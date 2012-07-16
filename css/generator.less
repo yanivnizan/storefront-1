@@ -1,0 +1,96 @@
+@import "elements.less";
+
+body {
+    background-image: url(../img/background.png);
+}
+header {
+    /*min-height: 100px;*/
+    /*background: #00ADA7;*/
+    /*border-bottom: #00426d 2px solid    ;*/
+}
+
+
+#main {
+    width: 940px;
+    margin: 0 auto;
+    /*border: 1px solid;*/
+}
+
+#setup {
+    width: 550px;
+}
+
+#setup h2 {
+    font-family: "Varela", sans-serif;
+    letter-spacing: -1px;
+    font-size: 30px;
+    margin: 20px 0;
+    padding: 0 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #A1864E;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+#templates {
+    @slot: 133px;
+    @margin: 10px;
+
+    .previous {
+        background-image: url("../img/icons/previous.png");
+    }
+    .next {
+        background-image: url("../img/icons/next.png");
+    }
+    &>a {
+        width: 26px;
+        height: 26px;
+        display: inline-block;
+        opacity: 0.3;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    .slider-container {
+        width: (@slot + (2 * @margin)) * 3 + 10;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .slider {
+        -webkit-transition: -webkit-transform 0.5s;
+        -moz-transition: -moz-transform 0.5s;
+        transition: transform 0.5s;
+    }
+
+    img {
+        max-width: @slot;
+        .box-shadow(2px 2px 5px black);
+        margin: @margin;
+        cursor: pointer;
+
+        &.selected {
+            .box-shadow(0 0 5px 8px #808080);
+        }
+    }
+}
+
+
+#preview {
+    float: right;
+    position: relative;
+}
+
+#preview-container {
+    background: white;
+    position: absolute;
+    z-index: 1;
+    top: 140px;
+    left: 31px;
+}
+.iphone-viewport {
+    width: 297px;
+    height: 425px;
+}
