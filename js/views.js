@@ -24,8 +24,10 @@ define(["handlebars"], function() {
                 src : this.$("img").attr("src")
             });
             this.$("input").val("");
+            this.$(".control-group").removeClass("error success");
             this.$("img").remove();
             this.$el.removeClass("drag-over");
+            this.$("label.error,label.valid").remove()
         },
         events : {
             "drop" : function(event) {
@@ -70,7 +72,7 @@ define(["handlebars"], function() {
                     }
                 },
                 highlight : function(label) {
-                    $(label).closest('.control-group').addClass('error');
+                    $(label).closest('.control-group').removeClass('success').addClass('error');
                 },
                 success : function(label) {
                     label.addClass('valid').closest('.control-group').addClass('success');
