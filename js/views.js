@@ -16,10 +16,33 @@ define(["handlebars"], function() {
         events : {
             "submit" : function(event) {
                 event.preventDefault();
-                this.collection.add([{
+                this.collection.unshift({
                     name : this.$("input[name='name']").val(),
-                    price : this.$("input[name='price']").val()
-                }]);
+                    price : this.$("input[name='price']").val(),
+                    src : this.$("img").attr("src")
+                });
+                this.$("input").val("");
+                this.$("img").remove();
+            },
+            "drop" : function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+                var $this = this;
+                var files = event.dataTransfer.files;
+                if (files.length > 0) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(evt) {
+                        $this.$el.append($("<img>", {src : evt.target.result}));
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            },
+            "dragenter" : function() {
+                this.$el.addClass("drag-over");
+            },
+            "dragleave" : function() {
+                this.$el.removeClass("drag-over");
             }
         }
     });

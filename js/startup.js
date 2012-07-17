@@ -5,6 +5,10 @@ define(["models", "views"], function(Models, Views) {
     return {
         startup : function() {
 
+            // Patch for enabling event.dataTransfer attribute on drag-n-drop event
+            jQuery.event.fixHooks.drop = { props: [ "dataTransfer" ] };
+
+
             var Slider = Backbone.View.extend({
                 el : $("#templates"),
                 initialize : function(options) {
