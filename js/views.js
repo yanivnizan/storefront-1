@@ -4,6 +4,7 @@ define(["handlebars"], function() {
 //    var itemCollectionTemplate = Handlebars.compile($("#item-template").html());
 
     var ItemView = Backbone.View.extend({
+        className : "item",
         render : function() {
             console.log(this.model);
             this.$el.append(itemTemplate(this.model.toJSON()));
@@ -13,17 +14,20 @@ define(["handlebars"], function() {
 
     var NewItemView = Backbone.View.extend({
         el : $("#new-item"),
+        initialize : function() {
+            _.bindAll(this, "submit");
+        },
+        submit : function(form) {
+            this.collection.unshift({
+                name : this.$("input[name='name']").val(),
+                price : this.$("input[name='price']").val(),
+                src : this.$("img").attr("src")
+            });
+            this.$("input").val("");
+            this.$("img").remove();
+            this.$el.removeClass("drag-over");
+        },
         events : {
-            "submit" : function(event) {
-                event.preventDefault();
-                this.collection.unshift({
-                    name : this.$("input[name='name']").val(),
-                    price : this.$("input[name='price']").val(),
-                    src : this.$("img").attr("src")
-                });
-                this.$("input").val("");
-                this.$("img").remove();
-            },
             "drop" : function(event) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -44,6 +48,36 @@ define(["handlebars"], function() {
             "dragleave" : function() {
                 this.$el.removeClass("drag-over");
             }
+        },
+        render : function() {
+            $("#new-item").validate({
+                rules : {
+                    name : {
+                        required : true
+                    },
+                    price : {
+                        required : true,
+                        number : true,
+                        min : 0
+                    }
+                },
+                messages:{
+                    name : {
+                        required : "Required"
+                    },
+                    price : {
+                        required : "Required"
+                    }
+                },
+                highlight : function(label) {
+                    $(label).closest('.control-group').addClass('error');
+                },
+                success : function(label) {
+                    label.addClass('valid').closest('.control-group').addClass('success');
+                },
+                submitHandler : this.submit
+            });
+            return this;
         }
     });
 

@@ -53,10 +53,7 @@ define(["models", "views"], function(Models, Views) {
             itemsView = new Views.ItemCollectionView({
                 collection : itemCollection
             });
-            new Views.NewItemView({collection : itemCollection});
-
-            itemCollection.add([{price : 10}]);
-
+            new Views.NewItemView({collection : itemCollection}).render();
 
             slider = new Slider({children : $(".slider img")}).render();
 
