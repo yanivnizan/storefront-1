@@ -6,7 +6,6 @@ define(["handlebars"], function() {
     var ItemView = Backbone.View.extend({
         className : "item",
         render : function() {
-            console.log(this.model);
             this.$el.append(itemTemplate(this.model.toJSON()));
             return this;
         }
