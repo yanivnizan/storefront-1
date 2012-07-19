@@ -25,7 +25,6 @@ define(["handlebars"], function() {
             this.$("input").val("");
             this.$(".control-group").removeClass("error success");
             this.$("img").remove();
-            this.$el.removeClass("drag-over");
             this.$("label.error,label.valid").remove()
         },
         events : {
@@ -38,16 +37,16 @@ define(["handlebars"], function() {
                     var reader = new FileReader();
 
                     reader.onload = function(evt) {
-                        $this.$el.append($("<img>", {src : evt.target.result}));
+                        $this.$("#drag-drop").append($("<img>", {src : evt.target.result}));
                     };
                     reader.readAsDataURL(files[0]);
                 }
             },
             "dragenter" : function() {
-                this.$el.addClass("drag-over");
+                this.$("#drag-drop").addClass("expanded");
             },
             "dragleave" : function() {
-                this.$el.removeClass("drag-over");
+                this.$("#drag-drop").removeClass("expanded");
             }
         },
         render : function() {
