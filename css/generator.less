@@ -40,6 +40,17 @@ header {
 }
 
 #templates, #backgrounds {
+
+    .option-content {
+        height: 0;
+        overflow: hidden;
+        .transition(height);
+
+        &.expand {
+            height: 220px;
+        }
+    }
+
     @slot: 133px;
     @margin: 10px;
 

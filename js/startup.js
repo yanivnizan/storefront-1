@@ -41,6 +41,18 @@ define(["models", "views"], function(Models, Views) {
                 $(this).tab('show');
             })
 
+            // Background options
+            var collapseExpand = function(collapsee, expandee) {
+                collapsee.on("transitionend.collapse webkitTransitionEnd.collapse oTransitionEnd.collapse", function() {
+                    collapsee.off(".collapse");
+                    expandee.addClass("expand");
+                }).removeClass("expand");
+            };
+            var first   = $("#backgrounds input:radio:first");
+            var second  = $("#backgrounds input:radio:last");
+            first.click(function() { collapseExpand(second.parent().next(), first.parent().next()); });
+            second.click(function() { collapseExpand(first.parent().next(), second.parent().next()); });
+
 
         }
     };
