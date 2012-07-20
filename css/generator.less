@@ -49,7 +49,7 @@ header {
     .next {
         background-image: url("../img/icons/next.png");
     }
-    &>a {
+    .slider-container > a {
         width: 26px;
         height: 26px;
         display: inline-block;
@@ -60,7 +60,7 @@ header {
         }
     }
 
-    .slider-container {
+    .slider-window {
         width: (@slot + (2 * @margin)) * 3 + 10;
         display: inline-block;
         overflow: hidden;

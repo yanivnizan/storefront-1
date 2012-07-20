@@ -21,12 +21,12 @@ define(["models", "views"], function(Models, Views) {
             new Views.NewItemView({collection : itemCollection}).render();
 
             var templateSlider = new Views.SlidingFrameView({
-                el : $("#templates"),
+                el : $("#templates .slider-container"),
                 childrenSelector : ".slider img"
             }).render();
 
             var backgroundSlider = new Views.SlidingFrameView({
-                el : $("#backgrounds"),
+                el : $("#backgrounds .slider-container"),
                 childrenSelector : ".slider img"
             }).render();
 
