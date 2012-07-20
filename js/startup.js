@@ -9,10 +9,13 @@ define(["models", "views"], function(Models, Views) {
             jQuery.event.fixHooks.drop = { props: [ "dataTransfer" ] };
 
 
+            var store = new Models.Store();
+            var storeView = new Views.StoreView({
+                model : store
+            });
 
-            itemCollection = new Models.ItemCollection();
-
-            itemsView = new Views.ItemCollectionView({
+            var itemCollection = new Models.ItemCollection();
+            var itemsView = new Views.ItemCollectionView({
                 collection : itemCollection
             });
             new Views.NewItemView({collection : itemCollection}).render();
@@ -28,9 +31,7 @@ define(["models", "views"], function(Models, Views) {
             }).render();
 
             backgroundSlider.on("templates/itemClicked", function(item) {
-                $("#preview-container .template").remove();
-                var template = $("<img>", {src : item.attr("src"), class : "template iphone-viewport"});
-                $("#preview-container").prepend(template);
+                store.set("background", item.attr("src"));
             });
 
 
