@@ -17,12 +17,17 @@ define(["models", "views"], function(Models, Views) {
             });
             new Views.NewItemView({collection : itemCollection}).render();
 
-            slider = new Views.SlidingFrameView({
+            var templateSlider = new Views.SlidingFrameView({
                 el : $("#templates"),
                 childrenSelector : ".slider img"
             }).render();
 
-            slider.on("templates/itemClicked", function(item) {
+            var backgroundSlider = new Views.SlidingFrameView({
+                el : $("#backgrounds"),
+                childrenSelector : ".slider img"
+            }).render();
+
+            backgroundSlider.on("templates/itemClicked", function(item) {
                 $("#preview-container .template").remove();
                 var template = $("<img>", {src : item.attr("src"), class : "template iphone-viewport"});
                 $("#preview-container").prepend(template);
