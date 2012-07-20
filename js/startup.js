@@ -63,6 +63,14 @@ define(["models", "views"], function(Models, Views) {
                 $("#preview-container").prepend(template);
             });
 
+
+            // Bootstrap tabs
+            $('#.tabbable a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            })
+
+
         }
     };
 });

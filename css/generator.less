@@ -2,6 +2,7 @@
 
 body {
     background-image: url(../img/background.png);
+    padding-top: 60px;
 }
 header {
     /*min-height: 100px;*/
@@ -16,20 +17,26 @@ header {
     /*border: 1px solid;*/
 }
 
-#setup {
-    width: 550px;
+
+/*** Bootstrap Override ***/
+.nav-pills {
+    &> li {
+        margin-right: 12px;
+
+        &>a {
+            .rounded(15px);
+        }
+    }
 }
 
-#setup h2 {
-    font-family: "Varela", sans-serif;
-    letter-spacing: -1px;
-    font-size: 30px;
-    margin: 20px 0;
-    padding: 0 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #A1864E;
+#wizard {
+    width: 550px;
+    display: inline-block;
+}
+
+#wizard h2 {
+    border-bottom: 1px solid;
     margin-bottom: 10px;
-    margin-top: 25px;
 }
 
 #templates {

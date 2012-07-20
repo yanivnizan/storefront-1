@@ -44,50 +44,75 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a
     different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
     to experience this site.</p><![endif]-->
-<header>
 
+
+<header class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">
+                Soomla Store Generator
+            </a>
+        </div>
+    </div>
 </header>
+
+
 <div role="main" id="main">
     <div id="preview">
         <img src="img/iphone4.png">
 
         <div id="preview-container" class="iphone-viewport"></div>
     </div>
-    <div id="setup">
-        <div id="templates">
-            <h2>Choose a template</h2>
-            <a class="previous"></a>
+    <div id="wizard" class="tabbable">
 
-            <div class="slider-container">
-                <div class="slider">
-                    <img src="img/theme-influx.jpg">
-                    <img src="img/theme-lime-bubbles.jpg">
-                    <img src="img/theme-mario.jpg">
-                    <img src="img/theme-praries.jpg">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#tab1" data-toggle="tab">Look & Feel</a></li>
+            <li><a href="#tab2" data-toggle="tab">Store Items</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane active fade in" id="tab1">
+                <div id="templates">
+                    <h2>Choose a template</h2>
+                    <a class="previous"></a>
+
+                    <div class="slider-container">
+                        <div class="slider">
+                            <img src="img/theme-influx.jpg">
+                            <img src="img/theme-lime-bubbles.jpg">
+                            <img src="img/theme-mario.jpg">
+                            <img src="img/theme-praries.jpg">
+                        </div>
+                    </div>
+                    <a class="next"></a>
+                </div>
+                <h2>Define store items</h2>
+                <form class="well" id="new-item">
+                    <div id="drag-drop">
+                        <h6>Drag'n'drop item <br/>graphic here.</h6>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="name">Name</label>
+                        <div class="controls">
+                            <input type="text" class="input" name="name" id="name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="price">Price</label>
+                        <div class="controls">
+                            <input type="text" class="input" name="price" id="price">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Add</button>
+                </form>
+                <div id="items">
+
                 </div>
             </div>
-            <a class="next"></a>
-        </div>
-        <h2>Define store items</h2>
-        <form class="well" id="new-item">
-            <div id="drag-drop">
-                <h6>Drag'n'drop item <br/>graphic here.</h6>
+
+            <div class="tab-pane fade" id="tab2">
+                <p>Howdy, I'm in Section 2.</p>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="name">Name</label>
-                <div class="controls">
-                    <input type="text" class="input" name="name" id="name">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="price">Price</label>
-                <div class="controls">
-                    <input type="text" class="input" name="price" id="price">
-                </div>
-            </div>
-            <button type="submit" class="btn">Add</button>
-        </form>
-        <div id="items">
 
         </div>
     </div>
@@ -113,6 +138,7 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
 <script src="js/libs/less-1.3.0.min.js"></script>
 <script src="js/libs/underscore-min.js"></script>
 <script src="js/libs/backbone.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
 <script data-main="js/main" src="js/libs/require.js"></script>
 
 
