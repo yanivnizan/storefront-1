@@ -3,6 +3,50 @@ define(["handlebars"], function() {
     var itemTemplate = Handlebars.compile($("#item-template").html());
 //    var itemCollectionTemplate = Handlebars.compile($("#item-template").html());
 
+
+    var SlidingFrameView = Backbone.View.extend({
+        initialize : function(options) {
+            this.slider = this.$(".slider");
+            this.previousButton = this.$(".previous");
+            this.nextButton = this.$(".next");
+
+            _.bindAll(this, "maxMovement");
+            this.children = this.$(options.childrenSelector);
+            this.slot = this.children.first().outerWidth(true);
+            this.xOffset = 0;
+            this.maxViewable = options.maxViewable || 3;
+        },
+        events : {
+            "click .next" : function(event) {
+                this.xOffset -= this.slot;
+                this.slider.css("transform", "translateX(" + this.xOffset + "px)");
+                this.previousButton.css("visibility", "");
+                if (this.xOffset == this.maxMovement()) this.nextButton.css("visibility", "hidden");
+            },
+            "click .previous" : function(event) {
+                this.xOffset += this.slot;
+                this.slider.css("transform", "translateX(" + this.xOffset + "px)");
+                this.nextButton.css("visibility", "");
+                if (this.xOffset == 0) $(event.target).css("visibility", "hidden");
+            },
+            "click img" : function(event) {
+                var img = $(event.target);
+                this.$("img").removeClass("selected");
+                img.addClass("selected");
+                this.trigger("templates/itemClicked", img);
+            }
+        },
+        maxMovement : function() {
+            return (-(Math.max(0, this.children.length - this.maxViewable)) * this.slot);
+        },
+        render : function() {
+            this.previousButton.css("visibility", "hidden");
+            this.slider.css("width", this.slot * this.children.length + 50);
+            return this;
+        }
+    });
+
+
     var ItemView = Backbone.View.extend({
         className : "item",
         render : function() {
@@ -98,6 +142,7 @@ define(["handlebars"], function() {
 
     return {
         ItemCollectionView : ItemCollectionView,
-        NewItemView : NewItemView
+        NewItemView : NewItemView,
+        SlidingFrameView : SlidingFrameView
     };
 });
