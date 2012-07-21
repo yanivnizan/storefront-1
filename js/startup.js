@@ -14,6 +14,8 @@ define(["models", "views"], function(Models, Views) {
                 model : store
             });
 
+            var uploadBackgroundView = new Views.DragDropView({el : $("#backgrounds .drag-drop")});
+
             var itemCollection = new Models.ItemCollection();
             var itemsView = new Views.ItemCollectionView({
                 collection : itemCollection
@@ -39,7 +41,7 @@ define(["models", "views"], function(Models, Views) {
             $('#.tabbable a').click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
-            })
+            });
 
             // Background options
             var collapseExpand = function(collapsee, expandee) {

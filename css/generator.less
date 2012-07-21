@@ -113,21 +113,24 @@ header {
         margin-top: 2px;
     }
 
-    #drag-drop {
+    .drag-drop {
         float: right;
         width: 200px;
         height: 115px;
-        border: dashed 3px #999;
         .transition(~"width,height", 0.4s);
-
-        h6 {
-            text-align: center;
-        }
 
         &.expanded {
             width: 260px;
             height: 160px;
         }
+    }
+}
+
+.drag-drop {
+    border: dashed 3px #999;
+
+    h6 {
+        text-align: center;
     }
 }
 

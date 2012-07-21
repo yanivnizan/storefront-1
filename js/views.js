@@ -47,6 +47,31 @@ define(["handlebars"], function() {
     });
 
 
+    var DragDropView = Backbone.View.extend({
+        events : {
+            "drop" : function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+                var $this = this;
+                var files = event.dataTransfer.files;
+                if (files.length > 0) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(evt) {
+                        $this.$el.append($("<img>", {src : evt.target.result}));
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            },
+            "dragenter" : function() {
+                this.$el.addClass("drag-enter");
+            },
+            "dragleave" : function() {
+                this.$el.removeClass("drag-enter");
+            }
+        }
+    });
+
     var ItemView = Backbone.View.extend({
         className : "item",
         render : function() {
@@ -81,16 +106,16 @@ define(["handlebars"], function() {
                     var reader = new FileReader();
 
                     reader.onload = function(evt) {
-                        $this.$("#drag-drop").append($("<img>", {src : evt.target.result}));
+                        $this.$(".drag-drop").append($("<img>", {src : evt.target.result}));
                     };
                     reader.readAsDataURL(files[0]);
                 }
             },
             "dragenter" : function() {
-                this.$("#drag-drop").addClass("expanded");
+                this.$(".drag-drop").addClass("expanded");
             },
             "dragleave" : function() {
-                this.$("#drag-drop").removeClass("expanded");
+                this.$(".drag-drop").removeClass("expanded");
             }
         },
         render : function() {
@@ -158,6 +183,7 @@ define(["handlebars"], function() {
         ItemCollectionView : ItemCollectionView,
         NewItemView : NewItemView,
         SlidingFrameView : SlidingFrameView,
+        DragDropView : DragDropView,
         StoreView : StoreView
     };
 });
