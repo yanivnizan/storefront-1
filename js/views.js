@@ -63,7 +63,9 @@ define(["handlebars"], function() {
 
                     reader.onload = function(evt) {
                         $this.$("img").remove();
-                        $this.$el.append($("<img>", {src : evt.target.result}));
+                        var img = $("<img>", {src : evt.target.result});
+                        $this.$el.append(img);
+                        $this.trigger("backgroundAdded", img);
                     };
                     reader.readAsDataURL(files[0]);
                 }
@@ -99,7 +101,7 @@ define(["handlebars"], function() {
                 dragleave : function(event) {
                     if (this.$("img").length == 0) this.$el.removeClass("expanded");
                 }
-            })
+            });
         },
         submit : function(form) {
             this.collection.unshift({
@@ -113,7 +115,7 @@ define(["handlebars"], function() {
             this.$("label.error,label.valid").remove()
         },
         render : function() {
-            $("#new-item").validate({
+            this.$el.validate({
                 rules : {
                     name : {
                         required : true

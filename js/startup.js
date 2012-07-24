@@ -20,7 +20,7 @@ define(["models", "views"], function(Models, Views) {
             var itemsView = new Views.ItemCollectionView({
                 collection : itemCollection
             });
-            new Views.NewItemView({collection : itemCollection}).render();
+            var newItem = new Views.NewItemView({collection : itemCollection}).render();
 
             var templateSlider = new Views.SlidingFrameView({
                 el : $("#templates .slider-container"),
@@ -34,6 +34,23 @@ define(["models", "views"], function(Models, Views) {
 
             backgroundSlider.on("templates/itemClicked", function(item) {
                 store.set("background", item.attr("src"));
+            });
+            uploadBackgroundView.on("backgroundAdded", function(img) {
+                store.set("background", img.attr("src"));
+            });
+
+            // TODO: refactor to a backbone view that controls the entire background selection widget.
+            $("#background-upload").change(function() {
+                var option = $(this);
+                if (option.is(":checked") && $("#backgrounds .drag-drop img").length > 0) {
+                    store.set("background", $("#backgrounds .drag-drop img").attr("src"));
+                }
+            });
+            $("#background-predefined").change(function() {
+                var option = $(this);
+                if (option.is(":checked") && $("#backgrounds .slider img.selected").length > 0) {
+                    store.set("background", $("#backgrounds .slider img.selected").attr("src"));
+                }
             });
 
 
