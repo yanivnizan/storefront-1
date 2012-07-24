@@ -48,6 +48,10 @@ define(["handlebars"], function() {
 
 
     var DragDropView = Backbone.View.extend({
+        initialize : function(options) {
+            if (options.dragenter) this.events.dragenter = options.dragenter;
+            if (options.dragleave) this.events.dragleave = options.dragleave;
+        },
         events : {
             "drop" : function(event) {
                 event.stopPropagation();
@@ -58,6 +62,7 @@ define(["handlebars"], function() {
                     var reader = new FileReader();
 
                     reader.onload = function(evt) {
+                        $this.$("img").remove();
                         $this.$el.append($("<img>", {src : evt.target.result}));
                     };
                     reader.readAsDataURL(files[0]);
@@ -84,6 +89,17 @@ define(["handlebars"], function() {
         el : $("#new-item"),
         initialize : function() {
             _.bindAll(this, "submit");
+
+            // Initialize sub views
+            new DragDropView({
+                el : this.$(".drag-drop"),
+                dragenter : function(event) {
+                    this.$el.addClass("expanded");
+                },
+                dragleave : function(event) {
+                    if (this.$("img").length == 0) this.$el.removeClass("expanded");
+                }
+            })
         },
         submit : function(form) {
             this.collection.unshift({
@@ -95,30 +111,6 @@ define(["handlebars"], function() {
             this.$(".control-group").removeClass("error success");
             this.$("img").remove();
             this.$("label.error,label.valid").remove()
-        },
-        events : {
-            "drop .drag-drop" : function(event) {
-                event.stopPropagation();
-                event.preventDefault();
-                var $this = $(event.target);
-                var files = event.dataTransfer.files;
-                if (files.length > 0) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(evt) {
-                        $this.append($("<img>", {src : evt.target.result}));
-                    };
-                    reader.readAsDataURL(files[0]);
-                }
-            },
-            "dragenter .drag-drop" : function() {
-                this.$(".drag-drop").addClass("expanded");
-            },
-            "dragleave .drag-drop" : function(event) {
-                var $this = $(event.target);
-                if ($("img", $this).length == 0)
-                    this.$(".drag-drop").removeClass("expanded");
-            }
         },
         render : function() {
             $("#new-item").validate({
