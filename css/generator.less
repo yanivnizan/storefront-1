@@ -44,6 +44,7 @@ header {
     .option-content {
         height: 0;
         overflow: hidden;
+        margin-bottom: 10px;
         .transition(height);
 
         &.expand {
@@ -81,21 +82,22 @@ header {
         -webkit-transition: -webkit-transform 0.5s;
         -moz-transition: -moz-transform 0.5s;
         transition: transform 0.5s;
-    }
 
-    img {
-        max-width: @slot;
-        .box-shadow(2px 2px 5px black);
-        margin: @margin;
-        cursor: pointer;
+        img {
+            max-width: @slot;
+            .box-shadow(2px 2px 5px black);
+            margin: @margin;
+            cursor: pointer;
 
-        &.selected {
-            .box-shadow(0 0 5px 8px #808080);
+            &.selected {
+                .box-shadow(0 0 5px 8px #808080);
+            }
         }
     }
+
 }
 
-#new-item{
+#new-item {
 
     label.valid {
         width: 24px;
@@ -123,14 +125,31 @@ header {
             width: 260px;
             height: 160px;
         }
+
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
     }
 }
 
 .drag-drop {
     border: dashed 3px #999;
-
     h6 {
         text-align: center;
+    }
+    img {
+        display: block;
+        margin: 10px auto;
+    }
+}
+
+#backgrounds .drag-drop {
+    height: 200px;
+
+    img {
+        max-width: 150px;
+        max-height: 150px;
     }
 }
 

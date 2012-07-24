@@ -97,25 +97,27 @@ define(["handlebars"], function() {
             this.$("label.error,label.valid").remove()
         },
         events : {
-            "drop" : function(event) {
+            "drop .drag-drop" : function(event) {
                 event.stopPropagation();
                 event.preventDefault();
-                var $this = this;
+                var $this = $(event.target);
                 var files = event.dataTransfer.files;
                 if (files.length > 0) {
                     var reader = new FileReader();
 
                     reader.onload = function(evt) {
-                        $this.$(".drag-drop").append($("<img>", {src : evt.target.result}));
+                        $this.append($("<img>", {src : evt.target.result}));
                     };
                     reader.readAsDataURL(files[0]);
                 }
             },
-            "dragenter" : function() {
+            "dragenter .drag-drop" : function() {
                 this.$(".drag-drop").addClass("expanded");
             },
-            "dragleave" : function() {
-                this.$(".drag-drop").removeClass("expanded");
+            "dragleave .drag-drop" : function(event) {
+                var $this = $(event.target);
+                if ($("img", $this).length == 0)
+                    this.$(".drag-drop").removeClass("expanded");
             }
         },
         render : function() {
