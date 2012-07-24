@@ -37,6 +37,9 @@ define(["models", "views"], function(Models, Views) {
             });
 
 
+            // Prevent navigation when dropping files in the document
+            $("body").on("drop", function(event) { return false; });
+
             // Bootstrap tabs
             $('#.tabbable a').click(function (e) {
                 e.preventDefault();
