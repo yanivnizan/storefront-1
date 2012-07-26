@@ -11,7 +11,11 @@ define(["models", "views"], function(Models, Views) {
 
             var store = new Models.Store();
 
-            var uploadBackgroundView = new Views.DragDropView({el : $("#backgrounds .drag-drop")});
+            var uploadBackgroundView = new Views.DragDropView({
+                el : $("#backgrounds .drag-drop")
+            }).on("backgroundAdded", function(img) {
+                store.set("background", img.attr("src"));
+            });
 
             var itemCollection = new Models.ItemCollection();
             var itemsView = new Views.ItemCollectionView({
@@ -22,21 +26,15 @@ define(["models", "views"], function(Models, Views) {
             var templateSlider = new Views.SlidingFrameView({
                 el : $("#templates .slider-container"),
                 childrenSelector : ".slider img"
-            }).render();
-            templateSlider.on("templates/itemClicked", function(img) {
+            }).render().on("templates/itemClicked", function(img) {
                 store.set("template", img.data("template"));
             });
 
             var backgroundSlider = new Views.SlidingFrameView({
                 el : $("#backgrounds .slider-container"),
                 childrenSelector : ".slider img"
-            }).render();
-
-            backgroundSlider.on("templates/itemClicked", function(item) {
+            }).render().on("templates/itemClicked", function(item) {
                 store.set("background", item.attr("src"));
-            });
-            uploadBackgroundView.on("backgroundAdded", function(img) {
-                store.set("background", img.attr("src"));
             });
 
             // TODO: refactor to a backbone view that controls the entire background selection widget.
