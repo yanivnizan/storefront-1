@@ -21,8 +21,17 @@ html,body {
     }
 
     .items {
-    //        height: 80%;
         .box-flex(1);
+        &>.item {
+            img {
+                float: left;
+                max-width: 80px;
+                max-height: 80px;
+            }
+            .content {
+                margin-left: 100px;
+            }
+        }
     }
     .footer {
     //        height: 10%;

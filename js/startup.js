@@ -75,7 +75,7 @@ define(["models", "views"], function(Models, Views) {
 
             // Bind the preview iframe to the store model once it's load
             $("#preview-frame").load(function() {
-                $(this)[0].contentWindow.Soomla.bindPreview(store);
+                $(this)[0].contentWindow.Soomla.bindPreview(store, itemCollection);
             }).attr("src", "preview.html");
 
         }
