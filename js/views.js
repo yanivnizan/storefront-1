@@ -162,24 +162,10 @@ define(["handlebars"], function() {
     });
 
 
-    var StoreView = Backbone.View.extend({
-        el : $("#preview-container"),
-         initialize : function() {
-             _.bindAll(this, "render");
-             this.model.on("change", this.render);
-         },
-        render : function() {
-            this.$el.empty();
-            var background = $("<img>", {src : this.model.get("background"), class : "background iphone-viewport"});
-            this.$el.prepend(background);
-        }
-    });
-
     return {
         ItemCollectionView : ItemCollectionView,
         NewItemView : NewItemView,
         SlidingFrameView : SlidingFrameView,
-        DragDropView : DragDropView,
-        StoreView : StoreView
+        DragDropView : DragDropView
     };
 });

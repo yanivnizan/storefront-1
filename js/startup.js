@@ -10,9 +10,6 @@ define(["models", "views"], function(Models, Views) {
 
 
             var store = new Models.Store();
-            var storeView = new Views.StoreView({
-                model : store
-            });
 
             var uploadBackgroundView = new Views.DragDropView({el : $("#backgrounds .drag-drop")});
 
@@ -26,6 +23,9 @@ define(["models", "views"], function(Models, Views) {
                 el : $("#templates .slider-container"),
                 childrenSelector : ".slider img"
             }).render();
+            templateSlider.on("templates/itemClicked", function(img) {
+                store.set("template", img.data("template"));
+            });
 
             var backgroundSlider = new Views.SlidingFrameView({
                 el : $("#backgrounds .slider-container"),
@@ -75,6 +75,10 @@ define(["models", "views"], function(Models, Views) {
             first.click(function() { collapseExpand(second.parent().next(), first.parent().next()); });
             second.click(function() { collapseExpand(first.parent().next(), second.parent().next()); });
 
+            // Bind the preview iframe to the store model once it's load
+            $("#preview-frame").load(function() {
+                $(this)[0].contentWindow.Soomla.bindPreview(store);
+            }).attr("src", "preview.html");
 
         }
     };
