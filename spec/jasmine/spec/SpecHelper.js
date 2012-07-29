@@ -1,9 +1,7 @@
-beforeEach(function() {
-  this.addMatchers({
-    toBePlaying: function(expectedSong) {
-      var player = this.actual;
-      return player.currentlyPlayingSong === expectedSong && 
-             player.isPlaying;
-    }
-  });
+beforeEach(function () {
+    this.addMatchers({
+        toBeInstanceOf:function (expected) {
+            return this.actual instanceof expected;
+        }
+    });
 });

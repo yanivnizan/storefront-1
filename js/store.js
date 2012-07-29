@@ -1,4 +1,4 @@
-$(function() {
+require(["models"], function(Models) {
 
     var StoreView = Backbone.View.extend({
         el : $("body"),
@@ -44,17 +44,22 @@ $(function() {
         }
     };
 
+    $(function() {
 
-    var Soomla = {
-        bindPreview : function(store, itemCollection) {
-            var storeView = new StoreView({
-                model : store,
-                collection : itemCollection
-            });
+        var Soomla = {
+            bindPreview : function(store, itemCollection) {
+                var storeView = new StoreView({
+                    model : store,
+                    collection : itemCollection
+                });
 
-        }
-    };
+            },
+            newStore : function(props) {
+                this.store = new Models.Store(props);
+            }
+        };
 
-    window.Soomla = Soomla;
+        window.Soomla = Soomla;
 
+    });
 });

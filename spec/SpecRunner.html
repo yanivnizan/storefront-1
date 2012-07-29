@@ -25,14 +25,19 @@
     <script src="../js/libs/require.js"></script>
 
     <!-- include spec files here... -->
-    <!--<script type="text/javascript" src="jasmine/spec/SpecHelper.js"></script>-->
+    <script type="text/javascript" src="jasmine/spec/SpecHelper.js"></script>
     <script type="text/javascript" src="jasmine/spec/generator.spec.js"></script>
 
     <script type="text/javascript">
 
-        require.config({ baseUrl : "../js" });
+        require.config({
+            baseUrl : "../js",
+            path : {
+                "generator.spec" : "../spec/jasmine/spec/generator.spec"
+            }
+        });
 
-        require(["preview"], function(Main) {
+        require(["store", "generator.spec"], function() {
             var jasmineEnv = jasmine.getEnv();
             jasmineEnv.updateInterval = 1000;
 
