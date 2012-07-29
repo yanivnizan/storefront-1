@@ -1,0 +1,72 @@
+{
+    template : {
+        name : "stacked",
+        elements : {
+            title : {
+                text : "The surfboard store",
+                backgroundImage : {
+                    local : true,
+                    url : "img/backgrounds/store-title.png"
+                }
+            },
+            buyMore : {
+                text : "Get more Clams",
+                backgroundImage : {
+                    local : true,
+                    url : "img/backgrounds/store-title.png"
+                },
+                showCurrencyIcon : true
+            },
+            items : {
+                backgroundImage : {
+                    local : true,
+                    url : "img/backgrounds/item.png"
+                }
+            }
+        }
+    },
+
+    background : {
+        local : true,
+        url : "img/backgrounds/green-bubbles.jpg"
+    },
+
+    currency : {
+        name : "clams",
+        image : {
+            local : false,
+            url : "http://example.com/img/clam.jpg"
+        },
+        balance : 13320
+    },
+
+    market : {
+        title : "1000 Clams package",
+        description : "description",
+        productId : 1000222,
+        price : "7.00$"
+    },
+
+    virtualGoods : [
+        {
+            name : "Rip Curl Shortboard",
+            description : "Shred the small waves with this super-fast board",
+            image : {
+                local : true,
+                url : "img/boards/rip-curl.jpg"
+            },
+            price : 100,
+            productId : 2988822
+        },
+        {
+            name : "Billanbog Vintage Longboard",
+            description : "Slowly glide through low power surf and hang five",
+            image : {
+                local : false,
+                url : "http://example.com/img/boards/billabong-logboard.jpg"
+            },
+            price : 150,
+            productId : 2988823
+        }
+    ]
+}
