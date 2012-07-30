@@ -161,11 +161,28 @@ define(["handlebars"], function() {
         }
     });
 
+    var TextView = Backbone.View.extend({
+        el : $("#custom-texts"),
+        events : {
+            "keyup #more-currency-text" : function(event) {
+                this.model.set({moreCurrencyText : $(event.target).val()});
+            },
+            "keyup #template-title" : function(event) {
+                this.model.set({templateTitle : $(event.target).val()});
+            }
+        },
+        render : function() {
+            this.$("#more-currency-text").val(this.model.get("moreCurrencyText"));
+            this.$("#template-title").val(this.model.get("templateTitle"));
+        }
+    });
+
 
     return {
         ItemCollectionView : ItemCollectionView,
         NewItemView : NewItemView,
         SlidingFrameView : SlidingFrameView,
-        DragDropView : DragDropView
+        DragDropView : DragDropView,
+        TextView : TextView
     };
 });

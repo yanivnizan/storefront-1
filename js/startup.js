@@ -10,6 +10,8 @@ define(["models", "views"], function(Models, Views) {
 
 
             var store = new Models.Store();
+            // TODO: For debug purposes.  Remove later
+            window.store = store;
 
             var uploadBackgroundView = new Views.DragDropView({
                 el : $("#backgrounds .drag-drop")
@@ -50,6 +52,9 @@ define(["models", "views"], function(Models, Views) {
                     store.set("background", $("#backgrounds .slider img.selected").attr("src"));
                 }
             });
+
+
+            new Views.TextView({ model : store }).render();
 
 
             // Prevent navigation when dropping files in the document
