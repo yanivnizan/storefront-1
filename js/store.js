@@ -58,7 +58,12 @@ require(["models"], function(Models) {
                 this.store = new Models.Store(props);
             },
             newStoreFromJSON : function(json) {
-                this.store = new Models.Store({"templateTitle" : json.template.elements.title.name});
+                var attributes = {};
+                if (json.background) attributes.background = json.background;
+                if (json.template && json.template.elements && json.template.elements.title && json.template.elements.title.name)
+                    attributes.templateTitle = json.template.elements.title.name;
+
+                this.store = new Models.Store(attributes);
             }
         };
 

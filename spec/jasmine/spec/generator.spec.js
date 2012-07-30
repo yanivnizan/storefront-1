@@ -108,9 +108,16 @@ define("generator.spec", ["models"], function (Models) {
         });
 
         describe('Input JSON parsing', function () {
+
+            it("should accept background", function() {
+                Soomla.newStoreFromJSON({
+                    background : "fish.jpg"
+                });
+                expect(Soomla.store.get("background")).toEqual("fish.jpg");
+            });
+
             it("should accept nested template.elements.title.name", function() {
                 Soomla.newStoreFromJSON({
-                    background : "img/theme-lime-bubbles.jpg",
                     template : {
                         elements : {
                             title : {
