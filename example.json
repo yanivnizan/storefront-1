@@ -4,32 +4,20 @@
         elements : {
             title : {
                 text : "The surfboard store",
-                backgroundImage : {
-                    local : true,
-                    url : "img/backgrounds/store-title.png"
-                }
+                backgroundImage : "img/backgrounds/store-title.png"
             },
             buyMore : {
                 text : "Get more Clams",
-                backgroundImage : {
-                    local : true,
-                    url : "img/backgrounds/store-title.png"
-                },
+                backgroundImage : "img/backgrounds/store-title.png",
                 showCurrencyIcon : true
             },
             items : {
-                backgroundImage : {
-                    local : true,
-                    url : "img/backgrounds/item.png"
-                }
+                backgroundImage : "img/backgrounds/item.png"
             }
         }
     },
 
-    background : {
-        local : true,
-        url : "img/backgrounds/green-bubbles.jpg"
-    },
+    background : "img/backgrounds/green-bubbles.jpg",
 
     currency : {
         name : "clams",
