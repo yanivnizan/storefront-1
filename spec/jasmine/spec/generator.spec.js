@@ -94,8 +94,8 @@ define("generator.spec", ["models"], function (Models) {
                 expect(Soomla.store.get("templateTitleBackgroundImage")).not.toBeDefined();
             });
 
-            it("should have a default 'more virtual currency' title", function() {
-                expect(Soomla.store.get("moreCurrencyTitle")).toEqual("Get more coins");
+            it("should have a default 'more virtual currency' text", function() {
+                expect(Soomla.store.get("moreCurrencyText")).toEqual("Get more coins");
             });
 
             it("shouldn't have a 'more virtual currency' background by default", function() {
@@ -119,6 +119,19 @@ define("generator.spec", ["models"], function (Models) {
                     }
                 });
                 expect(Soomla.store.get("templateName")).toEqual("basic");
+            });
+
+            it("should accept nested template.elements.buyMore.text", function() {
+                Soomla.newStoreFromJSON({
+                    template : {
+                        elements : {
+                            buyMore : {
+                                text : "Buy more clams"
+                            }
+                        }
+                    }
+                });
+                expect(Soomla.store.get("moreCurrencyText")).toEqual("Buy more clams");
             });
 
             it("should accept nested template.elements.title.name", function() {
