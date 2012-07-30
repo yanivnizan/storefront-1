@@ -21,13 +21,18 @@ define(function() {
             }
         }],
         defaults : {
-            currency : new Currency()
+            currency : new Currency(),
+            templateTitle : "Store",
+            moreCurrencyTitle : "Get more coins"
         },
         initialize : function() {
             _.bindAll(this, "getBalance");
         },
         getBalance : function() {
             return this.get("currency").get("balance");
+        },
+        validate : function(attributes) {
+            if (!attributes.background) return "error";
         }
     });
 

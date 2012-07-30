@@ -58,6 +58,46 @@ define("generator.spec", ["models"], function (Models) {
                 expect(Soomla.store.getBalance()).toEqual(100);
             });
         });
+
+        describe('=== Background', function () {
+
+            it("shouldn't have a background by default", function() {
+                Soomla.newStore();
+                expect(Soomla.store.get("background")).not.toBeDefined();
+            });
+
+            it("should fail to save when no background is supplied", function() {
+                Soomla.newStore();
+                var spy = { errorStub : function(){} };
+                spyOn(spy, "errorStub");
+                Soomla.store.on("error", spy.errorStub).set({background : ""});
+                expect(spy.errorStub).toHaveBeenCalled();
+            });
+
+        });
+
+        describe('=== Template', function () {
+            it("should have a default title 'Store'", function() {
+                Soomla.newStore();
+                expect(Soomla.store.get("templateTitle")).toEqual("Store");
+            });
+
+            it("shouldn't have a title background by default", function() {
+                Soomla.newStore();
+                expect(Soomla.store.get("templateTitleBackgroundImage")).not.toBeDefined();
+            });
+
+            it("should have a default 'more virtual currency' title", function() {
+                Soomla.newStore();
+                expect(Soomla.store.get("moreCurrencyTitle")).toEqual("Get more coins");
+            });
+
+            it("shouldn't have a 'more virtual currency' background by default", function() {
+                Soomla.newStore();
+                expect(Soomla.store.get("moreCurrencyBackgroundImage")).not.toBeDefined();
+            });
+        });
+
     });
 
 });
