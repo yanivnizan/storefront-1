@@ -8,18 +8,33 @@ define(function() {
     window.Currency = Currency;
 
 
+    var VirtualGood = Backbone.RelationalModel.extend({});
+    var VirtualGoodsCollection = Backbone.Collection.extend({});
+
     var Store = Backbone.RelationalModel.extend({
-        relations: [{
-            type: Backbone.HasOne,
-            key: 'currency',
-            relatedModel: Currency,
-            reverseRelation: {
-                type : Backbone.HasOne,
-                key: 'store',
-                includeInJSON: 'id'
-                // 'relatedModel' is automatically set to 'Zoo'; the 'relationType' to 'HasOne'.
+        relations: [
+            {
+                type: Backbone.HasOne,
+                key: 'currency',
+                relatedModel: Currency,
+                reverseRelation: {
+                    type : Backbone.HasOne,
+                    key: 'store',
+                    includeInJSON: 'id'
+                    // 'relatedModel' is automatically set to 'Zoo'; the 'relationType' to 'HasOne'.
+                }
+            },
+            {
+                type: Backbone.HasMany,
+                key: 'virtualGoods',
+                relatedModel: VirtualGood,
+                collectionType: VirtualGoodsCollection,
+                reverseRelation: {
+                    key: 'belongsTo',
+                    includeInJSON: 'id'
+                }
             }
-        }],
+        ],
         defaults : {
             currency            : new Currency(),
             templateTitle       : "Store",

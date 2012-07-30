@@ -77,6 +77,8 @@ require(["models"], function(Models) {
                             attributes.templateTitle = json.template.elements.title.name;
                     }
                 }
+                if (json.virtualGoods)
+                    attributes.virtualGoods = json.virtualGoods;
 
                 this.store = new Models.Store(attributes);
             }

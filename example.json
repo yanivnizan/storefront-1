@@ -39,20 +39,14 @@
         {
             name : "Rip Curl Shortboard",
             description : "Shred the small waves with this super-fast board",
-            image : {
-                local : true,
-                url : "img/boards/rip-curl.jpg"
-            },
+            image : "img/boards/rip-curl.jpg",
             price : 100,
             productId : 2988822
         },
         {
             name : "Billanbog Vintage Longboard",
             description : "Slowly glide through low power surf and hang five",
-            image : {
-                local : false,
-                url : "http://example.com/img/boards/billabong-logboard.jpg"
-            },
+            image : "http://example.com/img/boards/billabong-logboard.jpg",
             price : 150,
             productId : 2988823
         }

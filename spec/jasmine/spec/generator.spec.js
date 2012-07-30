@@ -103,6 +103,16 @@ define("generator.spec", ["models"], function (Models) {
             });
         });
 
+        describe('=== Virtual Goods', function () {
+
+            it("should have an empty virtual goods list by default", function() {
+                Soomla.newStore();
+                expect(Soomla.store.get("virtualGoods").toJSON()).toEqual([]);
+            });
+
+            // TODO: More tests on default field values and validation
+        });
+
         describe('Input JSON parsing', function () {
 
             it("should accept background", function() {
@@ -145,6 +155,21 @@ define("generator.spec", ["models"], function (Models) {
                     }
                 });
                 expect(Soomla.store.get("templateTitle")).toEqual("Surf Shop");
+            });
+
+            it("should accept an array of virtual goods", function() {
+                var virtualGood = {
+                    name : "Rip Curl Shortboard",
+                    description : "Shred the small waves with this super-fast board",
+                    image : "img/boards/rip-curl.jpg",
+                    price : 100,
+                    productId : 2988822
+                };
+                Soomla.newStoreFromJSON({
+                    virtualGoods : [virtualGood]
+                });
+                expect(Soomla.store.get("virtualGoods").at(0).toJSON()).toEqual(virtualGood);
+                expect(Soomla.store.get("virtualGoods").length).toEqual(1);
             });
         });
 
