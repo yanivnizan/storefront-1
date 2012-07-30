@@ -107,6 +107,23 @@ define("generator.spec", ["models"], function (Models) {
             });
         });
 
+        describe('Input JSON parsing', function () {
+            it("should accept nested template.elements.title.name", function() {
+                Soomla.newStoreFromJSON({
+                    background : "img/theme-lime-bubbles.jpg",
+                    template : {
+                        elements : {
+                            title : {
+                                name : "Surf Shop"
+                            }
+                        }
+                    }
+                });
+                expect(Soomla.store.get("templateTitle")).toEqual("Surf Shop");
+            });
+        });
+
+
     });
 
 });

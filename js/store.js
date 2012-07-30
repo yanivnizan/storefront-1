@@ -56,6 +56,9 @@ require(["models"], function(Models) {
             },
             newStore : function(props) {
                 this.store = new Models.Store(props);
+            },
+            newStoreFromJSON : function(json) {
+                this.store = new Models.Store({"templateTitle" : json.template.elements.title.name});
             }
         };
 
