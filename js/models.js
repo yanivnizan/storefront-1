@@ -21,9 +21,10 @@ define(function() {
             }
         }],
         defaults : {
-            currency : new Currency(),
-            templateTitle : "Store",
-            moreCurrencyTitle : "Get more coins"
+            currency            : new Currency(),
+            templateName        : "basic",
+            templateTitle       : "Store",
+            moreCurrencyTitle   : "Get more coins"
         },
         initialize : function() {
             _.bindAll(this, "getBalance");

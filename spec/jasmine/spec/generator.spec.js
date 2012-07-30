@@ -30,6 +30,10 @@ define("generator.spec", ["models"], function (Models) {
 
         describe('=== Currency', function () {
 
+            beforeEach(function() {
+                delete Soomla.store;
+            });
+
             it("should use coins as the default currency name", function () {
                 Soomla.newStore();
                 expect(Soomla.store.get("currency").get("name")).toEqual("coins");
@@ -77,23 +81,28 @@ define("generator.spec", ["models"], function (Models) {
         });
 
         describe('=== Template', function () {
-            it("should have a default title 'Store'", function() {
+
+            beforeEach(function() {
                 Soomla.newStore();
+            });
+
+            it("should have a default title 'Store'", function() {
+                expect(Soomla.store.get("templateName")).toEqual("basic");
+            });
+
+            it("should have a default title 'Store'", function() {
                 expect(Soomla.store.get("templateTitle")).toEqual("Store");
             });
 
             it("shouldn't have a title background by default", function() {
-                Soomla.newStore();
                 expect(Soomla.store.get("templateTitleBackgroundImage")).not.toBeDefined();
             });
 
             it("should have a default 'more virtual currency' title", function() {
-                Soomla.newStore();
                 expect(Soomla.store.get("moreCurrencyTitle")).toEqual("Get more coins");
             });
 
             it("shouldn't have a 'more virtual currency' background by default", function() {
-                Soomla.newStore();
                 expect(Soomla.store.get("moreCurrencyBackgroundImage")).not.toBeDefined();
             });
         });
