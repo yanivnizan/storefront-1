@@ -14,7 +14,7 @@ require(["models"], function(Models) {
         },
         renderTemplate : function() {
             var name = this.model.get("templateName");
-            this.$("#main").empty().append(templates[name].template());
+            this.$("#main").empty().append(templates[name].template(this.model.toJSON()));
 
 
             // TODO: Release previous view bindings
@@ -23,6 +23,10 @@ require(["models"], function(Models) {
                 collection : this.collection,
                 model : this.model
             });
+        },
+        render : function() {
+            var name = this.model.get("templateName");
+            this.$("#main").empty().append(templates[name].template(this.model.toJSON()));
         }
     });
 
@@ -60,8 +64,12 @@ require(["models"], function(Models) {
             newStoreFromJSON : function(json) {
                 var attributes = {};
                 if (json.background) attributes.background = json.background;
-                if (json.template && json.template.elements && json.template.elements.title && json.template.elements.title.name)
-                    attributes.templateTitle = json.template.elements.title.name;
+                if (json.template) {
+                    if (json.template.name)
+                        attributes.templateName = json.template.name;
+                    if (json.template.elements && json.template.elements.title && json.template.elements.title.name)
+                        attributes.templateTitle = json.template.elements.title.name;
+                }
 
                 this.store = new Models.Store(attributes);
             }

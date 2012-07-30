@@ -112,6 +112,15 @@ define("generator.spec", ["models"], function (Models) {
                 expect(Soomla.store.get("background")).toEqual("fish.jpg");
             });
 
+            it("should accept nested template.name", function() {
+                Soomla.newStoreFromJSON({
+                    template : {
+                        name : "basic"
+                    }
+                });
+                expect(Soomla.store.get("templateName")).toEqual("basic");
+            });
+
             it("should accept nested template.elements.title.name", function() {
                 Soomla.newStoreFromJSON({
                     template : {
