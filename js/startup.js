@@ -27,7 +27,7 @@ define(["models", "views"], function(Models, Views) {
                 el : $("#templates .slider-container"),
                 childrenSelector : ".slider img"
             }).render().on("templates/itemClicked", function(img) {
-                store.set("template", img.data("template"));
+                store.set("templateName", img.data("template"));
             });
 
             var backgroundSlider = new Views.SlidingFrameView({

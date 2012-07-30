@@ -5,7 +5,7 @@ require(["models"], function(Models) {
         initialize : function() {
             _.bindAll(this, "renderBackground", "renderTemplate");
             this.model.on("change:background", this.renderBackground);
-            this.model.on("change:template", this.renderTemplate);
+            this.model.on("change:templateName", this.renderTemplate);
         },
         renderBackground : function() {
             this.$(".background").remove();
@@ -13,7 +13,7 @@ require(["models"], function(Models) {
             this.$el.prepend(background);
         },
         renderTemplate : function() {
-            var name = this.model.get("template");
+            var name = this.model.get("templateName");
             this.$("#main").empty().append(templates[name].template());
 
 
@@ -32,7 +32,7 @@ require(["models"], function(Models) {
             this.collection.on("add", this.addItem);
         },
         addItem : function(item) {
-            var name = this.options.model.get("template");
+            var name = this.options.model.get("templateName");
             this.$el.append(templates[name].item(item.toJSON()));
         }
     });

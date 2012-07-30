@@ -22,7 +22,6 @@ define(function() {
         }],
         defaults : {
             currency            : new Currency(),
-            templateName        : "basic",
             templateTitle       : "Store",
             moreCurrencyTitle   : "Get more coins"
         },
@@ -31,9 +30,6 @@ define(function() {
         },
         getBalance : function() {
             return this.get("currency").get("balance");
-        },
-        validate : function(attributes) {
-            if (!attributes.background) return "error";
         }
     });
 
