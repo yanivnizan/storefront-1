@@ -50,7 +50,7 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("should create a store with all currency data", function() {
-                Soomla.newStore({
+                Soomla.newStoreFromJSON({
                     currency : {
                         name    : "clams",
                         image   : "fish.png",

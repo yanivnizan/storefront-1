@@ -106,6 +106,9 @@ require(["models"], function(Models) {
                 if (json.virtualGoods)
                     attributes.virtualGoods = json.virtualGoods;
 
+                if (json.currency)
+                    attributes.currency = json.currency;
+
                 this.store = new Models.Store(attributes);
             }
         };
