@@ -26,12 +26,18 @@ require(["models"], function(Models) {
             });
         },
         render : function() {
+            // Render background
+            this.$(".background").remove();
+            var background = $("<img>", {src : this.model.get("background"), class : "background"});
+            this.$el.prepend(background);
+
             var name = this.model.get("templateName");
             this.$("#main").empty().append(templates[name].template(this.model.toJSON()));
             this.itemsView = new ItemCollectionView({
                 el : $(".items"),
                 collection : this.model.get("virtualGoods"),
-                templateName : this.model.get("templateName")
+                templateName : this.model.get("templateName"),
+                currency : this.model.get("currency")
             }).render();
         }
     });
@@ -49,15 +55,26 @@ require(["models"], function(Models) {
         },
         render : function() {
             var name = this.options.templateName;
+            var currency = this.options.currency;
             var $el = this.$el;
 
             // Render each item and append it
             this.collection.each(function(item) {
                 $el.append(new ItemView({
                     model : item,
-                    templateName : name
+                    templateName : name,
+                    currency : currency
                 }).render().el);
             })
+        },
+        events : {
+            // TODO: Remove for phone
+            "mousewheel" : function(event) {
+                // TODO: items-container is not in the scope of this view
+                var scrollTop = $("#items-container").scrollTop();
+                var delta = event.originalEvent.wheelDelta;
+                $("#items-container").scrollTop(scrollTop - Math.round(delta));
+            }
         }
     });
 
@@ -66,7 +83,7 @@ require(["models"], function(Models) {
         tagName : "li",
         render : function() {
             var name = this.options.templateName;
-            this.$el.append(templates[name].item(this.model.toJSON()));
+            this.$el.append(templates[name].item(_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
             return this;
         }
     });
