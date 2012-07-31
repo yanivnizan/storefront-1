@@ -28,6 +28,11 @@ require(["models"], function(Models) {
         render : function() {
             var name = this.model.get("templateName");
             this.$("#main").empty().append(templates[name].template(this.model.toJSON()));
+            this.itemsView = new ItemCollectionView({
+                el : $(".items"),
+                collection : this.model.get("virtualGoods"),
+                templateName : this.model.get("templateName")
+            }).render();
         }
     });
 
@@ -36,12 +41,36 @@ require(["models"], function(Models) {
         initialize : function(options) {
             _.bindAll(this, "addItem");
             this.collection.on("add", this.addItem);
+            return this;
         },
         addItem : function(item) {
             var name = this.options.templateName;
             this.$el.append(templates[name].item(item.toJSON()));
+        },
+        render : function() {
+            var name = this.options.templateName;
+            var $el = this.$el;
+
+            // Render each item and append it
+            this.collection.each(function(item) {
+                $el.append(new ItemView({
+                    model : item,
+                    templateName : name
+                }).render().el);
+            })
         }
     });
+
+    var ItemView = Backbone.View.extend({
+        className : "item",
+        tagName : "li",
+        render : function() {
+            var name = this.options.templateName;
+            this.$el.append(templates[name].item(this.model.toJSON()));
+            return this;
+        }
+    });
+
 
     var templates = {
         basic : {
@@ -83,22 +112,5 @@ require(["models"], function(Models) {
 
         window.Soomla = Soomla;
 
-//        Soomla.newStoreFromJSON({
-//            background : "img/theme-lime-bubbles.jpg",
-//            template : {
-//                name : "basic",
-//                elements : {
-//                    title : {
-//                        name : "Surf Shop"
-//                    },
-//                    buyMore : {
-//                        text : "Get More clams"
-//                    }
-//                }
-//            }
-//        });
-//        var storeView = new StoreView({
-//            model : Soomla.store
-//        }).render();
     });
 });
