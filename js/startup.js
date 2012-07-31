@@ -19,11 +19,14 @@ define(["models", "views"], function(Models, Views) {
                 store.set("background", img.attr("src"));
             });
 
-            var itemCollection = new Models.ItemCollection();
+            var goodsCollection = store.get("virtualGoods");
             var itemsView = new Views.ItemCollectionView({
-                collection : itemCollection
+                collection : goodsCollection
             });
-            var newItem = new Views.NewItemView({collection : itemCollection}).render();
+
+
+            var newItem = new Views.NewItemView({collection : goodsCollection}).render();
+            window.newItem = newItem;
 
             var templateSlider = new Views.SlidingFrameView({
                 el : $("#templates .slider-container"),
@@ -80,7 +83,7 @@ define(["models", "views"], function(Models, Views) {
 
             // Bind the preview iframe to the store model once it's load
             $("#preview-frame").load(function() {
-                $(this)[0].contentWindow.Soomla.bindPreview(store, itemCollection);
+                $(this)[0].contentWindow.Soomla.bindPreview(store, goodsCollection);
             }).attr("src", "preview.html");
 
         }

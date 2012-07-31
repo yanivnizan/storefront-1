@@ -21,8 +21,8 @@ require(["models"], function(Models) {
             // TODO: Release previous view bindings
             this.itemsView = new ItemCollectionView({
                 el : $(".items"),
-                collection : this.collection,
-                model : this.model
+                collection : this.model.get("virtualGoods"),
+                templateName : this.model.get("templateName")
             });
         },
         render : function() {
@@ -31,13 +31,14 @@ require(["models"], function(Models) {
         }
     });
 
+    // TODO: Change naming or move, to prevent name confusion with other ItemCollectionView
     var ItemCollectionView = Backbone.View.extend({
         initialize : function(options) {
             _.bindAll(this, "addItem");
             this.collection.on("add", this.addItem);
         },
         addItem : function(item) {
-            var name = this.options.model.get("templateName");
+            var name = this.options.templateName;
             this.$el.append(templates[name].item(item.toJSON()));
         }
     });
@@ -52,12 +53,8 @@ require(["models"], function(Models) {
     $(function() {
 
         var Soomla = {
-            bindPreview : function(store, itemCollection) {
-                var storeView = new StoreView({
-                    model : store,
-                    collection : itemCollection
-                });
-
+            bindPreview : function(store) {
+                var storeView = new StoreView({ model : store });
             },
             newStore : function(props) {
                 this.store = new Models.Store(props);
@@ -86,5 +83,22 @@ require(["models"], function(Models) {
 
         window.Soomla = Soomla;
 
+//        Soomla.newStoreFromJSON({
+//            background : "img/theme-lime-bubbles.jpg",
+//            template : {
+//                name : "basic",
+//                elements : {
+//                    title : {
+//                        name : "Surf Shop"
+//                    },
+//                    buyMore : {
+//                        text : "Get More clams"
+//                    }
+//                }
+//            }
+//        });
+//        var storeView = new StoreView({
+//            model : Soomla.store
+//        }).render();
     });
 });
