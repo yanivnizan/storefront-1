@@ -110,6 +110,20 @@ define("generator.spec", ["models"], function (Models) {
                 expect(Soomla.store.get("virtualGoods").toJSON()).toEqual([]);
             });
 
+            it("should be able to add virtual goods to a nested collection", function() {
+                Soomla.newStore({
+                    virtualGoods: [{
+                        name : "Rip Curl Shortboard",
+                        description : "Shred the small waves with this super-fast board",
+                        image : "img/boards/rip-curl.jpg",
+                        price : 100,
+                        productId : 2988822
+                    }]
+                });
+                expect(Soomla.store.get("virtualGoods").length).toEqual(1);
+                expect(Soomla.store.get("virtualGoods").at(0)).toBeInstanceOf(Models.VirtualGood);
+            });
+
             // TODO: More tests on default field values and validation
         });
 

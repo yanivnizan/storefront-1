@@ -22,21 +22,27 @@
     <script src="../js/libs/underscore-min.js"></script>
     <script src="../js/libs/backbone-min.js"></script>
     <script src="../js/libs/backbone-relational.js"></script>
-    <script src="../js/libs/handlebars-1.0.0.beta.6.js"></script>
-    <script src="../js/libs/require.js"></script>
 
     <!-- include spec files here... -->
     <script type="text/javascript" src="jasmine/spec/SpecHelper.js"></script>
-    <script type="text/javascript" src="jasmine/spec/generator.spec.js"></script>
+    <script src="../js/libs/require.js"></script>
 
-    <script type="text/javascript">
+    <script>
 
         require.config({
             baseUrl : "../js",
-            path : {
-                "generator.spec" : "../spec/jasmine/spec/generator.spec"
+            paths : {
+                storeViews          : "views/store-views",
+                "generator.spec"    : "../spec/jasmine/spec/generator.spec",
+
+                // 3rd party modules
+                less        : "libs/less-1.3.0.min",
+                underscore  : "libs/underscore-min",
+                backbone    : "libs/backbone-min",
+                handlebars  : "libs/handlebars-1.0.0.beta.6"
             }
         });
+
 
         require(["store", "generator.spec"], function() {
             var jasmineEnv = jasmine.getEnv();
@@ -63,6 +69,7 @@
                 jasmineEnv.execute();
             }
         });
+
     </script>
 
 </head>
