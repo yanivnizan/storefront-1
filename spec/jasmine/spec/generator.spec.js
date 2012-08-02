@@ -201,11 +201,11 @@ define("generator.spec", ["models"], function (Models) {
         describe('=== Native API', function () {
 
             it("should have the basic interaction functions defined", function() {
-                expect(SoomlaJS.disableCoinsStore).toBeDefined();
+                expect(SoomlaJS.disableCurrencyStore).toBeDefined();
                 expect(SoomlaJS.currencyPurchaseEnded).toBeDefined();
                 expect(SoomlaJS.goodsPurchaseEnded).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
-                expect(SoomlaJS.goodsPurchaseEnded).toBeDefined();
+                expect(SoomlaJS.refresh).toBeDefined();
             });
 
         });

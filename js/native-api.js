@@ -1,6 +1,6 @@
 define({
     // in case Market purchases are not supported we only want to show the goods store
-    disableCoinsStore : function() {
+    disableCurrencyStore : function() {
         alert("Sorry bub, not implemented yet.");
     },
     /**
@@ -22,7 +22,7 @@ define({
         alert("Sorry bub, not implemented yet.");
     },
     // This might be a duplicate of initialize (we might only want "refresh")
-    goodsPurchaseEnded : function(json) {
+    refresh : function(json) {
         alert("Sorry bub, not implemented yet.");
     }
 
