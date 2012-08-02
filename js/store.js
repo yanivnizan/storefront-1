@@ -2,7 +2,7 @@ define(["models", "storeViews"], function(Models, StoreViews) {
 
     $(function() {
 
-        var Soomla = {
+        window.SoomlaJS = {
             newStore : function(json) {
                 var attributes = {};
                 if (json) {
@@ -35,8 +35,6 @@ define(["models", "storeViews"], function(Models, StoreViews) {
                 return this.store;
             }
         };
-
-        window.Soomla = Soomla;
 
     });
 });

@@ -12,7 +12,7 @@ define(["models", "views"], function(Models, Views) {
 
             // Bind the preview iframe to the store model once it's load
             $("#preview-frame").load(function() {
-                var store = $(this)[0].contentWindow.Soomla.initialize();
+                var store = $(this)[0].contentWindow.SoomlaJS.initialize();
 
                 // TODO: Move all DOM binding out, and only assign the store model in here
 

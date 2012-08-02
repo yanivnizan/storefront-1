@@ -1,4 +1,4 @@
-Soomla.initialize({
+SoomlaJS.initialize({
     template : {
         name : "basic",
         elements : {
