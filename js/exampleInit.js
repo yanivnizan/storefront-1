@@ -1,37 +1,20 @@
-{
+Soomla.newStoreFromJSON({
     template : {
         name : "basic",
         elements : {
             title : {
-                text : "The surfboard store",
-                backgroundImage : "img/backgrounds/store-title.png"
+                name : "The surfboard store"
             },
             buyMore : {
-                text : "Get more Clams",
-                backgroundImage : "img/backgrounds/store-title.png",
-                showCurrencyIcon : true
-            },
-            items : {
-                backgroundImage : "img/backgrounds/item.png"
+                text : "Buy more clams"
             }
         }
     },
-
-    background : "img/backgrounds/green-bubbles.jpg",
-
+    background : "img/theme-lime-bubbles.jpg",
     currency : {
         name : "clams",
-        image : "http://example.com/img/clam.jpg",
-        balance : 13320
+        image : "img/assets/clam.png"
     },
-
-    market : {
-        title : "1000 Clams package",
-        description : "description",
-        productId : 1000222,
-        price : "7.00$"
-    },
-
     virtualGoods : [
         {
             name : "Rip Curl Shortboard",
@@ -48,6 +31,9 @@
             productId : 2988823
         }
     ]
-}
 
 
+});
+new StoreViews.StoreView({
+    model : Soomla.store
+}).render();
