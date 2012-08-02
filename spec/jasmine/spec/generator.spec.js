@@ -50,7 +50,7 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("should create a store with all currency data", function() {
-                Soomla.newStoreFromJSON({
+                Soomla.newStore({
                     currency : {
                         name    : "clams",
                         image   : "fish.png",
@@ -84,6 +84,10 @@ define("generator.spec", ["models"], function (Models) {
 
             beforeEach(function() {
                 Soomla.newStore();
+            });
+
+            it("should have a default name", function() {
+                expect(Soomla.store.get("templateName")).toEqual("basic");
             });
 
             it("should have a default title 'Store'", function() {
@@ -130,20 +134,20 @@ define("generator.spec", ["models"], function (Models) {
         describe('Input JSON parsing', function () {
 
             it("should initalize without a JSON argument", function() {
-                Soomla.newStoreFromJSON();
+                Soomla.newStore();
                 expect(Soomla.store).toBeDefined();
                 expect(Soomla.store).toBeInstanceOf(Models.Store);
             });
 
             it("should accept background", function() {
-                Soomla.newStoreFromJSON({
+                Soomla.newStore({
                     background : "fish.jpg"
                 });
                 expect(Soomla.store.get("background")).toEqual("fish.jpg");
             });
 
             it("should accept nested template.name", function() {
-                Soomla.newStoreFromJSON({
+                Soomla.newStore({
                     template : {
                         name : "basic"
                     }
@@ -152,7 +156,7 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("should accept nested template.elements.buyMore.text", function() {
-                Soomla.newStoreFromJSON({
+                Soomla.newStore({
                     template : {
                         elements : {
                             buyMore : {
@@ -165,7 +169,7 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("should accept nested template.elements.title.name", function() {
-                Soomla.newStoreFromJSON({
+                Soomla.newStore({
                     template : {
                         elements : {
                             title : {
@@ -185,7 +189,7 @@ define("generator.spec", ["models"], function (Models) {
                     price : 100,
                     productId : 2988822
                 };
-                Soomla.newStoreFromJSON({
+                Soomla.newStore({
                     virtualGoods : [virtualGood]
                 });
                 expect(Soomla.store.get("virtualGoods").at(0).toJSON()).toEqual(virtualGood);

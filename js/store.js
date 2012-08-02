@@ -3,13 +3,7 @@ define(["models", "storeViews"], function(Models, StoreViews) {
     $(function() {
 
         var Soomla = {
-            bindPreview : function(store) {
-                var storeView = new StoreViews.StoreView({ model : store });
-            },
-            newStore : function(props) {
-                this.store = new Models.Store(props);
-            },
-            newStoreFromJSON : function(json) {
+            newStore : function(json) {
                 var attributes = {};
                 if (json) {
 
@@ -34,6 +28,11 @@ define(["models", "storeViews"], function(Models, StoreViews) {
                 }
 
                 this.store = new Models.Store(attributes);
+            },
+            initialize : function(json) {
+                this.newStore(json);
+                new StoreViews.StoreView({ model : this.store }).render();
+                return this.store;
             }
         };
 

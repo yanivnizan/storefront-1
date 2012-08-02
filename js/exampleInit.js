@@ -1,4 +1,4 @@
-Soomla.newStoreFromJSON({
+Soomla.initialize({
     template : {
         name : "basic",
         elements : {
@@ -34,6 +34,3 @@ Soomla.newStoreFromJSON({
 
 
 });
-new StoreViews.StoreView({
-    model : Soomla.store
-}).render();
