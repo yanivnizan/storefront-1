@@ -1,8 +1,8 @@
-define(["models", "storeViews"], function(Models, StoreViews) {
+define(["native-api", "models", "storeViews"], function(NativeAPI, Models, StoreViews) {
 
     $(function() {
 
-        window.SoomlaJS = {
+        window.SoomlaJS = _.extend({}, NativeAPI, {
             newStore : function(json) {
                 var attributes = {};
                 if (json) {
@@ -29,12 +29,13 @@ define(["models", "storeViews"], function(Models, StoreViews) {
 
                 this.store = new Models.Store(attributes);
             },
+            // The native UI is loaded and the html needs to be rendered now
             initialize : function(json) {
                 this.newStore(json);
                 new StoreViews.StoreView({ model : this.store }).render();
                 return this.store;
             }
-        };
+        });
 
     });
 });
