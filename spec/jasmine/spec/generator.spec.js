@@ -129,6 +129,12 @@ define("generator.spec", ["models"], function (Models) {
 
         describe('Input JSON parsing', function () {
 
+            it("should initalize without a JSON argument", function() {
+                Soomla.newStoreFromJSON();
+                expect(Soomla.store).toBeDefined();
+                expect(Soomla.store).toBeInstanceOf(Models.Store);
+            });
+
             it("should accept background", function() {
                 Soomla.newStoreFromJSON({
                     background : "fish.jpg"
