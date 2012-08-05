@@ -6,7 +6,7 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
         beforeEach(function() {
             storeView = new StoreViews.StoreView({
                 model : new Models.Store(),
-                el : $("<div><div class='leave-store'></div></div>")
+                el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
             });
             spyOn(NativeAPI, "destroy");
         });
@@ -33,6 +33,16 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             storeView.$(".leave-store").trigger(event);
             expect(callbacks.beforeLeave).toHaveBeenCalled();
         });
+
+        it("should trigger an event when 'Buy more' is tapped", function () {
+            var listeners = { buyMoreTapped : function() {} };
+            spyOn(listeners, "buyMoreTapped");
+            storeView.on("buyMoreTapped", listeners.buyMoreTapped);
+            var event = $.Event("touchend", {originalEvent : {touches : [1]}});
+            storeView.$(".buy-more").trigger(event);
+            expect(listeners.buyMoreTapped).toHaveBeenCalled();
+        });
+
 
     });
 

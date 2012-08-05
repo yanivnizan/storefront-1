@@ -60,6 +60,9 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
                 // TODO: Release view bindings and destroy view
                 NativeAPI.destroy();
+            },
+            "touchend .buy-more" : function() {
+                this.trigger("buyMoreTapped");
             }
         },
         renderBackground : function() {
