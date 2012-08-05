@@ -11,9 +11,8 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             spyOn(NativeAPI, "destroy");
         });
 
-        xit("should be defined on the SoomlaJS namespace", function() {
-            expect(SoomlaJS.storeView).not.toBeDefined();
-            SoomlaJS.initialize({});
+        it("should be defined on the SoomlaJS namespace", function() {
+            SoomlaJS.initialize({template : {name : "empty"}});
             expect(SoomlaJS.storeView).toBeDefined();
             expect(SoomlaJS.storeView).toBeInstanceOf(StoreViews.StoreView);
         });
@@ -32,7 +31,7 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             spyOn(callbacks, "beforeLeave");
             var event = $.Event("touchend", {originalEvent : {touches : [1]}});
             storeView.$(".leave-store").trigger(event);
-            exp ect(callbacks.beforeLeave).toHaveBeenCalled();
+            expect(callbacks.beforeLeave).toHaveBeenCalled();
         });
 
     });

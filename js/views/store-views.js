@@ -1,18 +1,11 @@
-define(["native-api", "handlebars"], function(NativeAPI) {
-
-    var templates = {
-        basic : {
-            template : Handlebars.compile($("#basic-template").html()),
-            item : Handlebars.compile($("#basic-item").html())
-        }
-    };
+define(["native-api", "templates"], function(NativeAPI, Templates) {
 
     var ItemView = Backbone.View.extend({
         className : "item",
         tagName : "li",
         render : function() {
             var name = this.options.templateName;
-            this.$el.append(templates[name].item(_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
+            this.$el.append(Templates[name].item(_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
             return this;
         }
     });
@@ -26,7 +19,7 @@ define(["native-api", "handlebars"], function(NativeAPI) {
         },
         addItem : function(item) {
             var name = this.options.templateName;
-            this.$el.append(templates[name].item(item.toJSON()));
+            this.$el.append(Templates[name].item(item.toJSON()));
         },
         render : function() {
             var name = this.options.templateName;
@@ -76,7 +69,7 @@ define(["native-api", "handlebars"], function(NativeAPI) {
         },
         renderTemplate : function() {
             var name = this.model.get("templateName");
-            this.$("#main").empty().append(templates[name].template(this.model.toJSON()));
+            this.$("#main").empty().append(Templates[name].template(this.model.toJSON()));
 
 
             // TODO: Release previous view bindings
@@ -93,7 +86,7 @@ define(["native-api", "handlebars"], function(NativeAPI) {
             this.$el.prepend(background);
 
             var name = this.model.get("templateName");
-            this.$("#main").empty().append(templates[name].template(this.model.toJSON()));
+            this.$("#main").empty().append(Templates[name].template(this.model.toJSON()));
             this.itemsView = new ItemCollectionView({
                 el : $(".items"),
                 collection : this.model.get("virtualGoods"),

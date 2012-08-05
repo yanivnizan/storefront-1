@@ -11,7 +11,7 @@ define("generator.spec", ["models"], function (Models) {
         });
 
         it("should create a new store", function () {
-            expect(SoomlaJS.store).not.toBeDefined();
+            expect(SoomlaJS.store).toBeUndefined();
             SoomlaJS.newStore();
             expect(SoomlaJS.store).toBeDefined();
             expect(SoomlaJS.store).toBeInstanceOf(Models.Store);
@@ -41,7 +41,7 @@ define("generator.spec", ["models"], function (Models) {
 
             it("should't have a default currency image", function() {
                 SoomlaJS.newStore();
-                expect(SoomlaJS.store.get("currency").get("image")).not.toBeDefined();
+                expect(SoomlaJS.store.get("currency").get("image")).toBeUndefined();
             });
 
             it("should start with a balance of zero", function() {
@@ -67,7 +67,7 @@ define("generator.spec", ["models"], function (Models) {
 
             it("shouldn't have a background by default", function() {
                 SoomlaJS.newStore();
-                expect(SoomlaJS.store.get("background")).not.toBeDefined();
+                expect(SoomlaJS.store.get("background")).toBeUndefined();
             });
 
             xit("should fail to save when no background is supplied", function() {
@@ -95,7 +95,7 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("shouldn't have a title background by default", function() {
-                expect(SoomlaJS.store.get("templateTitleBackgroundImage")).not.toBeDefined();
+                expect(SoomlaJS.store.get("templateTitleBackgroundImage")).toBeUndefined();
             });
 
             it("should have a default 'more virtual currency' text", function() {
@@ -103,7 +103,7 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("shouldn't have a 'more virtual currency' background by default", function() {
-                expect(SoomlaJS.store.get("moreCurrencyBackgroundImage")).not.toBeDefined();
+                expect(SoomlaJS.store.get("moreCurrencyBackgroundImage")).toBeUndefined();
             });
         });
 
@@ -196,11 +196,11 @@ define("generator.spec", ["models"], function (Models) {
                 expect(SoomlaJS.store.get("virtualGoods").length).toEqual(1);
             });
 
-            xit("should accept a 'beforeLeave' callback", function() {
+            it("should accept a 'beforeLeave' callback", function() {
                 var callbacks = {
                     beforeLeave : function() {}
                 };
-                SoomlaJS.initialize({ callbacks : callbacks });
+                SoomlaJS.initialize({ callbacks : callbacks, template : {name : "empty"} });
                 expect(SoomlaJS.storeView.options.callbacks.beforeLeave).toEqual(callbacks.beforeLeave);
             });
 
