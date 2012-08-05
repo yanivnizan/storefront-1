@@ -6,7 +6,8 @@ SoomlaJS.initialize({
                 name : "The Surf Store"
             },
             buyMore : {
-                text : "Buy more clams"
+                text : "Buy more clams",
+                image : "img/assets/clam.png"
             }
         }
     },

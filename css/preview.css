@@ -192,6 +192,11 @@ body {
   width: 100%;
   -webkit-user-select: none;
 }
+.buy-more img {
+  margin-right: 10px;
+  max-width: 40px;
+  max-height: 40px;
+}
 .background {
   position: absolute;
   z-index: -1;

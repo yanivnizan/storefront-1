@@ -13,8 +13,12 @@ define(["native-api", "models", "storeViews"], function(NativeAPI, Models, Store
                             attributes.templateName = json.template.name;
                         if (json.template.elements) {
 
-                            if (json.template.elements.buyMore && json.template.elements.buyMore.text)
-                                attributes.moreCurrencyText = json.template.elements.buyMore.text;
+                            if (json.template.elements.buyMore) {
+                                if (json.template.elements.buyMore.text)
+                                    attributes.moreCurrencyText = json.template.elements.buyMore.text;
+                                if (json.template.elements.buyMore.image)
+                                    attributes.moreCurrencyImage = json.template.elements.buyMore.image;
+                            }
 
                             if (json.template.elements.title && json.template.elements.title.name)
                                 attributes.templateTitle = json.template.elements.title.name;

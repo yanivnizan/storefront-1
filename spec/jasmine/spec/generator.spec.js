@@ -168,6 +168,19 @@ define("generator.spec", ["models"], function (Models) {
                 expect(SoomlaJS.store.get("moreCurrencyText")).toEqual("Buy more clams");
             });
 
+            it("should accept nested template.elements.buyMore.image", function() {
+                SoomlaJS.newStore({
+                    template : {
+                        elements : {
+                            buyMore : {
+                                image : "img/assets/clam.png"
+                            }
+                        }
+                    }
+                });
+                expect(SoomlaJS.store.get("moreCurrencyImage")).toEqual("img/assets/clam.png");
+            });
+
             it("should accept nested template.elements.title.name", function() {
                 SoomlaJS.newStore({
                     template : {
