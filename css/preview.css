@@ -31,7 +31,7 @@ body {
   box-pack: start;
   box-align: stretch;
 }
-#main > h1,
+#main > .header,
 #main .footer {
   margin: 10px;
   -webkit-border-radius: 5px;
@@ -47,6 +47,46 @@ body {
 #main .items {
   list-style-type: none;
   padding: 0;
+}
+.header {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: stretch;
+}
+.header > .padding {
+  width: 26px;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+}
+.header > .title {
+  margin: 0;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+}
+.header .leave-store {
+  background-image: url("../img/icons/close.png");
+  width: 26px;
+  height: 26px;
 }
 #items-container {
   margin: 10px;
