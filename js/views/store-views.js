@@ -1,4 +1,4 @@
-define(["handlebars"], function() {
+define(["native-api", "handlebars"], function(NativeAPI) {
 
     var templates = {
         basic : {
@@ -54,12 +54,19 @@ define(["handlebars"], function() {
     });
 
     var StoreView = Backbone.View.extend({
-        el : $("body"),
         initialize : function() {
             _.bindAll(this, "renderBackground", "renderTemplate", "render");
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
+        },
+        events : {
+            "touchend .leave-store" : function(event) {
+                event.preventDefault();
+
+                // TODO: Release view bindings and destroy view
+                NativeAPI.destroy();
+            }
         },
         renderBackground : function() {
             this.$(".background").remove();

@@ -32,7 +32,7 @@ define(["native-api", "models", "storeViews"], function(NativeAPI, Models, Store
             // The native UI is loaded and the html needs to be rendered now
             initialize : function(json) {
                 this.newStore(json);
-                new StoreViews.StoreView({ model : this.store }).render();
+                new StoreViews.StoreView({ model : this.store, el : $("body") }).render();
                 return this.store;
             }
         });
