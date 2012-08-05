@@ -1,5 +1,18 @@
 define("generator.spec", ["models"], function (Models) {
 
+
+    var objectFromString = function(str) {
+        var keys = str.split(/\s+=\s+/);
+        var value = keys.pop();
+        keys = keys[0].split(".");
+        var lastKey = keys.pop();
+        var obj, temp;
+        obj = temp = {};
+        _.each(keys, function(key) { temp[key] = {}; temp = temp[key]; });
+        temp[lastKey] = value;
+        return obj;
+    };
+
     describe('Soomla Store', function () {
 
         beforeEach(function() {
@@ -156,41 +169,17 @@ define("generator.spec", ["models"], function (Models) {
             });
 
             it("should accept nested template.elements.buyMore.text", function() {
-                SoomlaJS.newStore({
-                    template : {
-                        elements : {
-                            buyMore : {
-                                text : "Buy more clams"
-                            }
-                        }
-                    }
-                });
+                SoomlaJS.newStore(objectFromString("template.elements.buyMore.text = Buy more clams"));
                 expect(SoomlaJS.store.get("moreCurrencyText")).toEqual("Buy more clams");
             });
 
             it("should accept nested template.elements.buyMore.image", function() {
-                SoomlaJS.newStore({
-                    template : {
-                        elements : {
-                            buyMore : {
-                                image : "img/assets/clam.png"
-                            }
-                        }
-                    }
-                });
+                SoomlaJS.newStore(objectFromString("template.elements.buyMore.image = img/assets/clam.png"));
                 expect(SoomlaJS.store.get("moreCurrencyImage")).toEqual("img/assets/clam.png");
             });
 
             it("should accept nested template.elements.title.name", function() {
-                SoomlaJS.newStore({
-                    template : {
-                        elements : {
-                            title : {
-                                name : "Surf Shop"
-                            }
-                        }
-                    }
-                });
+                SoomlaJS.newStore(objectFromString("template.elements.title.name = Surf Shop"));
                 expect(SoomlaJS.store.get("templateTitle")).toEqual("Surf Shop");
             });
 
