@@ -33,10 +33,28 @@ html,body {
         width: 26px;
         .box(horizontal, center, center);
     }
-    &>.title {
-        margin: 0;
+
+    &>.content {
         .box-flex(1);
+
+        .title {
+            margin: 0;
+        }
     }
+
+    .balance {
+        margin: 0 auto;
+        padding: 5px 15px;
+        .rounded(5px);
+        background: rgba(255, 255, 255, 0.4);
+        font-weight: bold;
+
+        img {
+            max-width: 25px;
+            max-height: 25px;
+        }
+    }
+
     .leave-store {
         background-image: url("../img/icons/close.png");
         width: 26px;

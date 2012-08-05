@@ -77,11 +77,29 @@ body {
   box-pack: center;
   box-align: center;
 }
-.header > .title {
-  margin: 0;
+.header > .content {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
+}
+.header > .content .title {
+  margin: 0;
+}
+.header .balance {
+  margin: 0 auto;
+  padding: 5px 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background: rgba(255, 255, 255, 0.4);
+  font-weight: bold;
+}
+.header .balance img {
+  max-width: 25px;
+  max-height: 25px;
 }
 .header .leave-store {
   background-image: url("../img/icons/close.png");

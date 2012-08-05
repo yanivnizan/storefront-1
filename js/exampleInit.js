@@ -3,7 +3,7 @@ SoomlaJS.initialize({
         name : "basic",
         elements : {
             title : {
-                name : "The surfboard store"
+                name : "The Surf Store"
             },
             buyMore : {
                 text : "Buy more clams"
@@ -13,7 +13,8 @@ SoomlaJS.initialize({
     background : "img/theme-lime-bubbles.jpg",
     currency : {
         name : "clams",
-        image : "img/assets/clam.png"
+        image : "img/assets/clam.png",
+        balance: 0
     },
     virtualGoods : [
         {
