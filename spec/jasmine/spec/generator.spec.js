@@ -195,6 +195,15 @@ define("generator.spec", ["models"], function (Models) {
                 expect(SoomlaJS.store.get("virtualGoods").at(0).toJSON()).toEqual(virtualGood);
                 expect(SoomlaJS.store.get("virtualGoods").length).toEqual(1);
             });
+
+            xit("should accept a 'beforeLeave' callback", function() {
+                var callbacks = {
+                    beforeLeave : function() {}
+                };
+                SoomlaJS.initialize({ callbacks : callbacks });
+                expect(SoomlaJS.storeView.options.callbacks.beforeLeave).toEqual(callbacks.beforeLeave);
+            });
+
         });
 
 

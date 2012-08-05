@@ -62,6 +62,7 @@ define(["native-api", "handlebars"], function(NativeAPI) {
         },
         events : {
             "touchend .leave-store" : function(event) {
+                if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
                 event.preventDefault();
 
                 // TODO: Release view bindings and destroy view
@@ -99,6 +100,8 @@ define(["native-api", "handlebars"], function(NativeAPI) {
                 templateName : this.model.get("templateName"),
                 currency : this.model.get("currency")
             }).render();
+
+            return this;
         }
     });
 
