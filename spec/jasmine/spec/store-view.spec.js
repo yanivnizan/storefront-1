@@ -2,19 +2,20 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
 
     describe('Soomla Store Backbone Views', function () {
 
-        describe("=== StoreView", function() {
 
-            var storeView, attributes;
-            beforeEach(function() {
-                attributes = {
-                    model : new Models.Store(),
-                    el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
-                };
-                storeView = new StoreViews.StoreView(attributes);
-                delete SoomlaJS.store;
-                delete SoomlaJS.storeView;
-                spyOn(NativeAPI, "destroy");
-            });
+        var storeView, attributes;
+        beforeEach(function() {
+            attributes = {
+                model : new Models.Store(),
+                el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
+            };
+            storeView = new StoreViews.StoreView(attributes);
+            delete SoomlaJS.store;
+            delete SoomlaJS.storeView;
+            spyOn(NativeAPI, "destroy");
+        });
+
+        describe("=== StoreView", function() {
 
             it("should be defined on the SoomlaJS namespace", function() {
                 SoomlaJS.initialize({template : {name : "empty"}});
@@ -60,6 +61,15 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             });
         });
 
+        describe("=== ItemView", function() {
+
+            it("should trigger an event with the soomla ID when tapped", function () {
+                var spy = sinon.spy();
+                var event = $.Event("touchend", {originalEvent : {touches : [1]}});
+                new StoreViews.ItemView({ soomlaId : 1}).on("tapped", spy).$el.trigger(event);
+                expect(spy.calledWith(1)).toBeTruthy();
+            });
+        });
 
     });
 

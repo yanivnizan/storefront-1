@@ -3,6 +3,11 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
     var ItemView = Backbone.View.extend({
         className : "item",
         tagName : "li",
+        events : {
+            "touchend" : function() {
+                this.trigger("tapped", this.options.soomlaId);
+            }
+        },
         render : function() {
             var name = this.options.templateName;
             this.$el.append(Templates[name].item(_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
@@ -112,6 +117,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
     return {
         StoreView : StoreView,
-        ItemCollectionView : ItemCollectionView
+        ItemCollectionView : ItemCollectionView,
+        ItemView : ItemView
     };
 });
