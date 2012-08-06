@@ -87,8 +87,19 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
         render : function() {
             var name = this.model.get("templateName");
             this.$el.empty().append(Templates[name].template(this.model.toJSON()));
-            this.itemsView = new ItemCollectionView({
+
+            // Render goods store items
+            new ItemCollectionView({
                 el : $("#goods-store .items"),
+                collection : this.model.get("virtualGoods"),
+                templateName : this.model.get("templateName"),
+                currency : this.model.get("currency")
+            }).render();
+
+            // Render currency store items
+            // TODO: Render currecny instead of goods
+            new ItemCollectionView({
+                el : $("#currency-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
                 currency : this.model.get("currency")
@@ -100,6 +111,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
 
     return {
-        StoreView : StoreView
+        StoreView : StoreView,
+        ItemCollectionView : ItemCollectionView
     };
 });

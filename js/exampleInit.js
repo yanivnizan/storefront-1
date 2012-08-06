@@ -32,7 +32,35 @@ SoomlaJS.initialize({
             price : 150,
             productId : 2988823
         }
+    ],
+    currencyPacks : [
+        {
+            name : "Super Saver Pack",
+            description : "For you cheap skates...",
+            image : "coin.jpg",
+            itemId : "super_saver_pack",
+            marketItem : "super_saver_pack",
+            price : 0.99,
+            amount : 200
+        },
+        {
+            name : "Malibu Medium Pack",
+            description : "For you cheap skates...",
+            image : "coin.jpg",
+            itemId : "super_saver_pack",
+            marketItem : "super_saver_pack",
+            price : 1.99,
+            amount : 500
+        },
+        {
+            name : "Pipeline Pumpin' Pack",
+            description : "The holy grail for ya spendin' surfers",
+            image : "coin.jpg",
+            itemId : "pipeline_pumpin_pack",
+            marketItem : "pipeline_pumpin_pack",
+            price : 5.99,
+            amount : 1500
+        }
     ]
-
 
 });
