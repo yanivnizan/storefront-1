@@ -48,7 +48,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "renderBackground", "renderTemplate", "render");
+            _.bindAll(this, "renderBackground", "renderTemplate", "render", "showCurrencyStore");
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
@@ -61,10 +61,9 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
                 // TODO: Release view bindings and destroy view
                 NativeAPI.destroy();
             },
-            "touchend .buy-more" : function() {
-                this.trigger("buyMoreTapped");
-            }
+            "touchend .buy-more" : "showCurrencyStore"
         },
+        showCurrencyStore : function(){},
         renderBackground : function() {
             this.$(".background").remove();
             var background = $("<img>", {src : this.model.get("background"), class : "background"});

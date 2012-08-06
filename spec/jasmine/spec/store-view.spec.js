@@ -2,12 +2,13 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
 
     describe('Soomla Store View', function () {
 
-        var storeView;
+        var storeView, attributes;
         beforeEach(function() {
-            storeView = new StoreViews.StoreView({
+            attributes = {
                 model : new Models.Store(),
                 el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
-            });
+            };
+            storeView = new StoreViews.StoreView(attributes);
             spyOn(NativeAPI, "destroy");
         });
 
@@ -34,13 +35,15 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             expect(callbacks.beforeLeave).toHaveBeenCalled();
         });
 
-        it("should trigger an event when 'Buy more' is tapped", function () {
-            var listeners = { buyMoreTapped : function() {} };
-            spyOn(listeners, "buyMoreTapped");
-            storeView.on("buyMoreTapped", listeners.buyMoreTapped);
+        it("should invoke the currency store when 'Buy more' is tapped", function () {
+            var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
+            storeView = new StoreViews.StoreView(attributes);
             var event = $.Event("touchend", {originalEvent : {touches : [1]}});
             storeView.$(".buy-more").trigger(event);
-            expect(listeners.buyMoreTapped).toHaveBeenCalled();
+            expect(spy.called).toBeTruthy();
+
+            // Restore original spied function to prototype
+            StoreViews.StoreView.prototype.showCurrencyStore.restore();
         });
 
 
