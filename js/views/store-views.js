@@ -71,7 +71,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
         },
         renderTemplate : function() {
             var name = this.model.get("templateName");
-            this.$("#main").empty().append(Templates[name].template(this.model.toJSON()));
+            this.$el.empty().append(Templates[name].template(this.model.toJSON()));
 
 
             // TODO: Release previous view bindings
@@ -82,13 +82,8 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             });
         },
         render : function() {
-            // Render background
-            this.$(".background").remove();
-            var background = $("<img>", {src : this.model.get("background"), class : "background"});
-            this.$el.prepend(background);
-
             var name = this.model.get("templateName");
-            this.$("#main").empty().append(Templates[name].template(this.model.toJSON()));
+            this.$el.empty().append(Templates[name].template(this.model.toJSON()));
             this.itemsView = new ItemCollectionView({
                 el : $(".items"),
                 collection : this.model.get("virtualGoods"),

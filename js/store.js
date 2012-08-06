@@ -38,7 +38,7 @@ define(["native-api", "models", "storeViews"], function(NativeAPI, Models, Store
                 this.newStore(json);
                 this.storeView = new StoreViews.StoreView({
                     model : this.store,
-                    el : $("body"),
+                    el : $("#main"),
                     callbacks : json ? json.callbacks : {}
                 }).render();
                 return this.store;
