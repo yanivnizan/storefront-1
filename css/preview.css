@@ -109,7 +109,7 @@ body {
   width: 26px;
   height: 26px;
 }
-#items-container {
+.items-container {
   margin: 10px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;

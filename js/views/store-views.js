@@ -39,9 +39,9 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             // TODO: Remove for phone
             "mousewheel" : function(event) {
                 // TODO: items-container is not in the scope of this view
-                var scrollTop = $("#items-container").scrollTop();
+                var scrollTop = $(".items-container").scrollTop();
                 var delta = event.originalEvent.wheelDelta;
-                $("#items-container").scrollTop(scrollTop - Math.round(delta));
+                $(".items-container").scrollTop(scrollTop - Math.round(delta));
             }
         }
     });
@@ -79,7 +79,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
             // TODO: Release previous view bindings
             this.itemsView = new ItemCollectionView({
-                el : $(".items"),
+                el : $("#goods-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName")
             });
@@ -88,7 +88,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             var name = this.model.get("templateName");
             this.$el.empty().append(Templates[name].template(this.model.toJSON()));
             this.itemsView = new ItemCollectionView({
-                el : $(".items"),
+                el : $("#goods-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
                 currency : this.model.get("currency")
