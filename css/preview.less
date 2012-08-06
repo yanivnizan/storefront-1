@@ -7,9 +7,8 @@ html,body {
 #main {
     position: relative;
     height: 100%;
-    .box(vertical);
 
-    &>.header,.footer {
+    .header,.footer {
         margin: 10px;
         .rounded(5px);
         text-align: center;
@@ -20,6 +19,11 @@ html,body {
         list-style-type: none;
         padding: 0;
     }
+}
+
+[data-role="page"] {
+    height: 100%;
+    .box(vertical);
 }
 
 .header {
@@ -132,6 +136,11 @@ html,body {
     width: 100%;
     height: 100%;
 }
+
+#currency-store {
+    display: none;
+}
+
 
 // Add bootstrap button types
 .btn-basic-primary {

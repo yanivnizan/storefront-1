@@ -63,7 +63,10 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             },
             "touchend .buy-more" : "showCurrencyStore"
         },
-        showCurrencyStore : function(){},
+        showCurrencyStore : function() {
+            this.$("#goods-store").hide();
+            this.$("#currency-store").show();
+        },
         renderBackground : function() {
             this.$(".background").remove();
             var background = $("<img>", {src : this.model.get("background"), class : "background"});
