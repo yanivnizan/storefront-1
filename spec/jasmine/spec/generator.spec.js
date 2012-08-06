@@ -144,6 +144,32 @@ define("generator.spec", ["models"], function (Models) {
             // TODO: More tests on default field values and validation
         });
 
+        describe('=== Currency Packs', function () {
+
+            it("should have an empty currency pack list by default", function() {
+                SoomlaJS.newStore();
+                expect(SoomlaJS.store.get("currencyPacks").toJSON()).toEqual([]);
+            });
+
+            it("should be able to add currency packs to a nested collection", function() {
+                SoomlaJS.newStore({
+                    currencyPacks: [{
+                        name : "Super Saver Pack",
+                        description : "For you cheap skates...",
+                        image : "coin.jpg",
+                        itemId : "super_saver_pack",
+                        marketItem : "super_saver_pack",
+                        price : 2.99,
+                        amount : 200
+                    }]
+                });
+                expect(SoomlaJS.store.get("currencyPacks").length).toEqual(1);
+                expect(SoomlaJS.store.get("currencyPacks").at(0)).toBeInstanceOf(Models.CurrencyPack);
+            });
+
+            // TODO: More tests on default field values and validation
+        });
+
         describe('Input JSON parsing', function () {
 
             it("should initalize without a JSON argument", function() {

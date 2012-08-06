@@ -27,6 +27,9 @@ define(["native-api", "models", "storeViews"], function(NativeAPI, Models, Store
                     if (json.virtualGoods)
                         attributes.virtualGoods = json.virtualGoods;
 
+                    if (json.currencyPacks)
+                        attributes.currencyPacks = json.currencyPacks;
+
                     if (json.currency)
                         attributes.currency = json.currency;
                 }

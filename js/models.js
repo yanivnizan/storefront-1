@@ -1,7 +1,9 @@
 define(function() {
 
-    var VirtualGood = Backbone.RelationalModel.extend({});
-    var VirtualGoodsCollection = Backbone.Collection.extend({ model : VirtualGood });
+    var VirtualGood             = Backbone.RelationalModel.extend({}),
+        CurrencyPack            = Backbone.RelationalModel.extend({}),
+        VirtualGoodsCollection  = Backbone.Collection.extend({ model : VirtualGood }),
+        CurrencyPacksCollection = Backbone.Collection.extend({ model : CurrencyPack });
 
     var Currency = Backbone.RelationalModel.extend({
         defaults : {
@@ -33,6 +35,16 @@ define(function() {
                     key: 'belongsTo',
                     includeInJSON: 'id'
                 }
+            },
+            {
+                type: Backbone.HasMany,
+                key: 'currencyPacks',
+                relatedModel: CurrencyPack,
+                collectionType: CurrencyPacksCollection,
+                reverseRelation: {
+                    key: 'belongsTo',
+                    includeInJSON: 'id'
+                }
             }
         ],
         defaults : {
@@ -52,6 +64,7 @@ define(function() {
 
     return {
         VirtualGood : VirtualGood,
+        CurrencyPack : CurrencyPack,
         Store : Store,
         Currency : Currency
     };
