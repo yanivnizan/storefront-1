@@ -108,6 +108,17 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
 
         describe("=== ItemCollectionView", function() {
 
+            it("should accept a type of Backbone view to use when rendering items", function () {
+                // Create a view stub
+                var stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+
+                new StoreViews.ItemCollectionView({
+                    collection : new Backbone.Collection({a : 1}),
+                    type : stubType
+                }).render();
+                expect(stubType.prototype.render.called).toBeTruthy();
+            });
+
             it("should trigger an event when one of its items were selected", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model();
