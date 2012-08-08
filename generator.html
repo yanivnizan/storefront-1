@@ -105,7 +105,7 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
         $.ajax({
             url : "js/exampleInit.json",
             error : function(jqXHR, textStatus, errorThrown) {
-                alerT("Can't retrieve the default JSON from the server.  Looks like you're on your own filling in the form :-)");
+                alert("Can't retrieve the default JSON from the server.  Looks like you're on your own filling in the form :-)");
             },
             success : function(data) {
                 $("#store-json").val(JSON.stringify(data, null, '\t'));
