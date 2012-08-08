@@ -5,7 +5,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
         tagName : "li",
         events : {
             "touchend" : function() {
-                this.trigger("tapped", this.options.soomlaId);
+                this.trigger("tapped", this.model);
             }
         },
         render : function() {
@@ -20,6 +20,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
         initialize : function(options) {
             _.bindAll(this, "addItem");
             this.collection.on("add", this.addItem);
+            this.type = options.type || ItemView;
             return this;
         },
         addItem : function(item) {
@@ -27,18 +28,26 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             this.$el.append(Templates[name].item(item.toJSON()));
         },
         render : function() {
-            var name = this.options.templateName;
-            var currency = this.options.currency;
-            var $el = this.$el;
+            var name     = this.options.templateName,
+                currency = this.options.currency,
+                $this    = this;
+
+            // expose sub views for testing purposes
+            this.subViews = [];
 
             // Render each item and append it
             this.collection.each(function(item) {
-                $el.append(new ItemView({
+                var view = new $this.type({
                     model : item,
                     templateName : name,
                     currency : currency
-                }).render().el);
-            })
+                }).on("tapped", function(model) {
+                    $this.trigger("selected", model);
+                });
+                $this.subViews.push(view);
+                $this.$el.append(view.render().el);
+            });
+            return this;
         },
         events : {
             // TODO: Remove for phone

@@ -63,13 +63,34 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
 
         describe("=== ItemView", function() {
 
-            it("should trigger an event with the soomla ID when tapped", function () {
-                var spy = sinon.spy();
-                var event = $.Event("touchend", {originalEvent : {touches : [1]}});
-                new StoreViews.ItemView({ soomlaId : 1}).on("tapped", spy).$el.trigger(event);
-                expect(spy.calledWith(1)).toBeTruthy();
+            it("should trigger an event with its model when tapped", function () {
+                var spy     = sinon.spy(),
+                    model   = new Backbone.Model(),
+                    event   = $.Event("touchend", {originalEvent : {touches : [1]}});
+                new StoreViews.ItemView({ model : model}).on("tapped", spy).$el.trigger(event);
+                expect(spy.calledWith(model)).toBeTruthy();
             });
         });
+
+        describe("=== ItemCollectionView", function() {
+
+            it("should trigger an event when one of its items were selected", function () {
+                var spy     = sinon.spy(),
+                    model   = new Backbone.Model();
+
+                // Fake a view that can fire the event
+                var type    = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("tapped", this.model) }});
+
+                var view = new StoreViews.ItemCollectionView({
+                    collection : new Backbone.Collection([model]),
+                    type : type
+                }).on("selected", spy).render();
+
+                view.subViews[0].triggerTapEvent();
+                expect(spy.calledWith(model)).toBeTruthy();
+            });
+        });
+
 
     });
 
