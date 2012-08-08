@@ -3,19 +3,20 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
     describe('Soomla Store Backbone Views', function () {
 
 
-        var storeView, attributes;
-        beforeEach(function() {
-            attributes = {
-                model : new Models.Store(),
-                el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
-            };
-            storeView = new StoreViews.StoreView(attributes);
-            delete SoomlaJS.store;
-            delete SoomlaJS.storeView;
-            spyOn(NativeAPI, "destroy");
-        });
 
         describe("=== StoreView", function() {
+
+            var storeView, attributes;
+
+            beforeEach(function() {
+                attributes = {
+                    model : new Models.Store(),
+                    el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
+                };
+                storeView = new StoreViews.StoreView(attributes);
+                delete SoomlaJS.store;
+                delete SoomlaJS.storeView;
+            });
 
             it("should be defined on the SoomlaJS namespace", function() {
                 SoomlaJS.initialize({template : {name : "empty"}});
@@ -33,12 +34,15 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             });
 
             it("should leave the store when the back button is tapped with one finger", function () {
+                sinon.stub(NativeAPI, "destroy");
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".leave-store").trigger(event);
-                expect(NativeAPI.destroy).toHaveBeenCalled();
+                expect(NativeAPI.destroy.called).toBeTruthy();
+                NativeAPI.destroy.restore();
             });
 
             it("should call a 'beforeLeave' callback if provided", function () {
+                sinon.stub(NativeAPI, "destroy");
                 var callbacks = {
                     beforeLeave : function() {}
                 };
@@ -47,6 +51,7 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".leave-store").trigger(event);
                 expect(callbacks.beforeLeave).toHaveBeenCalled();
+                NativeAPI.destroy.restore();
             });
 
             it("should invoke the currency store when 'Buy more' is tapped", function () {
@@ -60,22 +65,34 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
                 StoreViews.StoreView.prototype.showCurrencyStore.restore();
             });
 
-            it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
+            describe("=== Native API calls", function() {
 
-                // Create view, model and api stubs
-                var modelStub = new Backbone.Model({templateName : "empty"}),
-                    ViewStub  = Backbone.View.extend({ triggerSelectedEvent : function() { this.trigger("selected", modelStub) }}),
-                    nativeAPIStub = {wantsToBuyVirtualGoods : sinon.spy()};
+                var modelStub, ViewStub, nativeAPIStub;
 
-                storeView = new StoreViews.StoreView({
-                    VirtualGoodsView : ViewStub,
-                    CurrencyPacksView : ViewStub,
-                    model : modelStub,
-                    nativeAPI : nativeAPIStub
-                }).render();
-                storeView.virtualGoodsView.triggerSelectedEvent();
-                expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub)).toBeTruthy();
+                beforeEach(function() {
+                    // Create view, model and api stubs
+                    modelStub       = new Backbone.Model({templateName : "empty"});
+                    ViewStub        = Backbone.View.extend({ triggerSelectedEvent : function() { this.trigger("selected", modelStub) }});
+                    nativeAPIStub   = {wantsToBuyVirtualGoods : sinon.spy(), wantsToBuyCurrencyPacks : sinon.spy()};
+                    storeView = new StoreViews.StoreView({
+                        VirtualGoodsView    : ViewStub,
+                        CurrencyPacksView   : ViewStub,
+                        model               : modelStub,
+                        nativeAPI           : nativeAPIStub
+                    }).render();
+                });
+
+                it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
+                    storeView.virtualGoodsView.triggerSelectedEvent();
+                    expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub)).toBeTruthy();
+                });
+
+                it("should invoke a currency pack purchase when the 'selected' event is captured from the currency packs sub-view", function() {
+                    storeView.currencyPacksView.triggerSelectedEvent();
+                    expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub)).toBeTruthy();
+                });
             });
+
         });
 
         describe("=== ItemView", function() {

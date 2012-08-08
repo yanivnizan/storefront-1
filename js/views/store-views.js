@@ -62,7 +62,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "renderBackground", "renderTemplate", "render", "showCurrencyStore", "wantsToBuyVirtualGoods");
+            _.bindAll(this, "renderBackground", "renderTemplate", "render", "showCurrencyStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
             this.VirtualGoodsView   = this.options.VirtualGoodsView  || ItemCollectionView;
             this.CurrencyPacksView  = this.options.CurrencyPacksView || ItemCollectionView;
             this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
@@ -121,12 +121,15 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
                 currency : this.model.get("currency")
-            }).render();
+            }).on("selected", this.wantsToBuyCurrencyPacks).render();
 
             return this;
         },
         wantsToBuyVirtualGoods : function(model) {
             this.nativeAPI.wantsToBuyVirtualGoods(model);
+        },
+        wantsToBuyCurrencyPacks : function(model) {
+            this.nativeAPI.wantsToBuyCurrencyPacks(model);
         }
     });
 
