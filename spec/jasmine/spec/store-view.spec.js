@@ -72,7 +72,10 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
                 beforeEach(function() {
                     // Create view, model and api stubs
                     modelStub       = new Backbone.Model({templateName : "empty"});
-                    ViewStub        = Backbone.View.extend({ triggerSelectedEvent : function() { this.trigger("selected", modelStub) }});
+                    ViewStub        = Backbone.View.extend({
+                        render : sinon.spy(function() {return this;}),
+                        triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
+                    });
                     nativeAPIStub   = {wantsToBuyVirtualGoods : sinon.spy(), wantsToBuyCurrencyPacks : sinon.spy()};
                     storeView = new StoreViews.StoreView({
                         VirtualGoodsView    : ViewStub,
@@ -80,6 +83,10 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
                         model               : modelStub,
                         nativeAPI           : nativeAPIStub
                     }).render();
+                });
+
+                it("should accept 2 Backbone view prototypes to use when rendering item collections", function () {
+                    expect(ViewStub.prototype.render.calledTwice).toBeTruthy();
                 });
 
                 it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
