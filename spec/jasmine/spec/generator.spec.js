@@ -1,5 +1,6 @@
-define("generator.spec", ["models"], function (Models) {
+define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) {
 
+    window.SoomlaNative = NativeAPI;
 
     var objectFromString = function(str) {
         var keys = str.split(/\s+=\s+/);
@@ -235,16 +236,21 @@ define("generator.spec", ["models"], function (Models) {
         });
 
 
-        describe('=== Native API', function () {
+        describe('=== Native / Javascript API', function () {
 
-            it("should have the basic interaction functions defined", function() {
+            it("should have Soomla Native API functions defined", function() {
+                expect(SoomlaNative.wantsToBuyVirtualGoods).toBeDefined();
+                expect(SoomlaNative.wantsToBuyCurrencyPacks).toBeDefined();
+                expect(SoomlaNative.wantsToLeaveStore).toBeDefined();
+            });
+
+            it("should have Soomla Javascript API functions defined", function() {
                 expect(SoomlaJS.disableCurrencyStore).toBeDefined();
                 expect(SoomlaJS.currencyPurchaseEnded).toBeDefined();
                 expect(SoomlaJS.goodsPurchaseEnded).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
                 expect(SoomlaJS.refresh).toBeDefined();
             });
-
         });
 
     });

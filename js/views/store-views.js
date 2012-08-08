@@ -1,4 +1,4 @@
-define(["native-api", "templates"], function(NativeAPI, Templates) {
+define(["templates"], function(Templates) {
 
     var ItemView = Backbone.View.extend({
         className : "item",
@@ -77,7 +77,7 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
                 event.preventDefault();
 
                 // TODO: Release view bindings and destroy view
-                NativeAPI.destroy();
+                this.nativeAPI.wantsToLeaveStore();
             },
             "touchend .buy-more" : "showCurrencyStore"
         },

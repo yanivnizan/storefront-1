@@ -1,8 +1,8 @@
-define(["native-api", "models", "storeViews"], function(NativeAPI, Models, StoreViews) {
+define(["js-api", "native-api", "models", "storeViews"], function(jsAPI, NativeAPI, Models, StoreViews) {
 
     $(function() {
 
-        window.SoomlaJS = _.extend({}, NativeAPI, {
+        window.SoomlaJS = _.extend({}, jsAPI, {
             newStore : function(json) {
                 var attributes = {};
                 if (json) {

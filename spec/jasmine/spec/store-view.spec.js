@@ -1,4 +1,4 @@
-define("storeView.spec", ["storeViews", "models", "native-api"], function (StoreViews, Models, NativeAPI) {
+define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models) {
 
     describe('Soomla Store Backbone Views', function () {
 
@@ -6,12 +6,18 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
 
         describe("=== StoreView", function() {
 
-            var storeView, attributes;
+            var storeView, attributes,
+            nativeAPIStub   = {
+                wantsToBuyVirtualGoods  : sinon.spy(),
+                wantsToBuyCurrencyPacks : sinon.spy(),
+                wantsToLeaveStore       : sinon.spy()
+            };
 
             beforeEach(function() {
                 attributes = {
                     model : new Models.Store(),
-                    el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>")
+                    el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>"),
+                    nativeAPI : nativeAPIStub
                 };
                 storeView = new StoreViews.StoreView(attributes);
                 delete SoomlaJS.store;
@@ -34,15 +40,12 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
             });
 
             it("should leave the store when the back button is tapped with one finger", function () {
-                sinon.stub(NativeAPI, "destroy");
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".leave-store").trigger(event);
-                expect(NativeAPI.destroy.called).toBeTruthy();
-                NativeAPI.destroy.restore();
+                expect(nativeAPIStub.wantsToLeaveStore.called).toBeTruthy();
             });
 
             it("should call a 'beforeLeave' callback if provided", function () {
-                sinon.stub(NativeAPI, "destroy");
                 var callbacks = {
                     beforeLeave : function() {}
                 };
@@ -51,7 +54,6 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".leave-store").trigger(event);
                 expect(callbacks.beforeLeave).toHaveBeenCalled();
-                NativeAPI.destroy.restore();
             });
 
             it("should invoke the currency store when 'Buy more' is tapped", function () {
