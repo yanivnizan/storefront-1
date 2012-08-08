@@ -62,7 +62,11 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "renderBackground", "renderTemplate", "render", "showCurrencyStore");
+            _.bindAll(this, "renderBackground", "renderTemplate", "render", "showCurrencyStore", "wantsToBuyVirtualGoods");
+            this.VirtualGoodsView   = this.options.VirtualGoodsView  || ItemCollectionView;
+            this.CurrencyPacksView  = this.options.CurrencyPacksView || ItemCollectionView;
+            this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
+
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
@@ -103,16 +107,16 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             this.$el.empty().append(Templates[name].template(this.model.toJSON()));
 
             // Render goods store items
-            new ItemCollectionView({
+            this.virtualGoodsView = new this.VirtualGoodsView({
                 el : $("#goods-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
                 currency : this.model.get("currency")
-            }).render();
+            }).on("selected", this.wantsToBuyVirtualGoods).render();
 
             // Render currency store items
             // TODO: Render currecny instead of goods
-            new ItemCollectionView({
+            this.currencyPacksView = new this.CurrencyPacksView({
                 el : $("#currency-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
@@ -120,6 +124,9 @@ define(["native-api", "templates"], function(NativeAPI, Templates) {
             }).render();
 
             return this;
+        },
+        wantsToBuyVirtualGoods : function(model) {
+            this.nativeAPI.wantsToBuyVirtualGoods(model);
         }
     });
 

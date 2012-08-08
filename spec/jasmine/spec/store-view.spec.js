@@ -59,6 +59,23 @@ define("storeView.spec", ["storeViews", "models", "native-api"], function (Store
                 // Restore original spied function to prototype
                 StoreViews.StoreView.prototype.showCurrencyStore.restore();
             });
+
+            it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
+
+                // Create view, model and api stubs
+                var modelStub = new Backbone.Model({templateName : "empty"}),
+                    ViewStub  = Backbone.View.extend({ triggerSelectedEvent : function() { this.trigger("selected", modelStub) }}),
+                    nativeAPIStub = {wantsToBuyVirtualGoods : sinon.spy()};
+
+                storeView = new StoreViews.StoreView({
+                    VirtualGoodsView : ViewStub,
+                    CurrencyPacksView : ViewStub,
+                    model : modelStub,
+                    nativeAPI : nativeAPIStub
+                }).render();
+                storeView.virtualGoodsView.triggerSelectedEvent();
+                expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub)).toBeTruthy();
+            });
         });
 
         describe("=== ItemView", function() {
