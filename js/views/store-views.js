@@ -1,12 +1,17 @@
 define(["templates"], function(Templates) {
 
     var ItemView = Backbone.View.extend({
+        initialize : function() {
+            _.bind(this.onSelect, this);
+        },
         className : "item",
         tagName : "li",
         events : {
-            "touchend" : function() {
-                this.trigger("tapped", this.model);
-            }
+            "touchend" : "onSelect",
+            "click" : "onSelect"
+        },
+        onSelect : function() {
+            this.trigger("selected", this.model);
         },
         render : function() {
             var name = this.options.templateName;
@@ -41,7 +46,7 @@ define(["templates"], function(Templates) {
                     model : item,
                     templateName : name,
                     currency : currency
-                }).on("tapped", function(model) {
+                }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
                 $this.subViews.push(view);
@@ -62,7 +67,7 @@ define(["templates"], function(Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "renderBackground", "renderTemplate", "render", "showCurrencyStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
+            _.bindAll(this, "wantsToLeaveStore", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
             this.VirtualGoodsView   = this.options.VirtualGoodsView  || ItemCollectionView;
             this.CurrencyPacksView  = this.options.CurrencyPacksView || ItemCollectionView;
             this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
@@ -72,14 +77,17 @@ define(["templates"], function(Templates) {
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
         },
         events : {
-            "touchend .leave-store" : function(event) {
-                if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
-                event.preventDefault();
+            "touchend .leave-store" : "wantsToLeaveStore",
+            "click .leave-store"    : "wantsToLeaveStore",
+            "touchend .buy-more"    : "showCurrencyStore",
+            "click .buy-more"       : "showCurrencyStore"
+        },
+        wantsToLeaveStore : function(event) {
+            if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
+            event.preventDefault();
 
-                // TODO: Release view bindings and destroy view
-                this.nativeAPI.wantsToLeaveStore();
-            },
-            "touchend .buy-more" : "showCurrencyStore"
+            // TODO: Release view bindings and destroy view
+            this.nativeAPI.wantsToLeaveStore();
         },
         showCurrencyStore : function() {
             this.$("#goods-store").hide();

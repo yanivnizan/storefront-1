@@ -6,14 +6,14 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
 
         describe("=== StoreView", function() {
 
-            var storeView, attributes,
-            nativeAPIStub   = {
-                wantsToBuyVirtualGoods  : sinon.spy(),
-                wantsToBuyCurrencyPacks : sinon.spy(),
-                wantsToLeaveStore       : sinon.spy()
-            };
+            var storeView, attributes, nativeAPIStub;
 
             beforeEach(function() {
+                nativeAPIStub   = {
+                    wantsToBuyVirtualGoods  : sinon.spy(),
+                    wantsToBuyCurrencyPacks : sinon.spy(),
+                    wantsToLeaveStore       : sinon.spy()
+                };
                 attributes = {
                     model : new Models.Store(),
                     el : $("<div><div class='leave-store'></div><div class='buy-more'></div></div>"),
@@ -39,28 +39,36 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                 StoreViews.ItemCollectionView.prototype.render.restore();
             });
 
-            it("should leave the store when the back button is tapped with one finger", function () {
+            it("should leave the store when the back button is tapped with one finger \ clicked", function () {
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".leave-store").trigger(event);
                 expect(nativeAPIStub.wantsToLeaveStore.called).toBeTruthy();
+
+                nativeAPIStub.wantsToLeaveStore.reset();
+                storeView.$(".leave-store").click();
+                expect(nativeAPIStub.wantsToLeaveStore.called).toBeTruthy();
             });
 
-            it("should call a 'beforeLeave' callback if provided", function () {
-                var callbacks = {
-                    beforeLeave : function() {}
-                };
-                _.extend(storeView.options, { callbacks : callbacks });
-                spyOn(callbacks, "beforeLeave");
+            it("should call a 'beforeLeave' callback if provided when tapping \ clicking the back button", function () {
+                _.extend(storeView.options, { callbacks : { beforeLeave : sinon.spy() } });
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".leave-store").trigger(event);
-                expect(callbacks.beforeLeave).toHaveBeenCalled();
+                expect(storeView.options.callbacks.beforeLeave.called).toBeTruthy();
+
+                nativeAPIStub.wantsToLeaveStore.reset();
+                storeView.$(".leave-store").click();
+                expect(storeView.options.callbacks.beforeLeave.called).toBeTruthy();
             });
 
-            it("should invoke the currency store when 'Buy more' is tapped", function () {
+            it("should invoke the currency store when 'Buy more' is tapped \ clicked", function () {
                 var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
                 storeView = new StoreViews.StoreView(attributes);
                 var event = $.Event("touchend", {originalEvent : {touches : [1]}});
                 storeView.$(".buy-more").trigger(event);
+                expect(spy.called).toBeTruthy();
+
+                spy.reset();
+                storeView.$(".buy-more").click();
                 expect(spy.called).toBeTruthy();
 
                 // Restore original spied function to prototype
@@ -110,7 +118,11 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model(),
                     event   = $.Event("touchend", {originalEvent : {touches : [1]}});
-                new StoreViews.ItemView({ model : model}).on("tapped", spy).$el.trigger(event);
+                new StoreViews.ItemView({ model : model}).on("selected", spy).$el.trigger(event);
+                expect(spy.calledWith(model)).toBeTruthy();
+
+                spy.reset();
+                new StoreViews.ItemView({ model : model}).on("selected", spy).$el.click();
                 expect(spy.calledWith(model)).toBeTruthy();
             });
         });
@@ -133,7 +145,7 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                     model   = new Backbone.Model();
 
                 // Fake a view that can fire the event
-                var type    = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("tapped", this.model) }});
+                var type    = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
 
                 var view = new StoreViews.ItemCollectionView({
                     collection : new Backbone.Collection([model]),
