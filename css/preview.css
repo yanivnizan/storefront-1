@@ -104,10 +104,12 @@ body {
   max-width: 25px;
   max-height: 25px;
 }
-.header .leave-store {
+.header .leave-store,
+.header .back {
   background-image: url("../img/icons/close.png");
   width: 26px;
   height: 26px;
+  cursor: pointer;
 }
 .items-container {
   margin: 10px;
