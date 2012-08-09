@@ -67,7 +67,7 @@ define(["templates"], function(Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "wantsToLeaveStore", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
+            _.bindAll(this, "wantsToLeaveStore", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
             this.VirtualGoodsView   = this.options.VirtualGoodsView  || ItemCollectionView;
             this.CurrencyPacksView  = this.options.CurrencyPacksView || ItemCollectionView;
             this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
@@ -80,7 +80,9 @@ define(["templates"], function(Templates) {
             "touchend .leave-store" : "wantsToLeaveStore",
             "click .leave-store"    : "wantsToLeaveStore",
             "touchend .buy-more"    : "showCurrencyStore",
-            "click .buy-more"       : "showCurrencyStore"
+            "click .buy-more"       : "showCurrencyStore",
+            "touchend .back"        : "showGoodsStore",
+            "click .back"           : "showGoodsStore"
         },
         wantsToLeaveStore : function(event) {
             if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
@@ -92,6 +94,10 @@ define(["templates"], function(Templates) {
         showCurrencyStore : function() {
             this.$("#goods-store").hide();
             this.$("#currency-store").show();
+        },
+        showGoodsStore : function() {
+            this.$("#currency-store").hide();
+            this.$("#goods-store").show();
         },
         renderBackground : function() {
             this.$(".background").remove();
