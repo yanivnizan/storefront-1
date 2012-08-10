@@ -85,7 +85,7 @@ define(["models", "views"], function(Models, Views) {
 
 
 
-            }).attr("src", "preview.html");
+            }).attr("src", "store.html");
 
         }
     };
