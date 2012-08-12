@@ -2,10 +2,8 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
 
     window.SoomlaNative = NativeAPI;
 
-    var objectFromString = function(str) {
-        var keys = str.split(/\s+=\s+/);
-        var value = keys.pop();
-        keys = keys[0].split(".");
+    var objectFromString = function(str, value) {
+        var keys = str.split(".");
         var lastKey = keys.pop();
         var obj, temp;
         obj = temp = {};
@@ -196,18 +194,24 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should accept nested template.elements.buyMore.text", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.buyMore.text = Buy more clams"));
+                SoomlaJS.newStore(objectFromString("template.elements.buyMore.text", "Buy more clams"));
                 expect(SoomlaJS.store.get("moreCurrencyText")).toEqual("Buy more clams");
             });
 
             it("should accept nested template.elements.buyMore.image", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.buyMore.image = img/assets/clam.png"));
+                SoomlaJS.newStore(objectFromString("template.elements.buyMore.image", "img/assets/clam.png"));
                 expect(SoomlaJS.store.get("moreCurrencyImage")).toEqual("img/assets/clam.png");
             });
 
             it("should accept nested template.elements.title.name", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.title.name = Surf Shop"));
+                SoomlaJS.newStore(objectFromString("template.elements.title.name", "Surf Shop"));
                 expect(SoomlaJS.store.get("templateTitle")).toEqual("Surf Shop");
+            });
+
+            it("should accept nested template.elements.title.name", function() {
+                var properties = {rows : 2, columns : 3};
+                SoomlaJS.newStore(objectFromString("template.properties", properties));
+                expect(SoomlaJS.store.get("templateProperties")).toEqual(properties);
             });
 
             it("should accept an array of virtual goods", function() {

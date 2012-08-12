@@ -11,6 +11,9 @@ define(["js-api", "native-api", "models", "storeViews"], function(jsAPI, NativeA
                     if (json.template) {
                         if (json.template.name)
                             attributes.templateName = json.template.name;
+
+                        if (json.template.properties)
+                            attributes.templateProperties = json.template.properties;
                         if (json.template.elements) {
 
                             if (json.template.elements.buyMore) {
