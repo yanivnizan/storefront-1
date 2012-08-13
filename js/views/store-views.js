@@ -125,6 +125,7 @@ define(["templates"], function(Templates) {
                 el : $("#goods-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
+                templateOptions : this.model.get("templateOptions"),
                 currency : this.model.get("currency")
             }).on("selected", this.wantsToBuyVirtualGoods).render();
 
@@ -134,6 +135,7 @@ define(["templates"], function(Templates) {
                 el : $("#currency-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
+                templateOptions : this.model.get("templateOptions"),
                 currency : this.model.get("currency")
             }).on("selected", this.wantsToBuyCurrencyPacks).render();
 
