@@ -1,0 +1,69 @@
+{
+    "template" :  {
+        "name" :  "basic",
+        "elements" :  {
+            "title" :  {
+                "name" :  "The Surf Store"
+            },
+            "buyMore" :  {
+                "text" :  "Buy more clams",
+                "image" :  "img/examples/surf/clam.png"
+            }
+        }
+    },
+    "background" :  "img/theme-lime-bubbles.jpg",
+    "currency" :  {
+        "name" :  "clams",
+        "image" :  "img/examples/surf/clam.png",
+        "balance": "0"
+    },
+    "virtualGoods" :  [
+        {
+            "name" :  "Rip Curl Shortboard",
+            "description" :  "Shred the small waves with this super-fast board",
+            "src" :  "img/examples/surf/blue-surfboard.png",
+            "price" :  "100",
+            "itemId" :  "2988822"
+        },
+        {
+            "name" :  "Billanbog Vintage Longboard",
+            "description" :  "Slowly glide through low power surf and hang five",
+            "src" :  "img/examples/surf/girl-surfboard-th.png",
+            "price" :  "150",
+            "itemId" :  "2988823"
+        }
+    ],
+    "currencyPacks" :  [
+        {
+            "name" :  "Super Saver Pack",
+            "description" :  "For you cheap skates...",
+            "image" :  "coin.jpg",
+            "itemId" :  "super_saver_pack",
+            "productId" :  "super_saver_pack",
+            "price" :  "0.99",
+            "amount" :  "200",
+            "managed" : false
+        },
+        {
+            "name" :  "Malibu Medium Pack",
+            "description" :  "For you cheap skates...",
+            "image" :  "coin.jpg",
+            "itemId" :  "super_saver_pack",
+            "productId" :  "super_saver_pack",
+            "price" :  "1.99",
+            "amount" :  "500",
+            "managed" : false
+        },
+        {
+            "name" :  "Pipeline Pumpin' Pack",
+            "description" :  "The holy grail for ya spendin' surfers",
+            "image" :  "coin.jpg",
+            "itemId" :  "pipeline_pumpin_pack",
+            "productId" :  "pipeline_pumpin_pack",
+            "price" :  "5.99",
+            "amount" :  "1500",
+            "managed" : false
+        }
+    ]
+
+}
