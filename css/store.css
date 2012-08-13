@@ -15,13 +15,15 @@ html,
 body {
   height: 100%;
 }
+h1 {
+  margin: 0;
+}
 #main {
   position: relative;
   height: 100%;
 }
 #main .header,
 #main .footer {
-  margin: 10px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -30,10 +32,6 @@ body {
   background-clip: padding-box;
   text-align: center;
   padding: 4px 7px;
-}
-#main .items {
-  list-style-type: none;
-  padding: 0;
 }
 [data-role="page"] {
   height: 100%;
@@ -51,6 +49,7 @@ body {
   box-align: stretch;
 }
 .header {
+  margin: 10px 10px 0;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -64,6 +63,9 @@ body {
   box-pack: start;
   box-align: stretch;
   background: rgba(0, 0, 0, 0.2);
+}
+.header h1 {
+  font-size: 24px;
 }
 .header > .padding {
   width: 26px;
@@ -118,7 +120,37 @@ body {
   box-flex: 1;
   overflow-y: scroll;
 }
-.item {
+.buy-more {
+  display: block;
+  padding: 5px;
+  width: 100%;
+  -webkit-user-select: none;
+}
+.buy-more img {
+  margin-right: 10px;
+  max-width: 40px;
+  max-height: 40px;
+}
+.footer {
+  margin: 0 10px 10px;
+}
+.footer h1 {
+  font-size: 20px;
+}
+.background {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+#currency-store {
+  display: none;
+}
+.basic.items {
+  list-style-type: none;
+  padding: 0;
+}
+.basic .item {
   margin: 0 0 10px;
   background: rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 5px;
@@ -140,7 +172,7 @@ body {
   box-pack: start;
   box-align: stretch;
 }
-.item .visual {
+.basic .item .visual {
   margin: 5px;
   background: white;
   -webkit-border-radius: 5px;
@@ -163,53 +195,144 @@ body {
   box-align: center;
   min-width: 70px;
 }
-.item .visual img {
+.basic .item .visual img {
   max-width: 50px;
   max-height: 50px;
 }
-.item .content {
+.basic .item .content {
   margin: 5px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.item img.currency {
+.basic .item img.currency {
   min-width: 15px;
   min-height: 15px;
   max-width: 25px;
   max-height: 25px;
 }
-.item h1 {
+.basic .item h1 {
   font-size: 14px;
   line-height: 18px;
   margin: 0 0 2px;
 }
-.item .description {
+.basic .item .description {
   font-size: 13px;
 }
-.item .price {
+.basic .item .price {
   float: right;
   font-weight: bold;
 }
-.buy-more {
-  display: block;
-  padding: 20px;
-  width: 100%;
-  -webkit-user-select: none;
+.grid {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: stretch;
 }
-.buy-more img {
-  margin-right: 10px;
-  max-width: 40px;
-  max-height: 40px;
+.grid.items {
+  padding: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-pack: start;
+  box-align: stretch;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
 }
-.background {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
+.grid.items .row {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: stretch;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
 }
-#currency-store {
-  display: none;
+.grid .item {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  margin: 3px;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.grid .item .visual {
+  background: white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+  margin-bottom: 5px;
+  min-width: 70px;
+}
+.grid .item .visual img {
+  max-width: 50px;
+  max-height: 50px;
+}
+.grid .item .content {
+  text-align: center;
+}
+.grid .item img.currency {
+  min-width: 15px;
+  min-height: 15px;
+  max-width: 25px;
+  max-height: 25px;
+}
+.grid .item h1 {
+  font-size: 11px;
+  line-height: 18px;
+  margin: 0 0 2px;
+}
+.grid .item .description {
+  font-size: 13px;
+}
+.grid .item .price {
+  float: right;
+  font-weight: bold;
 }
 .btn-basic-primary {
   background-color: #0f8a7c !important;

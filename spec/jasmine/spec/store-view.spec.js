@@ -32,12 +32,12 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
             });
 
             it("should create two item collection views when initiated with virtual goods and currency packs", function() {
-                var stub = sinon.stub(StoreViews.ItemCollectionView.prototype, "render").returns({render : function(){}});
+                var stub = sinon.stub(StoreViews.CollectionListView.prototype, "render").returns({render : function(){}});
                 SoomlaJS.initialize({template : {name : "empty"}});
                 expect(stub.calledTwice).toBeTruthy();
 
                 // Restore original stubbed function to prototype
-                StoreViews.ItemCollectionView.prototype.render.restore();
+                StoreViews.CollectionListView.prototype.render.restore();
             });
 
             it("should leave the store when the back button is tapped with one finger \ clicked", function () {
@@ -134,22 +134,22 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model(),
                     touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
-                new StoreViews.ItemView({ model : model}).on("selected", spy).$el.trigger(touchendEvent);
+                new StoreViews.ListItemView({ model : model}).on("selected", spy).$el.trigger(touchendEvent);
                 expect(spy.calledWith(model)).toBeTruthy();
 
                 spy.reset();
-                new StoreViews.ItemView({ model : model}).on("selected", spy).$el.click();
+                new StoreViews.ListItemView({ model : model}).on("selected", spy).$el.click();
                 expect(spy.calledWith(model)).toBeTruthy();
             });
         });
 
-        describe("=== ItemCollectionView", function() {
+        describe("=== CollectionListView", function() {
 
             it("should accept a type of Backbone view to use when rendering items", function () {
                 // Create a view stub
                 var stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
 
-                new StoreViews.ItemCollectionView({
+                new StoreViews.CollectionListView({
                     collection : new Backbone.Collection({a : 1}),
                     type : stubType
                 }).render();
@@ -163,7 +163,7 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                 // Fake a view that can fire the event
                 var type    = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
 
-                var view = new StoreViews.ItemCollectionView({
+                var view = new StoreViews.CollectionListView({
                     collection : new Backbone.Collection([model]),
                     type : type
                 }).on("selected", spy).render();

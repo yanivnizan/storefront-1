@@ -1,6 +1,6 @@
 define(["templates"], function(Templates) {
 
-    var ItemView = Backbone.View.extend({
+    var ListItemView = Backbone.View.extend({
         initialize : function() {
             _.bind(this.onSelect, this);
         },
@@ -20,25 +20,39 @@ define(["templates"], function(Templates) {
         }
     });
 
-    // TODO: Change naming or move, to prevent name confusion with other ItemCollectionView
-    var ItemCollectionView = Backbone.View.extend({
+    var GridItemView = ListItemView.extend({
+        tagName : "div"
+    });
+
+
+    var BaseCollectionView = Backbone.View.extend({
         initialize : function(options) {
-            _.bindAll(this, "addItem");
-            this.collection.on("add", this.addItem);
-            this.type = options.type || ItemView;
+            this.type = options.type;
+            this.subViews = []; // expose sub views for testing purposes
             return this;
         },
-        addItem : function(item) {
-            var name = this.options.templateName;
-            this.$el.append(Templates[name].item(item.toJSON()));
-        },
+        events : {
+            // TODO: Remove for phone
+            "mousewheel" : function(event) {
+                // TODO: items-container is not in the scope of this view
+                var scrollTop = $(".items-container").scrollTop();
+                var delta = event.originalEvent.wheelDelta;
+                $(".items-container").scrollTop(scrollTop - Math.round(delta));
+            }
+        }
+    });
+
+
+    var CollectionListView = BaseCollectionView.extend({
         render : function() {
+            (this.type) || (this.type = ListItemView);
             var name     = this.options.templateName,
                 currency = this.options.currency,
                 $this    = this;
 
-            // expose sub views for testing purposes
-            this.subViews = [];
+
+            // Set the view's class
+            this.$el.addClass("basic");
 
             // Render each item and append it
             this.collection.each(function(item) {
@@ -53,23 +67,56 @@ define(["templates"], function(Templates) {
                 $this.$el.append(view.render().el);
             });
             return this;
-        },
-        events : {
-            // TODO: Remove for phone
-            "mousewheel" : function(event) {
-                // TODO: items-container is not in the scope of this view
-                var scrollTop = $(".items-container").scrollTop();
-                var delta = event.originalEvent.wheelDelta;
-                $(".items-container").scrollTop(scrollTop - Math.round(delta));
-            }
+        }
+    });
+
+    var CollectionGridView = BaseCollectionView.extend({
+        render : function() {
+            (this.type) || (this.type = GridItemView);
+            var name     = this.options.templateName,
+                currency = this.options.currency,
+                rows     = this.options.templateProperties.rows,
+                columns  = this.options.templateProperties.columns,
+                $this    = this;
+
+            // Set the view's class
+            this.$el.addClass("grid");
+
+            // Render each item and append it
+            var currentRow;
+            this.collection.each(function(item, i) {
+                if (i % columns == 0) {
+                    currentRow = $("<div>", {class : "row"});
+                    $this.$el.append(currentRow);
+                }
+                var view = new $this.type({
+                    model : item,
+                    templateName : name,
+                    currency : currency,
+                    type : GridItemView
+                }).on("selected", function(model) {
+                    $this.trigger("selected", model);
+                });
+                $this.subViews.push(view);
+                currentRow.append(view.render().el);
+            });
+            return this;
         }
     });
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
-            this.VirtualGoodsView   = this.options.VirtualGoodsView  || ItemCollectionView;
-            this.CurrencyPacksView  = this.options.CurrencyPacksView || ItemCollectionView;
+
+            // untested code block
+            var viewType, name = this.model.get("templateName");
+            switch(name) {
+                case "grid" : viewType = CollectionGridView; break;
+                default     : viewType = CollectionListView; break;
+            };
+
+            this.VirtualGoodsView   = this.options.VirtualGoodsView  || viewType;
+            this.CurrencyPacksView  = this.options.CurrencyPacksView || viewType;
             this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
 
             this.model.on("change:background", this.renderBackground);
@@ -110,7 +157,7 @@ define(["templates"], function(Templates) {
 
 
             // TODO: Release previous view bindings
-            this.itemsView = new ItemCollectionView({
+            this.itemsView = new CollectionListView({
                 el : $("#goods-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName")
@@ -125,7 +172,7 @@ define(["templates"], function(Templates) {
                 el : $("#goods-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
-                templateOptions : this.model.get("templateOptions"),
+                templateProperties : this.model.get("templateProperties"),
                 currency : this.model.get("currency")
             }).on("selected", this.wantsToBuyVirtualGoods).render();
 
@@ -135,7 +182,7 @@ define(["templates"], function(Templates) {
                 el : $("#currency-store .items"),
                 collection : this.model.get("virtualGoods"),
                 templateName : this.model.get("templateName"),
-                templateOptions : this.model.get("templateOptions"),
+                templateProperties : this.model.get("templateProperties"),
                 currency : this.model.get("currency")
             }).on("selected", this.wantsToBuyCurrencyPacks).render();
 
@@ -152,7 +199,7 @@ define(["templates"], function(Templates) {
 
     return {
         StoreView : StoreView,
-        ItemCollectionView : ItemCollectionView,
-        ItemView : ItemView
+        CollectionListView : CollectionListView,
+        ListItemView : ListItemView
     };
 });

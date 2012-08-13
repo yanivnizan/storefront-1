@@ -1,15 +1,16 @@
 {
-    "template" :  {
+    "template": {
         "name" :  "basic",
-        "elements" :  {
-            "title" :  {
-                "name" :  "The Surf Store"
+        "elements": {
+            "title": {
+                "name": "Surf Store"
             },
-            "buyMore" :  {
-                "text" :  "Buy more clams",
-                "image" :  "img/examples/surf/clam.png"
+            "buyMore": {
+                "text": "Buy more clams",
+                "image": "img/examples/surf/clam.png"
             }
-        }
+        },
+        "properties" : {"columns" : 3}
     },
     "background" :  "img/theme-lime-bubbles.jpg",
     "currency" :  {
@@ -18,6 +19,20 @@
         "balance": "0"
     },
     "virtualGoods" :  [
+        {
+            "name" :  "Rip Curl Shortboard",
+            "description" :  "Shred the small waves with this super-fast board",
+            "src" :  "img/examples/surf/blue-surfboard.png",
+            "price" :  "100",
+            "productId" :  "2988822"
+        },
+        {
+            "name" :  "Billanbog Vintage Longboard",
+            "description" :  "Slowly glide through low power surf and hang five",
+            "src" :  "img/examples/surf/girl-surfboard-th.png",
+            "price" :  "150",
+            "productId" :  "2988823"
+        },
         {
             "name" :  "Rip Curl Shortboard",
             "description" :  "Shred the small waves with this super-fast board",

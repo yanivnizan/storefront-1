@@ -4,20 +4,18 @@ html,body {
     height: 100%;
 }
 
+h1 {
+    margin: 0;
+}
+
 #main {
     position: relative;
     height: 100%;
 
     .header,.footer {
-        margin: 10px;
         .rounded(5px);
         text-align: center;
         padding: 4px 7px;
-    }
-
-    .items {
-        list-style-type: none;
-        padding: 0;
     }
 }
 
@@ -27,8 +25,13 @@ html,body {
 }
 
 .header {
+    margin: 10px 10px 0;
     .box;
     background: rgba(0,0,0,0.2);
+
+    h1 {
+        font-size: 24px;
+    }
 
     &>.padding {
         width: 26px;
@@ -71,56 +74,9 @@ html,body {
     overflow-y  : scroll;
 }
 
-.item {
-    margin: 0 0 10px;
-    background: rgba(0,0,0,0.2); //refactor
-    .rounded(5px); //refactor
-    .box();
-
-    .visual {
-        margin: 5px;
-        background: white;
-        .rounded(5px);
-        .box(horizontal, center, center);
-
-        min-width: 70px;
-        img {
-            max-width: 50px;
-            max-height: 50px;
-        }
-    }
-    .content {
-        margin: 5px; //refactor
-        .box-flex(1);
-    }
-
-    img.currency {
-        min-width: 15px;
-        min-height: 15px;
-        max-width: 25px;
-        max-height: 25px;
-
-    }
-
-    h1 {
-        font-size : 14px;
-        line-height: 18px;
-        margin: 0 0 2px;
-    }
-
-    .description {
-        font-size: 13px;
-    }
-
-    .price{
-        float: right;
-        font-weight: bold;
-    }
-}
-
 .buy-more {
     display: block;
-    padding: 20px;
+    padding: 5px;
     width: 100%;
     -webkit-user-select: none;
 
@@ -128,6 +84,14 @@ html,body {
         margin-right: 10px;
         max-width: 40px;
         max-height: 40px;
+    }
+}
+
+.footer {
+    margin: 0 10px 10px;
+
+    h1 {
+        font-size: 20px;
     }
 }
 
@@ -141,6 +105,10 @@ html,body {
 #currency-store {
     display: none;
 }
+
+// Include store templates
+@import "templates/_basic.less";
+@import "templates/_grid.less";
 
 
 // Add bootstrap button types

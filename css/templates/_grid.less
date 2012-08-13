@@ -1,0 +1,61 @@
+.grid {
+    &.items {
+        padding: 0;
+        .box(vertical);
+        .box-flex(1);
+
+        .row {
+            .box;
+            .box-flex(1);
+        }
+    }
+    .box;
+
+    .item {
+        .box-flex(1);
+        margin: 3px;
+        padding: 5px; //refactor
+        background: rgba(0,0,0,0.2); //refactor
+        .rounded(5px); //refactor
+
+        .visual {
+            background: white;
+            .rounded(5px);
+            .box(horizontal, center, center);
+            margin-bottom: 5px;
+
+            min-width: 70px;
+            img {
+                max-width: 50px;
+                max-height: 50px;
+            }
+        }
+        .content {
+            text-align: center;
+        }
+
+        img.currency {
+            min-width: 15px;
+            min-height: 15px;
+            max-width: 25px;
+            max-height: 25px;
+
+        }
+
+        h1 {
+            font-size : 11px;
+            line-height: 18px;
+            margin: 0 0 2px;
+        }
+
+        .description {
+            font-size: 13px;
+        }
+
+        .price{
+            float: right;
+            font-weight: bold;
+        }
+    }
+
+}

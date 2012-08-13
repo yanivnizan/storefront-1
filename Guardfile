@@ -6,6 +6,7 @@ guard 'less', :all_on_start => true, :all_after_change => true do
   # watch(%r{^.+\.less$})
   watch("css/generator.less")
   watch("css/store.less")
-  watch("css/mixins/elements.less") { "css/generator.less" }
-  watch("css/mixins/elements.less") { "css/store.less" }
+  watch("css/mixins/elements.less")         { "css/generator.less"  }
+  watch("css/mixins/elements.less")         { "css/store.less"      }
+  watch(%r{^css\/templates\/_.+\.less$})    { "css/store.less"      }
 end
