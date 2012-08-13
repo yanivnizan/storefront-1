@@ -123,6 +123,7 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
                 var json = eval("(" + $("#store-json").val() + ")");
                 SoomlaJS.initialize(json);
             } catch (ex) {
+                console.dir(ex.stack);
                 alert("You're JSON is not well formatted. Check it and generate again");
             }
         });

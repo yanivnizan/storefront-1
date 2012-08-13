@@ -89,11 +89,11 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
 
             describe("=== Native API calls", function() {
 
-                var modelStub, ViewStub, nativeAPIStub, templateOptionsStub;
+                var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub;
 
                 beforeEach(function() {
                     // Create view, model and api stubs
-                    modelStub       = new Backbone.Model({templateName : "empty", templateOptions : templateOptionsStub});
+                    modelStub       = new Backbone.Model({templateName : "empty", templateProperties : templatePropertiesStub});
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
@@ -112,7 +112,7 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                 });
 
                 it("should accept a template options object", function() {
-                    expect(storeView.virtualGoodsView.options.templateOptions).toEqual(templateOptionsStub);
+                    expect(storeView.virtualGoodsView.options.templateProperties).toEqual(templatePropertiesStub);
                 });
 
                 it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
