@@ -1,0 +1,159 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+ More info: h5bp.com/i/378 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title></title>
+    <meta name="description" content="">
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap-buttons.css">
+    <link rel="stylesheet" href="css/store.css">
+
+    <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+
+    <!-- All JavaScript at the bottom, except this Modernizr build.
+Modernizr enables HTML5 elements & feature detects for optimal performance.
+Create your own custom Modernizr build: www.modernizr.com/download/ -->
+    <script src="js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+<body>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+chromium.org/developers/how-tos/chrome-frame-getting-started -->
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a
+    different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
+    to experience this site.</p><![endif]-->
+
+
+<div role="main" id="main">
+</div>
+
+
+<!-- JavaScript at the bottom for fast page loading -->
+
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery/jquery-1.7.1.min.js"><\/script>')</script>
+
+
+<!-- jQuery plugins -->
+
+
+<!-- scripts concatenated and minified via build script -->
+<script src="js/libs/underscore-min.js"></script>
+<script src="js/libs/backbone.js"></script>
+<script src="js/libs/backbone-relational.js"></script>
+<script src="js/libs/handlebars-1.0.0.beta.6.js"></script>
+<script data-main="js/main-store" src="js/libs/require.js"></script>
+
+<script>
+    $(window).load(function() {
+
+        $.ajax({
+            url : "js/exampleInit.json",
+            error : function(jqXHR, textStatus, errorThrown) {
+                alert("Can't retrieve the default JSON from the server.  Looks like you're on your own filling in the form :-)");
+            },
+            success : function(data) {
+                SoomlaJS.initialize(data);
+            },
+            dataType : "json"
+        });
+    });
+
+</script>
+<!-- end scripts -->
+
+<!------------   User info template   ------------>
+
+<script id="basic-template" type="text/x-handlebars-template">
+    <div id="goods-store" data-role="page">
+        <img src="{{background}}" class="background">
+        <div class="header">
+            <div class="padding"></div>
+            <div class="content">
+                <h1 class="title">
+                    {{templateTitle}}
+                </h1>
+            <span class="balance">
+                {{#if currency.image}}
+                <img src="{{currency.image}}">
+                {{/if}}
+                {{currency.balance}}
+            </span>
+            </div>
+            <div class="padding">
+                <div class="leave-store"></div>
+            </div>
+        </div>
+        <div class="items-container">
+            <ul class="items"></ul>
+        </div>
+        <div class="footer">
+            <button class="buy-more btn btn-basic-primary">
+                <h1><img src="{{moreCurrencyImage}}" class="currency">{{moreCurrencyText}}</h1>
+            </button>
+        </div>
+    </div>
+    <div id="currency-store" data-role="page">
+        <img src="{{background}}" class="background">
+        <div class="header">
+            <div class="padding"></div>
+            <div class="content">
+                <h1 class="title">
+                    {{templateTitle}}
+                </h1>
+            <span class="balance">
+                {{#if currency.image}}
+                <img src="{{currency.image}}">
+                {{/if}}
+                {{currency.balance}}
+            </span>
+            </div>
+            <div class="padding">
+                <div class="back"></div>
+            </div>
+        </div>
+        <div class="items-container">
+            <ul class="items"></ul>
+        </div>
+        <div class="footer">
+            <button class="buy-more btn btn-basic-primary">
+                <h1><img src="{{moreCurrencyImage}}" class="currency">{{moreCurrencyText}}</h1>
+            </button>
+        </div>
+    </div>
+</script>
+<script id="basic-item" type="text/x-handlebars-template">
+    <div class="visual">
+        <img src="{{src}}">
+    </div>
+    <div class="content">
+        <h1>{{name}}</h1>
+        <div class="description">{{description}}</div>
+        <span class="price">{{price}} <img src="{{currency.image}}" class="currency"></span>
+    </div>
+</script>
+
+
+</body>
+</html>
