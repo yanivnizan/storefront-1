@@ -3,10 +3,10 @@
  * Since the native code should provide this interface, it is currently implemented with stubs.
  */
 define({
-    wantsToBuyVirtualGoods : function(soomlaId) {
+    wantsToBuyVirtualGoods : function(model) {
         alert("Sorry bub, not implemented yet.");
     },
-    wantsToBuyCurrencyPacks : function(soomlaId) {
+    wantsToBuyCurrencyPacks : function(model) {
         alert("Sorry bub, not implemented yet.");
     },
     wantsToLeaveStore : function() {
