@@ -46,21 +46,23 @@ define(["templates"], function(Templates) {
 
     var CollectionListView = BaseCollectionView.extend({
         render : function() {
-            (this.type) || (this.type = ListItemView);
+            (this.type) || (this.type = ListItemView); // For testing purposes
             var name     = this.options.templateName,
                 currency = this.options.currency,
+                itemType = this.options.itemType,
                 $this    = this;
 
 
             // Set the view's class
-            this.$el.addClass("basic");
+            this.$el.addClass("basic " + itemType + "s");
 
             // Render each item and append it
             this.collection.each(function(item) {
                 var view = new $this.type({
-                    model : item,
+                    model        : item,
                     templateName : name,
-                    currency : currency
+                    currency     : currency,
+                    itemType     : itemType
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
@@ -73,15 +75,16 @@ define(["templates"], function(Templates) {
 
     var CollectionGridView = BaseCollectionView.extend({
         render : function() {
-            (this.type) || (this.type = GridItemView);
+            (this.type) || (this.type = GridItemView); // For testing purposes
             var name     = this.options.templateName,
                 currency = this.options.currency,
+                itemType = this.options.itemType,
                 rows     = this.options.templateProperties.rows,
                 columns  = this.options.templateProperties.columns,
                 $this    = this;
 
             // Set the view's class
-            this.$el.addClass("grid");
+            this.$el.addClass("grid " + itemType + "s");
 
             // Render each item and append it
             var currentRow;
@@ -93,8 +96,9 @@ define(["templates"], function(Templates) {
                 var view = new $this.type({
                     model : item,
                     templateName : name,
-                    currency : currency,
-                    type : GridItemView
+                    currency     : currency,
+                    type         : GridItemView,
+                    itemType     : itemType
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
@@ -171,20 +175,22 @@ define(["templates"], function(Templates) {
             // Render goods store items
             this.virtualGoodsView = new this.VirtualGoodsView({
                 el : $("#goods-store .items"),
-                collection : this.model.get("virtualGoods"),
-                templateName : this.model.get("templateName"),
-                templateProperties : this.model.get("templateProperties"),
-                currency : this.model.get("currency")
+                collection          : this.model.get("virtualGoods"),
+                templateName        : this.model.get("templateName"),
+                templateProperties  : this.model.get("templateProperties"),
+                currency            : this.model.get("currency"),
+                itemType            : "virtualGood"
             }).on("selected", this.wantsToBuyVirtualGoods).render();
 
             // Render currency store items
             // TODO: Render currecny instead of goods
             this.currencyPacksView = new this.CurrencyPacksView({
                 el : $("#currency-store .items"),
-                collection : this.model.get("virtualGoods"),
-                templateName : this.model.get("templateName"),
-                templateProperties : this.model.get("templateProperties"),
-                currency : this.model.get("currency")
+                collection          : this.model.get("currencyPacks"),
+                templateName        : this.model.get("templateName"),
+                templateProperties  : this.model.get("templateProperties"),
+                currency            : this.model.get("currency"),
+                itemType            : "currencyPack"
             }).on("selected", this.wantsToBuyCurrencyPacks).render();
 
             return this;

@@ -168,6 +168,18 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
                 expect(stubType.prototype.render.called).toBeTruthy();
             });
 
+            it("should accept an item type that should be passed to its items", function () {
+                // Create a view stub
+                var stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+
+                var collectionView = new StoreViews.CollectionListView({
+                    collection : new Backbone.Collection({a : 1}),
+                    type : stubType,
+                    itemType : "virtualGood"
+                }).render();
+                expect(collectionView.subViews[0].options.itemType).toEqual("virtualGood");
+            });
+
             it("should trigger an event when one of its items were selected", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model();

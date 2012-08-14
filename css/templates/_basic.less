@@ -1,4 +1,4 @@
-.basic {
+.basic.virtualGoods {
     &.items {
         list-style-type: none;
         padding: 0;
@@ -51,3 +51,63 @@
         }
     }
 }
+
+.basic.currencyPacks {
+    &.items {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .item {
+        margin: 0 0 10px;
+        background: rgba(0,0,0,0.2); //refactor
+        .rounded(5px); //refactor
+        .box();
+
+        .visual {
+            margin: 5px;
+            background: white;
+            .rounded(5px);
+            .box(horizontal, center, center);
+
+            min-width: 70px;
+            img {
+                max-width: 50px;
+                max-height: 50px;
+            }
+        }
+        .content {
+            margin: 5px; //refactor
+            .box-flex(1);
+        }
+
+        img.currency {
+            min-width: 15px;
+            min-height: 15px;
+            max-width: 25px;
+            max-height: 25px;
+
+        }
+
+        h1 {
+            font-size : 14px;
+            line-height: 18px;
+            margin: 0 0 2px;
+        }
+
+        h2 {
+            font-size : 11px;
+            line-height: 15px;
+            margin: 0 0 2px;
+        }
+
+        .buy {
+            .box(horizontal, center, center);
+        }
+
+        .price{
+            font-weight: bold;
+        }
+    }
+}
+
