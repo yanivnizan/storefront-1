@@ -7,15 +7,18 @@ define( [
     return {
         basic : {
             template    : Handlebars.templates["basic-template"],
-            item        : Handlebars.templates["basic-item"]
+            item        : Handlebars.templates["basic-item"],
+            currencyPack: function(){}
         },
         grid : {
             template    : Handlebars.templates["grid-template"],
-            item        : Handlebars.templates["grid-item"]
+            item        : Handlebars.templates["grid-item"],
+            currencyPack: function(){}
         },
         empty : {
             template    : function(){},
-            item        : function(){}
+            item        : function(){},
+            currencyPack: function(){}
         }
     }
 });

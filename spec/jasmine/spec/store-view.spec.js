@@ -1,4 +1,4 @@
-define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models) {
+define("storeView.spec", ["storeViews", "models", "templates"], function (StoreViews, Models, Templates) {
 
     describe('Soomla Store Backbone Views', function () {
 
@@ -140,6 +140,18 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
                 spy.reset();
                 new StoreViews.ListItemView({ model : model}).on("selected", spy).$el.click();
                 expect(spy.calledWith(model)).toBeTruthy();
+            });
+
+            it("should accept an itemType and use the relevant template", function() {
+                var spy = sinon.spy(Templates.empty, "currencyPack");
+                new StoreViews.ListItemView({
+                    templateName : "empty",
+                    itemType     : "currencyPack",
+                    model        : new Backbone.Model(),
+                    currency     : new Backbone.Model()
+                }).render();
+                expect(spy.called).toBeTruthy();
+                spy.restore();
             });
         });
 

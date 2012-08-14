@@ -14,8 +14,9 @@ define(["templates"], function(Templates) {
             this.trigger("selected", this.model);
         },
         render : function() {
-            var name = this.options.templateName;
-            this.$el.append(Templates[name].item(_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
+            var name     = this.options.templateName,
+                itemType = this.options.itemType || "item"; // TODO: Remove once itemType is always passed
+            this.$el.append(Templates[name][itemType](_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
             return this;
         }
     });
