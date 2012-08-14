@@ -189,10 +189,10 @@ define(["templates"], function(Templates) {
             return this;
         },
         wantsToBuyVirtualGoods : function(model) {
-            this.nativeAPI.wantsToBuyVirtualGoods(model);
+            this.nativeAPI.wantsToBuyVirtualGoods(model.toJSON());
         },
         wantsToBuyCurrencyPacks : function(model) {
-            this.nativeAPI.wantsToBuyCurrencyPacks(model);
+            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON());
         }
     });
 

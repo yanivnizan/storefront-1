@@ -117,12 +117,12 @@ define("storeView.spec", ["storeViews", "models"], function (StoreViews, Models)
 
                 it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
                     storeView.virtualGoodsView.triggerSelectedEvent();
-                    expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub)).toBeTruthy();
+                    expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub.toJSON())).toBeTruthy();
                 });
 
                 it("should invoke a currency pack purchase when the 'selected' event is captured from the currency packs sub-view", function() {
                     storeView.currencyPacksView.triggerSelectedEvent();
-                    expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub)).toBeTruthy();
+                    expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub.toJSON())).toBeTruthy();
                 });
             });
 
