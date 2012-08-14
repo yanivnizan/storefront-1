@@ -1,4 +1,4 @@
-define(function() {
+define(["backboneRelational"], function() {
 
     var VirtualGood             = Backbone.RelationalModel.extend({}),
         CurrencyPack            = Backbone.RelationalModel.extend({}),
