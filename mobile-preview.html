@@ -62,7 +62,6 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
 <script src="js/libs/underscore-min.js"></script>
 <script src="js/libs/backbone.js"></script>
 <script src="js/libs/backbone-relational.js"></script>
-<script src="js/libs/handlebars-1.0.0.beta.6.js"></script>
 <script data-main="js/main-store" src="js/libs/require.js"></script>
 
 <script>
@@ -82,78 +81,6 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
 
 </script>
 <!-- end scripts -->
-
-<!------------   User info template   ------------>
-
-<script id="grid-template" type="text/x-handlebars-template">
-    <div id="goods-store" data-role="page">
-        <img src="{{background}}" class="background">
-        <div class="header">
-            <div class="padding"></div>
-            <div class="content">
-                <h1 class="title">
-                    {{templateTitle}}
-                </h1>
-            <span class="balance">
-                {{#if currency.image}}
-                <img src="{{currency.image}}">
-                {{/if}}
-                {{currency.balance}}
-            </span>
-            </div>
-            <div class="padding">
-                <div class="leave-store"></div>
-            </div>
-        </div>
-        <div class="items-container">
-            <div class="items"></div>
-        </div>
-        <div class="footer">
-            <button class="buy-more btn btn-basic-primary">
-                <h1><img src="{{moreCurrencyImage}}" class="currency">{{moreCurrencyText}}</h1>
-            </button>
-        </div>
-    </div>
-    <div id="currency-store" data-role="page">
-        <img src="{{background}}" class="background">
-        <div class="header">
-            <div class="padding"></div>
-            <div class="content">
-                <h1 class="title">
-                    {{templateTitle}}
-                </h1>
-            <span class="balance">
-                {{#if currency.image}}
-                <img src="{{currency.image}}">
-                {{/if}}
-                {{currency.balance}}
-            </span>
-            </div>
-            <div class="padding">
-                <div class="back"></div>
-            </div>
-        </div>
-        <div class="items-container">
-            <ul class="items"></ul>
-        </div>
-        <div class="footer">
-            <button class="buy-more btn btn-basic-primary">
-                <h1><img src="{{moreCurrencyImage}}" class="currency">{{moreCurrencyText}}</h1>
-            </button>
-        </div>
-    </div>
-</script>
-<script id="grid-item" type="text/x-handlebars-template">
-    <div class="visual">
-        <img src="{{src}}">
-    </div>
-    <div class="content">
-        <h1>{{name}}</h1>
-        <div class="description">{{description}}</div>
-        <span class="price">{{price}} <img src="{{currency.image}}" class="currency"></span>
-    </div>
-</script>
-
 
 </body>
 </html>

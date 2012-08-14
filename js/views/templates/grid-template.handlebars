@@ -1,0 +1,56 @@
+<div id="goods-store" data-role="page">
+    <img src="{{background}}" class="background">
+    <div class="header">
+        <div class="padding"></div>
+        <div class="content">
+            <h1 class="title">
+                {{templateTitle}}
+            </h1>
+        <span class="balance">
+            {{#if currency.image}}
+            <img src="{{currency.image}}">
+            {{/if}}
+            {{currency.balance}}
+        </span>
+        </div>
+        <div class="padding">
+            <div class="leave-store"></div>
+        </div>
+    </div>
+    <div class="items-container">
+        <div class="items"></div>
+    </div>
+    <div class="footer">
+        <button class="buy-more btn btn-basic-primary">
+            <h1><img src="{{moreCurrencyImage}}" class="currency">{{moreCurrencyText}}</h1>
+        </button>
+    </div>
+</div>
+<div id="currency-store" data-role="page">
+    <img src="{{background}}" class="background">
+    <div class="header">
+        <div class="padding"></div>
+        <div class="content">
+            <h1 class="title">
+                {{templateTitle}}
+            </h1>
+        <span class="balance">
+            {{#if currency.image}}
+            <img src="{{currency.image}}">
+            {{/if}}
+            {{currency.balance}}
+        </span>
+        </div>
+        <div class="padding">
+            <div class="back"></div>
+        </div>
+    </div>
+    <div class="items-container">
+        <ul class="items"></ul>
+    </div>
+    <div class="footer">
+        <button class="buy-more btn btn-basic-primary">
+            <h1><img src="{{moreCurrencyImage}}" class="currency">{{moreCurrencyText}}</h1>
+        </button>
+    </div>
+</div>

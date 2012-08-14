@@ -1,16 +1,21 @@
-define(["handlebars"], function() {
+define( [
+    "templates/basic-template.handlebars",
+    "templates/basic-item.handlebars",
+    "templates/grid-template.handlebars",
+    "templates/grid-item.handlebars"
+], function() {
     return {
         basic : {
-            template : Handlebars.compile($("#basic-template").html()),
-            item : Handlebars.compile($("#basic-item").html())
+            template    : Handlebars.templates["basic-template"],
+            item        : Handlebars.templates["basic-item"]
         },
         grid : {
-            template : Handlebars.compile($("#grid-template").html()),
-            item : Handlebars.compile($("#grid-item").html())
+            template    : Handlebars.templates["grid-template"],
+            item        : Handlebars.templates["grid-item"]
         },
         empty : {
-            template : function(){},
-            item : function(){}
+            template    : function(){},
+            item        : function(){}
         }
     }
 });
