@@ -1,5 +1,16 @@
 define(["js-api", "native-api", "models", "storeViews"], function(jsAPI, NativeAPI, Models, StoreViews) {
 
+    // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
+    // extend the views to capture their events.
+    if (top.enablePointingDeviceEvents) {
+        _.extend(StoreViews.ListItemView.prototype.events, {click : "onSelect"});
+        _.extend(StoreViews.StoreView.prototype.events, {
+            "click .leave-store"    : "wantsToLeaveStore",
+            "click .buy-more"       : "showCurrencyStore",
+            "click .back"           : "showGoodsStore"
+        });
+
+    }
     $(function() {
 
         window.SoomlaJS = _.extend({}, jsAPI, {

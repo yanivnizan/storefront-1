@@ -7,8 +7,7 @@ define(["templates"], function(Templates) {
         className : "item",
         tagName : "li",
         events : {
-            "touchend" : "onSelect",
-            "click" : "onSelect"
+            "touchend" : "onSelect"
         },
         onSelect : function() {
             this.trigger("selected", this.model);
@@ -130,11 +129,8 @@ define(["templates"], function(Templates) {
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
-            "click .leave-store"    : "wantsToLeaveStore",
             "touchend .buy-more"    : "showCurrencyStore",
-            "click .buy-more"       : "showCurrencyStore",
-            "touchend .back"        : "showGoodsStore",
-            "click .back"           : "showGoodsStore"
+            "touchend .back"        : "showGoodsStore"
         },
         wantsToLeaveStore : function(event) {
             if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
