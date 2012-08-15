@@ -5,15 +5,18 @@ define( [
     "templates/grid-template.handlebars",
     "templates/grid-item.handlebars"
 ], function() {
+
+    var templates = Handlebars.templates;
+
     return {
         basic : {
-            template    : Handlebars.templates["basic-template"],
-            virtualGood : Handlebars.templates["basic-item"],
-            currencyPack: Handlebars.templates["basic-currencyPack"]
+            template    : templates["basic-template"],
+            virtualGood : templates["basic-item"],
+            currencyPack: templates["basic-currencyPack"]
         },
         grid : {
-            template    : Handlebars.templates["grid-template"],
-            virtualGood : Handlebars.templates["grid-item"],
+            template    : templates["grid-template"],
+            virtualGood : templates["grid-item"],
             currencyPack: function(){}
         },
         empty : {
