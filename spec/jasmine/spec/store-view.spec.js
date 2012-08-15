@@ -127,7 +127,7 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
 
                 beforeEach(function() {
                     // Create view, model and api stubs
-                    modelStub       = new Backbone.Model({ templateName : "empty", templateProperties : templatePropertiesStub, itemId : 100 });
+                    modelStub       = new Backbone.Model({ templateName : "empty", templateProperties : templatePropertiesStub, itemId : 100, productId: 200 });
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
@@ -156,7 +156,7 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
 
                 it("should invoke a currency pack purchase when the 'selected' event is captured from the currency packs sub-view", function() {
                     storeView.currencyPacksView.triggerSelectedEvent();
-                    expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub.toJSON().itemId)).toBeTruthy();
+                    expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub.toJSON().productId)).toBeTruthy();
                 });
             });
 

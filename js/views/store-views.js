@@ -195,7 +195,7 @@ define(["templates"], function(Templates) {
             this.nativeAPI.wantsToBuyVirtualGoods(model.toJSON().itemId);
         },
         wantsToBuyCurrencyPacks : function(model) {
-            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON().itemId);
+            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON().productId);
         }
     });
 
