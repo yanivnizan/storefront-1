@@ -3,13 +3,14 @@
         "name" :  "basic",
         "elements" :  {
             "title" :  {
-                "name" :  "The Surf Store"
+                "name" :  "Surf Store"
             },
             "buyMore" :  {
                 "text" :  "Buy more clams",
                 "image" :  "img/examples/surf/clam.png"
             }
-        }
+        },
+        "properties" : {"columns" : 3}
     },
     "background" :  "img/theme-lime-bubbles.jpg",
     "currency" :  {
