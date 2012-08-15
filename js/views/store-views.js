@@ -192,10 +192,10 @@ define(["templates"], function(Templates) {
             return this;
         },
         wantsToBuyVirtualGoods : function(model) {
-            this.nativeAPI.wantsToBuyVirtualGoods(model.toJSON());
+            this.nativeAPI.wantsToBuyVirtualGoods(model.toJSON().itemId);
         },
         wantsToBuyCurrencyPacks : function(model) {
-            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON());
+            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON().itemId);
         }
     });
 
