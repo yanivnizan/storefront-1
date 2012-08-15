@@ -12,7 +12,8 @@ define({
      * @param boolean
      */
     currencyPurchased : function(success, itemId, currentBalance, failureMessage) {
-        alert("Sorry bub, not implemented yet.");
+        if (success)
+            SoomlaJS.store.get("currency").set("balance", currentBalance);
     },
     /**
      * Android signature : goodsPurchaseEnded(boolean success, String itemId, int currentBalance, String failureMessage)

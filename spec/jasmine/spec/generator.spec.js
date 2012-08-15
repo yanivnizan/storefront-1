@@ -254,6 +254,18 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(SoomlaJS.goodsPurchased).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
             });
+
+            it("should set the store balance when currency was purchased successfully", function() {
+                SoomlaJS.newStore();
+                SoomlaJS.currencyPurchased(true, 1, 100);
+                expect(SoomlaJS.store.get("currency").get("balance")).toEqual(100);
+            });
+
+            it("shouldn't set the store balance when the currency purchase failed", function() {
+                SoomlaJS.newStore({ currency : { balance : 100 } });
+                SoomlaJS.currencyPurchased(false, 1, 200, "Server Error");
+                expect(SoomlaJS.store.get("currency").get("balance")).toEqual(100);
+            });
         });
 
     });
