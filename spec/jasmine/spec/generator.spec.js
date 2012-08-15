@@ -250,10 +250,9 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
 
             it("should have Soomla Javascript API functions defined", function() {
                 expect(SoomlaJS.disableCurrencyStore).toBeDefined();
-                expect(SoomlaJS.currencyPurchaseEnded).toBeDefined();
-                expect(SoomlaJS.goodsPurchaseEnded).toBeDefined();
+                expect(SoomlaJS.currencyPurchased).toBeDefined();
+                expect(SoomlaJS.goodsPurchased).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
-                expect(SoomlaJS.refresh).toBeDefined();
             });
         });
 
