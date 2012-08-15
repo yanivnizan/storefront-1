@@ -23,14 +23,14 @@
             "name" :  "Rip Curl Shortboard",
             "description" :  "Shred the small waves with this super-fast board",
             "src" :  "img/examples/surf/blue-surfboard.png",
-            "price" :  "100",
+            "price" :  100,
             "itemId" :  "2988822"
         },
         {
             "name" :  "Billanbog Vintage Longboard",
             "description" :  "Slowly glide through low power surf and hang five",
             "src" :  "img/examples/surf/girl-surfboard-th.png",
-            "price" :  "150",
+            "price" :  150,
             "itemId" :  "2988823"
         }
     ],
@@ -41,8 +41,8 @@
             "image" :  "coin.jpg",
             "itemId" :  "super_saver_pack",
             "productId" :  "super_saver_pack",
-            "price" :  "0.99",
-            "amount" :  "200",
+            "price" :  0.99,
+            "amount" :  200,
             "managed" : false
         },
         {
@@ -51,8 +51,8 @@
             "image" :  "coin.jpg",
             "itemId" :  "super_saver_pack",
             "productId" :  "super_saver_pack",
-            "price" :  "1.99",
-            "amount" :  "500",
+            "price" :  1.99,
+            "amount" :  500,
             "managed" : false
         },
         {
@@ -61,8 +61,8 @@
             "image" :  "coin.jpg",
             "itemId" :  "pipeline_pumpin_pack",
             "productId" :  "pipeline_pumpin_pack",
-            "price" :  "5.99",
-            "amount" :  "1500",
+            "price" :  5.99,
+            "amount" :  1500,
             "managed" : false
         }
     ]
