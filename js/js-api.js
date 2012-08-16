@@ -21,8 +21,10 @@ define({
      * @param boolean
      */
     goodsPurchased : function(success, itemId, currentBalance, failureMessage) {
-        if (success)
+        if (success) {
             SoomlaJS.store.addVirtualGoodInventory(itemId);
+            SoomlaJS.store.setBalance(currentBalance);
+        }
     },
     // The native UI is going to be destroyed
     destroy : function() {

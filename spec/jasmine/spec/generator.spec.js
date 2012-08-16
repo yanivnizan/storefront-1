@@ -287,9 +287,10 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should update a virtual good's inventory when it is purchased successfully", function() {
-                SoomlaJS.newStore({ virtualGoods : [{itemId : "surfboard", managed : true, inventory : 0}]});
-                SoomlaJS.goodsPurchased(true, "surfboard");
+                SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", managed : true, inventory : 0}]});
+                SoomlaJS.goodsPurchased(true, "surfboard", 100);
                 expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("inventory")).toEqual(1);
+                expect(SoomlaJS.store.getBalance()).toEqual(100);
             });
 
             it("shouldn't set the store balance when the currency purchase failed", function() {

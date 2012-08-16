@@ -16,7 +16,7 @@
     "currency" :  {
         "name" :  "clams",
         "image" :  "img/examples/surf/clam.png",
-        "balance": "0"
+        "balance": 1000
     },
     "isCurrencyStoreDisabled" : false,
     "virtualGoods" :  [
