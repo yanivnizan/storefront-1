@@ -8,10 +8,10 @@ define({
     },
     /**
      *
-     * Android signature : currencyPurchaseEnded(boolean success, String itemId, int currentBalance, String failureMessage)
+     * Android signature : currencyPurchaseEnded(boolean success, String productId, int currentBalance, String failureMessage)
      * @param boolean
      */
-    currencyPurchased : function(success, itemId, currentBalance, failureMessage) {
+    currencyPurchased : function(success, productId, currentBalance, failureMessage) {
         if (success)
             SoomlaJS.store.setBalance(currentBalance);
     },
