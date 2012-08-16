@@ -233,7 +233,7 @@ h1 {
 .basic.virtualGoods .item .description {
   font-size: 13px;
 }
-.basic.virtualGoods .item .inventory {
+.basic.virtualGoods .item .balance {
   font-size: 11px;
   font-weight: bold;
   text-align: left;

@@ -127,8 +127,8 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
 
         describe('=== Virtual Goods', function () {
 
-            it("should have a default inventory of 0", function() {
-                expect(new Models.VirtualGood().get("inventory")).toEqual(0);
+            it("should have a default balance of 0", function() {
+                expect(new Models.VirtualGood().get("balance")).toEqual(0);
             });
 
             it("should be unmanaged by default", function() {
@@ -152,10 +152,10 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(SoomlaJS.store.get("virtualGoods").at(0)).toBeInstanceOf(Models.VirtualGood);
             });
 
-            it("should increment the inventory of a managed virtual good when it was purchased", function() {
-                SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", inventory : 1, managed : true }] });
-                SoomlaJS.store.addVirtualGoodInventory("surfboard");
-                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("inventory")).toEqual(2);
+            it("should increment the balance of a managed virtual good when it was purchased", function() {
+                SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", balance : 1, managed : true }] });
+                SoomlaJS.store.incrementVirtualGoodBalance("surfboard");
+                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(2);
             });
 
             // TODO: More tests on default field values and validation
@@ -238,7 +238,7 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                     image       : "img/boards/rip-curl.jpg",
                     price       : 100,
                     itemId      : 2988822,
-                    inventory   : 0,
+                    balance   : 0,
                     managed     : false
                 };
                 SoomlaJS.newStore({
@@ -286,10 +286,10 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(SoomlaJS.store.getBalance()).toEqual(100);
             });
 
-            it("should update a virtual good's inventory when it is purchased successfully", function() {
-                SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", managed : true, inventory : 0}]});
+            it("should update a virtual good's balance when it is purchased successfully", function() {
+                SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", managed : true, balance : 0}]});
                 SoomlaJS.goodsPurchased(true, "surfboard", 100);
-                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("inventory")).toEqual(1);
+                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(1);
                 expect(SoomlaJS.store.getBalance()).toEqual(100);
             });
 

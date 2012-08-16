@@ -22,7 +22,7 @@ define({
      */
     goodsPurchased : function(success, itemId, currentBalance, failureMessage) {
         if (success) {
-            SoomlaJS.store.addVirtualGoodInventory(itemId);
+            SoomlaJS.store.incrementVirtualGoodBalance(itemId);
             SoomlaJS.store.setBalance(currentBalance);
         }
     },

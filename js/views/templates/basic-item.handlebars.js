@@ -20,11 +20,11 @@ Handlebars.templates['basic-item'] = Handlebars.template(function (Handlebars,de
   stack1 = foundHelper || depth0.description;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</div>\n    <div class=\"box-horizontal\">\n        <div class=\"inventory\">Owned: <label>";
-  foundHelper = helpers.inventory;
-  stack1 = foundHelper || depth0.inventory;
+  buffer += escapeExpression(stack1) + "</div>\n    <div class=\"box-horizontal\">\n        <div class=\"balance\">Owned: <label>";
+  foundHelper = helpers.balance;
+  stack1 = foundHelper || depth0.balance;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "inventory", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "balance", { hash: {} }); }
   buffer += escapeExpression(stack1) + "</label></div>\n        <div class=\"price\">";
   foundHelper = helpers.price;
   stack1 = foundHelper || depth0.price;

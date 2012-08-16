@@ -211,16 +211,16 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
                 spy.restore();
             });
 
-            it("should update its virtual good inventory when the good is purchased", function() {
-                var stub = sinon.stub(StoreViews.ListItemView.prototype, "updateInventory");
-                var model = new Backbone.Model({inventory : 0});
+            it("should update its virtual good balance when the good is purchased", function() {
+                var stub = sinon.stub(StoreViews.ListItemView.prototype, "updateBalance");
+                var model = new Backbone.Model({balance : 0});
                 new StoreViews.ListItemView({
                     templateName : "empty",
                     itemType     : "item",
                     model        : model,
                     currency     : new Backbone.Model()
                 });
-                model.set("inventory", 1);
+                model.set("balance", 1);
                 expect(stub.called).toBeTruthy();
                 stub.restore();
             });

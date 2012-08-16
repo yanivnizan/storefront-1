@@ -2,8 +2,8 @@ define(["templates"], function(Templates) {
 
     var ListItemView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "onSelect", "updateInventory");
-            this.model.on("change:inventory", this.updateInventory);
+            _.bindAll(this, "onSelect", "updateBalance");
+            this.model.on("change:balance", this.updateBalance);
         },
         className : "item",
         tagName : "li",
@@ -13,8 +13,8 @@ define(["templates"], function(Templates) {
         onSelect : function() {
             this.trigger("selected", this.model);
         },
-        updateInventory : function() {
-            this.$(".inventory label").html(this.model.get("inventory"));
+        updateBalance : function() {
+            this.$(".balance label").html(this.model.get("balance"));
         },
         render : function() {
             var name     = this.options.templateName,
@@ -147,7 +147,7 @@ define(["templates"], function(Templates) {
             this.nativeAPI.wantsToLeaveStore();
         },
         updateBalance : function() {
-            this.$(".balance label").html(this.model.getBalance());
+            this.$(".header .balance label").html(this.model.getBalance());
         },
         showCurrencyStore : function() {
             // When this flag is raised, there is no connectivity,
