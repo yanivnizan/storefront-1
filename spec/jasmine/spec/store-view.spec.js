@@ -127,7 +127,11 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
 
                 beforeEach(function() {
                     // Create view, model and api stubs
-                    modelStub       = new Models.Store({ templateName : "empty", templateProperties : templatePropertiesStub, currency : {balance : 0}});
+                    modelStub       = new Models.Store({
+                        templateName        : "empty",
+                        templateProperties  : templatePropertiesStub,
+                        currency            : {balance : 0}
+                    });
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
@@ -205,6 +209,20 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
                 }).render();
                 expect(spy.called).toBeTruthy();
                 spy.restore();
+            });
+
+            it("should update its virtual good inventory when the good is purchased", function() {
+                var stub = sinon.stub(StoreViews.ListItemView.prototype, "updateInventory");
+                var model = new Backbone.Model({inventory : 0});
+                new StoreViews.ListItemView({
+                    templateName : "empty",
+                    itemType     : "item",
+                    model        : model,
+                    currency     : new Backbone.Model()
+                });
+                model.set("inventory", 1);
+                expect(stub.called).toBeTruthy();
+                stub.restore();
             });
         });
 

@@ -2,7 +2,8 @@ define(["templates"], function(Templates) {
 
     var ListItemView = Backbone.View.extend({
         initialize : function() {
-            _.bind(this.onSelect, this);
+            _.bindAll(this, "onSelect", "updateInventory");
+            this.model.on("change:inventory", this.updateInventory);
         },
         className : "item",
         tagName : "li",
@@ -11,6 +12,9 @@ define(["templates"], function(Templates) {
         },
         onSelect : function() {
             this.trigger("selected", this.model);
+        },
+        updateInventory : function() {
+            this.$(".inventory label").html(this.model.get("inventory"));
         },
         render : function() {
             var name     = this.options.templateName,
@@ -110,7 +114,9 @@ define(["templates"], function(Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "wantsToLeaveStore", "updateBalance", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
+            _.bindAll(this, "wantsToLeaveStore", "updateBalance",
+                            "renderBackground", "renderTemplate", "render",
+                            "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
             // untested code block
             var viewType, name = this.model.get("templateName");

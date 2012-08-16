@@ -20,7 +20,12 @@ Handlebars.templates['basic-item'] = Handlebars.template(function (Handlebars,de
   stack1 = foundHelper || depth0.description;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</div>\n    <span class=\"price\">";
+  buffer += escapeExpression(stack1) + "</div>\n    <div class=\"box-horizontal\">\n        <div class=\"inventory\">Owned: <label>";
+  foundHelper = helpers.inventory;
+  stack1 = foundHelper || depth0.inventory;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "inventory", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</label></div>\n        <div class=\"price\">";
   foundHelper = helpers.price;
   stack1 = foundHelper || depth0.price;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -31,5 +36,5 @@ Handlebars.templates['basic-item'] = Handlebars.template(function (Handlebars,de
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.image", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\" class=\"currency\"></span>\n</div>\n";
+  buffer += escapeExpression(stack1) + "\" class=\"currency\"></div>\n    </div>\n</div>\n";
   return buffer;});
