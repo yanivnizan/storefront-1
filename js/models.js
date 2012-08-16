@@ -4,9 +4,16 @@ define(["backboneRelational"], function() {
         VirtualGoodsCollection  = Backbone.Collection.extend({ model : VirtualGood }),
         CurrencyPacksCollection = Backbone.Collection.extend({ model : CurrencyPack });
     var VirtualGood             = Backbone.RelationalModel.extend({
+        idAttribute : "productId",
         defaults : {
             inventory   : 0,
             managed     : false
+        },
+        initialize : function() {
+            _.bindAll(this, "isManaged");
+        },
+        isManaged : function() {
+            return this.get("managed");
         }
     });
 
@@ -38,7 +45,6 @@ define(["backboneRelational"], function() {
                 relatedModel: VirtualGood,
                 collectionType: VirtualGoodsCollection,
                 reverseRelation: {
-                    key: 'belongsTo',
                     includeInJSON: 'id'
                 }
             },
@@ -60,21 +66,27 @@ define(["backboneRelational"], function() {
             moreCurrencyText    : "Get more coins"
         },
         initialize : function() {
-            _.bindAll(this, "getBalance", "setBalance");
+            _.bindAll(this, "getBalance", "setBalance", "addVirtualGoodInventory");
         },
         getBalance : function() {
             return this.get("currency").get("balance");
         },
         setBalance : function(balance) {
             this.get("currency").set("balance", balance);
+        },
+        addVirtualGoodInventory : function(productId) {
+            var virtualGood = this.get("virtualGoods").get(productId);
+            if (virtualGood.isManaged())
+                virtualGood.set("inventory", virtualGood.get("inventory") + 1);
         }
     });
 
 
     return {
-        VirtualGood : VirtualGood,
-        CurrencyPack : CurrencyPack,
-        Store : Store,
-        Currency : Currency
+        VirtualGood             : VirtualGood,
+        VirtualGoodsCollection  : VirtualGoodsCollection,
+        CurrencyPack            : CurrencyPack,
+        Store                   : Store,
+        Currency                : Currency
     };
 });

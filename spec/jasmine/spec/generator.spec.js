@@ -132,7 +132,13 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should be unmanaged by default", function() {
-                expect(new Models.VirtualGood().get("managed")).toEqual(false);
+                expect(new Models.VirtualGood().isManaged()).toEqual(false);
+            });
+
+            it("should be found in a collection by 'productId'", function() {
+                var modelJSON = { productId : 'sword' };
+                var collection = new Models.VirtualGoodsCollection().add(new Models.VirtualGood(modelJSON));
+                expect(collection.get("sword").toJSON()).toEqual(_.extend({}, Models.VirtualGood.prototype.defaults, modelJSON));
             });
 
             it("should have an empty virtual goods list by default", function() {
@@ -141,17 +147,15 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should be able to add virtual goods to a nested collection", function() {
-                SoomlaJS.newStore({
-                    virtualGoods: [{
-                        name : "Rip Curl Shortboard",
-                        description : "Shred the small waves with this super-fast board",
-                        image : "img/boards/rip-curl.jpg",
-                        price : 100,
-                        productId : 2988822
-                    }]
-                });
+                SoomlaJS.newStore({ virtualGoods: [{ productId : "surf_board" }] });
                 expect(SoomlaJS.store.get("virtualGoods").length).toEqual(1);
                 expect(SoomlaJS.store.get("virtualGoods").at(0)).toBeInstanceOf(Models.VirtualGood);
+            });
+
+            it("should increment the inventory of a managed virtual good when it was purchased", function() {
+                SoomlaJS.newStore({ virtualGoods: [{ productId : "surf_board", inventory : 1, managed : true }] });
+                SoomlaJS.store.addVirtualGoodInventory("surf_board");
+                expect(SoomlaJS.store.get("virtualGoods").get("surf_board").get("inventory")).toEqual(2);
             });
 
             // TODO: More tests on default field values and validation
