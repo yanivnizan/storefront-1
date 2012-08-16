@@ -127,6 +127,14 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
 
         describe('=== Virtual Goods', function () {
 
+            it("should have a default inventory of 0", function() {
+                expect(new Models.VirtualGood().get("inventory")).toEqual(0);
+            });
+
+            it("should be unmanaged by default", function() {
+                expect(new Models.VirtualGood().get("managed")).toEqual(false);
+            });
+
             it("should have an empty virtual goods list by default", function() {
                 SoomlaJS.newStore();
                 expect(SoomlaJS.store.get("virtualGoods").toJSON()).toEqual([]);
@@ -221,11 +229,13 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
 
             it("should accept an array of virtual goods", function() {
                 var virtualGood = {
-                    name : "Rip Curl Shortboard",
+                    name        : "Rip Curl Shortboard",
                     description : "Shred the small waves with this super-fast board",
-                    image : "img/boards/rip-curl.jpg",
-                    price : 100,
-                    productId : 2988822
+                    image       : "img/boards/rip-curl.jpg",
+                    price       : 100,
+                    productId   : 2988822,
+                    inventory   : 0,
+                    managed     : false
                 };
                 SoomlaJS.newStore({
                     virtualGoods : [virtualGood]

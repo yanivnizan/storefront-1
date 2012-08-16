@@ -1,9 +1,15 @@
 define(["backboneRelational"], function() {
 
-    var VirtualGood             = Backbone.RelationalModel.extend({}),
-        CurrencyPack            = Backbone.RelationalModel.extend({}),
+    var CurrencyPack            = Backbone.RelationalModel.extend({}),
         VirtualGoodsCollection  = Backbone.Collection.extend({ model : VirtualGood }),
         CurrencyPacksCollection = Backbone.Collection.extend({ model : CurrencyPack });
+    var VirtualGood             = Backbone.RelationalModel.extend({
+        defaults : {
+            inventory   : 0,
+            managed     : false
+        }
+    });
+
 
     var Currency = Backbone.RelationalModel.extend({
         defaults : {
