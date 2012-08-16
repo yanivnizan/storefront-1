@@ -127,7 +127,7 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
 
                 beforeEach(function() {
                     // Create view, model and api stubs
-                    modelStub       = new Models.Store({ templateName : "empty", templateProperties : templatePropertiesStub);
+                    modelStub       = new Models.Store({ templateName : "empty", templateProperties : templatePropertiesStub, currency : {balance : 0}});
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
