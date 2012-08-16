@@ -21,7 +21,8 @@ define({
      * @param boolean
      */
     goodsPurchased : function(success, itemId, currentBalance, failureMessage) {
-        alert("Sorry bub, not implemented yet.");
+        if (success)
+            SoomlaJS.store.addVirtualGoodInventory(itemId);
     },
     // The native UI is going to be destroyed
     destroy : function() {

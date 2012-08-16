@@ -4,7 +4,7 @@ define(["backboneRelational"], function() {
         VirtualGoodsCollection  = Backbone.Collection.extend({ model : VirtualGood }),
         CurrencyPacksCollection = Backbone.Collection.extend({ model : CurrencyPack });
     var VirtualGood             = Backbone.RelationalModel.extend({
-        idAttribute : "productId",
+        idAttribute : "itemId",
         defaults : {
             inventory   : 0,
             managed     : false
@@ -74,8 +74,8 @@ define(["backboneRelational"], function() {
         setBalance : function(balance) {
             this.get("currency").set("balance", balance);
         },
-        addVirtualGoodInventory : function(productId) {
-            var virtualGood = this.get("virtualGoods").get(productId);
+        addVirtualGoodInventory : function(itemId) {
+            var virtualGood = this.get("virtualGoods").get(itemId);
             if (virtualGood.isManaged())
                 virtualGood.set("inventory", virtualGood.get("inventory") + 1);
         }

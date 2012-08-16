@@ -135,8 +135,8 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(new Models.VirtualGood().isManaged()).toEqual(false);
             });
 
-            it("should be found in a collection by 'productId'", function() {
-                var modelJSON = { productId : 'sword' };
+            it("should be found in a collection by 'itemId'", function() {
+                var modelJSON = { itemId : 'sword' };
                 var collection = new Models.VirtualGoodsCollection().add(new Models.VirtualGood(modelJSON));
                 expect(collection.get("sword").toJSON()).toEqual(_.extend({}, Models.VirtualGood.prototype.defaults, modelJSON));
             });
@@ -147,15 +147,15 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should be able to add virtual goods to a nested collection", function() {
-                SoomlaJS.newStore({ virtualGoods: [{ productId : "surf_board" }] });
+                SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard" }] });
                 expect(SoomlaJS.store.get("virtualGoods").length).toEqual(1);
                 expect(SoomlaJS.store.get("virtualGoods").at(0)).toBeInstanceOf(Models.VirtualGood);
             });
 
             it("should increment the inventory of a managed virtual good when it was purchased", function() {
-                SoomlaJS.newStore({ virtualGoods: [{ productId : "surf_board", inventory : 1, managed : true }] });
-                SoomlaJS.store.addVirtualGoodInventory("surf_board");
-                expect(SoomlaJS.store.get("virtualGoods").get("surf_board").get("inventory")).toEqual(2);
+                SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", inventory : 1, managed : true }] });
+                SoomlaJS.store.addVirtualGoodInventory("surfboard");
+                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("inventory")).toEqual(2);
             });
 
             // TODO: More tests on default field values and validation
@@ -237,7 +237,7 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                     description : "Shred the small waves with this super-fast board",
                     image       : "img/boards/rip-curl.jpg",
                     price       : 100,
-                    productId   : 2988822,
+                    itemId      : 2988822,
                     inventory   : 0,
                     managed     : false
                 };
@@ -284,6 +284,12 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 SoomlaJS.newStore({ currency : { balance : 100 } });
                 SoomlaJS.currencyPurchased(false, 1, 200, "Server Error");
                 expect(SoomlaJS.store.getBalance()).toEqual(100);
+            });
+
+            it("should update a virtual good's inventory when it is purchased successfully", function() {
+                SoomlaJS.newStore({ virtualGoods : [{itemId : "surfboard", managed : true, inventory : 0}]});
+                SoomlaJS.goodsPurchased(true, "surfboard");
+                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("inventory")).toEqual(1);
             });
 
             it("shouldn't set the store balance when the currency purchase failed", function() {
