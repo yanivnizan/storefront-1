@@ -49,13 +49,13 @@ function program3(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n            ";
+  buffer += "\n            <label>";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.balance);
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.balance", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\n        </span>\n        </div>\n        <div class=\"padding\">\n            <div class=\"leave-store\"></div>\n        </div>\n    </div>\n    <div class=\"items-container\">\n        <ul class=\"items\"></ul>\n    </div>\n    <div class=\"footer\">\n        <button class=\"buy-more btn btn-basic-primary\">\n            <h1><img src=\"";
+  buffer += escapeExpression(stack1) + "</label>\n        </span>\n        </div>\n        <div class=\"padding\">\n            <div class=\"leave-store\"></div>\n        </div>\n    </div>\n    <div class=\"items-container\">\n        <ul class=\"items\"></ul>\n    </div>\n    <div class=\"footer\">\n        <button class=\"buy-more btn btn-basic-primary\">\n            <h1><img src=\"";
   foundHelper = helpers.moreCurrencyImage;
   stack1 = foundHelper || depth0.moreCurrencyImage;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }

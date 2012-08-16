@@ -18,6 +18,7 @@
         "image" :  "img/examples/surf/clam.png",
         "balance": "0"
     },
+    "isCurrencyStoreDisabled" : false,
     "virtualGoods" :  [
         {
             "name" :  "Rip Curl Shortboard",

@@ -4,15 +4,17 @@
 define({
     // in case Market purchases are not supported we only want to show the goods store
     disableCurrencyStore : function() {
-        alert("Sorry bub, not implemented yet.");
+        // Raise a flag to indicate that the currency store can't be opened (probably due to connectivity issues)
+        SoomlaJS.store.set("isCurrencyStoreDisabled", true);
     },
     /**
      *
-     * Android signature : currencyPurchaseEnded(boolean success, String itemId, int currentBalance, String failureMessage)
+     * Android signature : currencyPurchaseEnded(boolean success, String productId, int currentBalance, String failureMessage)
      * @param boolean
      */
-    currencyPurchased : function(success, itemId, currentBalance, failureMessage) {
-        alert("Sorry bub, not implemented yet.");
+    currencyPurchased : function(success, productId, currentBalance, failureMessage) {
+        if (success)
+            SoomlaJS.store.setBalance(currentBalance);
     },
     /**
      * Android signature : goodsPurchaseEnded(boolean success, String itemId, int currentBalance, String failureMessage)

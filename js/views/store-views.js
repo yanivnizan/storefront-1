@@ -110,7 +110,7 @@ define(["templates"], function(Templates) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "wantsToLeaveStore", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
+            _.bindAll(this, "wantsToLeaveStore", "updateBalance", "renderBackground", "renderTemplate", "render", "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
             // untested code block
             var viewType, name = this.model.get("templateName");
@@ -126,6 +126,7 @@ define(["templates"], function(Templates) {
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
+            this.model.get("currency").on("change:balance", this.updateBalance);
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
@@ -139,9 +140,18 @@ define(["templates"], function(Templates) {
             // TODO: Release view bindings and destroy view
             this.nativeAPI.wantsToLeaveStore();
         },
+        updateBalance : function() {
+            this.$(".balance label").html(this.model.getBalance());
+        },
         showCurrencyStore : function() {
-            this.$("#goods-store").hide();
-            this.$("#currency-store").show();
+            // When this flag is raised, there is no connectivity,
+            // thus don't show the currency store
+            if (this.model.get("isCurrencyStoreDisabled")) {
+                alert("Buying more " + this.model.get("currency").get("name") + " is unavailable. Check your internet connectivity and try again.");
+            } else {
+                this.$("#goods-store").hide();
+                this.$("#currency-store").show();
+            }
         },
         showGoodsStore : function() {
             this.$("#currency-store").hide();
