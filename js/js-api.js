@@ -4,7 +4,8 @@
 define({
     // in case Market purchases are not supported we only want to show the goods store
     disableCurrencyStore : function() {
-        alert("Sorry bub, not implemented yet.");
+        // Raise a flag to indicate that the currency store can't be opened (probably due to connectivity issues)
+        SoomlaJS.store.set("isCurrencyStoreDisabled", true);
     },
     /**
      *

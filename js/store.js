@@ -46,6 +46,9 @@ define(["js-api", "native-api", "models", "storeViews"], function(jsAPI, NativeA
 
                     if (json.currency)
                         attributes.currency = json.currency;
+
+                    if (json.isCurrencyStoreDisabled)
+                        attributes.isCurrencyStoreDisabled = json.isCurrencyStoreDisabled;
                 }
 
                 this.store = new Models.Store(attributes);

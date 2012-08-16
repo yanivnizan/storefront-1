@@ -184,18 +184,12 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should accept background", function() {
-                SoomlaJS.newStore({
-                    background : "fish.jpg"
-                });
+                SoomlaJS.newStore({ background : "fish.jpg" });
                 expect(SoomlaJS.store.get("background")).toEqual("fish.jpg");
             });
 
             it("should accept nested template.name", function() {
-                SoomlaJS.newStore({
-                    template : {
-                        name : "basic"
-                    }
-                });
+                SoomlaJS.newStore({ template : { name : "basic"}});
                 expect(SoomlaJS.store.get("templateName")).toEqual("basic");
             });
 
@@ -207,6 +201,11 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             it("should accept nested template.elements.buyMore.image", function() {
                 SoomlaJS.newStore(objectFromString("template.elements.buyMore.image", "img/assets/clam.png"));
                 expect(SoomlaJS.store.get("moreCurrencyImage")).toEqual("img/assets/clam.png");
+            });
+
+            it("should accept nested isCurrencyStoreDisabled", function() {
+                SoomlaJS.newStore({isCurrencyStoreDisabled : true});
+                expect(SoomlaJS.store.get("isCurrencyStoreDisabled")).toEqual(true);
             });
 
             it("should accept nested template.elements.title.name", function() {
@@ -271,6 +270,12 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 SoomlaJS.newStore({ currency : { balance : 100 } });
                 SoomlaJS.currencyPurchased(false, 1, 200, "Server Error");
                 expect(SoomlaJS.store.getBalance()).toEqual(100);
+            });
+
+            it("shouldn't set the store balance when the currency purchase failed", function() {
+                SoomlaJS.newStore();
+                SoomlaJS.disableCurrencyStore();
+                expect(SoomlaJS.store.get("isCurrencyStoreDisabled")).toEqual(true);
             });
         });
 

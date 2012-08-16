@@ -144,8 +144,14 @@ define(["templates"], function(Templates) {
             this.$(".balance label").html(this.model.getBalance());
         },
         showCurrencyStore : function() {
-            this.$("#goods-store").hide();
-            this.$("#currency-store").show();
+            // When this flag is raised, there is no connectivity,
+            // thus don't show the currency store
+            if (this.model.get("isCurrencyStoreDisabled")) {
+                alert("Buying more " + this.model.get("currency").get("name") + " is unavailable. Check your internet connectivity and try again.");
+            } else {
+                this.$("#goods-store").hide();
+                this.$("#currency-store").show();
+            }
         },
         showGoodsStore : function() {
             this.$("#currency-store").hide();
