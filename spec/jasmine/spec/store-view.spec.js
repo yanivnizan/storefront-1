@@ -121,42 +121,56 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
 
             });
 
-            describe("=== Native API calls", function() {
+            describe("=== Native API calls & Transaction management", function() {
 
                 var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub;
 
                 beforeEach(function() {
                     // Create view, model and api stubs
-                    modelStub       = new Backbone.Model({ templateName : "empty", templateProperties : templatePropertiesStub, itemId : 100, productId: 200 });
+                    modelStub       = new Models.Store({ templateName : "empty", templateProperties : templatePropertiesStub);
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
                     });
                     nativeAPIStub   = {wantsToBuyVirtualGoods : sinon.spy(), wantsToBuyCurrencyPacks : sinon.spy()};
-                    storeView = new StoreViews.StoreView({
+                    attributes = {
                         VirtualGoodsView    : ViewStub,
                         CurrencyPacksView   : ViewStub,
                         model               : modelStub,
                         nativeAPI           : nativeAPIStub
-                    }).render();
+                    };
                 });
 
                 it("should accept 2 Backbone view prototypes to use when rendering item collections", function () {
+                    storeView = new StoreViews.StoreView(attributes).render();
                     expect(ViewStub.prototype.render.calledTwice).toBeTruthy();
                 });
 
                 it("should accept a template options object", function() {
+                    storeView = new StoreViews.StoreView(attributes).render();
                     expect(storeView.virtualGoodsView.options.templateProperties).toEqual(templatePropertiesStub);
                 });
 
                 it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
+                    storeView = new StoreViews.StoreView(attributes).render();
                     storeView.virtualGoodsView.triggerSelectedEvent();
                     expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub.toJSON().itemId)).toBeTruthy();
                 });
 
                 it("should invoke a currency pack purchase when the 'selected' event is captured from the currency packs sub-view", function() {
+                    storeView = new StoreViews.StoreView(attributes).render();
                     storeView.currencyPacksView.triggerSelectedEvent();
                     expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub.toJSON().productId)).toBeTruthy();
+                });
+
+                it("should update the view when the balance is changed", function() {
+                    var stub = sinon.stub(StoreViews.StoreView.prototype, "updateBalance");
+                    storeView = new StoreViews.StoreView(attributes);
+                    storeView.model.setBalance(100);
+                    expect(stub.called).toBeTruthy();
+
+                    // Restore original stubbed function to prototype
+                    StoreViews.StoreView.prototype.updateBalance.restore();
                 });
             });
 

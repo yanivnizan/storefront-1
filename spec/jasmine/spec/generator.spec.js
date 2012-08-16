@@ -61,6 +61,12 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(SoomlaJS.store.getBalance()).toEqual(0);
             });
 
+            it("should set a new balance with the given amount", function() {
+                SoomlaJS.newStore();
+                SoomlaJS.store.setBalance(100);
+                expect(SoomlaJS.store.getBalance()).toEqual(100);
+            });
+
             it("should create a store with all currency data", function() {
                 SoomlaJS.newStore({
                     currency : {
@@ -258,13 +264,13 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             it("should set the store balance when currency was purchased successfully", function() {
                 SoomlaJS.newStore();
                 SoomlaJS.currencyPurchased(true, 1, 100);
-                expect(SoomlaJS.store.get("currency").get("balance")).toEqual(100);
+                expect(SoomlaJS.store.getBalance()).toEqual(100);
             });
 
             it("shouldn't set the store balance when the currency purchase failed", function() {
                 SoomlaJS.newStore({ currency : { balance : 100 } });
                 SoomlaJS.currencyPurchased(false, 1, 200, "Server Error");
-                expect(SoomlaJS.store.get("currency").get("balance")).toEqual(100);
+                expect(SoomlaJS.store.getBalance()).toEqual(100);
             });
         });
 

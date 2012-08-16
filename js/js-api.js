@@ -13,7 +13,7 @@ define({
      */
     currencyPurchased : function(success, itemId, currentBalance, failureMessage) {
         if (success)
-            SoomlaJS.store.get("currency").set("balance", currentBalance);
+            SoomlaJS.store.setBalance(currentBalance);
     },
     /**
      * Android signature : goodsPurchaseEnded(boolean success, String itemId, int currentBalance, String failureMessage)

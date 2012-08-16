@@ -54,10 +54,13 @@ define(["backboneRelational"], function() {
             moreCurrencyText    : "Get more coins"
         },
         initialize : function() {
-            _.bindAll(this, "getBalance");
+            _.bindAll(this, "getBalance", "setBalance");
         },
         getBalance : function() {
             return this.get("currency").get("balance");
+        },
+        setBalance : function(balance) {
+            this.get("currency").set("balance", balance);
         }
     });
 
