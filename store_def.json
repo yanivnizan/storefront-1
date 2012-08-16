@@ -50,7 +50,7 @@
             "description" :  "For you cheap skates...",
             "image" :  "coin.jpg",
             "itemId" :  "super_saver_pack",
-            "productId" :  "super_saver_pack",
+            "productId" :  "android.test.purchased",
             "price" :  1.99,
             "amount" :  500,
             "managed" : false
