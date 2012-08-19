@@ -6,6 +6,7 @@ html,body {
 
 h1 {
     margin: 0;
+    font-size: 30px;
 }
 
 #main {
@@ -13,7 +14,6 @@ h1 {
     height: 100%;
 
     .header,.footer {
-        .rounded(5px);
         text-align: center;
         padding: 4px 7px;
     }
@@ -25,37 +25,35 @@ h1 {
 }
 
 .header {
-    margin: 10px 10px 0;
     .box;
-    background: rgba(0,0,0,0.2);
-
-    h1 {
-        font-size: 24px;
-    }
+    background: rgba(255, 255, 255, 0.4);
 
     &>.padding {
-        width: 26px;
-        .box(horizontal, center, center);
+        width: 80px;
+
+        &.left {
+            .box(horizontal, start, center);
+        }
+        &.right {
+            .box(horizontal, end, center);
+        }
     }
 
     &>.content {
         .box-flex(1);
-
-        .title {
-            margin: 0;
-        }
     }
 
     .balance {
         margin: 0 auto;
-        padding: 5px 15px;
+        padding: 5px;
         .rounded(5px);
-        background: rgba(255, 255, 255, 0.4);
+        background: rgba(0, 0, 0, 0.2);
+        font-size: 10px;
         font-weight: bold;
 
         img {
-            max-width: 25px;
-            max-height: 25px;
+            max-width: 20px;
+            max-height: 20px;
         }
     }
 
@@ -67,6 +65,9 @@ h1 {
     }
 }
 
+.title {
+    text-align: center;
+}
 
 .items-container {
     margin: 10px; //refactor
@@ -89,6 +90,7 @@ h1 {
 
 .footer {
     margin: 0 10px 10px;
+    .rounded(5px);
 
     h1 {
         font-size: 20px;
