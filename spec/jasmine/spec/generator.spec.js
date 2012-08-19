@@ -131,8 +131,8 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(new Models.VirtualGood().get("balance")).toEqual(0);
             });
 
-            it("should be unmanaged by default", function() {
-                expect(new Models.VirtualGood().isManaged()).toEqual(false);
+            it("should be consumable by default", function() {
+                expect(new Models.VirtualGood().isConsumable()).toEqual(true);
             });
 
             it("should be found in a collection by 'itemId'", function() {
@@ -152,8 +152,8 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(SoomlaJS.store.get("virtualGoods").at(0)).toBeInstanceOf(Models.VirtualGood);
             });
 
-            it("should increment the balance of a managed virtual good when it was purchased", function() {
-                SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", balance : 1, managed : true }] });
+            it("should increment the balance of a consumable virtual good when it was purchased", function() {
+                SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", balance : 1 }] });
                 SoomlaJS.store.incrementVirtualGoodBalance("surfboard");
                 expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(2);
             });
@@ -237,14 +237,12 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                     description : "Shred the small waves with this super-fast board",
                     image       : "img/boards/rip-curl.jpg",
                     price       : 100,
-                    itemId      : 2988822,
-                    balance   : 0,
-                    managed     : false
+                    itemId      : 2988822
                 };
                 SoomlaJS.newStore({
                     virtualGoods : [virtualGood]
                 });
-                expect(SoomlaJS.store.get("virtualGoods").at(0).toJSON()).toEqual(virtualGood);
+                expect(SoomlaJS.store.get("virtualGoods").at(0).toJSON()).toEqual(_.extend({}, Models.VirtualGood.prototype.defaults, virtualGood));
                 expect(SoomlaJS.store.get("virtualGoods").length).toEqual(1);
             });
 
@@ -287,7 +285,7 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should update a virtual good's balance when it is purchased successfully", function() {
-                SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", managed : true, balance : 0}]});
+                SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", balance : 0}]});
                 SoomlaJS.goodsPurchased(true, "surfboard", 100);
                 expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(1);
                 expect(SoomlaJS.store.getBalance()).toEqual(100);

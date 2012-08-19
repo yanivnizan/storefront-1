@@ -6,14 +6,14 @@ define(["backboneRelational"], function() {
     var VirtualGood             = Backbone.RelationalModel.extend({
         idAttribute : "itemId",
         defaults : {
-            balance   : 0,
-            managed     : false
+            balance     : 0,
+            consumable  : true
         },
         initialize : function() {
-            _.bindAll(this, "isManaged");
+            _.bindAll(this, "isConsumable");
         },
-        isManaged : function() {
-            return this.get("managed");
+        isConsumable : function() {
+            return this.get("consumable");
         }
     });
 
@@ -76,7 +76,7 @@ define(["backboneRelational"], function() {
         },
         incrementVirtualGoodBalance : function(itemId) {
             var virtualGood = this.get("virtualGoods").get(itemId);
-            if (virtualGood.isManaged())
+            if (virtualGood.isConsumable())
                 virtualGood.set("balance", virtualGood.get("balance") + 1);
         }
     });
