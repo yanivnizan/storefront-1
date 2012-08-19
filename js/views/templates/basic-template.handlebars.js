@@ -92,15 +92,5 @@ function program3(depth0,data) {
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.balance);
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.balance", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</label>\n        </span>\n        </div>\n        <div class=\"padding\">\n            <div class=\"back\"></div>\n        </div>\n    </div>\n    <div class=\"items-container\">\n        <ul class=\"items\"></ul>\n    </div>\n    <div class=\"footer\">\n        <button class=\"buy-more btn btn-basic-primary\">\n            <h1><img src=\"";
-  foundHelper = helpers.moreCurrencyImage;
-  stack1 = foundHelper || depth0.moreCurrencyImage;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "moreCurrencyImage", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\" class=\"currency\">";
-  foundHelper = helpers.moreCurrencyText;
-  stack1 = foundHelper || depth0.moreCurrencyText;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "moreCurrencyText", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</h1>\n        </button>\n    </div>\n</div>\n";
+  buffer += escapeExpression(stack1) + "</label>\n        </span>\n        </div>\n        <div class=\"padding\">\n            <div class=\"back\"></div>\n        </div>\n    </div>\n    <div class=\"items-container\">\n        <ul class=\"items\"></ul>\n    </div>\n</div>\n";
   return buffer;});
