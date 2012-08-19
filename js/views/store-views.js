@@ -1,5 +1,17 @@
 define(["templates"], function(Templates) {
 
+    // Determine which CSS transition event to bind according to the browser vendor
+    var transEndEventNames = {
+        'WebkitTransition' : 'webkitTransitionEnd',
+        'MozTransition'    : 'transitionend',
+        'OTransition'      : 'oTransitionEnd',
+        'msTransition'     : 'MSTransitionEnd',
+        'transition'       : 'transitionend'
+    },
+    transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
+
+
+
     var ListItemView = Backbone.View.extend({
         initialize : function() {
             _.bindAll(this, "onSelect", "updateBalance");
@@ -155,13 +167,11 @@ define(["templates"], function(Templates) {
             if (this.model.get("isCurrencyStoreDisabled")) {
                 alert("Buying more " + this.model.get("currency").get("name") + " is unavailable. Check your internet connectivity and try again.");
             } else {
-                this.$("#goods-store").hide();
-                this.$("#currency-store").show();
+                this.$("#currency-store").css("visibility", "").addClass("visible");
             }
         },
         showGoodsStore : function() {
-            this.$("#currency-store").hide();
-            this.$("#goods-store").show();
+            this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
         renderBackground : function() {
             this.$(".background").remove();
@@ -183,6 +193,7 @@ define(["templates"], function(Templates) {
         render : function() {
             var name = this.model.get("templateName");
             this.$el.empty().append(Templates[name].template(this.model.toJSON()));
+            this.$("#currency-store").css("visibility", "hidden");
 
             // Render goods store items
             this.virtualGoodsView = new this.VirtualGoodsView({
