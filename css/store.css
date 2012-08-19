@@ -231,11 +231,11 @@ h1 {
   box-orient: horizontal;
   box-pack: center;
   box-align: center;
-  min-width: 70px;
+  min-width: 50px;
 }
 .basic.virtualGoods .item .visual img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 40px;
+  max-height: 40px;
 }
 .basic.virtualGoods .item .content {
   margin: 5px;
@@ -255,10 +255,10 @@ h1 {
   margin: 0 0 2px;
 }
 .basic.virtualGoods .item .description {
-  font-size: 13px;
+  font-size: 11px;
 }
 .basic.virtualGoods .item .balance {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: bold;
   text-align: left;
   -webkit-box-flex: 1;
@@ -448,11 +448,11 @@ h1 {
   box-pack: center;
   box-align: center;
   margin-bottom: 5px;
-  min-width: 70px;
+  min-width: 50px;
 }
 .grid.virtualGoods .item .visual img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 40px;
+  max-height: 40px;
 }
 .grid.virtualGoods .item .content {
   text-align: center;

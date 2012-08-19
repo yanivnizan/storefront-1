@@ -22,14 +22,14 @@
     "virtualGoods" : [
         {
             "name"          : "Rip Curl Shortboard",
-            "description"   : "Shred the small waves with this super-fast board",
+            "description"   : "Shred small waves with this super-fast board",
             "src"           : "img/examples/surf/blue-surfboard.png",
             "price"         : 100,
             "itemId"        : "blue_surfboard"
         },
         {
             "name"          : "Billanbog Vintage Longboard",
-            "description"   : "Slowly glide through low power surf and hang five",
+            "description"   : "Slowly hang five through low power surf",
             "src"           : "img/examples/surf/girl-surfboard-th.png",
             "price"         : 150,
             "itemId"        : "girl_surfboard_th"
@@ -57,14 +57,14 @@
         },
         {
             "name"          : "Reef Shredder",
-            "description"   : "Go deep reef surfing with this mean paddling machine",
+            "description"   : "A mean paddling machine for the deep reefs",
             "src"           : "img/examples/surf/reef-shredder.png",
             "price"         : 300,
             "itemId"        : "reef_shredder"
         },
         {
             "name"          : "Sixties Gun",
-            "description"   : "Ride like a Big Wednesday with this time machine of a board",
+            "description"   : "Ride Venice-style with this time machine",
             "src"           : "img/examples/surf/sixties-gun.png",
             "price"         : 400,
             "itemId"        : "sixties_gun"
