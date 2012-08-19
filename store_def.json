@@ -6,7 +6,7 @@
                 "name"  :  "Surf Store"
             },
             "buyMore" :  {
-                "text"  :  "Buy more clams",
+                "text"  :  "Get more clams",
                 "image" :  "img/examples/surf/clam.png"
             }
         },
@@ -25,14 +25,56 @@
             "description"   : "Shred the small waves with this super-fast board",
             "src"           : "img/examples/surf/blue-surfboard.png",
             "price"         : 100,
-            "itemId"        : "2988822"
+            "itemId"        : "blue_surfboard"
         },
         {
             "name"          : "Billanbog Vintage Longboard",
             "description"   : "Slowly glide through low power surf and hang five",
             "src"           : "img/examples/surf/girl-surfboard-th.png",
             "price"         : 150,
-            "itemId"        : "2988823"
+            "itemId"        : "girl_surfboard_th"
+        },
+        {
+            "name"          : "Blue Barrel",
+            "description"   : "Get barreled with this speed controlled board",
+            "src"           : "img/examples/surf/blue-barrel.png",
+            "price"         : 200,
+            "itemId"        : "blue_barrel"
+        },
+        {
+            "name"          : "Keel Fish",
+            "description"   : "Carve slow waves with this ever-riding board",
+            "src"           : "img/examples/surf/keelfish.png",
+            "price"         : 200,
+            "itemId"        : "keelfish"
+        },
+        {
+            "name"          : "Picasso Peeler",
+            "description"   : "The master of surreal off-the-lip maneuvers",
+            "src"           : "img/examples/surf/picasso-peeler.png",
+            "price"         : 300,
+            "itemId"        : "picasso_peeler"
+        },
+        {
+            "name"          : "Reef Shredder",
+            "description"   : "Go deep reef surfing with this mean paddling machine",
+            "src"           : "img/examples/surf/reef-shredder.png",
+            "price"         : 300,
+            "itemId"        : "reef_shredder"
+        },
+        {
+            "name"          : "Sixties Gun",
+            "description"   : "Ride like a Big Wednesday with this time machine of a board",
+            "src"           : "img/examples/surf/sixties-gun.png",
+            "price"         : 400,
+            "itemId"        : "sixties_gun"
+        },
+        {
+            "name"          : "Traditional Fish",
+            "description"   : "The all around conditions board of choice",
+            "src"           : "img/examples/surf/traditional-fish.png",
+            "price"         : 450,
+            "itemId"        : "traditional_fish"
         }
     ],
     "currencyPacks" : [
