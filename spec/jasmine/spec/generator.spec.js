@@ -1,4 +1,4 @@
-define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) {
+define("generator.spec", ["models", "native-api", "components"], function (Models, NativeAPI, Components) {
 
     window.SoomlaNative = NativeAPI;
 
@@ -299,10 +299,11 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
             });
 
             it("should open a dialog when there are insufficient funds", function() {
+                var spy = sinon.spy(Components.ModalDialog.prototype, "render");
                 SoomlaJS.newStore();
-                expect(SoomlaJS.storeView.modalDialog).toBeUndefined();
                 SoomlaJS.insufficientFunds();
-                expect(SoomlaJS.storeView.modalDialog).toBeDefined();
+                expect(spy.called).toBeTruthy();
+                spy.restore();  // Restore original spied function to prototype
             });
         });
 

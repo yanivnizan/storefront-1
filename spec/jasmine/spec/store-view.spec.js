@@ -40,7 +40,6 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             it("should provide an API for opening a modal dialog", function() {
                 var spy = sinon.spy(Components.ModalDialog.prototype, "render");
                 storeView = new StoreViews.StoreView(attributes).openDialog();
-                expect(storeView.modalDialog).toBeDefined();
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
             });
@@ -76,7 +75,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             it("should move to the currency store if the insufficient funds dialog returns 'buyMore'", function() {
                 var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
                 storeView = new StoreViews.StoreView(attributes).openDialog();
-                storeView.modalDialog.close({target : {className : "buy-more"}}); // No argument to 'close' indicates 'cancel'
+                storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
             });
