@@ -34,9 +34,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 var stub = sinon.stub(StoreViews.CollectionListView.prototype, "render").returns({render : function(){}});
                 SoomlaJS.initialize({template : {name : "empty"}});
                 expect(stub.calledTwice).toBeTruthy();
-
-                // Restore original stubbed function to prototype
-                StoreViews.CollectionListView.prototype.render.restore();
+                stub.restore();  // Restore original stubbed function to prototype
             });
 
             it("should provide an API for opening a modal dialog", function() {
@@ -44,7 +42,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 storeView = new StoreViews.StoreView(attributes).openDialog();
                 expect(storeView.modalDialog).toBeDefined();
                 expect(spy.called).toBeTruthy();
-                spy.restore();
+                spy.restore();  // Restore original spied function to prototype
             });
 
             it("should leave the store when the back button is tapped", function () {
@@ -64,9 +62,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 storeView = new StoreViews.StoreView(attributes);
                 storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
-
-                // Restore original spied function to prototype
-                StoreViews.StoreView.prototype.showCurrencyStore.restore();
+                spy.restore();  // Restore original spied function to prototype
             });
 
             it("should show the goods store when 'Back' is tapped", function () {
@@ -74,9 +70,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 storeView = new StoreViews.StoreView(attributes);
                 storeView.$(".back").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
-
-                // Restore original spied function to prototype
-                StoreViews.StoreView.prototype.showGoodsStore.restore();
+                spy.restore();  // Restore original spied function to prototype
             });
 
             it("should move to the currency store if the insufficient funds dialog returns 'buyMore'", function() {
@@ -84,9 +78,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 storeView = new StoreViews.StoreView(attributes).openDialog();
                 storeView.modalDialog.close({target : {className : "buy-more"}}); // No argument to 'close' indicates 'cancel'
                 expect(spy.called).toBeTruthy();
-
-                // Restore original spied function to prototype
-                spy.restore();
+                spy.restore();  // Restore original spied function to prototype
             });
 
 
@@ -122,9 +114,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     storeView = new StoreViews.StoreView(attributes);
                     storeView.$(".buy-more").click();
                     expect(spy.called).toBeTruthy();
-
-                    // Restore original spied function to prototype
-                    StoreViews.StoreView.prototype.showCurrencyStore.restore();
+                    spy.restore();  // Restore original spied function to prototype
                 });
 
                 it("should show the goods store when 'Back' is clicked", function () {
@@ -132,9 +122,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     storeView = new StoreViews.StoreView(attributes);
                     storeView.$(".back").click();
                     expect(spy.called).toBeTruthy();
-
-                    // Restore original spied function to prototype
-                    StoreViews.StoreView.prototype.showGoodsStore.restore();
+                    spy.restore();  // Restore original spied function to prototype
                 });
 
             });
@@ -190,9 +178,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     storeView = new StoreViews.StoreView(attributes);
                     storeView.model.setBalance(100);
                     expect(stub.called).toBeTruthy();
-
-                    // Restore original stubbed function to prototype
-                    StoreViews.StoreView.prototype.updateBalance.restore();
+                    stub.restore();  // Restore original stubbed function to prototype
                 });
             });
 
