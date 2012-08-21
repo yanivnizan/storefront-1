@@ -1,4 +1,4 @@
-define(["templates", "backbone"], function(Templates, Backbone) {
+define(["templates", "backbone", "components"], function(Templates, Backbone, Components) {
 
     // Determine which CSS transition event to bind according to the browser vendor
     var transEndEventNames = {
@@ -128,7 +128,8 @@ define(["templates", "backbone"], function(Templates, Backbone) {
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
                             "renderBackground", "renderTemplate", "render",
-                            "showCurrencyStore", "showGoodsStore", "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
+                            "showCurrencyStore", "showGoodsStore", "openDialog",
+                            "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
             // untested code block
             var viewType, name = this.model.get("templateName");
@@ -172,6 +173,10 @@ define(["templates", "backbone"], function(Templates, Backbone) {
         },
         showGoodsStore : function() {
             this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
+        },
+        openDialog : function() {
+            this.modalDialog = new Components.ModalDialog({parent : this.$el}).render();
+            return this;
         },
         renderBackground : function() {
             this.$(".background").remove();

@@ -26,6 +26,9 @@ define({
             SoomlaJS.store.setBalance(currentBalance);
         }
     },
+    insufficientFunds : function() {
+        SoomlaJS.storeView.openDialog();
+    },
     // The native UI is going to be destroyed
     destroy : function() {
         alert("Sorry bub, not implemented yet.");

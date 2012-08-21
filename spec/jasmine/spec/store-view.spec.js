@@ -1,4 +1,4 @@
-define("storeView.spec", ["storeViews", "models", "templates"], function (StoreViews, Models, Templates) {
+define("storeView.spec", ["storeViews", "models", "templates", "components"], function (StoreViews, Models, Templates, Components) {
 
     describe('Soomla Store Backbone Views', function () {
 
@@ -37,6 +37,14 @@ define("storeView.spec", ["storeViews", "models", "templates"], function (StoreV
 
                 // Restore original stubbed function to prototype
                 StoreViews.CollectionListView.prototype.render.restore();
+            });
+
+            it("should provide an API for opening a modal dialog", function() {
+                var spy = sinon.spy(Components.ModalDialog.prototype, "render");
+                storeView = new StoreViews.StoreView(attributes).openDialog();
+                expect(storeView.modalDialog).toBeDefined();
+                expect(spy.called).toBeTruthy();
+                spy.restore();
             });
 
             it("should leave the store when the back button is tapped", function () {

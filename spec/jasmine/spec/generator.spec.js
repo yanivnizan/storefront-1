@@ -269,6 +269,7 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 expect(SoomlaJS.disableCurrencyStore).toBeDefined();
                 expect(SoomlaJS.currencyPurchased).toBeDefined();
                 expect(SoomlaJS.goodsPurchased).toBeDefined();
+                expect(SoomlaJS.insufficientFunds).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
             });
 
@@ -295,6 +296,13 @@ define("generator.spec", ["models", "native-api"], function (Models, NativeAPI) 
                 SoomlaJS.newStore();
                 SoomlaJS.disableCurrencyStore();
                 expect(SoomlaJS.store.get("isCurrencyStoreDisabled")).toEqual(true);
+            });
+
+            it("should open a dialog when there are insufficient funds", function() {
+                SoomlaJS.newStore();
+                expect(SoomlaJS.storeView.modalDialog).toBeUndefined();
+                SoomlaJS.insufficientFunds();
+                expect(SoomlaJS.storeView.modalDialog).toBeDefined();
             });
         });
 
