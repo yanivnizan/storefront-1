@@ -2,14 +2,14 @@ define("components.spec", ["components"], function (Components) {
 
     describe('Soomla Store Backbone Components', function () {
 
-        var modal, el, parent;
+        var modal, parent, touchendEvent;
 
         describe("ModalDialog component", function() {
 
             beforeEach(function() {
-                el      = $("<div class='modal'><span class='close'></span></div>");
                 parent  = $("<div>");
                 modal   = new Components.ModalDialog({parent : parent});
+                touchendEvent = $.Event("touchend", {originalEvent : {touches : [1]}});
             });
 
             it("should be defined", function() {
@@ -36,7 +36,6 @@ define("components.spec", ["components"], function (Components) {
             it("should close the modal when the close button \ overlay is tapped", function() {
                 _.each([".close", ".modal"], function(selector) {
                     var spy = sinon.spy(Components.ModalDialog.prototype, "close");
-                    var touchendEvent = $.Event("touchend", {originalEvent : {touches : [1]}});
                     new Components.ModalDialog({parent : parent}).render().$(selector).trigger(touchendEvent);
                     expect(spy.called).toBeTruthy();
                     spy.restore();
@@ -71,6 +70,24 @@ define("components.spec", ["components"], function (Components) {
                 new Components.ModalDialog({parent : parent}).render().on("closed", spy).close();
                 expect(spy.calledWith("cancel")).toBeTruthy();
             });
+
+            it("should have a tap event on the 'cancel' button and 'buy more' button", function() {
+                expect(modal.events["touchend .buy-more"]).toBeDefined();
+                expect(modal.events["touchend .cancel"]).toBeDefined();
+            });
+
+            it("should trigger an event indicating 'Cancel' was selected when closing", function() {
+                var spy = sinon.spy();
+                modal.render().on("closed", spy).$(".cancel").trigger(touchendEvent);
+                expect(spy.calledWith("cancel")).toBeTruthy();
+            });
+
+            it("should trigger an event indicating 'Buy more' was selected when closing", function() {
+                var spy = sinon.spy();
+                modal.render().on("closed", spy).$(".buy-more").trigger(touchendEvent);
+                expect(spy.calledWith("buyMore")).toBeTruthy();
+            });
+
 
         });
     });

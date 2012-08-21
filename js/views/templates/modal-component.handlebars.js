@@ -5,4 +5,4 @@ Handlebars.templates['modal-component'] = Handlebars.template(function (Handleba
   var foundHelper, self=this;
 
 
-  return "<div class=\"modal\">\n    <div class=\"dialog\">\n        <img src=\"img/icons/close-dialog.png\" class=\"close\">\n    </div>\n</div>\n";});
+  return "<div class=\"modal\">\n    <div class=\"dialog\">\n        <img src=\"img/icons/close-dialog.png\" class=\"close\">\n        <span class=\"cancel\"></span>\n        <span class=\"buy-more\"></span>\n    </div>\n</div>\n";});
