@@ -475,6 +475,46 @@ h1 {
   float: right;
   font-weight: bold;
 }
+.modal {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6);
+}
+.dialog {
+  height: 80%;
+  width: 80%;
+  position: relative;
+  background: #FFFFFF;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.dialog .close {
+  position: absolute;
+  z-index: 1;
+  right: -12px;
+  top: -12px;
+  cursor: pointer;
+}
 .btn-basic-primary {
   background-color: #0f8a7c !important;
   background-repeat: repeat-x;

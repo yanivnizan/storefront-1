@@ -1,4 +1,4 @@
-define(["templates"], function(Templates) {
+define(["templates", "backbone"], function(Templates, Backbone) {
 
     // Determine which CSS transition event to bind according to the browser vendor
     var transEndEventNames = {

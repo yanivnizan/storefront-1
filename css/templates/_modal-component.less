@@ -1,0 +1,26 @@
+.modal {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .box(horizontal, center, center);
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.dialog {
+    height: 80%;
+    width: 80%;
+    position: relative;
+    background: #FFFFFF;
+    .rounded(8px);
+
+    .close {
+        position: absolute;
+        z-index: 1;
+        right: -12px;
+        top: -12px;
+        cursor: pointer;
+    }
+}

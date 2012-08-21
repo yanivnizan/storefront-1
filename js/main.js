@@ -1,6 +1,7 @@
 require.config({
     baseUrl : "js",
     paths: {
+        components          : "views/components",
         storeViews          : "views/store-views",
         templates           : "views/templates",
 

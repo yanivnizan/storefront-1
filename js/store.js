@@ -1,8 +1,9 @@
-define(["js-api", "native-api", "models", "storeViews"], function(jsAPI, NativeAPI, Models, StoreViews) {
+define(["js-api", "native-api", "models", "storeViews", "components"], function(jsAPI, NativeAPI, Models, StoreViews, Components) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
     if (top.enablePointingDeviceEvents) {
+        _.extend(Components.ModalDialog.prototype.events, {"click .close" : "close"});
         _.extend(StoreViews.ListItemView.prototype.events, {click : "onSelect"});
         _.extend(StoreViews.StoreView.prototype.events, {
             "click .leave-store"    : "wantsToLeaveStore",
