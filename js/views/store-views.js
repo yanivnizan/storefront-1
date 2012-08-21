@@ -176,6 +176,9 @@ define(["templates", "backbone", "components"], function(Templates, Backbone, Co
         },
         openDialog : function() {
             this.modalDialog = new Components.ModalDialog({parent : this.$el}).render();
+            this.modalDialog.on("closed", function(command) {
+                if (command == "buyMore") this.showCurrencyStore();
+            }, this);
             return this;
         },
         renderBackground : function() {

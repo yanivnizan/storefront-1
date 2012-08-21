@@ -79,6 +79,16 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 StoreViews.StoreView.prototype.showGoodsStore.restore();
             });
 
+            it("should move to the currency store if the insufficient funds dialog returns 'buyMore'", function() {
+                var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
+                storeView = new StoreViews.StoreView(attributes).openDialog();
+                storeView.modalDialog.close({target : {className : "buy-more"}}); // No argument to 'close' indicates 'cancel'
+                expect(spy.called).toBeTruthy();
+
+                // Restore original spied function to prototype
+                spy.restore();
+            });
+
 
             describe("=== Extended pointing device events", function() {
 
