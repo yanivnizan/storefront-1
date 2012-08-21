@@ -19,7 +19,12 @@ define(["backbone", "templates/modal-component.handlebars"], function(Backbone) 
                 case "buy-more" : command = "buyMore"; break;
                 default : command = "cancel"; break; // "cancel" case
             }
-            this.trigger("closed", command);
+
+            // Finally, notify observers that the dialog is closing and detach
+            // any remaining event handlers.
+            this.trigger("closed", command).off();
+
+            return this;
         },
         initialize : function() {
             _.bindAll(this, "close");

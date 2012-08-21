@@ -58,10 +58,11 @@ define("components.spec", ["components"], function (Components) {
                 expect(spy.called).toBeTruthy();
                 spy.restore();
             });
-            it("should return the component from render for chaining", function() {
+            it("should return the component from render \ close for chaining", function() {
                 var stub = sinon.stub(Components.ModalDialog.prototype, "template");
                 modal = new Components.ModalDialog({parent : parent});
                 expect(modal.render()).toEqual(modal);
+                expect(modal.close()).toEqual(modal);
                 stub.restore();
             });
 
@@ -86,6 +87,12 @@ define("components.spec", ["components"], function (Components) {
                 var spy = sinon.spy();
                 modal.render().on("closed", spy).$(".buy-more").trigger(touchendEvent);
                 expect(spy.calledWith("buyMore")).toBeTruthy();
+            });
+
+            it("should have no event handlers attached to the view after it was closed", function() {
+                var spy = sinon.spy();
+                modal.render().on("testEvent", spy).close().trigger("testEvent");
+                expect(spy.called).toBeFalsy();
             });
 
 
