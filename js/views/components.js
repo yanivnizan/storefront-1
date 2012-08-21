@@ -8,6 +8,7 @@ define(["backbone", "templates/modal-component.handlebars"], function(Backbone) 
         },
         close : function() {
             this.remove();
+            this.trigger("closed", "cancel");
         },
         initialize : function() {
             _.bindAll(this, "close");

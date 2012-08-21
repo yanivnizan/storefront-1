@@ -65,6 +65,13 @@ define("components.spec", ["components"], function (Components) {
                 expect(modal.render()).toEqual(modal);
                 stub.restore();
             });
+
+            it("should trigger an event when closing the view", function() {
+                var spy = sinon.spy();
+                new Components.ModalDialog({parent : parent}).render().on("closed", spy).close();
+                expect(spy.calledWith("cancel")).toBeTruthy();
+            });
+
         });
     });
 });
