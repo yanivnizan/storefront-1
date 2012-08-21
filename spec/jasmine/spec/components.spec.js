@@ -2,14 +2,14 @@ define("components.spec", ["components"], function (Components) {
 
     describe('Soomla Store Backbone Components', function () {
 
-        var modal,
-            el      = $("<div class='modal'><span class='close'></span></div>"),
-            parent  = $("<div>");
+        var modal, el, parent;
 
         describe("ModalDialog component", function() {
 
             beforeEach(function() {
-                modal = new Components.ModalDialog({parent : parent});
+                el      = $("<div class='modal'><span class='close'></span></div>");
+                parent  = $("<div>");
+                modal   = new Components.ModalDialog({parent : parent});
             });
 
             it("should be defined", function() {
@@ -28,16 +28,19 @@ define("components.spec", ["components"], function (Components) {
                 expect(modal.options.parent).toEqual(parent);
             });
 
-            it("should have have a tap event on the close button", function() {
+            it("should have have a tap event on the close button and overlay", function() {
                 expect(modal.events["touchend .close"]).toBeDefined();
+                expect(modal.events["touchend .modal"]).toBeDefined();
             });
 
-            it("should close the modal when the close button is tapped", function() {
-                var spy = sinon.spy(Components.ModalDialog.prototype, "close");
-                var touchendEvent = $.Event("touchend", {originalEvent : {touches : [1]}});
-                new Components.ModalDialog({el : el}).$(".close").trigger(touchendEvent);
-                expect(spy.called).toBeTruthy();
-                spy.restore();
+            it("should close the modal when the close button \ overlay is tapped", function() {
+                _.each([".close", ".modal"], function(selector) {
+                    var spy = sinon.spy(Components.ModalDialog.prototype, "close");
+                    var touchendEvent = $.Event("touchend", {originalEvent : {touches : [1]}});
+                    new Components.ModalDialog({parent : parent}).render().$(selector).trigger(touchendEvent);
+                    expect(spy.called).toBeTruthy();
+                    spy.restore();
+                });
             });
 
             it("should remove element from DOM when closed", function() {

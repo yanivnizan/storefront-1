@@ -3,7 +3,8 @@ define(["backbone", "templates/modal-component.handlebars"], function(Backbone) 
     var ModalDialog = Backbone.View.extend({
         className : "modal-container",
         events : {
-            "touchend .close" : "close"
+            "touchend .close" : "close",
+            "touchend .modal" : "close"
         },
         close : function() {
             this.remove();
