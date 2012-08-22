@@ -279,6 +279,7 @@ h1 {
 .basic.currencyPacks .item {
   margin: 0 0 10px;
   background: rgba(0, 0, 0, 0.2);
+  padding: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -300,6 +301,7 @@ h1 {
 }
 .basic.currencyPacks .item .visual {
   margin: 5px;
+  padding: 2px;
   background: white;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
