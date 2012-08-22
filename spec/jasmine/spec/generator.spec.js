@@ -299,11 +299,11 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             });
 
             it("should open a dialog when there are insufficient funds", function() {
-                var spy = sinon.spy(Components.ModalDialog.prototype, "render");
+                var stub = sinon.stub(Components.ModalDialog.prototype, "render", function(){return this;});
                 SoomlaJS.newStore();
                 SoomlaJS.insufficientFunds();
-                expect(spy.called).toBeTruthy();
-                spy.restore();  // Restore original spied function to prototype
+                expect(stub.called).toBeTruthy();
+                stub.restore();  // Restore original spied function to prototype
             });
         });
 

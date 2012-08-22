@@ -175,7 +175,10 @@ define(["templates", "backbone", "components"], function(Templates, Backbone, Co
             this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
         openDialog : function() {
-            new Components.ModalDialog({parent : this.$el}).render().on("closed", function(command) {
+            new Components.ModalDialog({
+                parent : this.$el,
+                model : this.model.get("currency")
+            }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
             return this;

@@ -130,17 +130,6 @@ h1 {
   box-flex: 1;
   overflow-y: scroll;
 }
-.buy-more {
-  display: block;
-  padding: 5px;
-  width: 100%;
-  -webkit-user-select: none;
-}
-.buy-more img {
-  margin-right: 10px;
-  max-width: 40px;
-  max-height: 40px;
-}
 .footer {
   margin: 0 10px 10px;
   -webkit-border-radius: 5px;
@@ -152,6 +141,17 @@ h1 {
 }
 .footer h1 {
   font-size: 20px;
+}
+.footer .buy-more {
+  display: block;
+  padding: 5px;
+  width: 100%;
+  -webkit-user-select: none;
+}
+.footer .buy-more img {
+  margin-right: 10px;
+  max-width: 40px;
+  max-height: 40px;
 }
 .background {
   position: absolute;
@@ -497,7 +497,6 @@ h1 {
   background: rgba(0, 0, 0, 0.6);
 }
 .dialog {
-  height: 80%;
   width: 80%;
   position: relative;
   background: #FFFFFF;
@@ -507,6 +506,11 @@ h1 {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+  padding: 10px;
+  text-align: center;
+  -webkit-box-shadow: 0 0 20px #000000;
+  -moz-box-shadow: 0 0 20px #000000;
+  box-shadow: 0 0 20px #000000;
 }
 .dialog .close {
   position: absolute;

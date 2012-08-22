@@ -10,15 +10,11 @@ define(["backbone", "templates/modal-component.handlebars"], function(Backbone) 
         },
         close : function(event) {
             this.remove();
-            var command,
-                className = (event && event.target) ? event.target.className : null;
 
             // Decide which command to dispatch as an argument according to the
             // target element's class
-            switch (className) {
-                case "buy-more" : command = "buyMore"; break;
-                default : command = "cancel"; break; // "cancel" case
-            }
+            var target  = $(event.target),
+                command = (target && target.hasClass("buy-more")) ? "buyMore" : "cancel";
 
             // Finally, notify observers that the dialog is closing and detach
             // any remaining event handlers.
@@ -31,7 +27,7 @@ define(["backbone", "templates/modal-component.handlebars"], function(Backbone) 
         },
         template : Handlebars.templates["modal-component"],
         render : function() {
-            this.$el.html(this.template());
+            this.$el.html(this.template(this.model.toJSON()));
             this.options.parent.append(this.$el);
             return this;
         }
