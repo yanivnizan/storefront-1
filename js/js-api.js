@@ -9,25 +9,24 @@ define({
     },
     /**
      *
-     * Android signature : currencyPurchaseEnded(boolean success, String productId, int currentBalance, String failureMessage)
+     * Android signature : currencyPurchaseEnded(String productId, int balance)
      * @param boolean
      */
-    currencyPurchased : function(success, productId, currentBalance, failureMessage) {
-        if (success)
-            SoomlaJS.store.setBalance(currentBalance);
+    currencyBalanceChanged : function(productId, balance) {
+        SoomlaJS.store.setBalance(balance);
     },
     /**
-     * Android signature : goodsPurchaseEnded(boolean success, String itemId, int currentBalance, String failureMessage)
+     * Android signature : goodsPurchaseEnded(String itemId, int balance)
      * @param boolean
      */
-    goodsPurchased : function(success, itemId, currentBalance, failureMessage) {
-        if (success) {
-            SoomlaJS.store.incrementVirtualGoodBalance(itemId);
-            SoomlaJS.store.setBalance(currentBalance);
-        }
+    goodsBalanceChanged : function(itemId, balance) {
+        SoomlaJS.store.setVirtualGoodBalance(itemId, balance);
     },
     insufficientFunds : function() {
         SoomlaJS.storeView.openDialog();
+    },
+    unexpectedError : function() {
+        alert("An unexpected error has occurred.  Please try again.");
     },
     // The native UI is going to be destroyed
     destroy : function() {

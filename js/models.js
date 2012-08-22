@@ -66,7 +66,7 @@ define(["backboneRelational"], function() {
             moreCurrencyText    : "Get more coins"
         },
         initialize : function() {
-            _.bindAll(this, "getBalance", "setBalance", "incrementVirtualGoodBalance");
+            _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");
         },
         getBalance : function() {
             return this.get("currency").get("balance");
@@ -74,10 +74,10 @@ define(["backboneRelational"], function() {
         setBalance : function(balance) {
             this.get("currency").set("balance", balance);
         },
-        incrementVirtualGoodBalance : function(itemId) {
+        setVirtualGoodBalance : function(itemId, balance) {
             var virtualGood = this.get("virtualGoods").get(itemId);
             if (virtualGood.isConsumable())
-                virtualGood.set("balance", virtualGood.get("balance") + 1);
+                virtualGood.set("balance", balance);
         }
     });
 

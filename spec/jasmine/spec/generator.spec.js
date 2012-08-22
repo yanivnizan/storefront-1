@@ -154,8 +154,8 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
 
             it("should increment the balance of a consumable virtual good when it was purchased", function() {
                 SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", balance : 1 }] });
-                SoomlaJS.store.incrementVirtualGoodBalance("surfboard");
-                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(2);
+                SoomlaJS.store.setVirtualGoodBalance("surfboard", 5);
+                expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(5);
             });
 
             // TODO: More tests on default field values and validation
@@ -267,29 +267,24 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
 
             it("should have Soomla Javascript API functions defined", function() {
                 expect(SoomlaJS.disableCurrencyStore).toBeDefined();
-                expect(SoomlaJS.currencyPurchased).toBeDefined();
-                expect(SoomlaJS.goodsPurchased).toBeDefined();
+                expect(SoomlaJS.currencyBalanceChanged).toBeDefined();
+                expect(SoomlaJS.goodsBalanceChanged).toBeDefined();
                 expect(SoomlaJS.insufficientFunds).toBeDefined();
+                expect(SoomlaJS.unexpectedError).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
             });
 
             it("should set the store balance when currency was purchased successfully", function() {
                 SoomlaJS.newStore();
-                SoomlaJS.currencyPurchased(true, 1, 100);
-                expect(SoomlaJS.store.getBalance()).toEqual(100);
-            });
-
-            it("shouldn't set the store balance when the currency purchase failed", function() {
-                SoomlaJS.newStore({ currency : { balance : 100 } });
-                SoomlaJS.currencyPurchased(false, 1, 200, "Server Error");
+                SoomlaJS.currencyBalanceChanged("super_saver_pack", 100);
                 expect(SoomlaJS.store.getBalance()).toEqual(100);
             });
 
             it("should update a virtual good's balance when it is purchased successfully", function() {
                 SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", balance : 0}]});
-                SoomlaJS.goodsPurchased(true, "surfboard", 100);
+                SoomlaJS.goodsBalanceChanged("surfboard", 1);
                 expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(1);
-                expect(SoomlaJS.store.getBalance()).toEqual(100);
+                expect(SoomlaJS.store.getBalance()).toEqual(0);
             });
 
             it("shouldn't set the store balance when the currency purchase failed", function() {
