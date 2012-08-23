@@ -35,6 +35,7 @@
                 storeViews          : "views/store-views",
                 components          : "views/components",
                 templates           : "views/templates",
+                modalComponent      : "views/templates/modal-component.handlebars",
                 "components.spec"   : "../spec/jasmine/spec/components.spec",
                 "generator.spec"    : "../spec/jasmine/spec/generator.spec",
                 "storeView.spec"    : "../spec/jasmine/spec/store-view.spec",
@@ -58,6 +59,9 @@
                     deps: ['backbone']
                 },
                 templates: {
+                    deps: ['handlebars']
+                },
+                modalComponent: {
                     deps: ['handlebars']
                 },
                 handlebars : {

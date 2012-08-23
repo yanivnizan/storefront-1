@@ -4,6 +4,7 @@ require.config({
         components          : "views/components",
         storeViews          : "views/store-views",
         templates           : "views/templates",
+        modalComponent      : "views/templates/modal-component.handlebars",
 
         // 3rd party modules
         less                : "libs/less-1.3.0.min",
@@ -25,6 +26,9 @@ require.config({
             deps: ['backbone']
         },
         templates: {
+            deps: ['handlebars']
+        },
+        modalComponent: {
             deps: ['handlebars']
         },
         handlebars : {

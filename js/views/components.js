@@ -1,4 +1,4 @@
-define(["backbone", "templates/modal-component.handlebars"], function(Backbone) {
+define(["backbone", "modalComponent"], function(Backbone) {
 
     var ModalDialog = Backbone.View.extend({
         className : "modal-container",
