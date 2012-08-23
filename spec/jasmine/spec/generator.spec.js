@@ -56,6 +56,11 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(SoomlaJS.store.get("currency").get("image")).toBeUndefined();
             });
 
+            it("should have 'store_currency' as the default currency itemId", function() {
+                SoomlaJS.newStore();
+                expect(SoomlaJS.store.get("currency").get("itemId")).toEqual("store_currency");
+            });
+
             it("should start with a balance of zero", function() {
                 SoomlaJS.newStore();
                 expect(SoomlaJS.store.getBalance()).toEqual(0);
@@ -71,8 +76,8 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 SoomlaJS.newStore({
                     currency : {
                         name    : "clams",
-                        image   : "fish.png",
-                        balance : 100
+                        image   : "fish.png",                        balance : 100
+
                     }
                 });
                 expect(SoomlaJS.store.get("currency").get("name")).toEqual("clams");

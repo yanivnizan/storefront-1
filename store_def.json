@@ -15,8 +15,10 @@
     "background" : "img/theme-lime-bubbles.jpg",
     "currency" : {
         "name"          : "clams",
+        "description"   : "",
         "imgFilePath"   : "img/examples/surf/clam.png",
-        "balance"       : 1000
+        "balance"       : 1000,
+        "itemId"        : "store_currency"
     },
     "isCurrencyStoreDisabled" : false,
     "virtualGoods" : [

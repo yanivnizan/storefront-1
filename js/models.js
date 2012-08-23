@@ -20,8 +20,9 @@ define(["backboneRelational"], function() {
 
     var Currency = Backbone.RelationalModel.extend({
         defaults : {
-            name : "coins",
-            balance : 0
+            name    : "coins",
+            balance : 0,
+            itemId  : "store_currency"
         }
     });
     window.Currency = Currency;
