@@ -211,7 +211,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             });
 
             it("should accept nested template.elements.buyMore.image", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.buyMore.image", "img/assets/clam.png"));
+                SoomlaJS.newStore(objectFromString("template.elements.buyMore.imgFilePath", "img/assets/clam.png"));
                 expect(SoomlaJS.store.get("moreCurrencyImage")).toEqual("img/assets/clam.png");
             });
 

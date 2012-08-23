@@ -6,73 +6,73 @@
                 "name"  :  "Surf Store"
             },
             "buyMore" :  {
-                "text"  :  "Get more clams",
-                "image" :  "img/examples/surf/clam.png"
+                "text"          :  "Get more clams",
+                "imgFilePath"   :  "img/examples/surf/clam.png"
             }
         },
         "properties" : {"columns" : 3}
     },
     "background" : "img/theme-lime-bubbles.jpg",
     "currency" : {
-        "name"      : "clams",
-        "image"     : "img/examples/surf/clam.png",
-        "balance"   : 1000
+        "name"          : "clams",
+        "imgFilePath"   : "img/examples/surf/clam.png",
+        "balance"       : 1000
     },
     "isCurrencyStoreDisabled" : false,
     "virtualGoods" : [
         {
             "name"          : "Rip Curl Shortboard",
             "description"   : "Shred small waves with this super-fast board",
-            "src"           : "img/examples/surf/blue-surfboard.png",
+            "imgFilePath"   : "img/examples/surf/blue-surfboard.png",
             "price"         : 100,
             "itemId"        : "blue_surfboard"
         },
         {
             "name"          : "Billanbog Vintage Longboard",
             "description"   : "Slowly hang five through low power surf",
-            "src"           : "img/examples/surf/girl-surfboard-th.png",
+            "imgFilePath"   : "img/examples/surf/girl-surfboard-th.png",
             "price"         : 150,
             "itemId"        : "girl_surfboard_th"
         },
         {
             "name"          : "Blue Barrel",
             "description"   : "Get barreled with this speed controlled board",
-            "src"           : "img/examples/surf/blue-barrel.png",
+            "imgFilePath"   : "img/examples/surf/blue-barrel.png",
             "price"         : 200,
             "itemId"        : "blue_barrel"
         },
         {
             "name"          : "Keel Fish",
             "description"   : "Carve slow waves with this ever-riding board",
-            "src"           : "img/examples/surf/keelfish.png",
+            "imgFilePath"   : "img/examples/surf/keelfish.png",
             "price"         : 200,
             "itemId"        : "keelfish"
         },
         {
             "name"          : "Picasso Peeler",
             "description"   : "The master of surreal off-the-lip maneuvers",
-            "src"           : "img/examples/surf/picasso-peeler.png",
+            "imgFilePath"   : "img/examples/surf/picasso-peeler.png",
             "price"         : 300,
             "itemId"        : "picasso_peeler"
         },
         {
             "name"          : "Reef Shredder",
             "description"   : "A mean paddling machine for the deep reefs",
-            "src"           : "img/examples/surf/reef-shredder.png",
+            "imgFilePath"   : "img/examples/surf/reef-shredder.png",
             "price"         : 300,
             "itemId"        : "reef_shredder"
         },
         {
             "name"          : "Sixties Gun",
             "description"   : "Ride Venice-style with this time machine",
-            "src"           : "img/examples/surf/sixties-gun.png",
+            "imgFilePath"   : "img/examples/surf/sixties-gun.png",
             "price"         : 400,
             "itemId"        : "sixties_gun"
         },
         {
             "name"          : "Traditional Fish",
             "description"   : "The all around conditions board of choice",
-            "src"           : "img/examples/surf/traditional-fish.png",
+            "imgFilePath"   : "img/examples/surf/traditional-fish.png",
             "price"         : 450,
             "itemId"        : "traditional_fish"
         }
@@ -81,7 +81,7 @@
         {
             "name"          : "Super Saver Pack",
             "description"   : "For you cheap skates...",
-            "image"         : "coin.jpg",
+            "imgFilePath"   : "img/examples/surf/clam.png",
             "itemId"        : "super_saver_pack",
             "productId"     : "super_saver_pack",
             "price"         : 0.99,
@@ -91,7 +91,7 @@
         {
             "name"          : "Malibu Medium Pack",
             "description"   : "For you cheap skates...",
-            "image"         : "coin.jpg",
+            "imgFilePath"   : "img/examples/surf/clam.png",
             "itemId"        : "super_saver_pack",
             "productId"     : "android.test.purchased",
             "price"         : 1.99,
@@ -101,7 +101,7 @@
         {
             "name"          : "Pipeline Pumpin' Pack",
             "description"   : "The holy grail for ya spendin' surfers",
-            "image"         : "coin.jpg",
+            "imgFilePath"   : "img/examples/surf/clam.png",
             "itemId"        : "pipeline_pumpin_pack",
             "productId"     : "pipeline_pumpin_pack",
             "price"         : 5.99,

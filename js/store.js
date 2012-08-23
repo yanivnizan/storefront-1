@@ -34,8 +34,8 @@ define(["js-api", "native-api", "models", "storeViews", "components"], function(
                             if (json.template.elements.buyMore) {
                                 if (json.template.elements.buyMore.text)
                                     attributes.moreCurrencyText = json.template.elements.buyMore.text;
-                                if (json.template.elements.buyMore.image)
-                                    attributes.moreCurrencyImage = json.template.elements.buyMore.image;
+                                if (json.template.elements.buyMore.imgFilePath)
+                                    attributes.moreCurrencyImage = json.template.elements.buyMore.imgFilePath;
                             }
 
                             if (json.template.elements.title && json.template.elements.title.name)

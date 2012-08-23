@@ -10,9 +10,9 @@ function program1(depth0,data) {
   buffer += "\n            <img src=\"";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
-  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.imgFilePath);
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.image", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.imgFilePath", { hash: {} }); }
   buffer += escapeExpression(stack1) + "\">\n            ";
   return buffer;}
 
@@ -22,9 +22,9 @@ function program3(depth0,data) {
   buffer += "\n            <img src=\"";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
-  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.imgFilePath);
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.image", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.imgFilePath", { hash: {} }); }
   buffer += escapeExpression(stack1) + "\">\n            ";
   return buffer;}
 
@@ -41,7 +41,7 @@ function program3(depth0,data) {
   buffer += escapeExpression(stack1) + "\n            </h1>\n        <span class=\"balance\">\n            ";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
-  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.imgFilePath);
   stack2 = helpers['if'];
   tmp1 = self.program(1, program1, data);
   tmp1.hash = {};
@@ -78,7 +78,7 @@ function program3(depth0,data) {
   buffer += escapeExpression(stack1) + "\n            </h1>\n        <span class=\"balance\">\n            ";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
-  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.imgFilePath);
   stack2 = helpers['if'];
   tmp1 = self.program(3, program3, data);
   tmp1.hash = {};
