@@ -120,6 +120,17 @@ define(["templates", "backbone", "components"], function(Templates, Backbone, Co
                 $this.subViews.push(view);
                 currentRow.append(view.render().el);
             });
+
+            // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
+            // CSS flex box doesn't support a perfect grid like this when elements contain excessive text.
+            // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
+            // This assumes that the container has no margin, border or padding.
+            var subject = this.subViews[0].$el;
+            var trueElementWidth = (this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
+            _.each(this.subViews, function(subView) {
+                subView.$el.css("max-width", trueElementWidth);
+            });
+
             return this;
         }
     });
