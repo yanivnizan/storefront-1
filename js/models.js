@@ -64,7 +64,8 @@ define(["backboneRelational"], function() {
             currency            : new Currency(),
             templateName        : "basic",
             templateTitle       : "Store",
-            moreCurrencyText    : "Get more coins"
+            moreCurrencyText    : "Get more coins",
+            orientationLanscape : false
         },
         initialize : function() {
             _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");

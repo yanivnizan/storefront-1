@@ -117,6 +117,10 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(SoomlaJS.store.get("templateTitle")).toEqual("Store");
             });
 
+            it("should have a default landscape orientation", function() {
+                expect(SoomlaJS.store.get("orientationLanscape")).toEqual(false);
+            });
+
             it("shouldn't have a title background by default", function() {
                 expect(SoomlaJS.store.get("templateTitleBackgroundImage")).toBeUndefined();
             });
@@ -208,6 +212,11 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             it("should accept nested template.name", function() {
                 SoomlaJS.newStore({ template : { name : "basic"}});
                 expect(SoomlaJS.store.get("templateName")).toEqual("basic");
+            });
+
+            it("should accept nested template.orientationLandscape", function() {
+                SoomlaJS.newStore({ template : { orientationLandscape : true}});
+                expect(SoomlaJS.store.get("orientationLandscape")).toEqual(true);
             });
 
             it("should accept nested template.elements.buyMore.text", function() {

@@ -27,6 +27,9 @@ define(["js-api", "native-api", "models", "storeViews", "components"], function(
                         if (json.template.name)
                             attributes.templateName = json.template.name;
 
+                        if (json.template.orientationLandscape)
+                            attributes.orientationLandscape = json.template.orientationLandscape;
+
                         if (json.template.properties)
                             attributes.templateProperties = json.template.properties;
                         if (json.template.elements) {
