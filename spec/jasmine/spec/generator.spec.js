@@ -39,6 +39,13 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             expect(SoomlaJS.store.get("currency")).toBeInstanceOf(Models.Currency);
         });
 
+        xit("should invoke storeInitialized when initializing a store", function () {
+            var spy = sinon.spy(window.SoomlaNative, "storeInitialized");
+            SoomlaJS.initialize({ template : {name : "empty"} });
+            expect(spy.called).toBeTruthy();
+            spy.restore();
+        });
+
 
         describe('=== Currency', function () {
 

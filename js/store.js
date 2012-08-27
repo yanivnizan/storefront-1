@@ -68,6 +68,7 @@ define(["js-api", "native-api", "models", "storeViews", "components"], function(
                     el : $("#main"),
                     callbacks : json ? json.callbacks : {}
                 }).render();
+                if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
                 return this.store;
             }
         });
