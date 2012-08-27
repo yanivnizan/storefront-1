@@ -76,7 +76,7 @@ define(["js-api", "native-api", "models", "storeViews", "components"], function(
         // Notify native code that we're initialized only if an interface exists
         // i.e. only when running in a device and not in the store builder.
         var SoomlaNative = window.SoomlaNative;
-        if (SoomlaNative && SoomlaNative.pageInitialized) SoomlaNative.pageInitialized();
+        if (SoomlaNative && SoomlaNative.uiReady) SoomlaNative.uiReady();
 
     });
 });
