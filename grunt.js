@@ -56,21 +56,28 @@ module.exports = function(grunt) {
 
       less: {
           all: {
-              src: ['css/style.css', 'css/store.less'],
+              src: ['css/store.less'],
               dest: 'dist/css/store.css',
               options: {
                   compress: true
               }
           }
       },
+      requirejs: {
+          baseUrl: 'js',
+          mainConfigFile: 'js/main-store.js',
+          name: "main-store",
+          out: "dist/js/main-store.js"
+      },
 
       uglify: {}
   });
 
     grunt.loadNpmTasks('grunt-less');
+    grunt.loadNpmTasks('grunt-requirejs');
 
   // Default task.
 //  grunt.registerTask('default', 'lint qunit concat min');
-  grunt.registerTask('default', 'min');
+  grunt.registerTask('default', 'less requirejs');
 
 };

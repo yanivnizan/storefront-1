@@ -20,6 +20,7 @@
     "dependencies": {},
     "devDependencies": {
         "grunt": "~0.3.12",
-        "grunt-less" : "~0.1.5"
+        "grunt-less" : "~0.1.5",
+        "grunt-requirejs" : "~0.2.9"
     }
 }
