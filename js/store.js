@@ -1,4 +1,4 @@
-define(["js-api", "native-api", "models", "storeViews", "components"], function(jsAPI, NativeAPI, Models, StoreViews, Components) {
+define(["jquery", "js-api", "native-api", "models", "storeViews", "components"], function($, jsAPI, NativeAPI, Models, StoreViews, Components) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.

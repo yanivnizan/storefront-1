@@ -1,4 +1,4 @@
-define(["backbone", "modalComponent"], function(Backbone) {
+define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
 
     var ModalDialog = Backbone.View.extend({
         className : "modal-container",
