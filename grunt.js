@@ -1,83 +1,52 @@
 /*global module:false*/
-module.exports = function(grunt) {
+require('shelljs/global');
 
-  // Project configuration.
-  grunt.initConfig({
-    meta: {
-      version: '0.1.0',
-      banner: '/*! PROJECT_NAME - v<%= meta.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '* http://PROJECT_WEBSITE/\n' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
-        'YOUR_NAME; Licensed MIT */'
-    },
-//    lint: {
-//      files: ['grunt.js', 'lib/**/*.js', 'spec/**/*.js']
-//    },
-//    qunit: {
-//      files: ['spec/**/*.html']
-//    },
-//    concat: {
-//      dist: {
-//        src: ['<banner:meta.banner>', '<file_strip_banner:lib/FILE_NAME.js>'],
-//        dest: 'dist/FILE_NAME.js'
-//      }
-//    },
-    min: {
-      dist: {
-        src: ['js/store.js', 'js/native-api.js', 'js/models.js'],
-        dest: 'dist/build.js',
-          separator: ';'
-      }
-    },
-//    watch: {
-//      files: '<config:lint.files>',
-//      tasks: 'lint qunit'
-//    },
-//    jshint: {
-//      options: {
-//        curly: true,
-//        eqeqeq: true,
-//        immed: true,
-//        latedef: true,
-//        newcap: true,
-//        noarg: true,
-//        sub: true,
-//        undef: true,
-//        boss: true,
-//        eqnull: true,
-//        browser: true
-//      },
-//      globals: {
-//        jQuery: true
-//      }
-//    },
+module.exports = function (grunt) {
 
-
-      less: {
-          all: {
-              src: ['css/store.less'],
-              dest: 'dist/css/store.css',
-              options: {
-                  compress: true
-              }
-          }
-      },
-      requirejs: {
-          baseUrl: 'js',
-          mainConfigFile: 'js/main-store.js',
-          name: "main-store",
-          out: "dist/js/main-store.js"
-      },
-
-      uglify: {}
-  });
+    // Project configuration.
+    grunt.initConfig({
+        meta : {
+            version:'0.1.0',
+            banner:'/*! PROJECT_NAME - v<%= meta.version %> - ' +
+                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                '* http://PROJECT_WEBSITE/\n' +
+                '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
+                'YOUR_NAME; Licensed MIT */'
+        },
+        less:{
+            all:{
+                src  :['css/store.less'],
+                dest :'dist/css/store.css',
+                options:{
+                    compress:true
+                }
+            }
+        },
+        requirejs:{
+            baseUrl         : 'js',
+            mainConfigFile  : 'js/main-store.js',
+            name            : "main-store",
+            out             : "dist/js/main-store.js"
+        }
+    });
 
     grunt.loadNpmTasks('grunt-less');
     grunt.loadNpmTasks('grunt-requirejs');
 
-  // Default task.
-//  grunt.registerTask('default', 'lint qunit concat min');
-  grunt.registerTask('default', 'less requirejs');
+    // Register helper tasks
 
+    grunt.registerTask('copy', 'Copies more necessary resources to the distribution folder', function() {
+        mkdir("-p", "dist/js/libs/jquery");
+        cp("js/libs/require.js", "dist/js/libs/");
+        cp("js/libs/jquery/jquery-1.8.0.min.js", "dist/js/libs/jquery/");
+        cp("store.html", "store_def.json", "dist/");
+        cp("-R", "img", "dist/");
+    });
+    grunt.registerTask('clean', 'Cleans the distribution folder', function() {
+        rm("-rf", "dist");
+        mkdir("dist");
+    });
+
+    // Default task.
+    grunt.registerTask('default', 'clean copy less requirejs');
 };
