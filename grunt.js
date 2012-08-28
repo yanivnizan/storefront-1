@@ -36,9 +36,8 @@ module.exports = function (grunt) {
     // Register helper tasks
 
     grunt.registerTask('copy', 'Copies more necessary resources to the distribution folder', function() {
-        mkdir("-p", "dist/js/libs/jquery");
+        mkdir("-p", "dist/js/libs");
         cp("js/libs/require.js", "dist/js/libs/");
-        cp("js/libs/jquery/jquery-1.8.0.min.js", "dist/js/libs/jquery/");
         cp("store.html", "store_def.json", "dist/");
         cp("-R", "img", "dist/");
     });
