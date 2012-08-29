@@ -512,11 +512,7 @@ h1 {
   -webkit-box-align: stretch;
   display: -moz-box;
   -moz-box-orient: vertical;
-  -moz-box-pack: start;                                                 - Move around CSS files into LESS files to enable importing into store.less and consolidating into one file
-- In the HTML, leave only one link tag to load all concatenated CSS - dev + production
-- Add grunt-requirejs for using the r.js optimzier via grunt
-
-
+  -moz-box-pack: start;
   -moz-box-align: stretch;
   display: box;
   box-orient: vertical;
