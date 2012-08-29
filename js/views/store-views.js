@@ -149,14 +149,34 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                 default     : viewType = CollectionListView; break;
             };
 
-            this.VirtualGoodsView   = this.options.VirtualGoodsView  || viewType;
-            this.CurrencyPacksView  = this.options.CurrencyPacksView || viewType;
             this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
+            var VirtualGoodsView    = this.options.VirtualGoodsView  || viewType,
+                CurrencyPacksView   = this.options.CurrencyPacksView || viewType;
 
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
             this.model.get("currency").on("change:balance", this.updateBalance);
+
+            // Initialize sub-views, but defer providing an "el" until the rendering phase
+            // This will enable us to construct the view objects once and then render as many times
+            // as we like without losing the jQuery bindings each time.
+            // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
+            this.virtualGoodsView = new VirtualGoodsView({
+                collection          : this.model.get("virtualGoods"),
+                templateName        : this.model.get("templateName"),
+                templateProperties  : this.model.get("templateProperties"),
+                currency            : this.model.get("currency"),
+                itemType            : "virtualGood"
+            });
+            this.currencyPacksView = new CurrencyPacksView({
+                collection          : this.model.get("currencyPacks"),
+                templateName        : this.model.get("templateName"),
+                templateProperties  : this.model.get("templateProperties"),
+                currency            : this.model.get("currency"),
+                itemType            : "currencyPack"
+            });
+
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
@@ -201,7 +221,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         renderTemplate : function() {
             var name = this.model.get("templateName");
-            this.$el.empty().append(Templates[name].template(this.model.toJSON()));
+            this.$el.html(Templates[name].template(this.model.toJSON()));
 
 
             // TODO: Release previous view bindings
@@ -213,29 +233,13 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         render : function() {
             var name = this.model.get("templateName");
-            this.$el.empty().append(Templates[name].template(this.model.toJSON()));
+            this.$el.html(Templates[name].template(this.model.toJSON()));
             this.$("#currency-store").css("visibility", "hidden");
 
-            // Render goods store items
-            this.virtualGoodsView = new this.VirtualGoodsView({
-                el : $("#goods-store .items"),
-                collection          : this.model.get("virtualGoods"),
-                templateName        : this.model.get("templateName"),
-                templateProperties  : this.model.get("templateProperties"),
-                currency            : this.model.get("currency"),
-                itemType            : "virtualGood"
-            }).on("selected", this.wantsToBuyVirtualGoods).render();
-
-            // Render currency store items
-            // TODO: Render currecny instead of goods
-            this.currencyPacksView = new this.CurrencyPacksView({
-                el : $("#currency-store .items"),
-                collection          : this.model.get("currencyPacks"),
-                templateName        : this.model.get("templateName"),
-                templateProperties  : this.model.get("templateProperties"),
-                currency            : this.model.get("currency"),
-                itemType            : "currencyPack"
-            }).on("selected", this.wantsToBuyCurrencyPacks).render();
+            // Render items in goods store and currency store
+            // setElement will call delegateEvents internally, see comment in initialize
+            this.virtualGoodsView.setElement(this.$("#goods-store .items")).on("selected", this.wantsToBuyVirtualGoods).render();
+            this.currencyPacksView.setElement(this.$("#currency-store .items")).on("selected", this.wantsToBuyCurrencyPacks).render();
 
             return this;
         },
