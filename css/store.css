@@ -515,114 +515,6 @@ h1 {
   box-align: stretch;
   position: absolute;
 }
-.header {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: start;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: start;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-pack: start;
-  box-align: stretch;
-  background: rgba(255, 255, 255, 0.4);
-}
-.header > .padding {
-  width: 80px;
-}
-.header > .padding.left {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: start;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: start;
-  -moz-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: start;
-  box-align: center;
-}
-.header > .padding.right {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: end;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: end;
-  -moz-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: end;
-  box-align: center;
-}
-.header > .content {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-}
-.header .balance {
-  margin: 0 auto;
-  padding: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background: rgba(0, 0, 0, 0.2);
-  font-size: 10px;
-  font-weight: bold;
-}
-.header .balance img {
-  max-width: 20px;
-  max-height: 20px;
-}
-.header .leave-store,
-.header .back {
-  background-image: url("../img/icons/close.png");
-  width: 26px;
-  height: 26px;
-  cursor: pointer;
-}
-.title {
-  text-align: center;
-}
-.items-container {
-  margin: 10px;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  overflow-y: scroll;
-}
-.footer {
-  margin: 0 10px 10px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.footer h1 {
-  font-size: 20px;
-}
-.footer .buy-more {
-  display: block;
-  padding: 5px;
-  width: 100%;
-  -webkit-user-select: none;
-}
-.footer .buy-more img {
-  margin-right: 10px;
-  max-width: 40px;
-  max-height: 40px;
-}
 .background {
   position: absolute;
   z-index: -1;
@@ -841,6 +733,114 @@ h1 {
 .basic .currencyPacks .item .price {
   font-weight: bold;
 }
+.basic .header {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: stretch;
+  background: rgba(255, 255, 255, 0.4);
+}
+.basic .header > .padding {
+  width: 80px;
+}
+.basic .header > .padding.left {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: center;
+}
+.basic .header > .padding.right {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: end;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: end;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: end;
+  box-align: center;
+}
+.basic .header > .content {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+}
+.basic .header .balance {
+  margin: 0 auto;
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 10px;
+  font-weight: bold;
+}
+.basic .header .balance img {
+  max-width: 20px;
+  max-height: 20px;
+}
+.basic .header .leave-store,
+.basic .header .back {
+  background-image: url("../img/icons/close.png");
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+.basic .title {
+  text-align: center;
+}
+.basic .items-container {
+  margin: 10px;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  overflow-y: scroll;
+}
+.basic .footer {
+  margin: 0 10px 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.basic .footer h1 {
+  font-size: 20px;
+}
+.basic .footer .buy-more {
+  display: block;
+  padding: 5px;
+  width: 100%;
+  -webkit-user-select: none;
+}
+.basic .footer .buy-more img {
+  margin-right: 10px;
+  max-width: 40px;
+  max-height: 40px;
+}
 .grid .header,
 .grid .footer {
   text-align: center;
@@ -956,6 +956,114 @@ h1 {
 .grid .virtualGoods .item .price {
   float: right;
   font-weight: bold;
+}
+.grid .header {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: stretch;
+  background: rgba(255, 255, 255, 0.4);
+}
+.grid .header > .padding {
+  width: 80px;
+}
+.grid .header > .padding.left {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: center;
+}
+.grid .header > .padding.right {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: end;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: end;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: end;
+  box-align: center;
+}
+.grid .header > .content {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+}
+.grid .header .balance {
+  margin: 0 auto;
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 10px;
+  font-weight: bold;
+}
+.grid .header .balance img {
+  max-width: 20px;
+  max-height: 20px;
+}
+.grid .header .leave-store,
+.grid .header .back {
+  background-image: url("../img/icons/close.png");
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+.grid .title {
+  text-align: center;
+}
+.grid .items-container {
+  margin: 10px;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  overflow-y: scroll;
+}
+.grid .footer {
+  margin: 0 10px 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.grid .footer h1 {
+  font-size: 20px;
+}
+.grid .footer .buy-more {
+  display: block;
+  padding: 5px;
+  width: 100%;
+  -webkit-user-select: none;
+}
+.grid .footer .buy-more img {
+  margin-right: 10px;
+  max-width: 40px;
+  max-height: 40px;
 }
 .modal {
   height: 100%;
