@@ -498,11 +498,6 @@ h1 {
   position: relative;
   height: 100%;
 }
-#main .header,
-#main .footer {
-  text-align: center;
-  padding: 4px 7px;
-}
 [data-role="page"] {
   width: 100%;
   height: 100%;
@@ -659,11 +654,16 @@ h1 {
 #currency-store.visible {
   opacity: 1;
 }
-.basic.virtualGoods.items {
+.basic .header,
+.basic .footer {
+  text-align: center;
+  padding: 4px 7px;
+}
+.basic .virtualGoods.items {
   list-style-type: none;
   padding: 0;
 }
-.basic.virtualGoods .item {
+.basic .virtualGoods .item {
   margin: 0 0 10px;
   background: rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 5px;
@@ -685,7 +685,7 @@ h1 {
   box-pack: start;
   box-align: stretch;
 }
-.basic.virtualGoods .item .visual {
+.basic .virtualGoods .item .visual {
   margin: 5px;
   background: white;
   -webkit-border-radius: 5px;
@@ -708,31 +708,31 @@ h1 {
   box-align: center;
   min-width: 50px;
 }
-.basic.virtualGoods .item .visual img {
+.basic .virtualGoods .item .visual img {
   max-width: 40px;
   max-height: 40px;
 }
-.basic.virtualGoods .item .content {
+.basic .virtualGoods .item .content {
   margin: 5px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.basic.virtualGoods .item img.currency {
+.basic .virtualGoods .item img.currency {
   min-width: 15px;
   min-height: 15px;
   max-width: 25px;
   max-height: 25px;
 }
-.basic.virtualGoods .item h1 {
+.basic .virtualGoods .item h1 {
   font-size: 14px;
   line-height: 18px;
   margin: 0 0 2px;
 }
-.basic.virtualGoods .item .description {
+.basic .virtualGoods .item .description {
   font-size: 11px;
 }
-.basic.virtualGoods .item .balance {
+.basic .virtualGoods .item .balance {
   font-size: 10px;
   font-weight: bold;
   text-align: left;
@@ -740,18 +740,18 @@ h1 {
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.basic.virtualGoods .item .price {
+.basic .virtualGoods .item .price {
   text-align: right;
   font-weight: bold;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.basic.currencyPacks.items {
+.basic .currencyPacks.items {
   list-style-type: none;
   padding: 0;
 }
-.basic.currencyPacks .item {
+.basic .currencyPacks .item {
   margin: 0 0 10px;
   background: rgba(0, 0, 0, 0.2);
   padding: 5px;
@@ -774,7 +774,7 @@ h1 {
   box-pack: start;
   box-align: stretch;
 }
-.basic.currencyPacks .item .visual {
+.basic .currencyPacks .item .visual {
   margin: 5px;
   padding: 2px;
   background: white;
@@ -798,33 +798,33 @@ h1 {
   box-align: center;
   min-width: 70px;
 }
-.basic.currencyPacks .item .visual img {
+.basic .currencyPacks .item .visual img {
   max-width: 50px;
   max-height: 50px;
 }
-.basic.currencyPacks .item .content {
+.basic .currencyPacks .item .content {
   margin: 5px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.basic.currencyPacks .item img.currency {
+.basic .currencyPacks .item img.currency {
   min-width: 15px;
   min-height: 15px;
   max-width: 25px;
   max-height: 25px;
 }
-.basic.currencyPacks .item h1 {
+.basic .currencyPacks .item h1 {
   font-size: 14px;
   line-height: 18px;
   margin: 0 0 2px;
 }
-.basic.currencyPacks .item h2 {
+.basic .currencyPacks .item h2 {
   font-size: 11px;
   line-height: 15px;
   margin: 0 0 2px;
 }
-.basic.currencyPacks .item .buy {
+.basic .currencyPacks .item .buy {
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: center;
@@ -838,10 +838,15 @@ h1 {
   box-pack: center;
   box-align: center;
 }
-.basic.currencyPacks .item .price {
+.basic .currencyPacks .item .price {
   font-weight: bold;
 }
-.grid.virtualGoods {
+.grid .header,
+.grid .footer {
+  text-align: center;
+  padding: 4px 7px;
+}
+.grid .virtualGoods {
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -855,7 +860,7 @@ h1 {
   box-pack: start;
   box-align: stretch;
 }
-.grid.virtualGoods.items {
+.grid .virtualGoods.items {
   padding: 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -873,7 +878,7 @@ h1 {
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.grid.virtualGoods.items .row {
+.grid .virtualGoods.items .row {
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -890,7 +895,7 @@ h1 {
   -moz-box-flex: 1;
   box-flex: 1;
 }
-.grid.virtualGoods .item {
+.grid .virtualGoods .item {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
@@ -904,7 +909,7 @@ h1 {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-.grid.virtualGoods .item .visual {
+.grid .virtualGoods .item .visual {
   background: white;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -927,28 +932,28 @@ h1 {
   margin-bottom: 5px;
   min-width: 50px;
 }
-.grid.virtualGoods .item .visual img {
+.grid .virtualGoods .item .visual img {
   max-width: 40px;
   max-height: 40px;
 }
-.grid.virtualGoods .item .content {
+.grid .virtualGoods .item .content {
   text-align: center;
 }
-.grid.virtualGoods .item img.currency {
+.grid .virtualGoods .item img.currency {
   min-width: 15px;
   min-height: 15px;
   max-width: 25px;
   max-height: 25px;
 }
-.grid.virtualGoods .item h1 {
+.grid .virtualGoods .item h1 {
   font-size: 11px;
   line-height: 18px;
   margin: 0 0 2px;
 }
-.grid.virtualGoods .item .description {
+.grid .virtualGoods .item .description {
   font-size: 13px;
 }
-.grid.virtualGoods .item .price {
+.grid .virtualGoods .item .price {
   float: right;
   font-weight: bold;
 }

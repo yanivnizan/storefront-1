@@ -69,7 +69,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
 
             // Set the view's class
-            this.$el.addClass("basic " + itemType + "s");
+            this.$el.addClass(itemType + "s");
 
             // Render each item and append it
             this.collection.each(function(item) {
@@ -99,7 +99,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                 $this    = this;
 
             // Set the view's class
-            this.$el.addClass("grid " + itemType + "s");
+            this.$el.addClass(itemType + "s");
 
             // Render each item and append it
             var currentRow;
@@ -233,7 +233,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         render : function() {
             var name = this.model.get("templateName");
-            this.$el.html(Templates[name].template(this.model.toJSON()));
+            this.$el.addClass(name).html(Templates[name].template(this.model.toJSON()));
             this.$("#currency-store").css("visibility", "hidden");
 
             // Render items in goods store and currency store
