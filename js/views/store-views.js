@@ -60,6 +60,19 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
 
     var CollectionListView = BaseCollectionView.extend({
+        initialize : function(options) {
+            // Call super constructor
+            this.constructor.__super__.initialize.apply(this, arguments);
+
+            _.bindAll(this, "adjustWidth");
+            this.orientation = this.options.templateProperties.orientation || "vertical";
+        },
+        adjustWidth : function() {
+            // Assuming that all elements are the same width, take the full width of the first element
+            // and multiply it by the number of elements.  The product will be the scrollable container's width
+            var elementWidth = this.$(".item:first").outerWidth(true);
+            this.$el.css("width", this.collection.length * elementWidth);
+        },
         render : function() {
             (this.type) || (this.type = ListItemView); // For testing purposes
             var name     = this.options.templateName,
@@ -82,8 +95,11 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                     $this.trigger("selected", model);
                 });
                 $this.subViews.push(view);
-                $this.$el.append(view.render().el);
+                view.render().$el.addClass($this.orientation);
+                $this.$el.append(view.el);
             });
+
+            if (this.orientation == "horizontal") this.adjustWidth();
             return this;
         }
     });

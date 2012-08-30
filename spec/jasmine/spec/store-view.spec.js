@@ -231,26 +231,25 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
         describe("=== CollectionListView", function() {
 
-            it("should accept a type of Backbone view to use when rendering items", function () {
-                // Create a view stub
-                var stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+            var collectionView,
+                attributes,
+                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
 
-                new StoreViews.CollectionListView({
+            beforeEach(function() {
+                attributes = {
                     collection : new Backbone.Collection({a : 1}),
-                    type : stubType
-                }).render();
+                    type : stubType,
+                    itemType : "virtualGood"
+                };
+            });
+
+            it("should accept a type of Backbone view to use when rendering items", function () {
+                new StoreViews.CollectionListView(attributes).render();
                 expect(stubType.prototype.render.called).toBeTruthy();
             });
 
             it("should accept an item type that should be passed to its items", function () {
-                // Create a view stub
-                var stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
-
-                var collectionView = new StoreViews.CollectionListView({
-                    collection : new Backbone.Collection({a : 1}),
-                    type : stubType,
-                    itemType : "virtualGood"
-                }).render();
+                collectionView = new StoreViews.CollectionListView(attributes).render();
                 expect(collectionView.subViews[0].options.itemType).toEqual("virtualGood");
             });
 
@@ -261,13 +260,29 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 // Fake a view that can fire the event
                 var type    = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
 
-                var view = new StoreViews.CollectionListView({
+                collectionView = new StoreViews.CollectionListView({
                     collection : new Backbone.Collection([model]),
                     type : type
                 }).on("selected", spy).render();
 
-                view.subViews[0].triggerTapEvent();
+                collectionView.subViews[0].triggerTapEvent();
                 expect(spy.calledWith(model)).toBeTruthy();
+            });
+
+            it("should by default render the list vertically", function() {
+                var spy = sinon.spy(StoreViews.CollectionListView.prototype, "adjustWidth");
+                collectionView = new StoreViews.CollectionListView(attributes).render();
+                expect(spy.called).toBeFalsy();
+                expect(collectionView.orientation).toEqual("vertical");
+                spy.restore();
+            });
+
+            it("should adjust its width if its orientation is horizontal", function() {
+                var spy = sinon.spy(StoreViews.CollectionListView.prototype, "adjustWidth");
+                collectionView = new StoreViews.CollectionListView(_.extend(attributes, {orientation : "horizontal"})).render();
+                expect(spy.called).toBeTruthy();
+                expect(collectionView.orientation).toEqual("horizontal");
+                spy.restore();
             });
         });
 
