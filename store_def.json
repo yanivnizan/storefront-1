@@ -1,115 +1,154 @@
 {
-    "template" :  {
-        "name" :  "basic",
-        "elements" :  {
-            "title" :  {
-                "name"  :  "Surf Store"
+   "isCurrencyStoreDisabled" : false,
+   "template" :
+      {
+         "orientationLandscape" : false,
+         "elements" :
+            {
+               "buyMore" :
+                  {
+                     "imgFilePath" : "img/examples/surf/clam.png",
+                     "text" : "Get more clams"
+                  },
+               "title" :
+                  {
+                     "name" : "Surf Store"
+                  }
             },
-            "buyMore" :  {
-                "text"          :  "Get more clams",
-                "imgFilePath"   :  "img/examples/surf/clam.png"
-            }
-        },
-        "properties" : {"columns" : 3}
-    },
-    "background" : "img/theme-lime-bubbles.jpg",
-    "currency" : {
-        "name"          : "clams",
-        "description"   : "",
-        "imgFilePath"   : "img/examples/surf/clam.png",
-        "balance"       : 1000,
-        "itemId"        : "store_currency"
-    },
-    "isCurrencyStoreDisabled" : false,
-    "virtualGoods" : [
-        {
-            "name"          : "Rip Curl Shortboard",
-            "description"   : "Shred small waves with this super-fast board",
-            "imgFilePath"   : "img/examples/surf/blue-surfboard.png",
-            "price"         : 100,
-            "itemId"        : "blue_surfboard"
-        },
-        {
-            "name"          : "Vintage Longboard",
-            "description"   : "Slowly hang five through low power surf",
-            "imgFilePath"   : "img/examples/surf/girl-surfboard-th.png",
-            "price"         : 150,
-            "itemId"        : "girl_surfboard_th"
-        },
-        {
-            "name"          : "Blue Barrel",
-            "description"   : "Get barreled with this speed controlled board",
-            "imgFilePath"   : "img/examples/surf/blue-barrel.png",
-            "price"         : 200,
-            "itemId"        : "blue_barrel"
-        },
-        {
-            "name"          : "Keel Fish",
-            "description"   : "Carve slow waves with this ever-riding board",
-            "imgFilePath"   : "img/examples/surf/keelfish.png",
-            "price"         : 200,
-            "itemId"        : "keelfish"
-        },
-        {
-            "name"          : "Picasso Peeler",
-            "description"   : "The master of surreal off-the-lip maneuvers",
-            "imgFilePath"   : "img/examples/surf/picasso-peeler.png",
-            "price"         : 300,
-            "itemId"        : "picasso_peeler"
-        },
-        {
-            "name"          : "Reef Shredder",
-            "description"   : "A mean paddling machine for the deep reefs",
-            "imgFilePath"   : "img/examples/surf/reef-shredder.png",
-            "price"         : 300,
-            "itemId"        : "reef_shredder"
-        },
-        {
-            "name"          : "Sixties Gun",
-            "description"   : "Ride Venice-style with this time machine",
-            "imgFilePath"   : "img/examples/surf/sixties-gun.png",
-            "price"         : 400,
-            "itemId"        : "sixties_gun"
-        },
-        {
-            "name"          : "Traditional Fish",
-            "description"   : "The all around conditions board of choice",
-            "imgFilePath"   : "img/examples/surf/traditional-fish.png",
-            "price"         : 450,
-            "itemId"        : "traditional_fish"
-        }
-    ],
-    "currencyPacks" : [
-        {
-            "name"          : "Super Saver Pack",
-            "description"   : "For you cheap skates...",
-            "imgFilePath"   : "img/examples/surf/clam.png",
-            "itemId"        : "super_saver_pack",
-            "productId"     : "super_saver_pack",
-            "price"         : 0.99,
-            "amount"        : 200,
-            "consumable"    : false
-        },
-        {
-            "name"          : "Malibu Medium Pack",
-            "description"   : "For you cheap skates...",
-            "imgFilePath"   : "img/examples/surf/clam.png",
-            "itemId"        : "super_saver_pack",
-            "productId"     : "android.test.purchased",
-            "price"         : 1.99,
-            "amount"        : 500,
-            "consumable"    : false
-        },
-        {
-            "name"          : "Pipeline Pumpin' Pack",
-            "description"   : "The holy grail for ya spendin' surfers",
-            "imgFilePath"   : "img/examples/surf/clam.png",
-            "itemId"        : "pipeline_pumpin_pack",
-            "productId"     : "pipeline_pumpin_pack",
-            "price"         : 5.99,
-            "amount"        : 1500,
-            "consumable"    : false
-        }
-    ]
-
+         "properties" :
+            {
+               "columns" : 3
+            },
+         "name" : "basic"
+      },
+   "currencyPacks" :
+      [
+         {
+            "amount" : 200,
+            "currency_itemId" : "currency_clam",
+            "consumable" : false,
+            "price" : 0.99,
+            "description" : "Testing for a refund ...",
+            "name" : "Super Saver Pack",
+            "imgFilePath" : "img/examples/surf/clam.png",
+            "itemId" : "super_saver_pack",
+            "productId" : "android.test.refunded"
+         },
+         {
+            "amount" : 500,
+            "currency_itemId" : "currency_clam",
+            "consumable" : false,
+            "price" : 1.99,
+            "description" : "Testing for an item purchase ...",
+            "name" : "Malibu Medium Pack",
+            "imgFilePath" : "img/examples/surf/clam.png",
+            "itemId" : "malibu_medium_pack",
+            "productId" : "android.test.purchased"
+         },
+         {
+            "amount" : 1500,
+            "currency_itemId" : "currency_clam",
+            "consumable" : false,
+            "price" : 5.99,
+            "description" : "Testing for purchase cacellation ...",
+            "name" : "Pipeline Pumpin' Pack",
+            "imgFilePath" : "img/examples/surf/clam.png",
+            "itemId" : "pipeline_pumpin_pack",
+            "productId" : "android.test.canceled"
+         },
+         {
+            "amount" : 5500,
+            "currency_itemId" : "currency_clam",
+            "consumable" : false,
+            "price" : 15.99,
+            "description" : "Testing for item unavailable ...",
+            "name" : "Silver Pack",
+            "imgFilePath" : "img/examples/surf/clam.png",
+            "itemId" : "pipeline_pumpin_pack",
+            "productId" : "android.test.item_unavailable"
+         }
+      ],
+   "virtualCurrencies" :
+      [
+         {
+            "itemId" : "currency_clam",
+            "imgFilePath" : "img/examples/surf/clam.png",
+            "description" : "",
+            "name" : "clams"
+         }
+      ],
+   "background" : "img/theme-lime-bubbles.jpg",
+   "virtualGoods" :
+      [
+         {
+            "imgFilePath" : "img/examples/surf/blue-surfboard.png",
+            "itemId" : "blue_surfboard",
+            "currencyValue" :
+               {
+                  "currency_clam" : 100
+               },
+            "description" : "Shred small waves with this super-fast board",
+            "name" : "Rip Curl Shortboard"
+         },
+         {
+            "imgFilePath" : "img/examples/surf/girl-surfboard-th.png",
+            "itemId" : "girl_surfboard_th",
+            "currencyValue" :
+               {
+                  "currency_clam" : 150
+               },
+            "description" : "Slowly hang five through low power surf",
+            "name" : "Billanbog Vintage Longboard"
+         },
+         {
+            "imgFilePath" : "img/examples/surf/keelfish.png",
+            "itemId" : "keelfish",
+            "currencyValue" :
+               {
+                  "currency_clam" : 200
+               },
+            "description" : "Carve slow waves with this ever-riding board",
+            "name" : "Keel Fish"
+         },
+         {
+            "imgFilePath" : "img/examples/surf/picasso-peeler.png",
+            "itemId" : "picasso_peeler",
+            "currencyValue" :
+               {
+                  "currency_clam" : 300
+               },
+            "description" : "The master of surreal off-the-lip maneuvers",
+            "name" : "Picasso Peeler"
+         },
+         {
+            "imgFilePath" : "img/examples/surf/reef-shredder.png",
+            "itemId" : "reef_shredder",
+            "currencyValue" :
+               {
+                  "currency_clam" : 300
+               },
+            "description" : "A mean paddling machine for the deep reefs",
+            "name" : "Reef Shredder"
+         },
+         {
+            "imgFilePath" : "img/examples/surf/sixties-gun.png",
+            "itemId" : "sixties_gun",
+            "currencyValue" :
+               {
+                  "currency_clam" : 400
+               },
+            "description" : "Ride Venice-style with this time machine",
+            "name" : "Sixties Gun"
+         },
+         {
+            "imgFilePath" : "img/examples/surf/traditional-fish.png",
+            "itemId" : "traditional_fish",
+            "currencyValue" :
+               {
+                  "currency_clam" : 450
+               },
+            "description" : "The all around conditions board of choice",
+            "name" : "Traditional Fish"
+         }
+      ]
 }
