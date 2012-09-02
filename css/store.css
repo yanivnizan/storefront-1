@@ -486,6 +486,10 @@ td {
     page-break-after: avoid;
   }
 }
+*,
+a:active {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 html,
 body {
   height: 100%;

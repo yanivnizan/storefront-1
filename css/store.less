@@ -3,6 +3,11 @@
 // Add artificially "LESS"ed H5BP style.css
 @import "mixins/style.less";
 
+// Remove the tapping highlight from all elements, especially active links
+*,a:active {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 html,body {
     height: 100%;
 }
