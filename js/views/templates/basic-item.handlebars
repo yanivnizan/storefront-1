@@ -6,6 +6,9 @@
     <div class="description">{{description}}</div>
     <div class="box-horizontal">
         <div class="balance">Owned: <label>{{balance}}</label></div>
-        <div class="price">{{getPrice currencyValue}} <img src="{{currency.imgFilePath}}" class="currency"></div>
+        <div class="price">
+            <label>{{getPrice currencyValue}}</label>
+            <img src="{{currency.imgFilePath}}" class="currency">
+        </div>
     </div>
 </div>

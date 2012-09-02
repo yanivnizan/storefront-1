@@ -14,8 +14,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
     var ListItemView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "onSelect", "updateBalance");
+            _.bindAll(this, "onSelect", "updateBalance", "renderPrice");
             this.model.on("change:balance", this.updateBalance);
+            this.model.on("change:price", this.renderPrice);
         },
         className : "item",
         tagName : "li",
@@ -27,6 +28,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         updateBalance : function() {
             this.$(".balance label").html(this.model.get("balance"));
+        },
+        renderPrice : function() {
+            this.$(".price label").html(this.model.get("price"));
         },
         render : function() {
             var name     = this.options.templateName,

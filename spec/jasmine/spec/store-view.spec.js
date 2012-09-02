@@ -186,6 +186,14 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
         describe("=== ItemView", function() {
 
+            it("should render a new price when the price is updated in the model", function () {
+                var spy     = sinon.spy(StoreViews.ListItemView.prototype, "renderPrice"),
+                    model   = new Backbone.Model();
+                new StoreViews.ListItemView({ model : model}).model.set("price", 1);
+                expect(spy.called).toBeTruthy();
+                spy.restore();
+            });
+
             it("should trigger an event with its model when tapped", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model(),

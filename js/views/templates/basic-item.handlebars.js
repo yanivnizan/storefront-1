@@ -25,7 +25,7 @@ Handlebars.templates['basic-item'] = Handlebars.template(function (Handlebars,de
   stack1 = foundHelper || depth0.balance;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "balance", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</label></div>\n        <div class=\"price\">";
+  buffer += escapeExpression(stack1) + "</label></div>\n        <div class=\"price\">\n            <label>";
   foundHelper = helpers.currencyValue;
   stack1 = foundHelper || depth0.currencyValue;
   foundHelper = helpers.getPrice;
@@ -33,11 +33,11 @@ Handlebars.templates['basic-item'] = Handlebars.template(function (Handlebars,de
   if(typeof stack2 === functionType) { stack1 = stack2.call(depth0, stack1, { hash: {} }); }
   else if(stack2=== undef) { stack1 = helperMissing.call(depth0, "getPrice", stack1, { hash: {} }); }
   else { stack1 = stack2; }
-  buffer += escapeExpression(stack1) + " <img src=\"";
+  buffer += escapeExpression(stack1) + "</label>\n            <img src=\"";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.imgFilePath);
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "currency.imgFilePath", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\" class=\"currency\"></div>\n    </div>\n</div>\n";
+  buffer += escapeExpression(stack1) + "\" class=\"currency\">\n        </div>\n    </div>\n</div>\n";
   return buffer;});
