@@ -135,7 +135,8 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     modelStub       = new Models.Store({
                         templateName        : "empty",
                         templateProperties  : templatePropertiesStub,
-                        currency            : {balance : 0}
+                        currency            : {balance : 0},
+                        virtualCurrencies   : [{}]
                     });
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
@@ -175,7 +176,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 it("should update the view when the balance is changed", function() {
                     var stub = sinon.stub(StoreViews.StoreView.prototype, "updateBalance");
                     storeView = new StoreViews.StoreView(attributes);
-                    storeView.model.setBalance(100);
+                    storeView.model.setNewBalance({currency_coin : 100});
                     expect(stub.called).toBeTruthy();
                     stub.restore();  // Restore original stubbed function to prototype
                 });

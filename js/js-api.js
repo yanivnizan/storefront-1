@@ -9,11 +9,11 @@ define({
     },
     /**
      *
-     * Android signature : currencyPurchaseEnded(String productId, int balance)
+     * Android signature : currencyPurchaseEnded(JSONObject balances)
      * @param boolean
      */
-    currencyBalanceChanged : function(productId, balance) {
-        SoomlaJS.store.setBalance(balance);
+    currencyBalanceChanged : function(balances) {
+        SoomlaJS.store.setNewBalance(balances);
     },
     /**
      * Android signature : goodsPurchaseEnded(String itemId, int balance)

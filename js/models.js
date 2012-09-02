@@ -18,6 +18,7 @@ define(["backboneRelational"], function() {
     });
 
 
+    // TODO: Remove
     var Currency = Backbone.RelationalModel.extend({
         defaults : {
             name    : "coins",
@@ -25,10 +26,20 @@ define(["backboneRelational"], function() {
             itemId  : "store_currency"
         }
     });
-    window.Currency = Currency;
+    var NewCurrency = Backbone.RelationalModel.extend({
+        defaults : {
+            name    : "coins",
+            balance : 0,
+            itemId  : "currency_coin"
+        },
+        idAttribute : "itemId"
+    });
+    var CurrencyCollection = Backbone.Collection.extend({ model : NewCurrency });
+    window.Currency = Currency; // TODO: Remove
 
     var Store = Backbone.RelationalModel.extend({
         relations: [
+            // TODO: Remove
             {
                 type: Backbone.HasOne,
                 key: 'currency',
@@ -45,6 +56,15 @@ define(["backboneRelational"], function() {
                 key: 'virtualGoods',
                 relatedModel: VirtualGood,
                 collectionType: VirtualGoodsCollection,
+                reverseRelation: {
+                    includeInJSON: 'id'
+                }
+            },
+            {
+                type: Backbone.HasMany,
+                key: 'virtualCurrencies',
+                relatedModel: NewCurrency,
+                collectionType: CurrencyCollection,
                 reverseRelation: {
                     includeInJSON: 'id'
                 }
@@ -71,13 +91,17 @@ define(["backboneRelational"], function() {
             }
         },
         initialize : function() {
-            _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");
+            _.bindAll(this, "getNewBalance", "setNewBalance", "setVirtualGoodBalance");
         },
-        getBalance : function() {
-            return this.get("currency").get("balance");
+        setNewBalance : function(balances) {
+            var model = this.get("virtualCurrencies");
+            _.each(balances, function(balance, currency) {
+                model.get(currency).set("balance", balance);
+            });
+            return this;
         },
-        setBalance : function(balance) {
-            this.get("currency").set("balance", balance);
+        getNewBalance : function(currency) {
+            return this.get("virtualCurrencies").get(currency).get("balance");
         },
         setVirtualGoodBalance : function(itemId, balance) {
             var virtualGood = this.get("virtualGoods").get(itemId);
@@ -92,6 +116,7 @@ define(["backboneRelational"], function() {
         VirtualGoodsCollection  : VirtualGoodsCollection,
         CurrencyPack            : CurrencyPack,
         Store                   : Store,
-        Currency                : Currency
+        Currency                : Currency, // TODO: Remove
+        NewCurrency             : NewCurrency
     };
 });

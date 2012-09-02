@@ -48,9 +48,13 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
                     if (json.virtualGoods)
                         attributes.virtualGoods = json.virtualGoods;
 
+                    if (json.virtualCurrencies)
+                        attributes.virtualCurrencies = json.virtualCurrencies;
+
                     if (json.currencyPacks)
                         attributes.currencyPacks = json.currencyPacks;
 
+                    // TODO: Remove
                     if (json.currency)
                         attributes.currency = json.currency;
 

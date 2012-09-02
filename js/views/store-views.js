@@ -172,7 +172,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
-            this.model.get("currency").on("change:balance", this.updateBalance);
+            this.model.get("virtualCurrencies").on("change:balance", this.updateBalance);
 
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
@@ -206,8 +206,8 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // TODO: Release view bindings and destroy view
             this.nativeAPI.wantsToLeaveStore();
         },
-        updateBalance : function() {
-            this.$(".header .balance label").html(this.model.getBalance());
+        updateBalance : function(model) {
+            this.$(".header .balance label").html(model.get("balance"));
         },
         showCurrencyStore : function() {
             // When this flag is raised, there is no connectivity,
