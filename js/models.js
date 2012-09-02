@@ -1,8 +1,14 @@
 define(["backboneRelational"], function() {
 
-    var CurrencyPack            = Backbone.RelationalModel.extend({}),
-        VirtualGoodsCollection  = Backbone.Collection.extend({ model : VirtualGood }),
-        CurrencyPacksCollection = Backbone.Collection.extend({ model : CurrencyPack });
+    var CurrencyPack = Backbone.RelationalModel.extend({});
+    var Currency = Backbone.RelationalModel.extend({
+        defaults : {
+            name    : "coins",
+            balance : 0,
+            itemId  : "currency_coin"
+        },
+        idAttribute : "itemId"
+    });
     var VirtualGood             = Backbone.RelationalModel.extend({
         idAttribute : "itemId",
         defaults : {
@@ -18,15 +24,10 @@ define(["backboneRelational"], function() {
     });
 
 
-    var Currency = Backbone.RelationalModel.extend({
-        defaults : {
-            name    : "coins",
-            balance : 0,
-            itemId  : "currency_coin"
-        },
-        idAttribute : "itemId"
-    });
-    var VirtualCurrencyCollection = Backbone.Collection.extend({ model : Currency });
+    var VirtualCurrencyCollection   = Backbone.Collection.extend({ model : Currency     }),
+        CurrencyPacksCollection     = Backbone.Collection.extend({ model : CurrencyPack }),
+        VirtualGoodsCollection      = Backbone.Collection.extend({ model : VirtualGood  });
+
 
     var Store = Backbone.RelationalModel.extend({
         relations: [
