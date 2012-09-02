@@ -31,7 +31,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         render : function() {
             var name     = this.options.templateName,
                 itemType = this.options.itemType || "item"; // TODO: Remove once itemType is always passed
-            this.$el.append(Templates[name][itemType](_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
+            this.$el.append(Templates[name][itemType](this.model.toJSON()));
             return this;
         }
     });
@@ -76,7 +76,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         render : function() {
             (this.type) || (this.type = ListItemView); // For testing purposes
             var name     = this.options.templateName,
-                currency = this.options.currency,
                 itemType = this.options.itemType,
                 $this    = this;
 
@@ -86,10 +85,13 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
             // Render each item and append it
             this.collection.each(function(item) {
+                // TODO: Revisit this logic.  It's flawed to manipulate the model inside the view
+                if ($this.options.currencies)
+                    item.set("currency", $this.options.currencies.get(_.keys(item.get("currencyValue"))[0]).toJSON());
+
                 var view = new $this.type({
                     model        : item,
                     templateName : name,
-                    currency     : currency,
                     itemType     : itemType
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
@@ -108,7 +110,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         render : function() {
             (this.type) || (this.type = GridItemView); // For testing purposes
             var name     = this.options.templateName,
-                currency = this.options.currency,
                 itemType = this.options.itemType,
                 rows     = this.options.templateProperties.rows,
                 columns  = this.options.templateProperties.columns,
@@ -124,10 +125,13 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                     currentRow = $("<div>", {class : "row"});
                     $this.$el.append(currentRow);
                 }
+                // TODO: Revisit this logic.  It's flawed to manipulate the model inside the view
+                if ($this.options.currencies)
+                    item.set("currency", $this.options.currencies.get(_.keys(item.get("currencyValue"))[0]).toJSON());
+
                 var view = new $this.type({
                     model : item,
                     templateName : name,
-                    currency     : currency,
                     type         : GridItemView,
                     itemType     : itemType
                 }).on("selected", function(model) {
@@ -180,16 +184,16 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
             this.virtualGoodsView = new VirtualGoodsView({
                 collection          : this.model.get("virtualGoods"),
+                currencies          : this.model.get("virtualCurrencies"),
                 templateName        : this.model.get("templateName"),
                 templateProperties  : this.model.get("templateProperties"),
-                currency            : this.model.get("currency"),
                 itemType            : "virtualGood"
             });
             this.currencyPacksView = new CurrencyPacksView({
                 collection          : this.model.get("currencyPacks"),
+                currencies          : this.model.get("virtualCurrencies"),
                 templateName        : this.model.get("templateName"),
                 templateProperties  : this.model.get("templateProperties"),
-                currency            : this.model.get("currency"),
                 itemType            : "currencyPack"
             });
 

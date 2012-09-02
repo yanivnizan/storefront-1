@@ -6,7 +6,13 @@ define( [
     "templates/grid-item.handlebars"
 ], function() {
 
+    // TODO: Refactor.  This is an ugly solution
+    Handlebars.registerHelper('getPrice',function(currencyValues){
+        return _.values(currencyValues)[0];
+    });
+
     var templates = Handlebars.templates;
+
 
     return {
         basic : {

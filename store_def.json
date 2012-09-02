@@ -12,10 +12,9 @@
             }
         },
         "properties" : {
-            "columns" : 3,
-            "orientation" : "horizontal"
+            "columns" : 3
         },
-        "name" : "basic"
+        "name" : "grid"
     },
     "currencyPacks" : [
         {
