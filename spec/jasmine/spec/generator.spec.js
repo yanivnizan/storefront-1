@@ -124,6 +124,10 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(SoomlaJS.store.get("templateTitle")).toEqual("Store");
             });
 
+            it("should have a default properties map", function() {
+                expect(SoomlaJS.store.get("templateProperties")).toEqual({orientation : "horizontal"});
+            });
+
             it("should have a default landscape orientation", function() {
                 expect(SoomlaJS.store.get("orientationLanscape")).toEqual(false);
             });

@@ -65,7 +65,10 @@ define(["backboneRelational"], function() {
             templateName        : "basic",
             templateTitle       : "Store",
             moreCurrencyText    : "Get more coins",
-            orientationLanscape : false
+            orientationLanscape : false,
+            templateProperties  : {
+                orientation : "horizontal"
+            }
         },
         initialize : function() {
             _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");

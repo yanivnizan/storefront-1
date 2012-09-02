@@ -233,13 +233,15 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
             var collectionView,
                 attributes,
+                orientation = "vertical",
                 stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
 
             beforeEach(function() {
                 attributes = {
                     collection : new Backbone.Collection({a : 1}),
                     type : stubType,
-                    itemType : "virtualGood"
+                    itemType : "virtualGood",
+                    templateProperties: {orientation : orientation}
                 };
             });
 
@@ -262,7 +264,8 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
                 collectionView = new StoreViews.CollectionListView({
                     collection : new Backbone.Collection([model]),
-                    type : type
+                    type : type,
+                    templateProperties: {orientation : orientation}
                 }).on("selected", spy).render();
 
                 collectionView.subViews[0].triggerTapEvent();
@@ -279,7 +282,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
             it("should adjust its width if its orientation is horizontal", function() {
                 var spy = sinon.spy(StoreViews.CollectionListView.prototype, "adjustWidth");
-                collectionView = new StoreViews.CollectionListView(_.extend(attributes, {orientation : "horizontal"})).render();
+                collectionView = new StoreViews.CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
                 expect(spy.called).toBeTruthy();
                 expect(collectionView.orientation).toEqual("horizontal");
                 spy.restore();
