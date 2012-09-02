@@ -70,7 +70,7 @@ define(["backboneRelational"], function() {
             }
         },
         initialize : function() {
-            _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");
+            _.bindAll(this, "getBalance", "setBalance", "updateVirtualGoods");
         },
         setBalance : function(balances) {
             var model = this.get("virtualCurrencies");
@@ -82,10 +82,15 @@ define(["backboneRelational"], function() {
         getBalance : function(currency) {
             return this.get("virtualCurrencies").get(currency).get("balance");
         },
-        setVirtualGoodBalance : function(itemId, balance) {
-            var virtualGood = this.get("virtualGoods").get(itemId);
-            if (virtualGood.isConsumable())
-                virtualGood.set("balance", balance);
+        updateVirtualGoods : function(goods) {
+            var model = this.get("virtualGoods");
+            _.each(goods, function(attributes, good) {
+                var good = model.get(good);
+                _.each(attributes, function(value, attribute) {
+                    good.set(attribute, value);
+                })
+            });
+            return this;
         }
     });
 

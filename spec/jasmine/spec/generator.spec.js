@@ -147,6 +147,11 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(new Models.VirtualGood().isConsumable()).toEqual(true);
             });
 
+            it("should return itself after setting balances for chaining", function() {
+                var store = new Models.Store();
+                expect(store.updateVirtualGoods({})).toEqual(store);
+            });
+
             it("should be found in a collection by 'itemId'", function() {
                 var modelJSON = { itemId : 'sword' };
                 var collection = new Models.VirtualGoodsCollection().add(new Models.VirtualGood(modelJSON));
@@ -166,7 +171,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
 
             it("should increment the balance of a consumable virtual good when it was purchased", function() {
                 SoomlaJS.newStore({ virtualGoods: [{ itemId : "surfboard", balance : 1 }] });
-                SoomlaJS.store.setVirtualGoodBalance("surfboard", 5);
+                SoomlaJS.store.updateVirtualGoods({surfboard : {balance : 5}});
                 expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(5);
             });
 
@@ -299,7 +304,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             it("should have Soomla Javascript API functions defined", function() {
                 expect(SoomlaJS.disableCurrencyStore).toBeDefined();
                 expect(SoomlaJS.currencyBalanceChanged).toBeDefined();
-                expect(SoomlaJS.goodsBalanceChanged).toBeDefined();
+                expect(SoomlaJS.goodsUpdated).toBeDefined();
                 expect(SoomlaJS.insufficientFunds).toBeDefined();
                 expect(SoomlaJS.unexpectedError).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
@@ -313,7 +318,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
 
             it("should update a virtual good's balance when it is purchased successfully", function() {
                 SoomlaJS.newStore({ currency : {balance : 0} , virtualGoods : [{itemId : "surfboard", balance : 0}]});
-                SoomlaJS.goodsBalanceChanged("surfboard", 1);
+                SoomlaJS.goodsUpdated({surfboard : {balance : 1}});
                 expect(SoomlaJS.store.get("virtualGoods").get("surfboard").get("balance")).toEqual(1);
             });
 

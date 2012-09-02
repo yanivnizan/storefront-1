@@ -16,11 +16,11 @@ define({
         SoomlaJS.store.setBalance(balances);
     },
     /**
-     * Android signature : goodsPurchaseEnded(String itemId, int balance)
+     * Android signature : goodsPurchaseEnded(JSONObject virtualGoods)
      * @param boolean
      */
-    goodsBalanceChanged : function(itemId, balance) {
-        SoomlaJS.store.setVirtualGoodBalance(itemId, balance);
+    goodsUpdated : function(virtualGoods) {
+        SoomlaJS.store.updateVirtualGoods(virtualGoods);
     },
     insufficientFunds : function(currency) {
         SoomlaJS.storeView.openDialog(currency);
