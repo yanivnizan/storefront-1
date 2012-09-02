@@ -1,5 +1,4 @@
-{
-   "isCurrencyStoreDisabled" : false,
+CurrencyStoreDisabled" : false,
    "template" :
       {
          "orientationLandscape" : false,
@@ -81,72 +80,105 @@
    "virtualGoods" :
       [
          {
+            "priceModel" :
+               {
+                  "type" : "static",
+                  "values" :
+                     {
+                        "currency_clam" : 100
+                     }
+               },
             "imgFilePath" : "img/examples/surf/blue-surfboard.png",
             "itemId" : "blue_surfboard",
-            "currencyValue" :
-               {
-                  "currency_clam" : 100
-               },
             "description" : "Shred small waves with this super-fast board",
             "name" : "Rip Curl Shortboard"
          },
          {
+            "priceModel" :
+               {
+                  "type" : "balance",
+                  "values" :
+                     [
+                        {
+                           "currency_clam" : 100
+                        },
+                        {
+                           "currency_clam" : 150
+                        }
+                     ]
+               },
             "imgFilePath" : "img/examples/surf/girl-surfboard-th.png",
             "itemId" : "girl_surfboard_th",
-            "currencyValue" :
-               {
-                  "currency_clam" : 150
-               },
             "description" : "Slowly hang five through low power surf",
             "name" : "Billanbog Vintage Longboard"
          },
          {
+            "priceModel" :
+               {
+                  "type" : "static",
+                  "values" :
+                     {
+                        "currency_clam" : 200
+                     }
+               },
             "imgFilePath" : "img/examples/surf/keelfish.png",
             "itemId" : "keelfish",
-            "currencyValue" :
-               {
-                  "currency_clam" : 200
-               },
             "description" : "Carve slow waves with this ever-riding board",
             "name" : "Keel Fish"
          },
          {
+            "priceModel" :
+               {
+                  "type" : "static",
+                  "values" :
+                     {
+                        "currency_clam" : 300
+                     }
+               },
             "imgFilePath" : "img/examples/surf/picasso-peeler.png",
             "itemId" : "picasso_peeler",
-            "currencyValue" :
-               {
-                  "currency_clam" : 300
-               },
             "description" : "The master of surreal off-the-lip maneuvers",
             "name" : "Picasso Peeler"
          },
          {
+            "priceModel" :
+               {
+                  "type" : "static",
+                  "values" :
+                     {
+                        "currency_clam" : 300
+                     }
+               },
             "imgFilePath" : "img/examples/surf/reef-shredder.png",
             "itemId" : "reef_shredder",
-            "currencyValue" :
-               {
-                  "currency_clam" : 300
-               },
             "description" : "A mean paddling machine for the deep reefs",
             "name" : "Reef Shredder"
          },
          {
+            "priceModel" :
+               {
+                  "type" : "static",
+                  "values" :
+                     {
+                        "currency_clam" : 400
+                     }
+               },
             "imgFilePath" : "img/examples/surf/sixties-gun.png",
             "itemId" : "sixties_gun",
-            "currencyValue" :
-               {
-                  "currency_clam" : 400
-               },
             "description" : "Ride Venice-style with this time machine",
             "name" : "Sixties Gun"
          },
          {
+            "priceModel" :
+               {
+                  "type" : "static",
+                  "values" :
+                     {
+                        "currency_clam" : 450
+                     }
+               },
             "imgFilePath" : "img/examples/surf/traditional-fish.png",
             "itemId" : "traditional_fish",
-            "currencyValue" :
-               {
-                  "currency_clam" : 450
-               },
             "description" : "The all around conditions board of choice",
             "name" : "Traditional Fish"
          }
