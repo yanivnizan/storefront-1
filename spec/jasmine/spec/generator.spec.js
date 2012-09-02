@@ -34,9 +34,8 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             expect(SoomlaJS.store.get("background")).toEqual("fish.png");
         });
 
-        it("should have a default currency", function () {
-            SoomlaJS.newStore();
-            expect(SoomlaJS.store.get("currency")).toBeInstanceOf(Models.Currency);
+        it("should have a default empty list of virtual currencies", function () {
+            expect(new Models.Store().get("virtualCurrencies")).toBeInstanceOf(Models.VirtualCurrencyCollection);
         });
 
         xit("should invoke storeInitialized when initializing a store", function () {
@@ -60,13 +59,13 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             });
 
             it("should return itself after setting balances for chaining", function() {
-                expect(store.setNewBalance({})).toEqual(store);
+                expect(store.setBalance({})).toEqual(store);
             });
 
             it("should set a new balance with the given amount", function() {
                 var store = new Models.Store({virtualCurrencies : [{ itemId : "my_currency", balance : 0 }]});
-                store.setNewBalance({my_currency : 100});
-                expect(store.getNewBalance("my_currency")).toEqual(100);
+                store.setBalance({my_currency : 100});
+                expect(store.getBalance("my_currency")).toEqual(100);
             });
 
             it("should use coins as the default currency name", function () {
@@ -274,7 +273,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 SoomlaJS.newStore({
                     virtualCurrencies : [virtualCurrency]
                 });
-                expect(SoomlaJS.store.get("virtualCurrencies").get("currency_dollar").toJSON()).toEqual(_.extend({}, Models.NewCurrency.prototype.defaults, virtualCurrency));
+                expect(SoomlaJS.store.get("virtualCurrencies").get("currency_dollar").toJSON()).toEqual(_.extend({}, Models.Currency.prototype.defaults, virtualCurrency));
                 expect(SoomlaJS.store.get("virtualCurrencies").length).toEqual(1);
             });
 
@@ -309,7 +308,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             it("should set the store balance when currency was purchased successfully", function() {
                 SoomlaJS.newStore({virtualCurrencies: [{itemId : "dollar"}]});
                 SoomlaJS.currencyBalanceChanged({dollar : 100});
-                expect(SoomlaJS.store.getNewBalance("dollar")).toEqual(100);
+                expect(SoomlaJS.store.getBalance("dollar")).toEqual(100);
             });
 
             it("should update a virtual good's balance when it is purchased successfully", function() {

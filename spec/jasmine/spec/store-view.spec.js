@@ -16,7 +16,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     wantsToLeaveStore       : sinon.spy()
                 };
                 attributes = {
-                    model : new Models.Store(),
+                    model : new Models.Store({virtualCurrencies : [{}]}),
                     el : $("<div><div class='leave-store'></div><div class='buy-more'></div><div class='back'></div></div>"),
                     nativeAPI : nativeAPIStub
                 };
@@ -39,7 +39,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
             it("should provide an API for opening a modal dialog", function() {
                 var spy = sinon.spy(Components.ModalDialog.prototype, "render");
-                storeView = new StoreViews.StoreView(attributes).openDialog();
+                storeView = new StoreViews.StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
             });
@@ -74,7 +74,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
             it("should move to the currency store if the insufficient funds dialog returns 'buyMore'", function() {
                 var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
-                storeView = new StoreViews.StoreView(attributes).openDialog();
+                storeView = new StoreViews.StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
                 storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
@@ -176,7 +176,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 it("should update the view when the balance is changed", function() {
                     var stub = sinon.stub(StoreViews.StoreView.prototype, "updateBalance");
                     storeView = new StoreViews.StoreView(attributes);
-                    storeView.model.setNewBalance({currency_coin : 100});
+                    storeView.model.setBalance({currency_coin : 100});
                     expect(stub.called).toBeTruthy();
                     stub.restore();  // Restore original stubbed function to prototype
                 });

@@ -54,10 +54,6 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
                     if (json.currencyPacks)
                         attributes.currencyPacks = json.currencyPacks;
 
-                    // TODO: Remove
-                    if (json.currency)
-                        attributes.currency = json.currency;
-
                     if (json.isCurrencyStoreDisabled)
                         attributes.isCurrencyStoreDisabled = json.isCurrencyStoreDisabled;
                 }

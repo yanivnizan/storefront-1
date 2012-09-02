@@ -13,7 +13,7 @@ define({
      * @param boolean
      */
     currencyBalanceChanged : function(balances) {
-        SoomlaJS.store.setNewBalance(balances);
+        SoomlaJS.store.setBalance(balances);
     },
     /**
      * Android signature : goodsPurchaseEnded(String itemId, int balance)
@@ -22,8 +22,8 @@ define({
     goodsBalanceChanged : function(itemId, balance) {
         SoomlaJS.store.setVirtualGoodBalance(itemId, balance);
     },
-    insufficientFunds : function() {
-        SoomlaJS.storeView.openDialog();
+    insufficientFunds : function(currency) {
+        SoomlaJS.storeView.openDialog(currency);
     },
     unexpectedError : function() {
         alert("An unexpected error has occurred.  Please try again.");

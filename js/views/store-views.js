@@ -221,10 +221,10 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         showGoodsStore : function() {
             this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
-        openDialog : function() {
+        openDialog : function(currency) {
             new Components.ModalDialog({
                 parent : this.$el,
-                model : this.model.get("currency")
+                model : this.model.get("virtualCurrencies").get(currency)
             }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);

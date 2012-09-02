@@ -18,15 +18,7 @@ define(["backboneRelational"], function() {
     });
 
 
-    // TODO: Remove
     var Currency = Backbone.RelationalModel.extend({
-        defaults : {
-            name    : "coins",
-            balance : 0,
-            itemId  : "store_currency"
-        }
-    });
-    var NewCurrency = Backbone.RelationalModel.extend({
         defaults : {
             name    : "coins",
             balance : 0,
@@ -34,23 +26,10 @@ define(["backboneRelational"], function() {
         },
         idAttribute : "itemId"
     });
-    var CurrencyCollection = Backbone.Collection.extend({ model : NewCurrency });
-    window.Currency = Currency; // TODO: Remove
+    var VirtualCurrencyCollection = Backbone.Collection.extend({ model : Currency });
 
     var Store = Backbone.RelationalModel.extend({
         relations: [
-            // TODO: Remove
-            {
-                type: Backbone.HasOne,
-                key: 'currency',
-                relatedModel: Currency,
-                reverseRelation: {
-                    type : Backbone.HasOne,
-                    key: 'store',
-                    includeInJSON: 'id'
-                    // 'relatedModel' is automatically set to 'Zoo'; the 'relationType' to 'HasOne'.
-                }
-            },
             {
                 type: Backbone.HasMany,
                 key: 'virtualGoods',
@@ -63,8 +42,8 @@ define(["backboneRelational"], function() {
             {
                 type: Backbone.HasMany,
                 key: 'virtualCurrencies',
-                relatedModel: NewCurrency,
-                collectionType: CurrencyCollection,
+                relatedModel: Currency,
+                collectionType: VirtualCurrencyCollection,
                 reverseRelation: {
                     includeInJSON: 'id'
                 }
@@ -81,7 +60,6 @@ define(["backboneRelational"], function() {
             }
         ],
         defaults : {
-            currency            : new Currency(),
             templateName        : "basic",
             templateTitle       : "Store",
             moreCurrencyText    : "Get more coins",
@@ -91,16 +69,16 @@ define(["backboneRelational"], function() {
             }
         },
         initialize : function() {
-            _.bindAll(this, "getNewBalance", "setNewBalance", "setVirtualGoodBalance");
+            _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");
         },
-        setNewBalance : function(balances) {
+        setBalance : function(balances) {
             var model = this.get("virtualCurrencies");
             _.each(balances, function(balance, currency) {
                 model.get(currency).set("balance", balance);
             });
             return this;
         },
-        getNewBalance : function(currency) {
+        getBalance : function(currency) {
             return this.get("virtualCurrencies").get(currency).get("balance");
         },
         setVirtualGoodBalance : function(itemId, balance) {
@@ -112,11 +90,11 @@ define(["backboneRelational"], function() {
 
 
     return {
-        VirtualGood             : VirtualGood,
-        VirtualGoodsCollection  : VirtualGoodsCollection,
-        CurrencyPack            : CurrencyPack,
-        Store                   : Store,
-        Currency                : Currency, // TODO: Remove
-        NewCurrency             : NewCurrency
+        VirtualGood                 : VirtualGood,
+        VirtualGoodsCollection      : VirtualGoodsCollection,
+        CurrencyPack                : CurrencyPack,
+        Store                       : Store,
+        Currency                    : Currency,
+        VirtualCurrencyCollection   : VirtualCurrencyCollection
     };
 });
