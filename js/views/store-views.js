@@ -41,8 +41,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         render : function() {
             (this.type) || (this.type = ListItemView); // For testing purposes
-            var name     = this.options.templateName,
-                itemType = this.options.itemType,
+            var itemType = this.options.itemType,
                 $this    = this;
 
 
@@ -53,7 +52,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             this.collection.each(function(item) {
                 var view = new $this.type({
                     model    : item,
-                    template : Templates[name][itemType]
+                    template : $this.options.template
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
@@ -70,8 +69,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     var CollectionGridView = BaseCollectionView.extend({
         render : function() {
             (this.type) || (this.type = GridItemView); // For testing purposes
-            var name     = this.options.templateName,
-                itemType = this.options.itemType,
+            var itemType = this.options.itemType,
                 rows     = this.options.templateProperties.rows,
                 columns  = this.options.templateProperties.columns,
                 $this    = this;
@@ -88,7 +86,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                 }
                 var view = new $this.type({
                     model       : item,
-                    template    : Templates[name][itemType],
+                    template    : $this.options.template,
                     type        : GridItemView
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
@@ -140,13 +138,13 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
             this.virtualGoodsView = new VirtualGoodsView({
                 collection          : this.model.get("virtualGoods"),
-                templateName        : this.model.get("templateName"),
+                template            : Templates[name]["virtualGood"],
                 templateProperties  : this.model.get("templateProperties"),
                 itemType            : "virtualGood"
             });
             this.currencyPacksView = new CurrencyPacksView({
                 collection          : this.model.get("currencyPacks"),
-                templateName        : this.model.get("templateName"),
+                template            : Templates[name]["currencyPack"],
                 templateProperties  : this.model.get("templateProperties"),
                 itemType            : "currencyPack"
             });
