@@ -183,6 +183,14 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(good.get("currency")).toEqual(store.get("virtualCurrencies").get("currency_clam").toJSON());
             });
 
+            it("should use the first price for updating a virtual good when an update call is recieved with an array of prices", function() {
+                var store = new Models.Store({ virtualGoods: [{ itemId : "surfboard", balance : 1 }], virtualCurrencies : [{itemId : "currency_clam"}, {itemId : "currency_dollar"}] });
+                store.updateVirtualGoods({surfboard : {price : [{ "currency_dollar" : 100 }, { "currency_clam" : 10 }]}});
+                var good = store.get("virtualGoods").get("surfboard");
+                expect(good.get("price")).toEqual(100);
+                expect(good.get("currency")).toEqual(store.get("virtualCurrencies").get("currency_dollar").toJSON());
+            });
+
             // TODO: More tests on default field values and validation
         });
 

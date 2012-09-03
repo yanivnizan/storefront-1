@@ -72,7 +72,19 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
                 alert("Can't retrieve the default JSON from the server.  Looks like you're on your own filling in the form :-)");
             },
             success : function(data) {
+
+                // Initialize store
                 SoomlaJS.initialize(data);
+
+                // Inject prices and balances
+                var goods = {};
+                _.each(data.virtualGoods, function(good) {
+                    goods[good.itemId] = {
+                        balance : 0,
+                        price : good.priceModel.values
+                    };
+                });
+                SoomlaJS.goodsUpdated(goods);
             },
             dataType : "json"
         });

@@ -93,8 +93,16 @@ define(["backboneRelational"], function() {
 
                 if (attributes.price) {
                     // TODO: Support passing multiple prices in different currencies
-                    var currencyItemId = _.keys(attributes.price)[0];
-                    good.set("price", attributes.price[currencyItemId]);
+                    // Currently this code always takes the currency of the first price it encounters
+                    // regardless of the number of prices passed
+                    var currencyItemId;
+                    if (_.isArray(attributes.price)) {
+                        currencyItemId = _.keys(attributes.price[0])[0];
+                        good.set("price", attributes.price[0][currencyItemId]);
+                    } else {
+                        currencyItemId = _.keys(attributes.price)[0];
+                        good.set("price", attributes.price[currencyItemId]);
+                    }
                     good.set("currency", $this.get("virtualCurrencies").get(currencyItemId).toJSON());
                 }
             });
