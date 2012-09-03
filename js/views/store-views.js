@@ -14,9 +14,10 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
     var ListItemView = Backbone.View.extend({
         initialize : function() {
-            _.bindAll(this, "onSelect", "updateBalance", "renderPrice");
+            _.bindAll(this, "onSelect", "updateBalance", "renderPrice", "render");
             this.model.on("change:balance", this.updateBalance);
             this.model.on("change:price", this.renderPrice);
+            this.model.on("change:currency", this.render);
         },
         className : "item",
         tagName : "li",
@@ -35,7 +36,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         render : function() {
             var name     = this.options.templateName,
                 itemType = this.options.itemType || "item"; // TODO: Remove once itemType is always passed
-            this.$el.append(Templates[name][itemType](this.model.toJSON()));
+            this.$el.html(Templates[name][itemType](this.model.toJSON()));
             return this;
         }
     });

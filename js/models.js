@@ -83,12 +83,20 @@ define(["backboneRelational"], function() {
             return this.get("virtualCurrencies").get(currency).get("balance");
         },
         updateVirtualGoods : function(goods) {
-            var virtualGoods = this.get("virtualGoods");
+            var virtualGoods    = this.get("virtualGoods"),
+                $this           = this;
             _.each(goods, function(attributes, good) {
                 var good = virtualGoods.get(good);
-                _.each(attributes, function(value, attribute) {
-                    good.set(attribute, value);
-                })
+
+                if (attributes.balance)
+                    good.set("balance", attributes.balance);
+
+                if (attributes.price) {
+                    // TODO: Support passing multiple prices in different currencies
+                    var currencyItemId = _.keys(attributes.price)[0];
+                    good.set("price", attributes.price[currencyItemId]);
+                    good.set("currency", $this.get("virtualCurrencies").get(currencyItemId).toJSON());
+                }
             });
             return this;
         }

@@ -186,6 +186,14 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
         describe("=== ItemView", function() {
 
+            it("should re-render when the currency changes", function () {
+                var stub    = sinon.stub(StoreViews.ListItemView.prototype, "render"),
+                    model   = new Backbone.Model();
+                new StoreViews.ListItemView({ model : model}).model.set("currency", {});
+                expect(stub.called).toBeTruthy();
+                stub.restore();
+            });
+
             it("should render a new price when the price is updated in the model", function () {
                 var spy     = sinon.spy(StoreViews.ListItemView.prototype, "renderPrice"),
                     model   = new Backbone.Model();
