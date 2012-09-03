@@ -1,5 +1,10 @@
 define("storeView.spec", ["storeViews", "models", "templates", "components"], function (StoreViews, Models, Templates, Components) {
 
+    var StoreView           = StoreViews.StoreView,
+        ListItemView        = StoreViews.ListItemView,
+        CollectionListView  = StoreViews.CollectionListView;
+
+
     describe('Soomla Store Backbone Views', function () {
 
         var touchendEvent;
@@ -27,11 +32,11 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             it("should be defined on the SoomlaJS namespace", function() {
                 SoomlaJS.initialize({template : {name : "empty"}});
                 expect(SoomlaJS.storeView).toBeDefined();
-                expect(SoomlaJS.storeView).toBeInstanceOf(StoreViews.StoreView);
+                expect(SoomlaJS.storeView).toBeInstanceOf(StoreView);
             });
 
             it("should create two item collection views when initiated with virtual goods and currency packs", function() {
-                var stub = sinon.stub(StoreViews.CollectionListView.prototype, "render").returns({render : function(){}});
+                var stub = sinon.stub(CollectionListView.prototype, "render").returns({render : function(){}});
                 SoomlaJS.initialize({template : {name : "empty"}});
                 expect(stub.calledTwice).toBeTruthy();
                 stub.restore();  // Restore original stubbed function to prototype
@@ -39,42 +44,42 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
             it("should provide an API for opening a modal dialog", function() {
                 var spy = sinon.spy(Components.ModalDialog.prototype, "render");
-                storeView = new StoreViews.StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
+                storeView = new StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
             });
 
             it("should leave the store when the back button is tapped", function () {
-                storeView = new StoreViews.StoreView(attributes);
+                storeView = new StoreView(attributes);
                 storeView.$(".leave-store").trigger(touchendEvent);
                 expect(nativeAPIStub.wantsToLeaveStore.called).toBeTruthy();
             });
 
             it("should call a 'beforeLeave' callback if provided when tapping the back button", function () {
-                storeView = new StoreViews.StoreView(_.extend({}, attributes, { callbacks : { beforeLeave : sinon.spy() } }));
+                storeView = new StoreView(_.extend({}, attributes, { callbacks : { beforeLeave : sinon.spy() } }));
                 storeView.$(".leave-store").trigger(touchendEvent);
                 expect(storeView.options.callbacks.beforeLeave.called).toBeTruthy();
             });
 
             it("should show the currency store when 'Buy more' is tapped", function () {
-                var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
-                storeView = new StoreViews.StoreView(attributes);
+                var spy = sinon.spy(StoreView.prototype, "showCurrencyStore");
+                storeView = new StoreView(attributes);
                 storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
             });
 
             it("should show the goods store when 'Back' is tapped", function () {
-                var spy = sinon.spy(StoreViews.StoreView.prototype, "showGoodsStore");
-                storeView = new StoreViews.StoreView(attributes);
+                var spy = sinon.spy(StoreView.prototype, "showGoodsStore");
+                storeView = new StoreView(attributes);
                 storeView.$(".back").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
             });
 
             it("should move to the currency store if the insufficient funds dialog returns 'buyMore'", function() {
-                var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
-                storeView = new StoreViews.StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
+                var spy = sinon.spy(StoreView.prototype, "showCurrencyStore");
+                storeView = new StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
                 storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
                 spy.restore();  // Restore original spied function to prototype
@@ -84,41 +89,41 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             describe("=== Extended pointing device events", function() {
 
                 beforeEach(function() {
-                    _.extend(StoreViews.StoreView.prototype.events, {
+                    _.extend(StoreView.prototype.events, {
                         "click .leave-store" : "wantsToLeaveStore",
                         "click .buy-more"    : "showCurrencyStore",
                         "click .back"        : "showGoodsStore"
                     });
                 });
                 afterEach(function() {
-                    delete StoreViews.StoreView.prototype.events["click .leave-store"];
-                    delete StoreViews.StoreView.prototype.events["click .buy-more"];
-                    delete StoreViews.StoreView.prototype.events["click .back"];
+                    delete StoreView.prototype.events["click .leave-store"];
+                    delete StoreView.prototype.events["click .buy-more"];
+                    delete StoreView.prototype.events["click .back"];
                 });
 
                 it("should leave the store when the back button is clicked", function () {
-                    storeView = new StoreViews.StoreView(attributes);
+                    storeView = new StoreView(attributes);
                     storeView.$(".leave-store").click();
                     expect(nativeAPIStub.wantsToLeaveStore.called).toBeTruthy();
                 });
 
                 it("should call a 'beforeLeave' callback if provided when clicking the back button", function () {
-                    storeView = new StoreViews.StoreView(_.extend({}, attributes, { callbacks : { beforeLeave : sinon.spy() } }));
+                    storeView = new StoreView(_.extend({}, attributes, { callbacks : { beforeLeave : sinon.spy() } }));
                     storeView.$(".leave-store").click();
                     expect(storeView.options.callbacks.beforeLeave.called).toBeTruthy();
                 });
 
                 it("should show the currency store when 'Buy more' is clicked", function () {
-                    var spy = sinon.spy(StoreViews.StoreView.prototype, "showCurrencyStore");
-                    storeView = new StoreViews.StoreView(attributes);
+                    var spy = sinon.spy(StoreView.prototype, "showCurrencyStore");
+                    storeView = new StoreView(attributes);
                     storeView.$(".buy-more").click();
                     expect(spy.called).toBeTruthy();
                     spy.restore();  // Restore original spied function to prototype
                 });
 
                 it("should show the goods store when 'Back' is clicked", function () {
-                    var spy = sinon.spy(StoreViews.StoreView.prototype, "showGoodsStore");
-                    storeView = new StoreViews.StoreView(attributes);
+                    var spy = sinon.spy(StoreView.prototype, "showGoodsStore");
+                    storeView = new StoreView(attributes);
                     storeView.$(".back").click();
                     expect(spy.called).toBeTruthy();
                     spy.restore();  // Restore original spied function to prototype
@@ -152,30 +157,30 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 });
 
                 it("should accept 2 Backbone view prototypes to use when rendering item collections", function () {
-                    storeView = new StoreViews.StoreView(attributes).render();
+                    storeView = new StoreView(attributes).render();
                     expect(ViewStub.prototype.render.calledTwice).toBeTruthy();
                 });
 
                 it("should accept a template options object", function() {
-                    storeView = new StoreViews.StoreView(attributes).render();
+                    storeView = new StoreView(attributes).render();
                     expect(storeView.virtualGoodsView.options.templateProperties).toEqual(templatePropertiesStub);
                 });
 
                 it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
-                    storeView = new StoreViews.StoreView(attributes).render();
+                    storeView = new StoreView(attributes).render();
                     storeView.virtualGoodsView.triggerSelectedEvent();
                     expect(nativeAPIStub.wantsToBuyVirtualGoods.calledWith(modelStub.toJSON().itemId)).toBeTruthy();
                 });
 
                 it("should invoke a currency pack purchase when the 'selected' event is captured from the currency packs sub-view", function() {
-                    storeView = new StoreViews.StoreView(attributes).render();
+                    storeView = new StoreView(attributes).render();
                     storeView.currencyPacksView.triggerSelectedEvent();
                     expect(nativeAPIStub.wantsToBuyCurrencyPacks.calledWith(modelStub.toJSON().productId)).toBeTruthy();
                 });
 
                 it("should update the view when the balance is changed", function() {
-                    var stub = sinon.stub(StoreViews.StoreView.prototype, "updateBalance");
-                    storeView = new StoreViews.StoreView(attributes);
+                    var stub = sinon.stub(StoreView.prototype, "updateBalance");
+                    storeView = new StoreView(attributes);
                     storeView.model.setBalance({currency_coin : 100});
                     expect(stub.called).toBeTruthy();
                     stub.restore();  // Restore original stubbed function to prototype
@@ -190,17 +195,17 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model(),
                     touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
-                new StoreViews.ListItemView({ model : model}).on("selected", spy).$el.trigger(touchendEvent);
+                new ListItemView({ model : model}).on("selected", spy).$el.trigger(touchendEvent);
                 expect(spy.calledWith(model)).toBeTruthy();
             });
 
             it("should trigger an event with its model when clicked", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model();
-                _.extend(StoreViews.ListItemView.prototype.events, { click : "onSelect" });
-                new StoreViews.ListItemView({ model : model}).on("selected", spy).$el.click();
+                _.extend(ListItemView.prototype.events, { click : "onSelect" });
+                new ListItemView({ model : model}).on("selected", spy).$el.click();
                 expect(spy.calledWith(model)).toBeTruthy();
-                delete StoreViews.ListItemView.prototype.events.click;
+                delete ListItemView.prototype.events.click;
             });
         });
 
@@ -223,7 +228,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             });
 
             it("should accept a type of Backbone view to use when rendering items", function () {
-                new StoreViews.CollectionListView(attributes).render();
+                new CollectionListView(attributes).render();
                 expect(stubType.prototype.render.called).toBeTruthy();
             });
 
@@ -233,7 +238,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
                 // Fake a view that can fire the event
                 var type        = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
-                collectionView = new StoreViews.CollectionListView({
+                collectionView = new CollectionListView({
                     collection          : new Backbone.Collection([model]),
                     type                : type,
                     itemType            : "virtualGood",
@@ -246,16 +251,16 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             });
 
             it("should by default render the list vertically", function() {
-                var spy = sinon.spy(StoreViews.CollectionListView.prototype, "adjustWidth");
-                collectionView = new StoreViews.CollectionListView(attributes).render();
+                var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
+                collectionView = new CollectionListView(attributes).render();
                 expect(spy.called).toBeFalsy();
                 expect(collectionView.orientation).toEqual("vertical");
                 spy.restore();
             });
 
             it("should adjust its width if its orientation is horizontal", function() {
-                var spy = sinon.spy(StoreViews.CollectionListView.prototype, "adjustWidth");
-                collectionView = new StoreViews.CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
+                var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
+                collectionView = new CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
                 expect(spy.called).toBeTruthy();
                 expect(collectionView.orientation).toEqual("horizontal");
                 spy.restore();

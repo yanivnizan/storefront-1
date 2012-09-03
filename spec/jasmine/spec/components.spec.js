@@ -1,5 +1,8 @@
 define("components.spec", ["components", "backbone"], function (Components, Backbone) {
 
+    var ModalDialog  = Components.ModalDialog,
+        ListItemView = Components.ListItemView;
+
     describe('Soomla Store Backbone Components', function () {
 
 
@@ -9,12 +12,12 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             beforeEach(function() {
                 attributes      = { model : new Backbone.Model(), parent : $("<div>") };
-                modal           = new Components.ModalDialog(attributes);
+                modal           = new ModalDialog(attributes);
                 touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
             });
 
             it("should be defined", function() {
-                expect(Components.ModalDialog).toBeDefined();
+                expect(ModalDialog).toBeDefined();
             });
 
             it("should create a div", function() {
@@ -32,8 +35,8 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             it("should close the modal when the close button \ overlay is tapped", function() {
                 _.each([".close", ".modal"], function(selector) {
-                    var spy = sinon.spy(Components.ModalDialog.prototype, "close");
-                    new Components.ModalDialog(attributes).render().$(selector).trigger(touchendEvent);
+                    var spy = sinon.spy(ModalDialog.prototype, "close");
+                    new ModalDialog(attributes).render().$(selector).trigger(touchendEvent);
                     expect(spy.called).toBeTruthy();
                     spy.restore();
                 });
@@ -50,14 +53,14 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(modal.template).toBeDefined();
             });
             it("should use the template when rendering", function() {
-                var spy = sinon.spy(Components.ModalDialog.prototype, "template");
-                new Components.ModalDialog(attributes).render();
+                var spy = sinon.spy(ModalDialog.prototype, "template");
+                new ModalDialog(attributes).render();
                 expect(spy.called).toBeTruthy();
                 spy.restore();
             });
             it("should return the component from render \ close for chaining", function() {
-                var stub = sinon.stub(Components.ModalDialog.prototype, "template");
-                modal = new Components.ModalDialog(attributes);
+                var stub = sinon.stub(ModalDialog.prototype, "template");
+                modal = new ModalDialog(attributes);
                 expect(modal.render()).toEqual(modal);
                 expect(modal.close(touchendEvent)).toEqual(modal);
                 stub.restore();
@@ -65,7 +68,7 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             it("should trigger an event when closing the view", function() {
                 var spy = sinon.spy();
-                new Components.ModalDialog(attributes).render().on("closed", spy).close(touchendEvent);
+                new ModalDialog(attributes).render().on("closed", spy).close(touchendEvent);
                 expect(spy.calledWith("cancel")).toBeTruthy();
             });
 
@@ -101,16 +104,16 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             beforeEach(function() {
                 attributes      = { model : new Backbone.Model() };
-                view            = new Components.ListItemView(attributes);
+                view            = new ListItemView(attributes);
                 touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
             });
 
             it("should be defined", function() {
-                expect(Components.ListItemView).toBeDefined();
+                expect(ListItemView).toBeDefined();
             });
 
             it("should be an instance of a Backbone view", function() {
-                expect(new Components.ListItemView({model : new Backbone.Model()})).toBeInstanceOf(Backbone.View);
+                expect(new ListItemView({model : new Backbone.Model()})).toBeInstanceOf(Backbone.View);
             });
 
             it("should create a div", function() {
@@ -126,12 +129,12 @@ define("components.spec", ["components", "backbone"], function (Components, Back
             });
 
             it("should have template defined on the view after construction", function() {
-                expect(new Components.ListItemView(_.extend({template : "some template"}, attributes)).template).toEqual("some template");
+                expect(new ListItemView(_.extend({template : "some template"}, attributes)).template).toEqual("some template");
             });
 
             it("should accept an itemType and use the relevant template", function() {
                 var spy = sinon.spy();
-                new Components.ListItemView({
+                new ListItemView({
                     model       : new Backbone.Model(),
                     template    : spy
                 }).render();
@@ -139,22 +142,22 @@ define("components.spec", ["components", "backbone"], function (Components, Back
             });
 
             it("should return itself from render for chaining", function() {
-                var view = new Components.ListItemView(_.extend({template : sinon.stub()}, attributes));
+                var view = new ListItemView(_.extend({template : sinon.stub()}, attributes));
                 expect(view.render()).toEqual(view);
             });
 
             it("should trigger a 'selected' event on the view when tapped", function() {
                 var spy = sinon.spy();
-                view = new Components.ListItemView(attributes);
+                view = new ListItemView(attributes);
                 view.on("selected", spy).$el.trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
             });
 
             it("should re-render on changes to the model attributes: currency, price, balance", function () {
                 _.each(["currency", "price", "balance"], function(attribute) {
-                    var stub    = sinon.stub(Components.ListItemView.prototype, "render"),
+                    var stub    = sinon.stub(ListItemView.prototype, "render"),
                         model   = new Backbone.Model();
-                    new Components.ListItemView({ model : model}).model.set(attribute, "some value");
+                    new ListItemView({ model : model}).model.set(attribute, "some value");
                     expect(stub.called).toBeTruthy();
                     stub.restore();
                 });
