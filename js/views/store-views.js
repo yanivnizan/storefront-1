@@ -11,36 +11,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
 
 
-
-    var ListItemView = Backbone.View.extend({
-        initialize : function() {
-            _.bindAll(this, "onSelect", "updateBalance", "renderPrice", "render");
-            this.model.on("change:balance", this.updateBalance);
-            this.model.on("change:price", this.renderPrice);
-            this.model.on("change:currency", this.render);
-        },
-        className : "item",
-        tagName : "li",
-        events : {
-            "touchend" : "onSelect"
-        },
-        onSelect : function() {
-            this.trigger("selected", this.model);
-        },
-        updateBalance : function() {
-            this.$(".balance label").html(this.model.get("balance"));
-        },
-        renderPrice : function() {
-            this.$(".price label").html(this.model.get("price"));
-        },
-        render : function() {
-            var name     = this.options.templateName,
-                itemType = this.options.itemType || "item"; // TODO: Remove once itemType is always passed
-            this.$el.html(Templates[name][itemType](this.model.toJSON()));
-            return this;
-        }
-    });
-
+    var ListItemView = Components.ListItemView;
     var GridItemView = ListItemView.extend({
         tagName : "div"
     });
@@ -91,9 +62,8 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // Render each item and append it
             this.collection.each(function(item) {
                 var view = new $this.type({
-                    model        : item,
-                    templateName : name,
-                    itemType     : itemType
+                    model    : item,
+                    template : Templates[name][itemType]
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
@@ -127,10 +97,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                     $this.$el.append(currentRow);
                 }
                 var view = new $this.type({
-                    model : item,
-                    templateName : name,
-                    type         : GridItemView,
-                    itemType     : itemType
+                    model       : item,
+                    template    : Templates[name][itemType],
+                    type        : GridItemView
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });

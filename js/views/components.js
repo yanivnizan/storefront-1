@@ -33,7 +33,29 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
         }
     });
 
+    var ListItemView = Backbone.View.extend({
+        initialize : function() {
+            _.bindAll(this, "onSelect", "render");
+            this.template = this.options.template;
+            this.model.on("change:balance change:price change:currency", this.render);
+        },
+        className : "item",
+        tagName : "li",
+        events : {
+            "touchend" : "onSelect"
+        },
+        onSelect : function() {
+            this.trigger("selected", this.model);
+        },
+        render : function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        }
+    });
+
+
     return {
+        ListItemView : ListItemView,
         ModalDialog : ModalDialog
     };
 });

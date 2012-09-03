@@ -2,9 +2,10 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
     describe('Soomla Store Backbone Components', function () {
 
-        var modal, attributes, touchendEvent;
 
         describe("ModalDialog component", function() {
+
+            var modal, attributes, touchendEvent;
 
             beforeEach(function() {
                 attributes      = { model : new Backbone.Model(), parent : $("<div>") };
@@ -24,7 +25,7 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(modal.el.className).toEqual("modal-container");
             });
 
-            it("should have have a tap event on the close button and overlay", function() {
+            it("should have a tap event on the close button and overlay", function() {
                 expect(modal.events["touchend .close"]).toBeDefined();
                 expect(modal.events["touchend .modal"]).toBeDefined();
             });
@@ -91,6 +92,73 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(spy.called).toBeFalsy();
             });
 
+
+        });
+
+        describe("ListItemView", function() {
+
+            var view, attributes, touchendEvent;
+
+            beforeEach(function() {
+                attributes      = { model : new Backbone.Model() };
+                view            = new Components.ListItemView(attributes);
+                touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
+            });
+
+            it("should be defined", function() {
+                expect(Components.ListItemView).toBeDefined();
+            });
+
+            it("should be an instance of a Backbone view", function() {
+                expect(new Components.ListItemView({model : new Backbone.Model()})).toBeInstanceOf(Backbone.View);
+            });
+
+            it("should create a div", function() {
+                expect(view.el.nodeName).toEqual("LI");
+            });
+
+            it("should have a class name 'item'", function() {
+                expect(view.el.className).toEqual("item");
+            });
+
+            it("should have a tap event on the close button and overlay", function() {
+                expect(view.events["touchend"]).toBeDefined();
+            });
+
+            it("should have template defined on the view after construction", function() {
+                expect(new Components.ListItemView(_.extend({template : "some template"}, attributes)).template).toEqual("some template");
+            });
+
+            it("should accept an itemType and use the relevant template", function() {
+                var spy = sinon.spy();
+                new Components.ListItemView({
+                    model       : new Backbone.Model(),
+                    template    : spy
+                }).render();
+                expect(spy.called).toBeTruthy();
+            });
+
+            it("should return itself from render for chaining", function() {
+                var view = new Components.ListItemView(_.extend({template : sinon.stub()}, attributes));
+                expect(view.render()).toEqual(view);
+            });
+
+            it("should trigger a 'selected' event on the view when tapped", function() {
+                var spy = sinon.spy();
+                view = new Components.ListItemView(attributes);
+                view.on("selected", spy).$el.trigger(touchendEvent);
+                expect(spy.called).toBeTruthy();
+            });
+
+            it("should re-render on changes to the model attributes: currency, price, balance", function () {
+                _.each(["currency", "price", "balance"], function(attribute) {
+                    var stub    = sinon.stub(Components.ListItemView.prototype, "render"),
+                        model   = new Backbone.Model();
+                    new Components.ListItemView({ model : model}).model.set(attribute, "some value");
+                    expect(stub.called).toBeTruthy();
+                    stub.restore();
+                });
+            });
 
         });
     });

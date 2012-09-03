@@ -186,22 +186,6 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
         describe("=== ItemView", function() {
 
-            it("should re-render when the currency changes", function () {
-                var stub    = sinon.stub(StoreViews.ListItemView.prototype, "render"),
-                    model   = new Backbone.Model();
-                new StoreViews.ListItemView({ model : model}).model.set("currency", {});
-                expect(stub.called).toBeTruthy();
-                stub.restore();
-            });
-
-            it("should render a new price when the price is updated in the model", function () {
-                var spy     = sinon.spy(StoreViews.ListItemView.prototype, "renderPrice"),
-                    model   = new Backbone.Model();
-                new StoreViews.ListItemView({ model : model}).model.set("price", 1);
-                expect(spy.called).toBeTruthy();
-                spy.restore();
-            });
-
             it("should trigger an event with its model when tapped", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model(),
@@ -218,32 +202,6 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 expect(spy.calledWith(model)).toBeTruthy();
                 delete StoreViews.ListItemView.prototype.events.click;
             });
-
-            it("should accept an itemType and use the relevant template", function() {
-                var spy = sinon.spy(Templates.empty, "currencyPack");
-                new StoreViews.ListItemView({
-                    templateName : "empty",
-                    itemType     : "currencyPack",
-                    model        : new Backbone.Model(),
-                    currency     : new Backbone.Model()
-                }).render();
-                expect(spy.called).toBeTruthy();
-                spy.restore();
-            });
-
-            it("should update its virtual good balance when the good is purchased", function() {
-                var stub = sinon.stub(StoreViews.ListItemView.prototype, "updateBalance");
-                var model = new Backbone.Model({balance : 0});
-                new StoreViews.ListItemView({
-                    templateName : "empty",
-                    itemType     : "item",
-                    model        : model,
-                    currency     : new Backbone.Model()
-                });
-                model.set("balance", 1);
-                expect(stub.called).toBeTruthy();
-                stub.restore();
-            });
         });
 
         describe("=== CollectionListView", function() {
@@ -251,14 +209,16 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             var collectionView,
                 attributes,
                 orientation = "vertical",
+                model = new Backbone.Model(),
                 stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
 
             beforeEach(function() {
                 attributes = {
-                    collection : new Backbone.Collection({a : 1}),
-                    type : stubType,
-                    itemType : "virtualGood",
-                    templateProperties: {orientation : orientation}
+                    collection          : new Backbone.Collection([model]),
+                    type                : stubType,
+                    itemType            : "virtualGood",
+                    templateName        : "empty",
+                    templateProperties  : {orientation : orientation}
                 };
             });
 
@@ -267,22 +227,18 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 expect(stubType.prototype.render.called).toBeTruthy();
             });
 
-            it("should accept an item type that should be passed to its items", function () {
-                collectionView = new StoreViews.CollectionListView(attributes).render();
-                expect(collectionView.subViews[0].options.itemType).toEqual("virtualGood");
-            });
-
             it("should trigger an event when one of its items were selected", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model();
 
                 // Fake a view that can fire the event
-                var type    = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
-
+                var type        = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
                 collectionView = new StoreViews.CollectionListView({
-                    collection : new Backbone.Collection([model]),
-                    type : type,
-                    templateProperties: {orientation : orientation}
+                    collection          : new Backbone.Collection([model]),
+                    type                : type,
+                    itemType            : "virtualGood",
+                    templateName        : "empty",
+                    templateProperties  : {orientation : orientation}
                 }).on("selected", spy).render();
 
                 collectionView.subViews[0].triggerTapEvent();
