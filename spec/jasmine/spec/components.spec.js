@@ -1,7 +1,8 @@
 define("components.spec", ["components", "backbone"], function (Components, Backbone) {
 
     var ModalDialog  = Components.ModalDialog,
-        ListItemView = Components.ListItemView;
+        ListItemView = Components.ListItemView,
+        GridItemView = Components.GridItemView;
 
     describe('Soomla Store Backbone Components', function () {
 
@@ -164,6 +165,29 @@ define("components.spec", ["components", "backbone"], function (Components, Back
             });
 
         });
+
+        describe("GridItemView", function() {
+
+            var view, attributes;
+
+            beforeEach(function() {
+                attributes  = { model : new Backbone.Model() };
+                view        = new GridItemView(attributes);
+            });
+
+            it("should be defined", function() {
+                expect(GridItemView).toBeDefined();
+            });
+
+            it("should be an instance of a Backbone view", function() {
+                expect(view).toBeInstanceOf(Backbone.View);
+            });
+
+            it("should create a div", function() {
+                expect(view.el.nodeName).toEqual("DIV");
+            });
+        });
+
     });
 });
 

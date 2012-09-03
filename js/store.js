@@ -3,7 +3,7 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
     if (top.enablePointingDeviceEvents) {
-        _.extend(StoreViews.ListItemView.prototype.events, {click : "onSelect"});
+        _.extend(Components.ListItemView.prototype.events, {click : "onSelect"});
         _.extend(StoreViews.StoreView.prototype.events, {
             "click .leave-store"    : "wantsToLeaveStore",
             "click .buy-more"       : "showCurrencyStore",

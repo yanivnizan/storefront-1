@@ -53,9 +53,13 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
         }
     });
 
+    var GridItemView = ListItemView.extend({
+        tagName : "div"
+    });
 
     return {
         ListItemView : ListItemView,
-        ModalDialog : ModalDialog
+        GridItemView : GridItemView,
+        ModalDialog  : ModalDialog
     };
 });

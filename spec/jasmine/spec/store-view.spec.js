@@ -1,7 +1,7 @@
 define("storeView.spec", ["storeViews", "models", "templates", "components"], function (StoreViews, Models, Templates, Components) {
 
     var StoreView           = StoreViews.StoreView,
-        ListItemView        = StoreViews.ListItemView,
+        ListItemView        = Components.ListItemView,
         CollectionListView  = StoreViews.CollectionListView;
 
 

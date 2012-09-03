@@ -11,10 +11,8 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
 
 
-    var ListItemView = Components.ListItemView;
-    var GridItemView = ListItemView.extend({
-        tagName : "div"
-    });
+    var ListItemView = Components.ListItemView,
+        GridItemView = Components.GridItemView;
 
 
     var BaseCollectionView = Backbone.View.extend({
@@ -238,7 +236,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
     return {
         StoreView : StoreView,
-        CollectionListView : CollectionListView,
-        ListItemView : ListItemView
+        CollectionListView : CollectionListView
     };
 });
