@@ -20,20 +20,12 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             this.type = options.type;
             this.subViews = []; // expose sub views for testing purposes
             return this;
-        },
-        events : {
-            // TODO: Remove for phone
-            "mousewheel" : function(event) {
-                // TODO: items-container is not in the scope of this view
-                var scrollTop = $(".items-container").scrollTop();
-                var delta = event.originalEvent.wheelDelta;
-                $(".items-container").scrollTop(scrollTop - Math.round(delta));
-            }
         }
     });
 
 
     var CollectionListView = BaseCollectionView.extend({
+        tagName : "ul",
         initialize : function(options) {
             // Call super constructor
             this.constructor.__super__.initialize.apply(this, arguments);
