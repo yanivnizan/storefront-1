@@ -2,12 +2,14 @@
     <img src="{{background}}" class="background">
     <div class="header">
         <div class="padding left">
+            {{#each virtualCurrencies}}
             <span class="balance">
-                {{#if currency.imgFilePath}}
-                <img src="{{currency.imgFilePath}}">
+                {{#if this.imgFilePath}}
+                <img src="{{this.imgFilePath}}">
                 {{/if}}
-                <label>{{currency.balance}}</label>
+                <label>{{this.balance}}</label>
             </span>
+            {{/each}}
         </div>
         <div class="content">
             <h1 class="title">
@@ -31,12 +33,14 @@
     <img src="{{background}}" class="background">
     <div class="header">
         <div class="padding left">
+            {{#each virtualCurrencies}}
             <span class="balance">
-                {{#if currency.imgFilePath}}
-                <img src="{{currency.imgFilePath}}">
+                {{#if this.imgFilePath}}
+                <img src="{{this.imgFilePath}}">
                 {{/if}}
-                <label>{{currency.balance}}</label>
+                <label>{{this.balance}}</label>
             </span>
+            {{/each}}
         </div>
         <div class="content">
             <h1 class="title">
