@@ -83,9 +83,9 @@ define(["backboneRelational"], function() {
             return this.get("virtualCurrencies").get(currency).get("balance");
         },
         updateVirtualGoods : function(goods) {
-            var model = this.get("virtualGoods");
+            var virtualGoods = this.get("virtualGoods");
             _.each(goods, function(attributes, good) {
-                var good = model.get(good);
+                var good = virtualGoods.get(good);
                 _.each(attributes, function(value, attribute) {
                     good.set(attribute, value);
                 })

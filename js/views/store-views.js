@@ -89,10 +89,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
             // Render each item and append it
             this.collection.each(function(item) {
-                // TODO: Revisit this logic.  It's flawed to manipulate the model inside the view
-                if ($this.options.currencies)
-                    item.set("currency", $this.options.currencies.get(_.keys(item.get("currencyValue"))[0]).toJSON());
-
                 var view = new $this.type({
                     model        : item,
                     templateName : name,
@@ -129,10 +125,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                     currentRow = $("<div>", {class : "row"});
                     $this.$el.append(currentRow);
                 }
-                // TODO: Revisit this logic.  It's flawed to manipulate the model inside the view
-                if ($this.options.currencies)
-                    item.set("currency", $this.options.currencies.get(_.keys(item.get("currencyValue"))[0]).toJSON());
-
                 var view = new $this.type({
                     model : item,
                     templateName : name,
@@ -180,7 +172,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
-            this.model.get("virtualCurrencies").on("change:balance", this.updateBalance);
+            this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
@@ -188,14 +180,12 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
             this.virtualGoodsView = new VirtualGoodsView({
                 collection          : this.model.get("virtualGoods"),
-                currencies          : this.model.get("virtualCurrencies"),
                 templateName        : this.model.get("templateName"),
                 templateProperties  : this.model.get("templateProperties"),
                 itemType            : "virtualGood"
             });
             this.currencyPacksView = new CurrencyPacksView({
                 collection          : this.model.get("currencyPacks"),
-                currencies          : this.model.get("virtualCurrencies"),
                 templateName        : this.model.get("templateName"),
                 templateProperties  : this.model.get("templateProperties"),
                 itemType            : "currencyPack"
