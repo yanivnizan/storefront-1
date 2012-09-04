@@ -74,8 +74,21 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
         initialize : function(options) {
             // Call super constructor
             this.constructor.__super__.initialize.call(this, options);
-
+            (this.type) || (this.type = ListItemView); // For testing purposes
             _.bindAll(this, "adjustWidth");
+
+            // Instantiate subviews
+            var $this = this;
+            this.collection.each(function(item) {
+                var view = new $this.type({
+                    model    : item,
+                    template : $this.template
+                }).on("selected", function(model) {
+                    $this.trigger("selected", model);
+                });
+                $this.subViews.push(view);
+            });
+
             this.orientation = this.options.templateProperties.orientation || "vertical";
         },
         adjustWidth : function() {
@@ -85,18 +98,10 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
             this.$el.css("width", this.collection.length * elementWidth);
         },
         render : function() {
-            (this.type) || (this.type = ListItemView); // For testing purposes
-            var $this    = this;
+            var $this = this;
 
             // Render each item and append it
-            this.collection.each(function(item) {
-                var view = new $this.type({
-                    model    : item,
-                    template : $this.template
-                }).on("selected", function(model) {
-                        $this.trigger("selected", model);
-                    });
-                $this.subViews.push(view);
+            _.each(this.subViews, function(view) {
                 view.render().$el.addClass($this.orientation);
                 $this.$el.append(view.el);
             });

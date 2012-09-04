@@ -234,15 +234,6 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 };
             });
 
-            it("should create a UL tag", function () {
-                expect(new CollectionListView(attributes).el.nodeName).toEqual("UL");
-            });
-
-            it("should accept a type of Backbone view to use when rendering items", function () {
-                new CollectionListView(attributes).render();
-                expect(stubType.prototype.render.called).toBeTruthy();
-            });
-
             it("should trigger an event when one of its items were selected", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model();

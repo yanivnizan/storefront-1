@@ -207,12 +207,38 @@ define("components.spec", ["components", "backbone"], function (Components, Back
         });
 
         describe("CollectionListView", function() {
+
+            var view,attributes, stubType;
+
+            beforeEach(function() {
+                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+                attributes  = {
+                    collection : new Backbone.Collection([new Backbone.Model()]),
+                    templateProperties : {},
+                    type : stubType
+                };
+                view        = new CollectionListView(attributes);
+            });
+
             it("should be defined", function() {
                 expect(CollectionListView).toBeDefined();
             });
 
-            it("should be defined", function() {
-                expect(new CollectionListView({templateProperties : {}})).toBeInstanceOf(BaseCollectionView);
+            it("should be an instance of BaseCollectionView", function() {
+                expect(view).toBeInstanceOf(BaseCollectionView);
+            });
+
+            it("should create a UL tag", function () {
+                expect(view.el.nodeName).toEqual("UL");
+            });
+
+            it("should create instances of subviews upon construction", function() {
+                expect(new CollectionListView(attributes).subViews.length).toEqual(1);
+            });
+
+            it("should call subviews' render function when rendering", function () {
+                view.render();
+                expect(stubType.prototype.render.called).toBeTruthy();
             });
 
         });
