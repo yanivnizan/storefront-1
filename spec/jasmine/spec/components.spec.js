@@ -1,8 +1,9 @@
 define("components.spec", ["components", "backbone"], function (Components, Backbone) {
 
-    var ModalDialog  = Components.ModalDialog,
-        ListItemView = Components.ListItemView,
-        GridItemView = Components.GridItemView;
+    var ModalDialog         = Components.ModalDialog,
+        ListItemView        = Components.ListItemView,
+        GridItemView        = Components.GridItemView,
+        BaseCollectionView  = Components.BaseCollectionView;
 
     describe('Soomla Store Backbone Components', function () {
 
@@ -185,6 +186,22 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             it("should create a div", function() {
                 expect(view.el.nodeName).toEqual("DIV");
+            });
+        });
+
+        describe("BaseCollectionView", function() {
+            it("should be defined", function() {
+                expect(BaseCollectionView).toBeDefined();
+            });
+
+            it("should have a template defined", function() {
+                var template = sinon.stub();
+                expect(new BaseCollectionView({template : template}).template).toEqual(template);
+            });
+
+            it("should have a type defined", function() {
+                var type = sinon.stub();
+                expect(new BaseCollectionView({type : type}).type).toEqual(type);
             });
         });
 

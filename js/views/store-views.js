@@ -11,17 +11,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
 
 
-    var ListItemView = Components.ListItemView,
-        GridItemView = Components.GridItemView;
-
-
-    var BaseCollectionView = Backbone.View.extend({
-        initialize : function(options) {
-            this.type = options.type;
-            this.subViews = []; // expose sub views for testing purposes
-            return this;
-        }
-    });
+    var ListItemView        = Components.ListItemView,
+        GridItemView        = Components.GridItemView,
+        BaseCollectionView  = Components.BaseCollectionView;
 
 
     var CollectionListView = BaseCollectionView.extend({
@@ -141,13 +133,13 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                 template            : Templates[name]["virtualGood"],
                 templateProperties  : this.model.get("templateProperties"),
                 itemType            : "virtualGood"
-            });
+            }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new CurrencyPacksView({
                 collection          : this.model.get("currencyPacks"),
                 template            : Templates[name]["currencyPack"],
                 templateProperties  : this.model.get("templateProperties"),
                 itemType            : "currencyPack"
-            });
+            }).on("selected", this.wantsToBuyCurrencyPacks);
 
         },
         events : {
@@ -210,8 +202,8 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
             // Render items in goods store and currency store
             // setElement will call delegateEvents internally, see comment in initialize
-            this.virtualGoodsView.setElement(this.$("#goods-store .items")).on("selected", this.wantsToBuyVirtualGoods).render();
-            this.currencyPacksView.setElement(this.$("#currency-store .items")).on("selected", this.wantsToBuyCurrencyPacks).render();
+            this.virtualGoodsView.setElement(this.$("#goods-store .items")).render();
+            this.currencyPacksView.setElement(this.$("#currency-store .items")).render();
 
             return this;
         },

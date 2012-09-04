@@ -57,9 +57,22 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
         tagName : "div"
     });
 
+
+    ////////////////////  Collection Views  /////////////////////
+
+    var BaseCollectionView = Backbone.View.extend({
+        initialize : function(options) {
+            this.type = options.type;
+            this.template = options.template;
+            this.subViews = []; // expose sub views for testing purposes
+        }
+    });
+
+
     return {
-        ListItemView : ListItemView,
-        GridItemView : GridItemView,
-        ModalDialog  : ModalDialog
+        ListItemView        : ListItemView,
+        GridItemView        : GridItemView,
+        ModalDialog         : ModalDialog,
+        BaseCollectionView  : BaseCollectionView
     };
 });
