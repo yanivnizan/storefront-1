@@ -13,51 +13,14 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
     var ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
-        BaseCollectionView  = Components.BaseCollectionView;
+        BaseCollectionView  = Components.BaseCollectionView
+        CollectionListView  = Components.CollectionListView;
 
 
-    var CollectionListView = BaseCollectionView.extend({
-        tagName : "ul",
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.apply(this, arguments);
-
-            _.bindAll(this, "adjustWidth");
-            this.orientation = this.options.templateProperties.orientation || "vertical";
-        },
-        adjustWidth : function() {
-            // Assuming that all elements are the same width, take the full width of the first element
-            // and multiply it by the number of elements.  The product will be the scrollable container's width
-            var elementWidth = this.$(".item:first").outerWidth(true);
-            this.$el.css("width", this.collection.length * elementWidth);
-        },
-        render : function() {
-            (this.type) || (this.type = ListItemView); // For testing purposes
-            var $this    = this;
-
-            // Render each item and append it
-            this.collection.each(function(item) {
-                var view = new $this.type({
-                    model    : item,
-                    template : $this.options.template
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                });
-                $this.subViews.push(view);
-                view.render().$el.addClass($this.orientation);
-                $this.$el.append(view.el);
-            });
-
-            if (this.orientation == "horizontal") this.adjustWidth();
-            return this;
-        }
-    });
-
-    var CollectionGridView = BaseCollectionView.extend({
+   var CollectionGridView = BaseCollectionView.extend({
         render : function() {
             (this.type) || (this.type = GridItemView); // For testing purposes
-            var rows     = this.options.templateProperties.rows,
-                columns  = this.options.templateProperties.columns,
+            var columns  = this.options.templateProperties.columns,
                 $this    = this;
 
             // Render each item and append it
@@ -69,7 +32,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                 }
                 var view = new $this.type({
                     model       : item,
-                    template    : $this.options.template,
+                    template    : $this.template,
                     type        : GridItemView
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);

@@ -3,7 +3,8 @@ define("components.spec", ["components", "backbone"], function (Components, Back
     var ModalDialog         = Components.ModalDialog,
         ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
-        BaseCollectionView  = Components.BaseCollectionView;
+        BaseCollectionView  = Components.BaseCollectionView,
+        CollectionListView  = Components.CollectionListView;
 
     describe('Soomla Store Backbone Components', function () {
 
@@ -203,6 +204,17 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 var type = sinon.stub();
                 expect(new BaseCollectionView({type : type}).type).toEqual(type);
             });
+        });
+
+        describe("CollectionListView", function() {
+            it("should be defined", function() {
+                expect(CollectionListView).toBeDefined();
+            });
+
+            it("should be defined", function() {
+                expect(new CollectionListView({templateProperties : {}})).toBeInstanceOf(BaseCollectionView);
+            });
+
         });
 
     });
