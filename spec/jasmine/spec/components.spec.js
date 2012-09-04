@@ -241,6 +241,38 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(stubType.prototype.render.called).toBeTruthy();
             });
 
+            it("should trigger an event when one of its items were selected", function () {
+                var spy     = sinon.spy(),
+                    model   = new Backbone.Model();
+
+                // Fake a view that can fire the event
+                var type        = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
+                view = new CollectionListView({
+                    collection          : new Backbone.Collection([model]),
+                    type                : type,
+                    templateProperties  : {}
+                }).on("selected", spy).render();
+
+                view.subViews[0].triggerTapEvent();
+                expect(spy.calledWith(model)).toBeTruthy();
+            });
+
+            it("should by default render the list vertically", function() {
+                var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
+                view = new CollectionListView(attributes).render();
+                expect(spy.called).toBeFalsy();
+                expect(view.orientation).toEqual("vertical");
+                spy.restore();
+            });
+
+            it("should adjust its width if its orientation is horizontal", function() {
+                var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
+                view = new CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
+                expect(spy.called).toBeTruthy();
+                expect(view.orientation).toEqual("horizontal");
+                spy.restore();
+            });
+
         });
 
     });

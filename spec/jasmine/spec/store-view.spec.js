@@ -216,60 +216,6 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
             });
         });
 
-        describe("=== CollectionListView", function() {
-
-            var collectionView,
-                attributes,
-                orientation = "vertical",
-                model = new Backbone.Model(),
-                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
-
-            beforeEach(function() {
-                attributes = {
-                    collection          : new Backbone.Collection([model]),
-                    type                : stubType,
-                    itemType            : "virtualGood",
-                    templateName        : "empty",
-                    templateProperties  : {orientation : orientation}
-                };
-            });
-
-            it("should trigger an event when one of its items were selected", function () {
-                var spy     = sinon.spy(),
-                    model   = new Backbone.Model();
-
-                // Fake a view that can fire the event
-                var type        = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
-                collectionView = new CollectionListView({
-                    collection          : new Backbone.Collection([model]),
-                    type                : type,
-                    itemType            : "virtualGood",
-                    templateName        : "empty",
-                    templateProperties  : {orientation : orientation}
-                }).on("selected", spy).render();
-
-                collectionView.subViews[0].triggerTapEvent();
-                expect(spy.calledWith(model)).toBeTruthy();
-            });
-
-            it("should by default render the list vertically", function() {
-                var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
-                collectionView = new CollectionListView(attributes).render();
-                expect(spy.called).toBeFalsy();
-                expect(collectionView.orientation).toEqual("vertical");
-                spy.restore();
-            });
-
-            it("should adjust its width if its orientation is horizontal", function() {
-                var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
-                collectionView = new CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
-                expect(spy.called).toBeTruthy();
-                expect(collectionView.orientation).toEqual("horizontal");
-                spy.restore();
-            });
-        });
-
-
         describe("=== CollectionGridView", function() {
 
             var attributes,
