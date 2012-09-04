@@ -14,49 +14,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     var ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
         BaseCollectionView  = Components.BaseCollectionView
-        CollectionListView  = Components.CollectionListView;
+        CollectionListView  = Components.CollectionListView,
+        CollectionGridView  = Components.CollectionGridView;
 
-
-   var CollectionGridView = BaseCollectionView.extend({
-        render : function() {
-            (this.type) || (this.type = GridItemView); // For testing purposes
-            var columns  = this.options.templateProperties.columns,
-                $this    = this;
-
-            // Render each item and append it
-            var currentRow;
-            this.collection.each(function(item, i) {
-                if (i % columns == 0) {
-                    currentRow = $("<div>", {class : "row"});
-                    $this.$el.append(currentRow);
-                }
-                var view = new $this.type({
-                    model       : item,
-                    template    : $this.template,
-                    type        : GridItemView
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                });
-                $this.subViews.push(view);
-                currentRow.append(view.render().el);
-            });
-
-            // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
-            // CSS flex box doesn't support a perfect grid like this when elements contain excessive text.
-            // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
-            // This assumes that the container has no margin, border or padding.
-            // NOTE: Must set timeout 0 to return to event loop, otherwise the styles aren't applied yet and the calculation yields 0
-            setTimeout(function() {
-                var subject = $this.subViews[0].$el;
-                var trueElementWidth = ($this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
-                _.each($this.subViews, function(subView) {
-                    subView.$el.css("max-width", trueElementWidth);
-                });
-            }, 0);
-
-            return this;
-        }
-    });
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
@@ -173,8 +133,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
 
     return {
-        StoreView : StoreView,
-        CollectionListView : CollectionListView,
-        CollectionGridView : CollectionGridView
+        StoreView : StoreView
     };
 });

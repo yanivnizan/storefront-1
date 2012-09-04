@@ -2,17 +2,15 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
     var StoreView           = StoreViews.StoreView,
         ListItemView        = Components.ListItemView,
-        CollectionListView  = StoreViews.CollectionListView,
-        CollectionGridView  = StoreViews.CollectionGridView;
+        CollectionListView  = Components.CollectionListView,
+        CollectionGridView  = Components.CollectionGridView;
 
 
-    describe('Soomla Store Backbone Views', function () {
+    describe('Soomla Store Master Views', function () {
 
-        var touchendEvent;
+        describe("StoreView", function() {
 
-        describe("=== StoreView", function() {
-
-            var storeView, attributes, nativeAPIStub;
+            var storeView, attributes, nativeAPIStub, touchendEvent;
 
             beforeEach(function() {
                 touchendEvent = $.Event("touchend", {originalEvent : {touches : [1]}});
@@ -192,51 +190,11 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     expect(stub.called).toBeTruthy();
                     stub.restore();  // Restore original stubbed function to prototype
                 });
+
             });
 
         });
 
-        describe("=== ItemView", function() {
-
-            it("should trigger an event with its model when tapped", function () {
-                var spy     = sinon.spy(),
-                    model   = new Backbone.Model(),
-                    touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
-                new ListItemView({ model : model}).on("selected", spy).$el.trigger(touchendEvent);
-                expect(spy.calledWith(model)).toBeTruthy();
-            });
-
-            it("should trigger an event with its model when clicked", function () {
-                var spy     = sinon.spy(),
-                    model   = new Backbone.Model();
-                _.extend(ListItemView.prototype.events, { click : "onSelect" });
-                new ListItemView({ model : model}).on("selected", spy).$el.click();
-                expect(spy.calledWith(model)).toBeTruthy();
-                delete ListItemView.prototype.events.click;
-            });
-        });
-
-        describe("=== CollectionGridView", function() {
-
-            var attributes,
-                model = new Backbone.Model(),
-                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
-
-            beforeEach(function() {
-                attributes = {
-                    collection          : new Backbone.Collection([model]),
-                    type                : stubType,
-                    itemType            : "virtualGood",
-                    templateName        : "empty",
-                    templateProperties  : {}
-                };
-            });
-
-            it("should create a DIV tag", function () {
-                expect(new CollectionGridView(attributes).el.nodeName).toEqual("DIV");
-            });
-
-        });
     });
 
 });

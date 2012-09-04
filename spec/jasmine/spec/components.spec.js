@@ -4,7 +4,8 @@ define("components.spec", ["components", "backbone"], function (Components, Back
         ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
         BaseCollectionView  = Components.BaseCollectionView,
-        CollectionListView  = Components.CollectionListView;
+        CollectionListView  = Components.CollectionListView,
+        CollectionGridView  = Components.CollectionGridView;
 
     describe('Soomla Store Backbone Components', function () {
 
@@ -103,10 +104,11 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
         describe("ListItemView", function() {
 
-            var view, attributes, touchendEvent;
+            var view, attributes, model, touchendEvent;
 
             beforeEach(function() {
-                attributes      = { model : new Backbone.Model() };
+                model = new Backbone.Model();
+                attributes      = { model : model };
                 view            = new ListItemView(attributes);
                 touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
             });
@@ -153,7 +155,15 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 var spy = sinon.spy();
                 view = new ListItemView(attributes);
                 view.on("selected", spy).$el.trigger(touchendEvent);
-                expect(spy.called).toBeTruthy();
+                expect(spy.calledWith(model)).toBeTruthy();
+            });
+
+            it("should trigger an event with its model when clicked", function () {
+                var spy     = sinon.spy();
+                _.extend(ListItemView.prototype.events, { click : "onSelect" });
+                new ListItemView(attributes).on("selected", spy).$el.click();
+                expect(spy.calledWith(model)).toBeTruthy();
+                delete ListItemView.prototype.events.click;
             });
 
             it("should re-render on changes to the model attributes: currency, price, balance", function () {
@@ -271,6 +281,35 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(spy.called).toBeTruthy();
                 expect(view.orientation).toEqual("horizontal");
                 spy.restore();
+            });
+
+        });
+
+        describe("CollectionGridView", function() {
+
+            var view, attributes, model, stubType;
+
+            beforeEach(function() {
+                model = new Backbone.Model();
+                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+                attributes  = {
+                    collection : new Backbone.Collection([model]),
+                    templateProperties : {},
+                    type : stubType
+                };
+                view = new CollectionGridView(attributes);
+            });
+
+            it("should be defined", function() {
+                expect(CollectionGridView).toBeDefined();
+            });
+
+            it("should be an instance of BaseCollectionView", function() {
+                expect(view).toBeInstanceOf(BaseCollectionView);
+            });
+
+            it("should create a DIV tag", function () {
+                expect(view.el.nodeName).toEqual("DIV");
             });
 
         });
