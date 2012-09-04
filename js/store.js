@@ -62,7 +62,15 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
             },
             // The native UI is loaded and the html needs to be rendered now
             initialize : function(json) {
+
+                // Initialize model
                 this.newStore(json);
+
+                // Append appropriate stylesheet
+                var link = $("<link rel='stylesheet' href='css/templates/" + json.template.name + ".css'>");
+                $("head").append(link);
+
+                // Initialize view
                 this.storeView = new StoreViews.StoreView({
                     model : this.store,
                     el : $("#main"),

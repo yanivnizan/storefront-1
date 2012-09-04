@@ -1,11 +1,11 @@
-.basic {
-    .header,.footer {
-        text-align: center;
-        padding: 4px 7px;
-    }
+@import "css/mixins/elements.less";
+
+.header,.footer {
+    text-align: center;
+    padding: 4px 7px;
 }
 
-.basic .virtualGoods {
+.virtualGoods {
     &.items {
         list-style-type: none;
         padding: 0;
@@ -73,7 +73,7 @@
     }
 }
 
-.basic .currencyPacks {
+.currencyPacks {
     &.items {
         list-style-type: none;
         padding: 0;
@@ -134,77 +134,75 @@
     }
 }
 
-.basic {
-    .header {
-        .box;
-        background: rgba(255, 255, 255, 0.4);
+.header {
+    .box;
+    background: rgba(255, 255, 255, 0.4);
 
-        &>.padding {
-            width: 80px;
+    &>.padding {
+        width: 80px;
 
-            &.left {
-                .box(horizontal, start, center);
-            }
-            &.right {
-                .box(horizontal, end, center);
-            }
+        &.left {
+            .box(horizontal, start, center);
         }
-
-        &>.content {
-            .box-flex(1);
-        }
-
-        .balance {
-            margin: 0 auto;
-            padding: 5px;
-            .rounded(5px);
-            background: rgba(0, 0, 0, 0.2);
-            font-size: 10px;
-            font-weight: bold;
-
-            img {
-                max-width: 20px;
-                max-height: 20px;
-            }
-        }
-
-        .leave-store, .back {
-            background-image: url("../img/icons/close.png");
-            width: 26px;
-            height: 26px;
-            cursor: pointer;
+        &.right {
+            .box(horizontal, end, center);
         }
     }
 
-    .title {
-        text-align: center;
-    }
-
-    .items-container {
-        margin: 10px; //refactor
+    &>.content {
         .box-flex(1);
-        overflow-y  : scroll;
     }
 
-    .footer {
-        margin: 0 10px 10px;
+    .balance {
+        margin: 0 auto;
+        padding: 5px;
         .rounded(5px);
+        background: rgba(0, 0, 0, 0.2);
+        font-size: 10px;
+        font-weight: bold;
 
-        h1 {
-            font-size: 20px;
+        img {
+            max-width: 20px;
+            max-height: 20px;
         }
+    }
 
-        .buy-more {
-            display: block;
-            padding: 5px;
-            width: 100%;
-            -webkit-user-select: none;
+    .leave-store, .back {
+        background-image: url("../../img/icons/close.png");
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+    }
+}
 
-            img {
-                margin-right: 10px;
-                max-width: 40px;
-                max-height: 40px;
-            }
+.title {
+    text-align: center;
+}
+
+.items-container {
+    margin: 10px; //refactor
+    .box-flex(1);
+    overflow-y  : scroll;
+}
+
+.footer {
+    margin: 0 10px 10px;
+    .rounded(5px);
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .buy-more {
+        display: block;
+        padding: 5px;
+        width: 100%;
+        -webkit-user-select: none;
+
+        img {
+            margin-right: 10px;
+            max-width: 40px;
+            max-height: 40px;
         }
     }
 }
