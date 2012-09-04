@@ -33,12 +33,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         render : function() {
             (this.type) || (this.type = ListItemView); // For testing purposes
-            var itemType = this.options.itemType,
-                $this    = this;
-
-
-            // Set the view's class
-            this.$el.addClass(itemType + "s");
+            var $this    = this;
 
             // Render each item and append it
             this.collection.each(function(item) {
@@ -61,13 +56,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     var CollectionGridView = BaseCollectionView.extend({
         render : function() {
             (this.type) || (this.type = GridItemView); // For testing purposes
-            var itemType = this.options.itemType,
-                rows     = this.options.templateProperties.rows,
+            var rows     = this.options.templateProperties.rows,
                 columns  = this.options.templateProperties.columns,
                 $this    = this;
-
-            // Set the view's class
-            this.$el.addClass(itemType + "s");
 
             // Render each item and append it
             var currentRow;
@@ -91,11 +82,14 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // CSS flex box doesn't support a perfect grid like this when elements contain excessive text.
             // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
             // This assumes that the container has no margin, border or padding.
-            var subject = this.subViews[0].$el;
-            var trueElementWidth = (this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
-            _.each(this.subViews, function(subView) {
-                subView.$el.css("max-width", trueElementWidth);
-            });
+            // NOTE: Must set timeout 0 to return to event loop, otherwise the styles aren't applied yet and the calculation yields 0
+            setTimeout(function() {
+                var subject = $this.subViews[0].$el;
+                var trueElementWidth = ($this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
+                _.each($this.subViews, function(subView) {
+                    subView.$el.css("max-width", trueElementWidth);
+                });
+            }, 0);
 
             return this;
         }
@@ -129,16 +123,16 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // as we like without losing the jQuery bindings each time.
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
             this.virtualGoodsView = new VirtualGoodsView({
+                className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
                 template            : Templates[name]["virtualGood"],
-                templateProperties  : this.model.get("templateProperties"),
-                itemType            : "virtualGood"
+                templateProperties  : this.model.get("templateProperties")
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new CurrencyPacksView({
+                className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
                 template            : Templates[name]["currencyPack"],
-                templateProperties  : this.model.get("templateProperties"),
-                itemType            : "currencyPack"
+                templateProperties  : this.model.get("templateProperties")
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
         },
@@ -200,10 +194,9 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             this.$el.addClass(name).html(Templates[name].template(this.model.toJSON()));
             this.$("#currency-store").css("visibility", "hidden");
 
-            // Render items in goods store and currency store
-            // setElement will call delegateEvents internally, see comment in initialize
-            this.virtualGoodsView.setElement(this.$("#goods-store .items")).render();
-            this.currencyPacksView.setElement(this.$("#currency-store .items")).render();
+            // Render subviews (items in goods store and currency store)
+            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
+            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
 
             return this;
         },
@@ -218,6 +211,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
     return {
         StoreView : StoreView,
-        CollectionListView : CollectionListView
+        CollectionListView : CollectionListView,
+        CollectionGridView : CollectionGridView
     };
 });

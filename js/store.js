@@ -66,16 +66,17 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
                 // Initialize model
                 this.newStore(json);
 
-                // Append appropriate stylesheet
-                var link = $("<link rel='stylesheet' href='css/templates/" + json.template.name + ".css'>");
-                $("head").append(link);
-
                 // Initialize view
-                this.storeView = new StoreViews.StoreView({
+                var storeView = this.storeView = new StoreViews.StoreView({
                     model : this.store,
                     el : $("#main"),
                     callbacks : json ? json.callbacks : {}
-                }).render();
+                });
+
+                // Append appropriate stylesheet
+                var link = $("<link rel='stylesheet' href='css/templates/" + json.template.name + ".css'>");
+                link.on("load", storeView.render).appendTo($("head"));
+
                 if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
                 return this.store;
             }

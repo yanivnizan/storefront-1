@@ -2,7 +2,8 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
     var StoreView           = StoreViews.StoreView,
         ListItemView        = Components.ListItemView,
-        CollectionListView  = StoreViews.CollectionListView;
+        CollectionListView  = StoreViews.CollectionListView,
+        CollectionGridView  = StoreViews.CollectionGridView;
 
 
     describe('Soomla Store Backbone Views', function () {
@@ -35,9 +36,15 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 expect(SoomlaJS.storeView).toBeInstanceOf(StoreView);
             });
 
+            it("should create two item collection sub-views", function() {
+                storeView = new StoreView(attributes);
+                expect(storeView.virtualGoodsView).toBeInstanceOf(Components.BaseCollectionView);
+                expect(storeView.currencyPacksView).toBeInstanceOf(Components.BaseCollectionView);
+            });
+
             it("should create two item collection views when initiated with virtual goods and currency packs", function() {
-                var stub = sinon.stub(CollectionListView.prototype, "render").returns({render : function(){}});
-                SoomlaJS.initialize({template : {name : "empty"}});
+                var stub = sinon.stub(CollectionListView.prototype, "render", function(){ return this; });
+                new StoreView(attributes).render();
                 expect(stub.calledTwice).toBeTruthy();
                 stub.restore();  // Restore original stubbed function to prototype
             });
@@ -272,6 +279,27 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
         });
 
 
+        describe("=== CollectionGridView", function() {
+
+            var attributes,
+                model = new Backbone.Model(),
+                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+
+            beforeEach(function() {
+                attributes = {
+                    collection          : new Backbone.Collection([model]),
+                    type                : stubType,
+                    itemType            : "virtualGood",
+                    templateName        : "empty",
+                    templateProperties  : {}
+                };
+            });
+
+            it("should create a DIV tag", function () {
+                expect(new CollectionGridView(attributes).el.nodeName).toEqual("DIV");
+            });
+
+        });
     });
 
 });
