@@ -9,21 +9,21 @@ define({
     },
     /**
      *
-     * Android signature : currencyPurchaseEnded(String productId, int balance)
+     * Android signature : currencyPurchaseEnded(JSONObject balances)
      * @param boolean
      */
-    currencyBalanceChanged : function(productId, balance) {
-        SoomlaJS.store.setBalance(balance);
+    currencyBalanceChanged : function(balances) {
+        SoomlaJS.store.setBalance(balances);
     },
     /**
-     * Android signature : goodsPurchaseEnded(String itemId, int balance)
+     * Android signature : goodsPurchaseEnded(JSONObject virtualGoods)
      * @param boolean
      */
-    goodsBalanceChanged : function(itemId, balance) {
-        SoomlaJS.store.setVirtualGoodBalance(itemId, balance);
+    goodsUpdated : function(virtualGoods) {
+        SoomlaJS.store.updateVirtualGoods(virtualGoods);
     },
-    insufficientFunds : function() {
-        SoomlaJS.storeView.openDialog();
+    insufficientFunds : function(currency) {
+        SoomlaJS.storeView.openDialog(currency);
     },
     unexpectedError : function() {
         alert("An unexpected error has occurred.  Please try again.");

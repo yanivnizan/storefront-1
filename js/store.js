@@ -3,7 +3,7 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
     if (top.enablePointingDeviceEvents) {
-        _.extend(StoreViews.ListItemView.prototype.events, {click : "onSelect"});
+        _.extend(Components.ListItemView.prototype.events, {click : "onSelect"});
         _.extend(StoreViews.StoreView.prototype.events, {
             "click .leave-store"    : "wantsToLeaveStore",
             "click .buy-more"       : "showCurrencyStore",
@@ -48,11 +48,11 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
                     if (json.virtualGoods)
                         attributes.virtualGoods = json.virtualGoods;
 
+                    if (json.virtualCurrencies)
+                        attributes.virtualCurrencies = json.virtualCurrencies;
+
                     if (json.currencyPacks)
                         attributes.currencyPacks = json.currencyPacks;
-
-                    if (json.currency)
-                        attributes.currency = json.currency;
 
                     if (json.isCurrencyStoreDisabled)
                         attributes.isCurrencyStoreDisabled = json.isCurrencyStoreDisabled;
@@ -62,12 +62,21 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
             },
             // The native UI is loaded and the html needs to be rendered now
             initialize : function(json) {
+
+                // Initialize model
                 this.newStore(json);
-                this.storeView = new StoreViews.StoreView({
+
+                // Initialize view
+                var storeView = this.storeView = new StoreViews.StoreView({
                     model : this.store,
                     el : $("#main"),
                     callbacks : json ? json.callbacks : {}
-                }).render();
+                });
+
+                // Append appropriate stylesheet
+                var link = $("<link rel='stylesheet' href='css/templates/" + json.template.name + ".css'>");
+                link.on("load", storeView.render).appendTo($("head"));
+
                 if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
                 return this.store;
             }

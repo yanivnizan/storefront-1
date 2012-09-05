@@ -1,4 +1,11 @@
-.basic.virtualGoods {
+@import "css/mixins/elements.less";
+
+.header,.footer {
+    text-align: center;
+    padding: 4px 7px;
+}
+
+.virtualGoods {
     &.items {
         list-style-type: none;
         padding: 0;
@@ -9,6 +16,12 @@
         background: rgba(0,0,0,0.2); //refactor
         .rounded(5px); //refactor
         .box();
+
+        &.horizontal {
+            display: -webkit-inline-box;
+            display: -moz-inline-box;
+            display: inline-box;
+        }
 
         .visual {
             margin: 5px;
@@ -60,7 +73,7 @@
     }
 }
 
-.basic.currencyPacks {
+.currencyPacks {
     &.items {
         list-style-type: none;
         padding: 0;
@@ -121,3 +134,75 @@
     }
 }
 
+.header {
+    .box;
+    background: rgba(255, 255, 255, 0.4);
+
+    &>.padding {
+        width: 80px;
+
+        &.left {
+            .box(horizontal, start, center);
+        }
+        &.right {
+            .box(horizontal, end, center);
+        }
+    }
+
+    &>.content {
+        .box-flex(1);
+    }
+
+    .balance {
+        margin: 0 auto;
+        padding: 5px;
+        .rounded(5px);
+        background: rgba(0, 0, 0, 0.2);
+        font-size: 10px;
+        font-weight: bold;
+
+        img {
+            max-width: 20px;
+            max-height: 20px;
+        }
+    }
+
+    .leave-store, .back {
+        background-image: url("../../img/icons/close.png");
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+    }
+}
+
+.title {
+    text-align: center;
+}
+
+.items-container {
+    margin: 10px; //refactor
+    .box-flex(1);
+    overflow-y  : scroll;
+}
+
+.footer {
+    margin: 0 10px 10px;
+    .rounded(5px);
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .buy-more {
+        display: block;
+        padding: 5px;
+        width: 100%;
+        -webkit-user-select: none;
+
+        img {
+            margin-right: 10px;
+            max-width: 40px;
+            max-height: 40px;
+        }
+    }
+}

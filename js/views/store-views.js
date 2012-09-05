@@ -11,129 +11,12 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
 
 
+    var ListItemView        = Components.ListItemView,
+        GridItemView        = Components.GridItemView,
+        BaseCollectionView  = Components.BaseCollectionView
+        CollectionListView  = Components.CollectionListView,
+        CollectionGridView  = Components.CollectionGridView;
 
-    var ListItemView = Backbone.View.extend({
-        initialize : function() {
-            _.bindAll(this, "onSelect", "updateBalance");
-            this.model.on("change:balance", this.updateBalance);
-        },
-        className : "item",
-        tagName : "li",
-        events : {
-            "touchend" : "onSelect"
-        },
-        onSelect : function() {
-            this.trigger("selected", this.model);
-        },
-        updateBalance : function() {
-            this.$(".balance label").html(this.model.get("balance"));
-        },
-        render : function() {
-            var name     = this.options.templateName,
-                itemType = this.options.itemType || "item"; // TODO: Remove once itemType is always passed
-            this.$el.append(Templates[name][itemType](_.extend({currency : this.options.currency.toJSON()}, this.model.toJSON())));
-            return this;
-        }
-    });
-
-    var GridItemView = ListItemView.extend({
-        tagName : "div"
-    });
-
-
-    var BaseCollectionView = Backbone.View.extend({
-        initialize : function(options) {
-            this.type = options.type;
-            this.subViews = []; // expose sub views for testing purposes
-            return this;
-        },
-        events : {
-            // TODO: Remove for phone
-            "mousewheel" : function(event) {
-                // TODO: items-container is not in the scope of this view
-                var scrollTop = $(".items-container").scrollTop();
-                var delta = event.originalEvent.wheelDelta;
-                $(".items-container").scrollTop(scrollTop - Math.round(delta));
-            }
-        }
-    });
-
-
-    var CollectionListView = BaseCollectionView.extend({
-        render : function() {
-            (this.type) || (this.type = ListItemView); // For testing purposes
-            var name     = this.options.templateName,
-                currency = this.options.currency,
-                itemType = this.options.itemType,
-                $this    = this;
-
-
-            // Set the view's class
-            this.$el.addClass("basic " + itemType + "s");
-
-            // Render each item and append it
-            this.collection.each(function(item) {
-                var view = new $this.type({
-                    model        : item,
-                    templateName : name,
-                    currency     : currency,
-                    itemType     : itemType
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                });
-                $this.subViews.push(view);
-                $this.$el.append(view.render().el);
-            });
-            return this;
-        }
-    });
-
-    var CollectionGridView = BaseCollectionView.extend({
-        render : function() {
-            (this.type) || (this.type = GridItemView); // For testing purposes
-            var name     = this.options.templateName,
-                currency = this.options.currency,
-                itemType = this.options.itemType,
-                rows     = this.options.templateProperties.rows,
-                columns  = this.options.templateProperties.columns,
-                $this    = this;
-
-            // Set the view's class
-            this.$el.addClass("grid " + itemType + "s");
-
-            // Render each item and append it
-            var currentRow;
-            this.collection.each(function(item, i) {
-                if (i % columns == 0) {
-                    currentRow = $("<div>", {class : "row"});
-                    $this.$el.append(currentRow);
-                }
-                var view = new $this.type({
-                    model : item,
-                    templateName : name,
-                    currency     : currency,
-                    type         : GridItemView,
-                    itemType     : itemType
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                });
-                $this.subViews.push(view);
-                currentRow.append(view.render().el);
-            });
-
-            // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
-            // CSS flex box doesn't support a perfect grid like this when elements contain excessive text.
-            // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
-            // This assumes that the container has no margin, border or padding.
-            var subject = this.subViews[0].$el;
-            var trueElementWidth = (this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
-            _.each(this.subViews, function(subView) {
-                subView.$el.css("max-width", trueElementWidth);
-            });
-
-            return this;
-        }
-    });
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
@@ -156,26 +39,24 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
-            this.model.get("currency").on("change:balance", this.updateBalance);
+            this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
             // as we like without losing the jQuery bindings each time.
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
             this.virtualGoodsView = new VirtualGoodsView({
+                className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                templateName        : this.model.get("templateName"),
-                templateProperties  : this.model.get("templateProperties"),
-                currency            : this.model.get("currency"),
-                itemType            : "virtualGood"
-            });
+                template            : Templates[name]["virtualGood"],
+                templateProperties  : this.model.get("templateProperties")
+            }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new CurrencyPacksView({
+                className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                templateName        : this.model.get("templateName"),
-                templateProperties  : this.model.get("templateProperties"),
-                currency            : this.model.get("currency"),
-                itemType            : "currencyPack"
-            });
+                template            : Templates[name]["currencyPack"],
+                templateProperties  : this.model.get("templateProperties")
+            }).on("selected", this.wantsToBuyCurrencyPacks);
 
         },
         events : {
@@ -190,8 +71,8 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // TODO: Release view bindings and destroy view
             this.nativeAPI.wantsToLeaveStore();
         },
-        updateBalance : function() {
-            this.$(".header .balance label").html(this.model.getBalance());
+        updateBalance : function(model) {
+            this.$(".header .balance label").html(model.get("balance"));
         },
         showCurrencyStore : function() {
             // When this flag is raised, there is no connectivity,
@@ -205,10 +86,10 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         showGoodsStore : function() {
             this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
-        openDialog : function() {
+        openDialog : function(currency) {
             new Components.ModalDialog({
                 parent : this.$el,
-                model : this.model.get("currency")
+                model : this.model.get("virtualCurrencies").get(currency)
             }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
@@ -233,13 +114,12 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         render : function() {
             var name = this.model.get("templateName");
-            this.$el.html(Templates[name].template(this.model.toJSON()));
+            this.$el.addClass(name).html(Templates[name].template(this.model.toJSON()));
             this.$("#currency-store").css("visibility", "hidden");
 
-            // Render items in goods store and currency store
-            // setElement will call delegateEvents internally, see comment in initialize
-            this.virtualGoodsView.setElement(this.$("#goods-store .items")).on("selected", this.wantsToBuyVirtualGoods).render();
-            this.currencyPacksView.setElement(this.$("#currency-store .items")).on("selected", this.wantsToBuyCurrencyPacks).render();
+            // Render subviews (items in goods store and currency store)
+            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
+            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
 
             return this;
         },
@@ -253,8 +133,6 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
 
 
     return {
-        StoreView : StoreView,
-        CollectionListView : CollectionListView,
-        ListItemView : ListItemView
+        StoreView : StoreView
     };
 });

@@ -1,8 +1,14 @@
 define(["backboneRelational"], function() {
 
-    var CurrencyPack            = Backbone.RelationalModel.extend({}),
-        VirtualGoodsCollection  = Backbone.Collection.extend({ model : VirtualGood }),
-        CurrencyPacksCollection = Backbone.Collection.extend({ model : CurrencyPack });
+    var CurrencyPack = Backbone.RelationalModel.extend({});
+    var Currency = Backbone.RelationalModel.extend({
+        defaults : {
+            name    : "coins",
+            balance : 0,
+            itemId  : "currency_coin"
+        },
+        idAttribute : "itemId"
+    });
     var VirtualGood             = Backbone.RelationalModel.extend({
         idAttribute : "itemId",
         defaults : {
@@ -18,33 +24,27 @@ define(["backboneRelational"], function() {
     });
 
 
-    var Currency = Backbone.RelationalModel.extend({
-        defaults : {
-            name    : "coins",
-            balance : 0,
-            itemId  : "store_currency"
-        }
-    });
-    window.Currency = Currency;
+    var VirtualCurrencyCollection   = Backbone.Collection.extend({ model : Currency     }),
+        CurrencyPacksCollection     = Backbone.Collection.extend({ model : CurrencyPack }),
+        VirtualGoodsCollection      = Backbone.Collection.extend({ model : VirtualGood  });
+
 
     var Store = Backbone.RelationalModel.extend({
         relations: [
-            {
-                type: Backbone.HasOne,
-                key: 'currency',
-                relatedModel: Currency,
-                reverseRelation: {
-                    type : Backbone.HasOne,
-                    key: 'store',
-                    includeInJSON: 'id'
-                    // 'relatedModel' is automatically set to 'Zoo'; the 'relationType' to 'HasOne'.
-                }
-            },
             {
                 type: Backbone.HasMany,
                 key: 'virtualGoods',
                 relatedModel: VirtualGood,
                 collectionType: VirtualGoodsCollection,
+                reverseRelation: {
+                    includeInJSON: 'id'
+                }
+            },
+            {
+                type: Backbone.HasMany,
+                key: 'virtualCurrencies',
+                relatedModel: Currency,
+                collectionType: VirtualCurrencyCollection,
                 reverseRelation: {
                     includeInJSON: 'id'
                 }
@@ -61,34 +61,62 @@ define(["backboneRelational"], function() {
             }
         ],
         defaults : {
-            currency            : new Currency(),
             templateName        : "basic",
             templateTitle       : "Store",
             moreCurrencyText    : "Get more coins",
-            orientationLanscape : false
+            orientationLanscape : false,
+            templateProperties  : {
+                orientation : "horizontal"
+            }
         },
         initialize : function() {
-            _.bindAll(this, "getBalance", "setBalance", "setVirtualGoodBalance");
+            _.bindAll(this, "getBalance", "setBalance", "updateVirtualGoods");
         },
-        getBalance : function() {
-            return this.get("currency").get("balance");
+        setBalance : function(balances) {
+            var model = this.get("virtualCurrencies");
+            _.each(balances, function(balance, currency) {
+                model.get(currency).set("balance", balance);
+            });
+            return this;
         },
-        setBalance : function(balance) {
-            this.get("currency").set("balance", balance);
+        getBalance : function(currency) {
+            return this.get("virtualCurrencies").get(currency).get("balance");
         },
-        setVirtualGoodBalance : function(itemId, balance) {
-            var virtualGood = this.get("virtualGoods").get(itemId);
-            if (virtualGood.isConsumable())
-                virtualGood.set("balance", balance);
+        updateVirtualGoods : function(goods) {
+            var virtualGoods    = this.get("virtualGoods"),
+                $this           = this;
+            _.each(goods, function(attributes, good) {
+                var good = virtualGoods.get(good);
+
+                if (attributes.balance)
+                    good.set("balance", attributes.balance);
+
+                if (attributes.price) {
+                    // TODO: Support passing multiple prices in different currencies
+                    // Currently this code always takes the currency of the first price it encounters
+                    // regardless of the number of prices passed
+                    var currencyItemId;
+                    if (_.isArray(attributes.price)) {
+                        currencyItemId = _.keys(attributes.price[0])[0];
+                        good.set("price", attributes.price[0][currencyItemId]);
+                    } else {
+                        currencyItemId = _.keys(attributes.price)[0];
+                        good.set("price", attributes.price[currencyItemId]);
+                    }
+                    good.set("currency", $this.get("virtualCurrencies").get(currencyItemId).toJSON());
+                }
+            });
+            return this;
         }
     });
 
 
     return {
-        VirtualGood             : VirtualGood,
-        VirtualGoodsCollection  : VirtualGoodsCollection,
-        CurrencyPack            : CurrencyPack,
-        Store                   : Store,
-        Currency                : Currency
+        VirtualGood                 : VirtualGood,
+        VirtualGoodsCollection      : VirtualGoodsCollection,
+        CurrencyPack                : CurrencyPack,
+        Store                       : Store,
+        Currency                    : Currency,
+        VirtualCurrencyCollection   : VirtualCurrencyCollection
     };
 });
