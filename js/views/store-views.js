@@ -11,10 +11,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
     transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
 
 
-    var ListItemView        = Components.ListItemView,
-        GridItemView        = Components.GridItemView,
-        BaseCollectionView  = Components.BaseCollectionView
-        CollectionListView  = Components.CollectionListView,
+    var CollectionListView  = Components.CollectionListView,
         CollectionGridView  = Components.CollectionGridView;
 
 
