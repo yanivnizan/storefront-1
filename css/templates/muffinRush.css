@@ -76,6 +76,10 @@
 .virtualGoods .item .visual .foreground {
   position: absolute;
   z-index: 1;
+  max-width: 80px;
+  max-height: 80px;
+  left: 10px;
+  top: 10px;
 }
 .virtualGoods .item .visual .background {
   position: absolute;
@@ -83,24 +87,23 @@
   left: -7px;
 }
 .virtualGoods .item .content {
-  margin: 5px;
+  padding: 10px 15px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
 }
 .virtualGoods .item img.currency {
-  min-width: 15px;
-  min-height: 15px;
-  max-width: 25px;
-  max-height: 25px;
+  display: block;
+  max-width: 55px;
+  max-height: 55px;
 }
 .virtualGoods .item h1 {
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 29px;
+  line-height: 29px;
   margin: 0 0 2px;
 }
 .virtualGoods .item .description {
-  font-size: 11px;
+  font-size: 15px;
 }
 .virtualGoods .item .balance {
   font-size: 10px;
@@ -111,11 +114,10 @@
   box-flex: 1;
 }
 .virtualGoods .item .price {
-  text-align: right;
+  padding: 5px;
+  text-align: center;
   font-weight: bold;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
+  font-style: italic;
 }
 .currencyPacks.items {
   list-style-type: none;

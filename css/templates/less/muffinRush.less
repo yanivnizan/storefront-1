@@ -42,8 +42,14 @@
 			height: 100px;
 
 			.foreground {
+				@size: 100px;
+				@max: 80px;
 				position: absolute;
 				z-index: 1;
+				max-width: @max;
+				max-height: @max;
+				left: (@size - @max) / 2;
+				top: (@size - @max) / 2;
 			}
 			.background {
 				position: absolute;
@@ -52,26 +58,25 @@
 			}
 		}
 		.content {
-			margin: 5px; //refactor
+			padding: 10px 15px; //refactor
 			.box-flex(1);
 		}
 
 		img.currency {
-			min-width: 15px;
-			min-height: 15px;
-			max-width: 25px;
-			max-height: 25px;
+			display: block;
+			max-width: 55px;
+			max-height: 55px;
 
 		}
 
 		h1 {
-			font-size: 14px;
-			line-height: 18px;
+			font-size: 29px;
+			line-height: 29px;
 			margin: 0 0 2px;
 		}
 
 		.description {
-			font-size: 11px;
+			font-size: 15px;
 		}
 
 		.balance {
@@ -82,11 +87,13 @@
 		}
 
 		.price {
-			text-align: right;
+			padding: 5px;
+			text-align: center;
 			font-weight: bold;
-			.box-flex(1);
+			font-style: italic;
 		}
 	}
+
 }
 
 .currencyPacks {

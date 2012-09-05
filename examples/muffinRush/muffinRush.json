@@ -19,14 +19,14 @@
             "description"   : "",
             "itemId"        : "currency_muffin",
             "balance"       : 1000,
-            "imgFilePath"   : "examples/muffinRush/muffin_glow.png"
+            "imgFilePath"   : "examples/muffinRush/muffin.png"
         }
     ],
     "isCurrencyStoreDisabled" : false,
     "virtualGoods" : [
         {
             "name"          : "Fruit Cake",
-            "description"   : "Attracts nuts to your head for the first 25 seconds of the Christmas game",
+            "description"   : "Customers buy a double portion on each purchase of this cake",
             "imgFilePath"   : "examples/muffinRush/items/fruit_cake.png",
             "priceModel"    : {
                 "type" : "static",
@@ -38,7 +38,7 @@
         },
         {
             "name"          : "Pavlova",
-            "description"   : "There are no special powers to this hat",
+            "description"   : "Gives customers a sugar rush and they call their friends",
             "imgFilePath"   : "examples/muffinRush/items/pavlova.png",
             "priceModel"    : {
                 "type" : "static",
@@ -50,7 +50,7 @@
         },
         {
             "name"          : "Chocolate Cake",
-            "description"   : "There are no special powers to this hat",
+            "description"   : "A classic cake to maximize customer satisfaction",
             "imgFilePath"   : "examples/muffinRush/items/chocolate_cake.png",
             "priceModel"    : {
                 "type" : "static",
@@ -62,7 +62,7 @@
         },
         {
             "name"          : "Cream Cup",
-            "description"   : "Increases player's size by 15%!",
+            "description"   : "Increase bakery reputation with this original pastry",
             "imgFilePath"   : "examples/muffinRush/items/cream_cup.png",
             "priceModel"    : {
                 "type" : "static",
