@@ -75,8 +75,10 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
                 });
 
                 // Append appropriate stylesheet
+                // TODO: render the store as a callback to the CSS load event
                 var link = $("<link rel='stylesheet' href='css/templates/" + json.template.name + ".css'>");
-                link.on("load", storeView.render).appendTo($("head"));
+                link.appendTo($("head"));
+                storeView.render();
 
                 if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
                 return this.store;
