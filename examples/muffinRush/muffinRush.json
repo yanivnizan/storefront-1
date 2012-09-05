@@ -10,7 +10,7 @@
                 "imgFilePath"   :  "examples/muffinRush/GetMore.png"
             }
         },
-        "properties" : {"orientation" : "horizontal"}
+        "properties" : {}
     },
     "background" : "examples/muffinRush/Bg_Wall.png",
     "virtualCurrencies" : [

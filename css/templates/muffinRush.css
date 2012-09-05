@@ -15,6 +15,16 @@
 .footer {
   text-align: center;
 }
+.items-container {
+  margin: 20px 40px;
+  -webkit-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
+  -moz-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
+  box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  overflow-y: scroll;
+}
 .virtualGoods.items {
   list-style-type: none;
   padding: 0;
@@ -232,13 +242,6 @@
   position: absolute;
   top: 43px;
   left: 85px;
-}
-.items-container {
-  margin: 10px;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  overflow-y: scroll;
 }
 .footer {
   display: -webkit-box;

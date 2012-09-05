@@ -4,6 +4,13 @@
 	text-align: center;
 }
 
+.items-container {
+	margin: 20px 40px;
+	.box-shadow(~"0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1");
+	.box-flex(1);
+	overflow-y: scroll;
+}
+
 .virtualGoods {
 	&.items {
 		list-style-type: none;
@@ -153,12 +160,6 @@
 		}
 	}
 
-}
-
-.items-container {
-	margin: 10px; //refactor
-	.box-flex(1);
-	overflow-y: scroll;
 }
 
 .footer {
