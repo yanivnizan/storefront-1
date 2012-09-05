@@ -20,24 +20,24 @@
   -webkit-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
   -moz-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
   box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
+  background-image: url("../../examples/muffinRush/InnerBG.png");
+  background-size: cover;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
   overflow-y: scroll;
+}
+.virtualGoods {
+  background-position: center;
 }
 .virtualGoods.items {
   list-style-type: none;
   padding: 0;
 }
 .virtualGoods .item {
-  margin: 0 0 10px;
-  background: rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
+  margin: 0 10px 10px;
+  background-image: url("../../examples/muffinRush/Bar.png");
+  background-position: center;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -57,14 +57,6 @@
   display: inline-box;
 }
 .virtualGoods .item .visual {
-  margin: 5px;
-  background: white;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: center;
@@ -77,11 +69,18 @@
   box-orient: horizontal;
   box-pack: center;
   box-align: center;
-  min-width: 50px;
+  position: relative;
+  width: 100px;
+  height: 100px;
 }
-.virtualGoods .item .visual img {
-  max-width: 40px;
-  max-height: 40px;
+.virtualGoods .item .visual .foreground {
+  position: absolute;
+  z-index: 1;
+}
+.virtualGoods .item .visual .background {
+  position: absolute;
+  top: -7px;
+  left: -7px;
 }
 .virtualGoods .item .content {
   margin: 5px;
