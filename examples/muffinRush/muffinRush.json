@@ -34,7 +34,7 @@
                     "currency_muffin" : 225
                 }
             },
-            "itemId"        : "jail_snitch"
+            "itemId"        : "fruit_cake"
         },
         {
             "name"          : "Pavlova",
@@ -46,7 +46,7 @@
                     "currency_muffin" : 175
                 }
             },
-            "itemId"        : "clowns_hat"
+            "itemId"        : "pavlova"
         },
         {
             "name"          : "Chocolate Cake",
@@ -58,7 +58,7 @@
                     "currency_muffin" : 250
                 }
             },
-            "itemId"        : "the_fez"
+            "itemId"        : "chocolate_cake"
         },
         {
             "name"          : "Cream Cup",
@@ -70,37 +70,47 @@
                     "currency_muffin" : 50
                 }
             },
-            "itemId"        : "mushroom_spore"
+            "itemId"        : "cream_cup"
         }
     ],
     "currencyPacks" : [
         {
-            "name"              : "Saver Pack",
-            "imgFilePath"       : "examples/muffinRush/muffin_glow.png",
-            "itemId"            : "saver_pack",
+            "name"              : "10 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins01.png",
+            "itemId"            : "muffins_10",
             "currency_itemId"   : "currency_muffin",
-            "productId"         : "saver_pack",
-            "price"             : 2.20,
-            "amount"            : 100,
+            "productId"         : "muffins_10",
+            "price"             : 0.99,
+            "amount"            : 10,
             "consumable"        : false
         },
         {
-            "name"              : "Medium Pack",
-            "imgFilePath"       : "examples/muffinRush/muffin_glow.png",
-            "itemId"            : "medium_pack",
+            "name"              : "50 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins02.png",
+            "itemId"            : "muffins_50",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "android.test.purchased",
-            "price"             : 6.50,
-            "amount"            : 500,
+            "price"             : 1.99,
+            "amount"            : 50,
             "consumable"        : false
         },
         {
-            "name"              : "Huge Pack",
-            "imgFilePath"       : "examples/muffinRush/muffin_glow.png",
-            "itemId"            : "huge_pack",
+            "name"              : "400 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins03.png",
+            "itemId"            : "muffins_400",
             "currency_itemId"   : "currency_muffin",
-            "productId"         : "huge_pack",
-            "price"             : 11.50,
+            "productId"         : "muffins_400",
+            "price"             : 4.99,
+            "amount"            : 400,
+            "consumable"        : false
+        },
+        {
+            "name"              : "1000 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins04.png",
+            "itemId"            : "muffins_1000",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_1000",
+            "price"             : 8.99,
             "amount"            : 1000,
             "consumable"        : false
         }

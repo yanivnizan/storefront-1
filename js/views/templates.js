@@ -5,7 +5,8 @@ define( [
     "templates/grid-template.handlebars",
     "templates/grid-item.handlebars",
     "templates/muffinRush-template.handlebars",
-    "templates/muffinRush-item.handlebars"
+    "templates/muffinRush-item.handlebars",
+    "templates/muffinRush-currencyPack.handlebars"
 ], function() {
 
     Handlebars.registerHelper('formatCurrency', function(value) {
@@ -28,7 +29,7 @@ define( [
         muffinRush : {
             template    : templates["muffinRush-template"],
             virtualGood : templates["muffinRush-item"],
-            currencyPack: templates["basic-currencyPack"]
+            currencyPack: templates["muffinRush-currencyPack"]
         },
         empty : {
             template    : function(){},
