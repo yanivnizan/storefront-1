@@ -261,6 +261,9 @@
   -moz-box-flex: 1;
   box-flex: 1;
 }
+.footer img {
+  max-height: 105px;
+}
 .leave-store,
 .back {
   cursor: pointer;
