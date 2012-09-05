@@ -1,0 +1,109 @@
+{
+    "template" :  {
+        "name" :  "muffinRush",
+        "elements" :  {
+            "title" :  {
+                "name"  :  "Store"
+            },
+            "buyMore" :  {
+                "text"          :  "More coins",
+                "imgFilePath"   :  "examples/muffinRush/GetMore.png"
+            }
+        },
+        "properties" : {"orientation" : "horizontal"}
+    },
+    "background" : "examples/muffinRush/Bg_Wall.png",
+    "virtualCurrencies" : [
+        {
+            "name"          : "Muffins",
+            "description"   : "",
+            "itemId"        : "currency_muffin",
+            "balance"       : 1000,
+            "imgFilePath"   : "examples/muffinRush/muffin_glow.png"
+        }
+    ],
+    "isCurrencyStoreDisabled" : false,
+    "virtualGoods" : [
+        {
+            "name"          : "Fruit Cake",
+            "description"   : "Attracts nuts to your head for the first 25 seconds of the Christmas game",
+            "imgFilePath"   : "examples/muffinRush/items/fruit_cake.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 225
+                }
+            },
+            "itemId"        : "jail_snitch"
+        },
+        {
+            "name"          : "Pavlova",
+            "description"   : "There are no special powers to this hat",
+            "imgFilePath"   : "examples/muffinRush/items/pavlova.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 175
+                }
+            },
+            "itemId"        : "clowns_hat"
+        },
+        {
+            "name"          : "Chocolate Cake",
+            "description"   : "There are no special powers to this hat",
+            "imgFilePath"   : "examples/muffinRush/items/chocolate_cake.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 250
+                }
+            },
+            "itemId"        : "the_fez"
+        },
+        {
+            "name"          : "Cream Cup",
+            "description"   : "Increases player's size by 15%!",
+            "imgFilePath"   : "examples/muffinRush/items/cream_cup.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 50
+                }
+            },
+            "itemId"        : "mushroom_spore"
+        }
+    ],
+    "currencyPacks" : [
+        {
+            "name"              : "Saver Pack",
+            "imgFilePath"       : "examples/muffinRush/muffin_glow.png",
+            "itemId"            : "saver_pack",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "saver_pack",
+            "price"             : 2.20,
+            "amount"            : 100,
+            "consumable"        : false
+        },
+        {
+            "name"              : "Medium Pack",
+            "imgFilePath"       : "examples/muffinRush/muffin_glow.png",
+            "itemId"            : "medium_pack",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "android.test.purchased",
+            "price"             : 6.50,
+            "amount"            : 500,
+            "consumable"        : false
+        },
+        {
+            "name"              : "Huge Pack",
+            "imgFilePath"       : "examples/muffinRush/muffin_glow.png",
+            "itemId"            : "huge_pack",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "huge_pack",
+            "price"             : 11.50,
+            "amount"            : 1000,
+            "consumable"        : false
+        }
+    ]
+
+}

@@ -3,7 +3,8 @@ define( [
     "templates/basic-item.handlebars",
     "templates/basic-currencyPack.handlebars",
     "templates/grid-template.handlebars",
-    "templates/grid-item.handlebars"
+    "templates/grid-item.handlebars",
+    "templates/muffinRush-template.handlebars"
 ], function() {
 
     Handlebars.registerHelper('formatCurrency', function(value) {
@@ -22,6 +23,11 @@ define( [
             template    : templates["grid-template"],
             virtualGood : templates["grid-item"],
             currencyPack: function(){}
+        },
+        muffinRush : {
+            template    : templates["muffinRush-template"],
+            virtualGood : templates["basic-item"],
+            currencyPack: templates["basic-currencyPack"]
         },
         empty : {
             template    : function(){},

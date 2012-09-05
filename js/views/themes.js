@@ -49,6 +49,22 @@ define(["templates", "components"], function(Templates, Components) {
                     template : Templates["grid"]["currencyPack"]
                 }
             }
+        },
+        muffinRush : {
+            virtualGoodsView : {
+                type : Components.CollectionListView,
+                item : {
+                    type : Components.ListItemView,
+                    template : Templates["muffinRush"]["virtualGood"]
+                }
+            },
+            currencyPacksView : {
+                type : Components.CollectionListView,
+                item : {
+                    type : Components.ListItemView,
+                    template : Templates["muffinRush"]["currencyPack"]
+                }
+            }
         }
     };
 

@@ -519,7 +519,7 @@ h1 {
   box-align: stretch;
   position: absolute;
 }
-.background {
+[data-role="page"] > .background {
   position: absolute;
   z-index: -1;
   width: 100%;

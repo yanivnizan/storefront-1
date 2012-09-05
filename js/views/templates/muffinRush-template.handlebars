@@ -1,0 +1,50 @@
+<div id="goods-store" data-role="page">
+    <img src="{{background}}" class="background">
+    <div class="header">
+        <div class="title">
+            <img src="examples/muffinRush/Store_Store.png">
+        </div>
+        <div class="balance">
+            <img src="examples/muffinRush/YourMuf.png">
+            {{#each virtualCurrencies}}
+            <label>{{this.balance}}</label>
+            {{/each}}
+
+        </div>
+    </div>
+    <div class="items-container">
+        <ul class="items"></ul>
+    </div>
+    <div class="footer">
+        <div>
+            <img src="examples/muffinRush/back.png" class="leave-store">
+        </div>
+        <div>
+            <img src="{{moreCurrencyImage}}" class="currency">
+        </div>
+    </div>
+</div>
+<div id="currency-store" data-role="page">
+    <img src="{{background}}" class="background">
+    <div class="header">
+        <div class="title">
+            <img src="examples/muffinRush/Store_Store.png">
+        </div>
+        <div class="balance">
+            <img src="examples/muffinRush/YourMuf.png">
+            {{#each virtualCurrencies}}
+            <label>{{this.balance}}</label>
+            {{/each}}
+
+        </div>
+    </div>
+    <div class="items-container">
+        <ul class="items"></ul>
+    </div>
+    <div class="footer">
+        <div>
+            <img src="examples/muffinRush/back.png" class="back">
+        </div>
+    </div>
+
+</div>
