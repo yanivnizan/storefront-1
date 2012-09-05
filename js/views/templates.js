@@ -6,6 +6,10 @@ define( [
     "templates/grid-item.handlebars"
 ], function() {
 
+    Handlebars.registerHelper('formatCurrency', function(value) {
+        return parseFloat(value).toFixed(2);
+    });
+
     var templates = Handlebars.templates;
 
     return {
