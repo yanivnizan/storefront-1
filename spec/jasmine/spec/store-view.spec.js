@@ -1,4 +1,4 @@
-define("storeView.spec", ["storeViews", "models", "templates", "components"], function (StoreViews, Models, Templates, Components) {
+define("storeView.spec", ["storeViews", "models", "templates", "components", "themes"], function (StoreViews, Models, Templates, Components, Themes) {
 
     var StoreView           = StoreViews.StoreView,
         ListItemView        = Components.ListItemView,
@@ -20,9 +20,10 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                     wantsToLeaveStore       : sinon.spy()
                 };
                 attributes = {
-                    model : new Models.Store({virtualCurrencies : [{}]}),
-                    el : $("<div><div class='leave-store'></div><div class='buy-more'></div><div class='back'></div></div>"),
-                    nativeAPI : nativeAPIStub
+                    model       : new Models.Store({virtualCurrencies : [{}]}),
+                    el          : $("<div><div class='leave-store'></div><div class='buy-more'></div><div class='back'></div></div>"),
+                    nativeAPI   : nativeAPIStub,
+                    theme       : Themes.empty
                 };
                 delete SoomlaJS.store;
                 delete SoomlaJS.storeView;
@@ -32,6 +33,10 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                 SoomlaJS.initialize({template : {name : "empty"}});
                 expect(SoomlaJS.storeView).toBeDefined();
                 expect(SoomlaJS.storeView).toBeInstanceOf(StoreView);
+            });
+
+            it("should have the theme defined on the view", function() {
+               expect(new StoreView(attributes).theme).toEqual(attributes.theme);
             });
 
             it("should create two item collection sub-views", function() {
@@ -138,7 +143,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
 
             describe("=== Native API calls & Transaction management", function() {
 
-                var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub;
+                var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub, themeStub;
 
                 beforeEach(function() {
                     // Create view, model and api stubs
@@ -152,12 +157,17 @@ define("storeView.spec", ["storeViews", "models", "templates", "components"], fu
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
                     });
+                    themeStub       = _.clone(Themes.empty);
+                    themeStub.virtualGoodsView.type = ViewStub;
+                    themeStub.currencyPacksView.type = ViewStub;
                     nativeAPIStub   = {wantsToBuyVirtualGoods : sinon.spy(), wantsToBuyCurrencyPacks : sinon.spy()};
+
                     attributes = {
                         VirtualGoodsView    : ViewStub,
                         CurrencyPacksView   : ViewStub,
                         model               : modelStub,
-                        nativeAPI           : nativeAPIStub
+                        nativeAPI           : nativeAPIStub,
+                        theme               : themeStub
                     };
                 });
 

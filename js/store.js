@@ -1,4 +1,4 @@
-define(["jquery", "js-api", "native-api", "models", "storeViews", "components"], function($, jsAPI, NativeAPI, Models, StoreViews, Components) {
+define(["jquery", "js-api", "native-api", "models", "storeViews", "components", "themes"], function($, jsAPI, NativeAPI, Models, StoreViews, Components, Themes) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
@@ -70,7 +70,8 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components"],
                 var storeView = this.storeView = new StoreViews.StoreView({
                     model : this.store,
                     el : $("#main"),
-                    callbacks : json ? json.callbacks : {}
+                    callbacks : json ? json.callbacks : {},
+                    theme : Themes[json.template.name]
                 });
 
                 // Append appropriate stylesheet

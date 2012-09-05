@@ -22,16 +22,11 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
                             "showCurrencyStore", "showGoodsStore", "openDialog",
                             "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
-            // untested code block
-            var viewType, name = this.model.get("templateName");
-            switch(name) {
-                case "grid" : viewType = CollectionGridView; break;
-                default     : viewType = CollectionListView; break;
-            };
+            // TODO: get rid of the templateName altogether
+            var name = this.model.get("templateName");
 
-            this.nativeAPI          = this.options.nativeAPI         || window.SoomlaNative;
-            var VirtualGoodsView    = this.options.VirtualGoodsView  || viewType,
-                CurrencyPacksView   = this.options.CurrencyPacksView || viewType;
+            this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
+            this.theme      = this.options.theme;
 
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
@@ -42,16 +37,16 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             // This will enable us to construct the view objects once and then render as many times
             // as we like without losing the jQuery bindings each time.
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new VirtualGoodsView({
+            this.virtualGoodsView = new this.theme.virtualGoodsView.type({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                template            : Templates[name]["virtualGood"],
+                template            : this.theme.virtualGoodsView.item.template,
                 templateProperties  : this.model.get("templateProperties")
             }).on("selected", this.wantsToBuyVirtualGoods);
-            this.currencyPacksView = new CurrencyPacksView({
+            this.currencyPacksView = new this.theme.currencyPacksView.type({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                template            : Templates[name]["currencyPack"],
+                template            : this.theme.currencyPacksView.item.template,
                 templateProperties  : this.model.get("templateProperties")
             }).on("selected", this.wantsToBuyCurrencyPacks);
 

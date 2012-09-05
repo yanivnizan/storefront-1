@@ -4,6 +4,7 @@ require.config({
         components          : "views/components",
         storeViews          : "views/store-views",
         templates           : "views/templates",
+        themes              : "views/themes",
         modalComponent      : "views/templates/modal-component.handlebars",
 
         // 3rd party modules
