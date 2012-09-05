@@ -103,7 +103,7 @@
   margin: 0 0 2px;
 }
 .virtualGoods .item .description {
-  font-size: 15px;
+  font-size: 13px;
 }
 .virtualGoods .item .balance {
   font-size: 10px;
@@ -239,10 +239,11 @@
 .header .balance {
   position: relative;
 }
-.header .balance label {
+.header .balance .container {
   position: absolute;
   top: 43px;
   left: 85px;
+  width: 100px;
 }
 .footer {
   display: -webkit-box;
@@ -267,6 +268,17 @@
   max-height: 105px;
 }
 .leave-store,
-.back {
+.back,
+.buy-more {
   cursor: pointer;
+  -webkit-transition: -webkit-transform 0.05s;
+  -moz-transition: -moz-transform 0.05s;
+  transition: transform 0.05s;
+}
+.leave-store:active,
+.back:active,
+.buy-more:active {
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  transform: scale(1.5);
 }

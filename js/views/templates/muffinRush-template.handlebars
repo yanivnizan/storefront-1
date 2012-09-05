@@ -7,9 +7,10 @@
         <div class="balance">
             <img src="examples/muffinRush/YourMuf.png">
             {{#each virtualCurrencies}}
-            <label>{{this.balance}}</label>
+            <div class="container">
+                <label>{{this.balance}}</label>
+            </div>
             {{/each}}
-
         </div>
     </div>
     <div class="items-container">
@@ -19,7 +20,7 @@
             <img src="examples/muffinRush/back.png" class="leave-store">
         </div>
         <div>
-            <img src="{{moreCurrencyImage}}" class="currency">
+            <img src="{{moreCurrencyImage}}" class="currency buy-more">
         </div>
     </div>
 </div>
@@ -32,9 +33,10 @@
         <div class="balance">
             <img src="examples/muffinRush/YourMuf.png">
             {{#each virtualCurrencies}}
-            <label>{{this.balance}}</label>
+            <div class="container">
+                <label>{{this.balance}}</label>
+            </div>
             {{/each}}
-
         </div>
     </div>
     <div class="items-container">

@@ -76,7 +76,7 @@
 		}
 
 		.description {
-			font-size: 15px;
+			font-size: 13px;
 		}
 
 		.balance {
@@ -170,10 +170,11 @@
 
 	.balance {
 		position: relative;
-		label {
+		.container {
 			position: absolute;
 			top: 43px;
 			left: 85px;
+			width: 100px;
 		}
 	}
 
@@ -191,6 +192,14 @@
 	}
 }
 
-.leave-store, .back {
+.leave-store, .back, .buy-more {
 	cursor: pointer;
+
+	-webkit-transition: -webkit-transform 0.05s;
+	-moz-transition: -moz-transform 0.05s;
+	transition: transform 0.05s;
+
+	&:active {
+		.scale;
+	}
 }
