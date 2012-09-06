@@ -1,9 +1,10 @@
-define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
+define(["jquery", "backbone"], function($, Backbone) {
 
     var ModalDialog = Backbone.View.extend({
         className : "modal-container",
         initialize : function() {
             _.bindAll(this, "close");
+            this.template = this.options.template;
         },
         events : {
             "touchend .close"    : "close",
@@ -25,7 +26,6 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
 
             return this;
         },
-        template : Handlebars.templates["modal-component"],
         render : function() {
             this.$el.html(this.template(this.model.toJSON()));
             this.options.parent.append(this.$el);

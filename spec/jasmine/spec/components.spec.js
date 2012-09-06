@@ -1,4 +1,4 @@
-define("components.spec", ["components", "backbone"], function (Components, Backbone) {
+define("components.spec", ["components", "backbone", "handlebars"], function (Components, Backbone, Handlebars) {
 
     // Assign components to local variables for spec brevity
     var ModalDialog         = Components.ModalDialog,
@@ -16,7 +16,11 @@ define("components.spec", ["components", "backbone"], function (Components, Back
             var modal, attributes, touchendEvent;
 
             beforeEach(function() {
-                attributes      = { model : new Backbone.Model(), parent : $("<div>") };
+                attributes      = {
+                    model       : new Backbone.Model(),
+                    parent      : $("<div>"),
+                    template    : Handlebars.compile("<div class='close'></div> <div class='modal'></div> <div class='buy-more'></div> <div class='cancel'></div>")
+                };
                 modal           = new ModalDialog(attributes);
                 touchendEvent   = $.Event("touchend", {originalEvent : {touches : [1]}});
             });
@@ -35,6 +39,10 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             it("should have a class name 'modal-container'", function() {
                 expect(modal.el.className).toEqual("modal-container");
+            });
+
+            it("should have a template defined", function() {
+                expect(new ModalDialog(_.extend(attributes, {template : "some template"})).template).toEqual("some template");
             });
 
             it("should have a tap event on the close button and overlay", function() {
@@ -60,17 +68,13 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(modal.template).toBeDefined();
             });
             it("should use the template when rendering", function() {
-                var spy = sinon.spy(ModalDialog.prototype, "template");
-                new ModalDialog(attributes).render();
-                expect(spy.called).toBeTruthy();
-                spy.restore();
+                modal = new ModalDialog(_.extend(attributes, {template : sinon.spy()})).render();
+                expect(modal.template.called).toBeTruthy();
             });
             it("should return the itself from render / close for chaining", function() {
-                var stub = sinon.stub(ModalDialog.prototype, "template");
-                modal = new ModalDialog(attributes);
+                modal = new ModalDialog(_.extend(attributes, {template : sinon.stub()})).render();
                 expect(modal.render()).toEqual(modal);
                 expect(modal.close(touchendEvent)).toEqual(modal);
-                stub.restore();
             });
 
             it("should trigger an event when closing the view", function() {

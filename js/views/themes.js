@@ -16,7 +16,8 @@ define(["templates", "components"], function(Templates, Components) {
                     type : Components.ListItemView,
                     template : Templates["empty"]["currencyPack"]
                 }
-            }
+            },
+            modalDialogTemplate : Templates["empty"]["modalDialog"]
         },
         basic : {
             virtualGoodsView : {
@@ -32,7 +33,8 @@ define(["templates", "components"], function(Templates, Components) {
                     type : Components.ListItemView,
                     template : Templates["basic"]["currencyPack"]
                 }
-            }
+            },
+            modalDialogTemplate : Templates["basic"]["modalDialog"]
         },
         grid : {
             virtualGoodsView : {
@@ -48,7 +50,8 @@ define(["templates", "components"], function(Templates, Components) {
                     type : Components.ListItemView,
                     template : Templates["grid"]["currencyPack"]
                 }
-            }
+            },
+            modalDialogTemplate : Templates["grid"]["modalDialog"]
         },
         muffinRush : {
             virtualGoodsView : {
@@ -64,7 +67,8 @@ define(["templates", "components"], function(Templates, Components) {
                     type : Components.ListItemView,
                     template : Templates["muffinRush"]["currencyPack"]
                 }
-            }
+            },
+            modalDialogTemplate : Templates["muffinRush"]["modalDialog"]
         }
     };
 

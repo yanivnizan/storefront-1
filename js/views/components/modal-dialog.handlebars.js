@@ -1,6 +1,6 @@
 
 Handlebars.templates = Handlebars.templates || {};
-Handlebars.templates['modal-component'] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+Handlebars.templates['modal-dialog'] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 

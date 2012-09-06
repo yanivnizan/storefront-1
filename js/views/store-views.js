@@ -81,7 +81,8 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         openDialog : function(currency) {
             new Components.ModalDialog({
                 parent : this.$el,
-                model : this.model.get("virtualCurrencies").get(currency)
+                model : this.model.get("virtualCurrencies").get(currency),
+                template : this.theme.modalDialogTemplate
             }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);

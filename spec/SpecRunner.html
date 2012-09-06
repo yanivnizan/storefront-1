@@ -31,7 +31,7 @@
                 components          : "views/components",
                 templates           : "views/templates",
                 themes              : "views/themes",
-                modalComponent      : "views/components/modal-component.handlebars",
+                modalDialog         : "views/components/modal-dialog.handlebars",
                 "components.spec"   : "../spec/jasmine/spec/components.spec",
                 "generator.spec"    : "../spec/jasmine/spec/generator.spec",
                 "storeView.spec"    : "../spec/jasmine/spec/store-view.spec",
@@ -42,7 +42,7 @@
                 underscore          : "libs/underscore-min",
                 backbone            : "libs/backbone-min",
                 backboneRelational  : "libs/backbone-relational",
-                handlebars          : "libs/handlebars.runtime-1.0.0.beta.6"
+                handlebars          : "libs/handlebars-1.0.0.beta.6"
             },
             shim: {
                 underscore: {
@@ -58,7 +58,7 @@
                 templates: {
                     deps: ['handlebars']
                 },
-                modalComponent: {
+                modalDialog: {
                     deps: ['handlebars']
                 },
                 handlebars : {
