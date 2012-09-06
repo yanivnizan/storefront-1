@@ -1,9 +1,8 @@
 define("storeView.spec", ["storeViews", "models", "templates", "components", "themes"], function (StoreViews, Models, Templates, Components, Themes) {
 
+    // Assign to local variables for spec brevity
     var StoreView           = StoreViews.StoreView,
-        ListItemView        = Components.ListItemView,
-        CollectionListView  = Components.CollectionListView,
-        CollectionGridView  = Components.CollectionGridView;
+        CollectionListView  = Components.CollectionListView;
 
 
     describe('Soomla Store Master Views', function () {
@@ -25,50 +24,51 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                     nativeAPI   : nativeAPIStub,
                     theme       : Themes.empty
                 };
-                delete SoomlaJS.store;
-                delete SoomlaJS.storeView;
             });
 
             it("should be defined on the SoomlaJS namespace", function() {
                 SoomlaJS.initialize({template : {name : "empty"}});
                 expect(SoomlaJS.storeView).toBeDefined();
                 expect(SoomlaJS.storeView).toBeInstanceOf(StoreView);
+                delete SoomlaJS.store;
+                delete SoomlaJS.storeView;
             });
 
-            it("should have the theme defined on the view", function() {
+            it("should have a theme defined", function() {
                expect(new StoreView(attributes).theme).toEqual(attributes.theme);
             });
 
-            it("should create two item collection sub-views", function() {
+            it("should have two item collection sub-views", function() {
                 storeView = new StoreView(attributes);
                 expect(storeView.virtualGoodsView).toBeInstanceOf(Components.BaseCollectionView);
                 expect(storeView.currencyPacksView).toBeInstanceOf(Components.BaseCollectionView);
             });
 
-            it("should create two item collection views when initiated with virtual goods and currency packs", function() {
-                var stub = sinon.stub(CollectionListView.prototype, "render", function(){ return this; });
+            it("should render two item collection views when instantiated and rendered", function() {
+                // The empty theme has the same view type for both the virtual goods and the currency packs
+                var stub = sinon.stub(Themes.empty.virtualGoodsView.type.prototype, "render", function(){ return this; });
                 new StoreView(attributes).render();
                 expect(stub.calledTwice).toBeTruthy();
-                stub.restore();  // Restore original stubbed function to prototype
+                stub.restore();
             });
 
             it("should provide an API for opening a modal dialog", function() {
                 var spy = sinon.spy(Components.ModalDialog.prototype, "render");
                 storeView = new StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
                 expect(spy.called).toBeTruthy();
-                spy.restore();  // Restore original spied function to prototype
+                spy.restore();
             });
 
             it("should leave the store when the back button is tapped", function () {
-                storeView = new StoreView(attributes);
-                storeView.$(".leave-store").trigger(touchendEvent);
+                new StoreView(attributes).$(".leave-store").trigger(touchendEvent);
                 expect(nativeAPIStub.wantsToLeaveStore.called).toBeTruthy();
             });
 
             it("should call a 'beforeLeave' callback if provided when tapping the back button", function () {
-                storeView = new StoreView(_.extend({}, attributes, { callbacks : { beforeLeave : sinon.spy() } }));
+                var spy = sinon.spy();
+                storeView = new StoreView(_.extend({}, attributes, { callbacks : { beforeLeave : spy } }));
                 storeView.$(".leave-store").trigger(touchendEvent);
-                expect(storeView.options.callbacks.beforeLeave.called).toBeTruthy();
+                expect(spy.called).toBeTruthy();
             });
 
             it("should show the currency store when 'Buy more' is tapped", function () {
@@ -76,7 +76,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                 storeView = new StoreView(attributes);
                 storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
-                spy.restore();  // Restore original spied function to prototype
+                spy.restore();
             });
 
             it("should show the goods store when 'Back' is tapped", function () {
@@ -84,7 +84,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                 storeView = new StoreView(attributes);
                 storeView.$(".back").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
-                spy.restore();  // Restore original spied function to prototype
+                spy.restore();
             });
 
             it("should move to the currency store if the insufficient funds dialog returns 'buyMore'", function() {
@@ -92,11 +92,11 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                 storeView = new StoreView(attributes).openDialog(Models.Currency.prototype.defaults.itemId);
                 storeView.$(".buy-more").trigger(touchendEvent);
                 expect(spy.called).toBeTruthy();
-                spy.restore();  // Restore original spied function to prototype
+                spy.restore();
             });
 
 
-            describe("=== Extended pointing device events", function() {
+            describe("Extended pointing device events", function() {
 
                 beforeEach(function() {
                     _.extend(StoreView.prototype.events, {
@@ -128,7 +128,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                     storeView = new StoreView(attributes);
                     storeView.$(".buy-more").click();
                     expect(spy.called).toBeTruthy();
-                    spy.restore();  // Restore original spied function to prototype
+                    spy.restore();
                 });
 
                 it("should show the goods store when 'Back' is clicked", function () {
@@ -136,12 +136,12 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                     storeView = new StoreView(attributes);
                     storeView.$(".back").click();
                     expect(spy.called).toBeTruthy();
-                    spy.restore();  // Restore original spied function to prototype
+                    spy.restore();
                 });
 
             });
 
-            describe("=== Native API calls & Transaction management", function() {
+            describe("Native API calls & Transaction management", function() {
 
                 var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub, themeStub;
 
@@ -169,11 +169,6 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                         nativeAPI           : nativeAPIStub,
                         theme               : themeStub
                     };
-                });
-
-                it("should accept 2 Backbone view prototypes to use when rendering item collections", function () {
-                    storeView = new StoreView(attributes).render();
-                    expect(ViewStub.prototype.render.calledTwice).toBeTruthy();
                 });
 
                 it("should accept a template options object", function() {

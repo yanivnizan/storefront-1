@@ -2,6 +2,9 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
 
     var ModalDialog = Backbone.View.extend({
         className : "modal-container",
+        initialize : function() {
+            _.bindAll(this, "close");
+        },
         events : {
             "touchend .close"    : "close",
             "touchend .modal"    : "close",
@@ -22,9 +25,6 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
 
             return this;
         },
-        initialize : function() {
-            _.bindAll(this, "close");
-        },
         template : Handlebars.templates["modal-component"],
         render : function() {
             this.$el.html(this.template(this.model.toJSON()));
@@ -34,13 +34,13 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
     });
 
     var ListItemView = Backbone.View.extend({
+        className : "item",
+        tagName : "li",
         initialize : function() {
             _.bindAll(this, "onSelect", "render");
             this.template = this.options.template;
             this.model.on("change:balance change:price change:currency", this.render);
         },
-        className : "item",
-        tagName : "li",
         events : {
             "touchend" : "onSelect"
         },
@@ -112,6 +112,40 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
     });
 
     var CollectionGridView = BaseCollectionView.extend({
+        initialize : function(options) {
+            // Call super constructor
+            this.constructor.__super__.initialize.call(this, options);
+            (this.type) || (this.type = GridItemView); // For testing purposes
+            _.bindAll(this, "adjustWidth");
+
+            // Instantiate subviews
+            var $this = this;
+            this.collection.each(function(item) {
+                var view = new $this.type({
+                    model    : item,
+                    template : $this.template,
+                    type        : GridItemView
+                }).on("selected", function(model) {
+                    $this.trigger("selected", model);
+                });
+                $this.subViews.push(view);
+            });
+        },
+        adjustWidth : function() {
+
+            // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
+            // CSS flex box doesn't support a perfect grid like this when elements contain excessive text.
+            // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
+            // This assumes that the container has no margin, border or padding.
+
+            var columns             = this.options.templateProperties.columns,
+                subject             = this.subViews[0].$el,
+                trueElementWidth    = (this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
+
+            _.each(this.subViews, function(subView) {
+                subView.$el.css("width", trueElementWidth);
+            });
+        },
         render : function() {
             (this.type) || (this.type = GridItemView); // For testing purposes
             var columns  = this.options.templateProperties.columns,
@@ -119,35 +153,16 @@ define(["jquery", "backbone", "modalComponent"], function($, Backbone) {
 
             // Render each item and append it
             var currentRow;
-            this.collection.each(function(item, i) {
+            _.each(this.subViews, function(view, i) {
                 if (i % columns == 0) {
                     currentRow = $("<div>", {class : "row"});
                     $this.$el.append(currentRow);
                 }
-                var view = new $this.type({
-                    model       : item,
-                    template    : $this.template,
-                    type        : GridItemView
-                }).on("selected", function(model) {
-                        $this.trigger("selected", model);
-                    });
-                $this.subViews.push(view);
                 currentRow.append(view.render().el);
             });
 
-            // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
-            // CSS flex box doesn't support a perfect grid like this when elements contain excessive text.
-            // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
-            // This assumes that the container has no margin, border or padding.
             // NOTE: Must set timeout 0 to return to event loop, otherwise the styles aren't applied yet and the calculation yields 0
-            setTimeout(function() {
-                var subject = $this.subViews[0].$el;
-                var trueElementWidth = ($this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
-                _.each($this.subViews, function(subView) {
-                    subView.$el.css("max-width", trueElementWidth);
-                });
-            }, 0);
-
+            setTimeout(this.adjustWidth, 0);
             return this;
         }
     });

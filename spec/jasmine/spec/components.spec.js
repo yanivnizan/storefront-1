@@ -1,5 +1,6 @@
 define("components.spec", ["components", "backbone"], function (Components, Backbone) {
 
+    // Assign components to local variables for spec brevity
     var ModalDialog         = Components.ModalDialog,
         ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
@@ -24,6 +25,10 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(ModalDialog).toBeDefined();
             });
 
+            it("should be an instance of Backbone.View", function() {
+                expect(modal).toBeInstanceOf(Backbone.View);
+            });
+
             it("should create a div", function() {
                 expect(modal.el.nodeName).toEqual("DIV");
             });
@@ -37,7 +42,7 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(modal.events["touchend .modal"]).toBeDefined();
             });
 
-            it("should close the modal when the close button \ overlay is tapped", function() {
+            it("should close the modal when the close button / overlay is tapped", function() {
                 _.each([".close", ".modal"], function(selector) {
                     var spy = sinon.spy(ModalDialog.prototype, "close");
                     new ModalDialog(attributes).render().$(selector).trigger(touchendEvent);
@@ -51,8 +56,6 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(modal.$el.parent().length).toEqual(0);
             });
 
-            // TODO: Detach from events when closing
-
             it("should have a template defined", function() {
                 expect(modal.template).toBeDefined();
             });
@@ -62,7 +65,7 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(spy.called).toBeTruthy();
                 spy.restore();
             });
-            it("should return the component from render \ close for chaining", function() {
+            it("should return the itself from render / close for chaining", function() {
                 var stub = sinon.stub(ModalDialog.prototype, "template");
                 modal = new ModalDialog(attributes);
                 expect(modal.render()).toEqual(modal);
@@ -129,11 +132,11 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(view.el.className).toEqual("item");
             });
 
-            it("should have a tap event on the close button and overlay", function() {
+            it("should have a tap event on the entire item", function() {
                 expect(view.events["touchend"]).toBeDefined();
             });
 
-            it("should have template defined on the view after construction", function() {
+            it("should have a template defined", function() {
                 expect(new ListItemView(_.extend({template : "some template"}, attributes)).template).toEqual("some template");
             });
 
@@ -151,14 +154,14 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(view.render()).toEqual(view);
             });
 
-            it("should trigger a 'selected' event on the view when tapped", function() {
+            it("should trigger a 'selected' event on itself with its model when tapped", function() {
                 var spy = sinon.spy();
                 view = new ListItemView(attributes);
                 view.on("selected", spy).$el.trigger(touchendEvent);
                 expect(spy.calledWith(model)).toBeTruthy();
             });
 
-            it("should trigger an event with its model when clicked", function () {
+            it("should trigger a 'selected' event on itself with its model when clicked", function () {
                 var spy     = sinon.spy();
                 _.extend(ListItemView.prototype.events, { click : "onSelect" });
                 new ListItemView(attributes).on("selected", spy).$el.click();
@@ -203,6 +206,10 @@ define("components.spec", ["components", "backbone"], function (Components, Back
         describe("BaseCollectionView", function() {
             it("should be defined", function() {
                 expect(BaseCollectionView).toBeDefined();
+            });
+
+            it("should be an instance of Backbone.View", function() {
+                expect(new BaseCollectionView()).toBeInstanceOf(Backbone.View);
             });
 
             it("should have a template defined", function() {
@@ -251,7 +258,7 @@ define("components.spec", ["components", "backbone"], function (Components, Back
                 expect(stubType.prototype.render.called).toBeTruthy();
             });
 
-            it("should trigger an event when one of its items were selected", function () {
+            it("should trigger an event when one of its items was selected", function () {
                 var spy     = sinon.spy(),
                     model   = new Backbone.Model();
 
@@ -310,6 +317,22 @@ define("components.spec", ["components", "backbone"], function (Components, Back
 
             it("should create a DIV tag", function () {
                 expect(view.el.nodeName).toEqual("DIV");
+            });
+
+            it("should create instances of subviews upon construction", function() {
+                expect(view.subViews.length).toEqual(1);
+            });
+
+            it("should adjust its items' width asynchronously when rendering", function() {
+                var stub = sinon.stub(CollectionGridView.prototype, "adjustWidth");
+                runs( function() {
+                    new CollectionGridView(_.extend({}, attributes, {collection : new Backbone.Collection()})).render();
+                });
+                waits(0);
+                runs(function() {
+                    expect(stub.called).toBeTruthy();
+                    stub.restore();
+                })
             });
 
         });
