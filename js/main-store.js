@@ -5,7 +5,7 @@ require.config({
         storeViews          : "views/store-views",
         templates           : "views/templates",
         themes              : "views/themes",
-        modalComponent      : "views/templates/modal-component.handlebars",
+        modalComponent      : "views/components/modal-component.handlebars",
 
         // 3rd party modules
         jquery              : "libs/jquery/jquery-1.8.0.min",

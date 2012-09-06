@@ -1,12 +1,12 @@
 define( [
-    "templates/basic-template.handlebars",
-    "templates/basic-item.handlebars",
-    "templates/basic-currencyPack.handlebars",
-    "templates/grid-template.handlebars",
-    "templates/grid-item.handlebars",
-    "templates/muffinRush-template.handlebars",
-    "templates/muffinRush-item.handlebars",
-    "templates/muffinRush-currencyPack.handlebars"
+    "../themes/templates/basic-template.handlebars",
+    "../themes/templates/basic-item.handlebars",
+    "../themes/templates/basic-currencyPack.handlebars",
+    "../themes/templates/grid-template.handlebars",
+    "../themes/templates/grid-item.handlebars",
+    "../themes/templates/muffinRush-template.handlebars",
+    "../themes/templates/muffinRush-item.handlebars",
+    "../themes/templates/muffinRush-currencyPack.handlebars"
 ], function() {
 
     Handlebars.registerHelper('formatCurrency', function(value) {

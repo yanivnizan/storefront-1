@@ -76,7 +76,7 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
 
                 // Append appropriate stylesheet
                 // TODO: render the store as a callback to the CSS load event
-                var link = $("<link rel='stylesheet' href='css/templates/" + json.template.name + ".css'>");
+                var link = $("<link rel='stylesheet' href='themes/css/" + json.template.name + ".css'>");
                 link.appendTo($("head"));
                 storeView.render();
 
