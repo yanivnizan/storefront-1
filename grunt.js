@@ -4,43 +4,66 @@ require('shelljs/global');
 module.exports = function (grunt) {
 
     // Project configuration.
-    grunt.initConfig({
+    var config = {
         meta : {
-            version:'0.1.0',
-            banner:'/*! PROJECT_NAME - v<%= meta.version %> - ' +
+            version : '0.1.0',
+            banner : '/*! PROJECT_NAME - v<%= meta.version %> - ' +
                 '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
                 '* http://PROJECT_WEBSITE/\n' +
                 '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
                 'YOUR_NAME; Licensed MIT */'
         },
-        less:{
-            all:{
-                src  :['css/store.less'],
+        less : {
+            store : {
+                src  :'css/store.less',
                 dest :'dist/css/store.css',
-                options:{
-                    compress:true
+                options : {
+                    compress : true
                 }
             }
         },
-        requirejs:{
+        requirejs : {
             baseUrl         : 'js',
             mainConfigFile  : 'js/main-store.js',
             name            : "main-store",
             out             : "dist/js/main-store.js"
         }
+    };
+
+    // Extend the config object to include LESS pre-compilation tasks for all themes
+    ["basic", "grid", "muffinRush"].forEach(function(name) {
+        config.less[name] = {
+            src  :'themes/css/less/' + name + '.less',
+            dest :'dist/themes/css/' + name + '.css',
+            options:{
+                compress:true
+            }
+        }
     });
+
+    grunt.initConfig(config);
 
     grunt.loadNpmTasks('grunt-less');
     grunt.loadNpmTasks('grunt-requirejs');
 
+
     // Register helper tasks
 
     grunt.registerTask('copy', 'Copies more necessary resources to the distribution folder', function() {
+
+        // Copy Javascript
         mkdir("-p", "dist/js/libs");
         cp("js/libs/require.js", "dist/js/libs/");
+
+        // Copy HTML & images
         cp("store.html", "store_def.json", "dist/");
         cp("-R", "img", "dist/");
+
+        // Copy themes
+        mkdir("-p", "dist/themes/templates");
+        cp("themes/templates/*", "dist/themes/templates/");
     });
+
     grunt.registerTask('clean', 'Cleans the distribution folder', function() {
         rm("-rf", "dist");
         mkdir("dist");
