@@ -10,7 +10,12 @@ Handlebars.templates['muffinRush-item'] = Handlebars.template(function (Handleba
   stack1 = foundHelper || depth0.imgFilePath;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "imgFilePath", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\" class=\"foreground\">\n</div>\n<div class=\"content\">\n    <h1>";
+  buffer += escapeExpression(stack1) + "\" class=\"foreground\">\n    <div class=\"balance\">\n        <label>";
+  foundHelper = helpers.balance;
+  stack1 = foundHelper || depth0.balance;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "balance", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</label>\n    </div>\n</div>\n<div class=\"content\">\n    <h1>";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -20,12 +25,7 @@ Handlebars.templates['muffinRush-item'] = Handlebars.template(function (Handleba
   stack1 = foundHelper || depth0.description;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "description", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</div>\n    <div class=\"box-horizontal\">\n        <div class=\"balance\">Owned: <label>";
-  foundHelper = helpers.balance;
-  stack1 = foundHelper || depth0.balance;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "balance", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "</label></div>\n    </div>\n</div>\n<div class=\"price\">\n    <img src=\"";
+  buffer += escapeExpression(stack1) + "</div>\n</div>\n<div class=\"price\">\n    <img src=\"";
   foundHelper = helpers.currency;
   stack1 = foundHelper || depth0.currency;
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.imgFilePath);

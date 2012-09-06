@@ -49,7 +49,7 @@
             "itemId"        : "pavlova"
         },
         {
-            "name"          : "Chocolate Cake",
+            "name"          : "Choco-Cake",
             "description"   : "A classic cake to maximize customer satisfaction",
             "imgFilePath"   : "examples/muffinRush/items/chocolate_cake.png",
             "priceModel"    : {

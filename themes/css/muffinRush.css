@@ -11,12 +11,16 @@
     More info at: http://lesselements.com
 -----------------------------------------------------*/
 /*==============  Layout  ==============*/
+@font-face {
+  font-family: Hobo;
+  src: url('../fonts/HoboStd.otf');
+}
 .header,
 .footer {
   text-align: center;
 }
 .items-container {
-  margin: 20px 40px;
+  margin: 20px 30px;
   -webkit-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
   -moz-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
   box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
@@ -62,18 +66,6 @@
 }
 .virtualGoods .item .visual,
 .currencyPacks .item .visual {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: center;
-  box-align: center;
   position: relative;
   width: 100px;
   height: 100px;
@@ -85,7 +77,6 @@
   max-width: 80px;
   max-height: 80px;
   left: 10px;
-  top: 10px;
 }
 .virtualGoods .item .visual .background,
 .currencyPacks .item .visual .background {
@@ -93,9 +84,30 @@
   top: -7px;
   left: -7px;
 }
+.virtualGoods .item .visual .balance,
+.currencyPacks .item .visual .balance {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 1;
+  position: absolute;
+  bottom: 7px;
+  width: 100%;
+}
+.virtualGoods .item .visual .balance label,
+.currencyPacks .item .visual .balance label {
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
 .virtualGoods .item .content,
 .currencyPacks .item .content {
-  padding: 10px 15px;
+  padding: 15px 15px 10px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
@@ -108,30 +120,27 @@
 }
 .virtualGoods .item h1,
 .currencyPacks .item h1 {
-  font-size: 29px;
-  line-height: 29px;
+  font-size: 27px;
+  line-height: 30px;
+  font-family: Hobo;
   margin: 0 0 2px;
 }
 .virtualGoods .item .description,
 .currencyPacks .item .description {
-  font-size: 13px;
-}
-.virtualGoods .item .balance,
-.currencyPacks .item .balance {
-  font-size: 10px;
-  font-weight: bold;
-  text-align: left;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
+  font-size: 14px;
+  line-height: 16px;
+  font-family: Helvetica;
 }
 .virtualGoods .item .price,
 .currencyPacks .item .price {
   width: 55px;
   padding: 5px;
   text-align: center;
+  font-size: 20px;
   font-weight: bold;
   font-style: italic;
+  color: #ab744d;
+  text-shadow: 2px 2px 2px #FFFFFF;
 }
 .currencyPacks .item .price {
   display: -webkit-box;
@@ -205,9 +214,6 @@
 .back,
 .buy-more {
   cursor: pointer;
-  -webkit-transition: -webkit-transform 0.05s;
-  -moz-transition: -moz-transform 0.05s;
-  transition: transform 0.05s;
 }
 .leave-store:active,
 .back:active,
