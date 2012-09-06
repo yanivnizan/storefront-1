@@ -213,11 +213,23 @@
   -moz-box-flex: 1;
   box-flex: 1;
   margin-top: 20px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: start;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: start;
+  -moz-box-align: center;
+  display: box;
+  box-orient: vertical;
+  box-pack: start;
+  box-align: center;
 }
-.header .balance {
+.header .balance-container .balance {
   position: relative;
 }
-.header .balance .container {
+.header .balance-container .container {
   position: absolute;
   top: 43px;
   left: 85px;
