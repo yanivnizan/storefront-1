@@ -124,8 +124,16 @@
 
 }
 
-.currencyPacks .item .price {
-	.box(vertical, center, stretch);
+// Currency Pack specific overrides
+.currencyPacks .item {
+	.price {
+		.box(vertical, center, center);
+		width: 100px;
+		font-size: 30px;
+	}
+	.content {
+		.box(vertical, center, center);
+	}
 }
 
 .header {

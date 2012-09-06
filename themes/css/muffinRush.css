@@ -165,15 +165,31 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-box-pack: center;
-  -webkit-box-align: stretch;
+  -webkit-box-align: center;
   display: -moz-box;
   -moz-box-orient: vertical;
   -moz-box-pack: center;
-  -moz-box-align: stretch;
+  -moz-box-align: center;
   display: box;
   box-orient: vertical;
   box-pack: center;
-  box-align: stretch;
+  box-align: center;
+  width: 100px;
+  font-size: 30px;
+}
+.currencyPacks .item .content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  box-align: center;
 }
 .header {
   height: 183px;
