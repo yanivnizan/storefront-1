@@ -247,13 +247,36 @@
 }
 .leave-store,
 .back,
-.buy-more {
+.buy-more,
+.cancel {
   cursor: pointer;
 }
 .leave-store:active,
 .back:active,
-.buy-more:active {
+.buy-more:active,
+.cancel:active {
   -webkit-transform: scale(1.5);
   -moz-transform: scale(1.5);
   transform: scale(1.5);
+}
+.dialog {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  box-align: center;
+  width: auto;
+}
+.dialog  > img {
+  display: block;
+}
+.dialog .actions {
+  margin-top: 10px;
 }

@@ -573,7 +573,6 @@ h1 {
   background: rgba(0, 0, 0, 0.6);
 }
 .dialog {
-  width: 80%;
   position: relative;
   background: #FFFFFF;
   -webkit-border-radius: 8px;

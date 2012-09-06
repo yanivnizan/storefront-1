@@ -171,10 +171,23 @@
 	}
 }
 
-.leave-store, .back, .buy-more {
+.leave-store, .back, .buy-more, .cancel {
 	cursor: pointer;
 
 	&:active {
 		.scale;
+	}
+}
+
+.dialog {
+	.box(vertical, center, center);
+	width: auto;
+
+	& > img {
+		display: block;
+	}
+
+	.actions {
+		margin-top: 10px;
 	}
 }
