@@ -263,14 +263,6 @@
 .cancel {
   cursor: pointer;
 }
-.leave-store:active,
-.back:active,
-.buy-more:active,
-.cancel:active {
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  transform: scale(1.5);
-}
 .dialog {
   display: -webkit-box;
   -webkit-box-orient: vertical;

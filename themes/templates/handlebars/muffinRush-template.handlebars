@@ -32,13 +32,15 @@
         <div class="title">
             <img src="examples/muffinRush/Store_Store.png">
         </div>
-        <div class="balance">
-            <img src="examples/muffinRush/YourMuf.png">
-            {{#each virtualCurrencies}}
-            <div class="container">
-                <label>{{this.balance}}</label>
+        <div class="balance-container">
+            <div class="balance">
+                <img src="examples/muffinRush/YourMuf.png">
+                {{#each virtualCurrencies}}
+                <div class="container">
+                    <label>{{this.balance}}</label>
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
     </div>
     <div class="items-container">
