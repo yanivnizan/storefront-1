@@ -54,6 +54,15 @@
 				max-height: @max;
 				left: (@size - @max) / 2;
 			}
+
+			.img-container {
+				position: absolute;
+				z-index: 1;
+				width: 100px;
+				height: 100px;
+				.box(vertical, center, center);
+			}
+
 			.background {
 				position: absolute;
 				top: -7px;

@@ -78,6 +78,25 @@
   max-height: 80px;
   left: 10px;
 }
+.virtualGoods .item .visual .img-container,
+.currencyPacks .item .visual .img-container {
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  box-align: center;
+}
 .virtualGoods .item .visual .background,
 .currencyPacks .item .visual .background {
   position: absolute;
