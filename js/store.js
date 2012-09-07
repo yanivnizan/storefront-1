@@ -1,4 +1,4 @@
-define(["jquery", "js-api", "native-api", "models", "storeViews", "components", "themes"], function($, jsAPI, NativeAPI, Models, StoreViews, Components, Themes) {
+define(["jquery", "js-api", "native-api", "models", "storeViews", "components", "handlebars"], function($, jsAPI, NativeAPI, Models, StoreViews, Components, Handlebars) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
@@ -65,22 +65,43 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
 
                 // Initialize model
                 this.newStore(json);
+                var $this = this;
 
-                // Initialize view
-                var storeView = this.storeView = new StoreViews.StoreView({
-                    model : this.store,
-                    el : $("#main"),
-                    callbacks : json ? json.callbacks : {},
-                    theme : Themes[json.template.name]
+                this.store.set("theme", json.theme);
+
+                var recursiveThemeUpdate = function(obj) {
+                    _.each(obj, function(value, key) {
+                        if (_.isObject(value)) {
+                            recursiveThemeUpdate(value);
+                        } else if (key == "template" && Handlebars.templates[value] && _.isFunction(Handlebars.templates[value])) {
+                            obj[key] = Handlebars.templates[value];
+                        }
+                    });
+                };
+
+                require(["themes/" + json.template.name + "/templates.js"], function() {
+
+                    var theme = $this.store.get("theme");
+                    recursiveThemeUpdate(theme);
+                    $this.store.set("theme", theme);
+
+                    // Initialize view
+                    var storeView = $this.storeView = new StoreViews.StoreView({
+                        model : $this.store,
+                        el : $("#main"),
+                        callbacks : json ? json.callbacks : {}
+                    });
+
+                    // Append appropriate stylesheet
+                    // TODO: render the store as a callback to the CSS load event
+                    var link = $("<link rel='stylesheet' href='themes/" + json.template.name + "/" + json.template.name + ".css'>");
+                    link.appendTo($("head"));
+                    storeView.render();
+
+                    if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
+
                 });
 
-                // Append appropriate stylesheet
-                // TODO: render the store as a callback to the CSS load event
-                var link = $("<link rel='stylesheet' href='themes/css/" + json.template.name + ".css'>");
-                link.appendTo($("head"));
-                storeView.render();
-
-                if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
                 return this.store;
             }
         });

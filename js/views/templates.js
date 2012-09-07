@@ -4,10 +4,6 @@ define( [
     "../themes/templates/basic-currencyPack.handlebars",
     "../themes/templates/grid-template.handlebars",
     "../themes/templates/grid-item.handlebars",
-    "../themes/templates/muffinRush-template.handlebars",
-    "../themes/templates/muffinRush-item.handlebars",
-    "../themes/templates/muffinRush-currencyPack.handlebars",
-    "../themes/templates/muffinRush-modalDialog.handlebars",
     "modalDialog"
 ], function() {
 
@@ -30,12 +26,12 @@ define( [
             currencyPack: function(){},
             modalDialog : templates["modal-dialog"]
         },
-        muffinRush : {
-            template    : templates["muffinRush-template"],
-            virtualGood : templates["muffinRush-item"],
-            currencyPack: templates["muffinRush-currencyPack"],
-            modalDialog : templates["muffinRush-modalDialog"]
-        },
+//        muffinRush : {
+//            template    : templates["muffinRush-template"],
+//            virtualGood : templates["muffinRush-item"],
+//            currencyPack: templates["muffinRush-currencyPack"],
+//            modalDialog : templates["muffinRush-modalDialog"]
+//        },
         empty : {
             template    : function(){},
             virtualGood : function(){},

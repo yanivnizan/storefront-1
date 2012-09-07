@@ -1,0 +1,139 @@
+{
+    "template" :  {
+        "name" :  "muffinRush",
+        "elements" :  {
+            "title" :  {
+                "name"  :  "Store"
+            },
+            "buyMore" :  {
+                "text"          :  "More coins",
+                "imgFilePath"   :  "examples/muffinRush/GetMore.png"
+            }
+        },
+        "properties" : {}
+    },
+    "theme" : {
+        "template" : "template",
+        "virtualGoodsView" : {
+            "type" : "Components.CollectionListView",
+            "item" : {
+                "type" : "Components.ListItemView",
+                "template" : "item"
+            }
+        },
+        "currencyPacksView" : {
+            "type" : "Components.CollectionListView",
+            "item" : {
+                "type" : "Components.ListItemView",
+                "template" : "currencyPack"
+            }
+        },
+        "modalDialog" : {
+            "template" : "modalDialog"
+        }
+    },
+    "background" : "examples/muffinRush/Bg_Wall.png",
+    "virtualCurrencies" : [
+        {
+            "name"          : "Muffins",
+            "description"   : "",
+            "itemId"        : "currency_muffin",
+            "balance"       : 1000,
+            "imgFilePath"   : "examples/muffinRush/muffin.png"
+        }
+    ],
+    "isCurrencyStoreDisabled" : false,
+    "virtualGoods" : [
+        {
+            "name"          : "Fruit Cake",
+            "description"   : "Customers buy a double portion on each purchase of this cake",
+            "imgFilePath"   : "examples/muffinRush/items/fruit_cake.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 225
+                }
+            },
+            "itemId"        : "fruit_cake"
+        },
+        {
+            "name"          : "Pavlova",
+            "description"   : "Gives customers a sugar rush and they call their friends",
+            "imgFilePath"   : "examples/muffinRush/items/pavlova.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 175
+                }
+            },
+            "itemId"        : "pavlova"
+        },
+        {
+            "name"          : "Choco-Cake",
+            "description"   : "A classic cake to maximize customer satisfaction",
+            "imgFilePath"   : "examples/muffinRush/items/chocolate_cake.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 250
+                }
+            },
+            "itemId"        : "chocolate_cake"
+        },
+        {
+            "name"          : "Cream Cup",
+            "description"   : "Increase bakery reputation with this original pastry",
+            "imgFilePath"   : "examples/muffinRush/items/cream_cup.png",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 50
+                }
+            },
+            "itemId"        : "cream_cup"
+        }
+    ],
+    "currencyPacks" : [
+        {
+            "name"              : "10 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins01.png",
+            "itemId"            : "muffins_10",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_10",
+            "price"             : 0.99,
+            "amount"            : 10,
+            "consumable"        : false
+        },
+        {
+            "name"              : "50 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins02.png",
+            "itemId"            : "muffins_50",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "android.test.purchased",
+            "price"             : 1.99,
+            "amount"            : 50,
+            "consumable"        : false
+        },
+        {
+            "name"              : "400 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins03.png",
+            "itemId"            : "muffins_400",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_400",
+            "price"             : 4.99,
+            "amount"            : 400,
+            "consumable"        : false
+        },
+        {
+            "name"              : "1000 Muffins",
+            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins04.png",
+            "itemId"            : "muffins_1000",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_1000",
+            "price"             : 8.99,
+            "amount"            : 1000,
+            "consumable"        : false
+        }
+    ]
+
+}

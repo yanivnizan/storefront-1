@@ -11,6 +11,8 @@ GEM
     guard-less (0.1.2)
       guard (>= 0.2.2)
       less (~> 2.1.0)
+    guard-shell (0.5.1)
+      guard (>= 1.1.0)
     guard-steering (0.0.2)
       guard (>= 1.0.2)
       steering (>= 1.1.0)
@@ -43,6 +45,7 @@ PLATFORMS
 DEPENDENCIES
   guard (= 1.2.3)
   guard-less (= 0.1.2)
+  guard-shell (= 0.5.1)
   guard-steering (= 0.0.2)
   libnotify (= 0.7.3)
   steering (= 1.1.0)

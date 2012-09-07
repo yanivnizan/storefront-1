@@ -1,4 +1,4 @@
-define(["jquery", "templates", "backbone", "components"], function($, Templates, Backbone, Components) {
+define(["jquery", "backbone", "components"], function($, Backbone, Components) {
 
     // Determine which CSS transition event to bind according to the browser vendor
     var transEndEventNames = {
@@ -26,24 +26,27 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             var name = this.model.get("templateName");
 
             this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
-            this.theme      = this.options.theme;
+            this.theme      = this.model.get("theme");
 
             this.model.on("change:background", this.renderBackground);
             this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
+            var VirtualGoodsView  = eval(this.theme.virtualGoodsView.type),
+                CurrencyPacksView = eval(this.theme.currencyPacksView.type);
+
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
             // as we like without losing the jQuery bindings each time.
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new this.theme.virtualGoodsView.type({
+            this.virtualGoodsView = new VirtualGoodsView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
                 template            : this.theme.virtualGoodsView.item.template,
                 templateProperties  : this.model.get("templateProperties")
             }).on("selected", this.wantsToBuyVirtualGoods);
-            this.currencyPacksView = new this.theme.currencyPacksView.type({
+            this.currencyPacksView = new CurrencyPacksView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
                 template            : this.theme.currencyPacksView.item.template,
@@ -82,7 +85,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
             new Components.ModalDialog({
                 parent : this.$el,
                 model : this.model.get("virtualCurrencies").get(currency),
-                template : this.theme.modalDialogTemplate
+                template : this.theme.modalDialog.template
             }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
@@ -95,7 +98,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         renderTemplate : function() {
             var name = this.model.get("templateName");
-            this.$el.html(Templates[name].template(this.model.toJSON()));
+            this.$el.html(this.theme.template(this.model.toJSON()));
 
 
             // TODO: Release previous view bindings
@@ -107,7 +110,7 @@ define(["jquery", "templates", "backbone", "components"], function($, Templates,
         },
         render : function() {
             var name = this.model.get("templateName");
-            this.$el.addClass(name).html(Templates[name].template(this.model.toJSON()));
+            this.$el.addClass(name).html(this.theme.template(this.model.toJSON()));
             this.$("#currency-store").css("visibility", "hidden");
 
             // Render subviews (items in goods store and currency store)

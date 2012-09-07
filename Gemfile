@@ -6,5 +6,6 @@ group :development do
   gem 'guard-less',     '0.1.2' # For LESS CSS preprocessing
   gem 'steering',       '1.1.0' # For Handelbars.js precompiling
   gem 'guard-steering', '0.0.2' # For Handelbars.js precompiling
+  gem 'guard-shell',    '0.5.1' # For Handelbars.js precompiling
 end
 
