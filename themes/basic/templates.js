@@ -1,6 +1,6 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['basic-currencyPack'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['currencyPack'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
 
@@ -23,7 +23,7 @@ templates['basic-currencyPack'] = template(function (Handlebars,depth0,helpers,p
   else { stack1 = depth0.price; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "$</span>\n</div>\n";
   return buffer;});
-templates['basic-item'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['item'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
 
@@ -54,7 +54,22 @@ templates['basic-item'] = template(function (Handlebars,depth0,helpers,partials,
   stack1 = typeof stack1 === functionType ? stack1() : stack1;
   buffer += escapeExpression(stack1) + "\" class=\"currency\">\n        </div>\n    </div>\n</div>\n";
   return buffer;});
-templates['basic-template'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['modalDialog'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"modal\">\n    <div class=\"dialog\">\n        <img src=\"img/default/icons/close-dialog.png\" class=\"close\">\n        <h3>Not enough ";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</h3>\n        <h4>Buy more ";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "?</h4>\n        <button class=\"cancel btn btn-large\">No</button>\n        <button class=\"buy-more btn btn-large btn-basic-primary\">Yes</button>\n    </div>\n</div>\n";
+  return buffer;});
+templates['template'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 

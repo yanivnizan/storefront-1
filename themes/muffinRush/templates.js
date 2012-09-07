@@ -59,7 +59,7 @@ templates['modalDialog'] = template(function (Handlebars,depth0,helpers,partials
   
 
 
-  return "<div class=\"modal\">\n    <div class=\"dialog\">\n        <img src=\"img/icons/close-dialog.png\" class=\"close\">\n\n        <img src=\"themes/muffinRush/img/modalDialog/AlertText_Sorry.png\">\n        <img src=\"themes/muffinRush/img/modalDialog/Crumbs.png\">\n        <img src=\"themes/muffinRush/img/modalDialog/AlertText_Question.png\">\n\n        <div class=\"actions\">\n            <img src=\"themes/muffinRush/img/modalDialog/No.png\" class=\"cancel\">\n            <img src=\"themes/muffinRush/img/modalDialog/Yes.png\" class=\"buy-more\">\n        </div>\n    </div>\n</div>\n";});
+  return "<div class=\"modal\">\n    <div class=\"dialog\">\n        <img src=\"img/default/icons/close-dialog.png\" class=\"close\">\n\n        <img src=\"themes/muffinRush/img/modalDialog/AlertText_Sorry.png\">\n        <img src=\"themes/muffinRush/img/modalDialog/Crumbs.png\">\n        <img src=\"themes/muffinRush/img/modalDialog/AlertText_Question.png\">\n\n        <div class=\"actions\">\n            <img src=\"themes/muffinRush/img/modalDialog/No.png\" class=\"cancel\">\n            <img src=\"themes/muffinRush/img/modalDialog/Yes.png\" class=\"buy-more\">\n        </div>\n    </div>\n</div>\n";});
 templates['template'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;

@@ -4,7 +4,7 @@
         "orientationLandscape" : false,
         "elements" : {
             "buyMore" : {
-                "imgFilePath" : "img/examples/surf/clam.png",
+                "imgFilePath" : "themes/basic/img/clam.png",
                 "text" : "Get more clams"
             },
             "title" : {
@@ -16,6 +16,27 @@
         },
         "name" : "basic"
     },
+    "theme" : {
+        "name" :  "basic",
+        "template" : "template",
+        "virtualGoodsView" : {
+            "type" : "Components.CollectionListView",
+            "item" : {
+                "type" : "Components.ListItemView",
+                "template" : "item"
+            }
+        },
+        "currencyPacksView" : {
+            "type" : "Components.CollectionListView",
+            "item" : {
+                "type" : "Components.ListItemView",
+                "template" : "currencyPack"
+            }
+        },
+        "modalDialog" : {
+            "template" : "modalDialog"
+        }
+    },
     "currencyPacks" : [
         {
             "amount" : 200,
@@ -23,7 +44,7 @@
             "price" : 0.99,
             "description" : "Testing for a refund ...",
             "name" : "Super Saver Pack",
-            "imgFilePath" : "img/examples/surf/clam.png",
+            "imgFilePath" : "themes/basic/img/clam.png",
             "itemId" : "super_saver_pack",
             "productId" : "android.test.refunded"
         },
@@ -33,7 +54,7 @@
             "price" : 1.99,
             "description" : "Testing for an item purchase ...",
             "name" : "Malibu Medium Pack",
-            "imgFilePath" : "img/examples/surf/clam.png",
+            "imgFilePath" : "themes/basic/img/clam.png",
             "itemId" : "malibu_medium_pack",
             "productId" : "android.test.purchased"
         },
@@ -43,7 +64,7 @@
             "price" : 5.99,
             "description" : "Testing for purchase cacellation ...",
             "name" : "Pipeline Pumpin' Pack",
-            "imgFilePath" : "img/examples/surf/clam.png",
+            "imgFilePath" : "themes/basic/img/clam.png",
             "itemId" : "pipeline_pumpin_pack",
             "productId" : "android.test.canceled"
         },
@@ -53,7 +74,7 @@
             "price" : 15.99,
             "description" : "Testing for item unavailable ...",
             "name" : "Silver Pack",
-            "imgFilePath" : "img/examples/surf/clam.png",
+            "imgFilePath" : "themes/basic/img/clam.png",
             "itemId" : "pipeline_pumpin_pack",
             "productId" : "android.test.item_unavailable"
         }
@@ -61,15 +82,15 @@
     "virtualCurrencies" : [
         {
             "itemId" : "currency_clam",
-            "imgFilePath" : "img/examples/surf/clam.png",
+            "imgFilePath" : "themes/basic/img/clam.png",
             "description" : "",
             "name" : "clams"
         }
     ],
-    "background" : "img/theme-lime-bubbles.jpg",
+    "background" : "themes/basic/img/theme-lime-bubbles.jpg",
     "virtualGoods" : [
         {
-            "imgFilePath" : "img/examples/surf/blue-surfboard.png",
+            "imgFilePath" : "themes/basic/img/items/blue-surfboard.png",
             "itemId" : "blue_surfboard",
             "priceModel" :{
                 "type" : "static",
@@ -81,7 +102,7 @@
             "name" : "Rip Curl Shortboard"
         },
         {
-            "imgFilePath" : "img/examples/surf/girl-surfboard-th.png",
+            "imgFilePath" : "themes/basic/img/items/girl-surfboard-th.png",
             "itemId" : "girl_surfboard_th",
             "priceModel" :{
                 "type" : "balance",
@@ -98,7 +119,7 @@
             "name" : "Billanbog Vintage Longboard"
         },
         {
-            "imgFilePath" : "img/examples/surf/keelfish.png",
+            "imgFilePath" : "themes/basic/img/items/keelfish.png",
             "itemId" : "keelfish",
             "priceModel" :{
                 "type" : "static",
@@ -111,7 +132,7 @@
             "name" : "Keel Fish"
         },
         {
-            "imgFilePath" : "img/examples/surf/picasso-peeler.png",
+            "imgFilePath" : "themes/basic/img/items/picasso-peeler.png",
             "itemId" : "picasso_peeler",
             "priceModel" :{
                 "type" : "static",
@@ -124,7 +145,7 @@
             "name" : "Picasso Peeler"
         },
         {
-            "imgFilePath" : "img/examples/surf/reef-shredder.png",
+            "imgFilePath" : "themes/basic/img/items/reef-shredder.png",
             "itemId" : "reef_shredder",
             "priceModel" :{
                 "type" : "static",
@@ -137,7 +158,7 @@
             "name" : "Reef Shredder"
         },
         {
-            "imgFilePath" : "img/examples/surf/sixties-gun.png",
+            "imgFilePath" : "themes/basic/img/items/sixties-gun.png",
             "itemId" : "sixties_gun",
             "priceModel" :{
                 "type" : "static",
@@ -150,7 +171,7 @@
             "name" : "Sixties Gun"
         },
         {
-            "imgFilePath" : "img/examples/surf/traditional-fish.png",
+            "imgFilePath" : "themes/basic/img/items/traditional-fish.png",
             "itemId" : "traditional_fish",
             "priceModel" : {
                 "type" : "static",

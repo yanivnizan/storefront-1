@@ -5,7 +5,6 @@ require.config({
         storeViews          : "views/store-views",
         templates           : "views/templates",
         themes              : "views/themes",
-        modalDialog         : "views/components/modal-dialog.handlebars",
 
         // 3rd party modules
         jquery              : "libs/jquery/jquery-1.8.0.min",
@@ -28,9 +27,6 @@ require.config({
             deps: ['backbone']
         },
         templates: {
-            deps: ['handlebars']
-        },
-        modalDialog: {
             deps: ['handlebars']
         },
         handlebars : {

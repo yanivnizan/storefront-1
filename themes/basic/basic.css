@@ -273,7 +273,7 @@
 }
 .header .leave-store,
 .header .back {
-  background-image: url("../../img/icons/close.png");
+  background-image: url("img/close.png");
   width: 26px;
   height: 26px;
   cursor: pointer;

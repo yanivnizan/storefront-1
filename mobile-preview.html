@@ -64,7 +64,7 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
             else
                 return decodeURIComponent(results[1].replace(/\+/g, " "));
         };
-        var storeDefinition = getParameterByName("store_def") || "store_def.json";
+        var storeDefinition = getParameterByName("store_def") || "themes/basic/basic.json";
 
         $.ajax({
             url : storeDefinition,
