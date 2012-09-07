@@ -33,9 +33,13 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
                 if (json) {
 
                     if (json.background) attributes.background = json.background;
+
+                    if (json.theme) {
+                        if (json.theme.name)
+                            attributes.themeName = json.theme.name;
+                    }
+
                     if (json.template) {
-                        if (json.template.name)
-                            attributes.templateName = json.template.name;
 
                         if (json.template.orientationLandscape)
                             attributes.orientationLandscape = json.template.orientationLandscape;

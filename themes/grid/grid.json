@@ -13,8 +13,7 @@
         },
         "properties" : {
             "columns" : 3
-        },
-        "name" : "basic"
+        }
     },
     "theme" : {
         "name" :  "grid",

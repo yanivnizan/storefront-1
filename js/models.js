@@ -61,7 +61,7 @@ define(["backboneRelational"], function() {
             }
         ],
         defaults : {
-            templateName        : "basic",
+            themeName           : "basic",
             templateTitle       : "Store",
             moreCurrencyText    : "Get more coins",
             orientationLanscape : false,

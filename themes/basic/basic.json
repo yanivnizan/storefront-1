@@ -11,8 +11,7 @@
                 "name" : "Surf Store"
             }
         },
-        "properties" : {},
-        "name" : "basic"
+        "properties" : {}
     },
     "theme" : {
         "name" :  "basic",

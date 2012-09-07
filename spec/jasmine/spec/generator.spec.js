@@ -109,7 +109,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             });
 
             it("should have a default name", function() {
-                expect(SoomlaJS.store.get("templateName")).toEqual("basic");
+                expect(SoomlaJS.store.get("themeName")).toEqual("basic");
             });
 
             it("should have a default title 'Store'", function() {
@@ -234,8 +234,8 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             });
 
             it("should accept nested template.name", function() {
-                SoomlaJS.newStore({ template : { name : "basic"}});
-                expect(SoomlaJS.store.get("templateName")).toEqual("basic");
+                SoomlaJS.newStore({ theme : { name : "grid"}});
+                expect(SoomlaJS.store.get("themeName")).toEqual("grid");
             });
 
             it("should accept nested template.orientationLandscape", function() {
