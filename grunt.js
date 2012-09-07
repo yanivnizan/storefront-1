@@ -1,6 +1,7 @@
 /*global module:false*/
 require('shelljs/global');
 
+
 module.exports = function (grunt) {
 
     // Project configuration.
@@ -31,10 +32,11 @@ module.exports = function (grunt) {
     };
 
     // Extend the config object to include LESS pre-compilation tasks for all themes
-    ["basic", "grid", "muffinRush"].forEach(function(name) {
+    var themes = ls("themes");
+    themes.forEach(function(name) {
         config.less[name] = {
-            src  :'themes/css/less/' + name + '.less',
-            dest :'dist/themes/css/' + name + '.css',
+            src  :'dist/themes/' + name + '/less/' + name + '.less',
+            dest :'dist/themes/' + name + '/' + name + '.css',
             options:{
                 compress:true
             }
@@ -56,12 +58,11 @@ module.exports = function (grunt) {
         cp("js/libs/require.js", "dist/js/libs/");
 
         // Copy HTML & images
-        cp("store.html", "store_def.json", "dist/");
+        cp("store.html", "dist/");
         cp("-R", "img", "dist/");
 
         // Copy themes
-        mkdir("-p", "dist/themes/templates");
-        cp("themes/templates/*", "dist/themes/templates/");
+        cp("-R", "themes/", "dist/");
     });
 
     grunt.registerTask('clean', 'Cleans the distribution folder', function() {
