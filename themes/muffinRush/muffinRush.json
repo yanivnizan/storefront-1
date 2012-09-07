@@ -7,7 +7,7 @@
             },
             "buyMore" :  {
                 "text"          :  "More coins",
-                "imgFilePath"   :  "examples/muffinRush/GetMore.png"
+                "imgFilePath"   :  "themes/muffinRush/img/GetMore.png"
             }
         },
         "properties" : {}
@@ -32,14 +32,14 @@
             "template" : "modalDialog"
         }
     },
-    "background" : "examples/muffinRush/Bg_Wall.png",
+    "background" : "themes/muffinRush/img/Bg_Wall.png",
     "virtualCurrencies" : [
         {
             "name"          : "Muffins",
             "description"   : "",
             "itemId"        : "currency_muffin",
             "balance"       : 1000,
-            "imgFilePath"   : "examples/muffinRush/muffin.png"
+            "imgFilePath"   : "themes/muffinRush/img/muffin.png"
         }
     ],
     "isCurrencyStoreDisabled" : false,
@@ -47,7 +47,7 @@
         {
             "name"          : "Fruit Cake",
             "description"   : "Customers buy a double portion on each purchase of this cake",
-            "imgFilePath"   : "examples/muffinRush/items/fruit_cake.png",
+            "imgFilePath"   : "themes/muffinRush/img/items/fruit_cake.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -59,7 +59,7 @@
         {
             "name"          : "Pavlova",
             "description"   : "Gives customers a sugar rush and they call their friends",
-            "imgFilePath"   : "examples/muffinRush/items/pavlova.png",
+            "imgFilePath"   : "themes/muffinRush/img/items/pavlova.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -71,7 +71,7 @@
         {
             "name"          : "Choco-Cake",
             "description"   : "A classic cake to maximize customer satisfaction",
-            "imgFilePath"   : "examples/muffinRush/items/chocolate_cake.png",
+            "imgFilePath"   : "themes/muffinRush/img/items/chocolate_cake.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -83,7 +83,7 @@
         {
             "name"          : "Cream Cup",
             "description"   : "Increase bakery reputation with this original pastry",
-            "imgFilePath"   : "examples/muffinRush/items/cream_cup.png",
+            "imgFilePath"   : "themes/muffinRush/img/items/cream_cup.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -96,7 +96,7 @@
     "currencyPacks" : [
         {
             "name"              : "10 Muffins",
-            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins01.png",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins01.png",
             "itemId"            : "muffins_10",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "muffins_10",
@@ -106,7 +106,7 @@
         },
         {
             "name"              : "50 Muffins",
-            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins02.png",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins02.png",
             "itemId"            : "muffins_50",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "android.test.purchased",
@@ -116,7 +116,7 @@
         },
         {
             "name"              : "400 Muffins",
-            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins03.png",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins03.png",
             "itemId"            : "muffins_400",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "muffins_400",
@@ -126,7 +126,7 @@
         },
         {
             "name"              : "1000 Muffins",
-            "imgFilePath"       : "examples/muffinRush/currencyPacks/muffins04.png",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins04.png",
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "muffins_1000",
