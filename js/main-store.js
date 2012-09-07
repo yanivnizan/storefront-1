@@ -3,8 +3,6 @@ require.config({
     paths: {
         components          : "views/components",
         storeViews          : "views/store-views",
-        templates           : "views/templates",
-        themes              : "views/themes",
 
         // 3rd party modules
         jquery              : "libs/jquery/jquery-1.8.0.min",
@@ -25,9 +23,6 @@ require.config({
         },
         backboneRelational : {
             deps: ['backbone']
-        },
-        templates: {
-            deps: ['handlebars']
         },
         handlebars : {
             exports : "Handlebars"
