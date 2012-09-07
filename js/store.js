@@ -17,6 +17,16 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
     }
     $(function() {
 
+        var recursiveThemeUpdate = function(obj) {
+            _.each(obj, function(value, key) {
+                if (_.isObject(value)) {
+                    recursiveThemeUpdate(value);
+                } else if (key == "template" && Handlebars.templates[value] && _.isFunction(Handlebars.templates[value])) {
+                    obj[key] = Handlebars.templates[value];
+                }
+            });
+        };
+
         window.SoomlaJS = _.extend({}, jsAPI, {
             newStore : function(json) {
                 var attributes = {};
@@ -63,40 +73,27 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
             // The native UI is loaded and the html needs to be rendered now
             initialize : function(json) {
 
+                // Append appropriate stylesheet
+                // TODO: render the store as a callback to the CSS load event
+                var link = $("<link rel='stylesheet' href='themes/" + json.theme.name + "/" + json.theme.name + ".css'>");
+                link.appendTo($("head"));
+
                 // Initialize model
                 this.newStore(json);
                 var $this = this;
 
-                this.store.set("theme", json.theme);
+                require(["themes/" + json.theme.name + "/templates.js"], function() {
 
-                var recursiveThemeUpdate = function(obj) {
-                    _.each(obj, function(value, key) {
-                        if (_.isObject(value)) {
-                            recursiveThemeUpdate(value);
-                        } else if (key == "template" && Handlebars.templates[value] && _.isFunction(Handlebars.templates[value])) {
-                            obj[key] = Handlebars.templates[value];
-                        }
-                    });
-                };
-
-                require(["themes/" + json.template.name + "/templates.js"], function() {
-
-                    var theme = $this.store.get("theme");
+                    var theme = json.theme;
                     recursiveThemeUpdate(theme);
                     $this.store.set("theme", theme);
 
                     // Initialize view
-                    var storeView = $this.storeView = new StoreViews.StoreView({
+                    $this.storeView = new StoreViews.StoreView({
                         model : $this.store,
                         el : $("#main"),
                         callbacks : json ? json.callbacks : {}
-                    });
-
-                    // Append appropriate stylesheet
-                    // TODO: render the store as a callback to the CSS load event
-                    var link = $("<link rel='stylesheet' href='themes/" + json.template.name + "/" + json.template.name + ".css'>");
-                    link.appendTo($("head"));
-                    storeView.render();
+                    }).render();
 
                     if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();
 

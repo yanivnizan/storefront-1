@@ -13,6 +13,7 @@
         "properties" : {}
     },
     "theme" : {
+        "name" :  "muffinRush",
         "template" : "template",
         "virtualGoodsView" : {
             "type" : "Components.CollectionListView",
