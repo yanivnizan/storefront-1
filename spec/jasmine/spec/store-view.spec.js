@@ -1,4 +1,4 @@
-define("storeView.spec", ["storeViews", "models", "templates", "components", "themes"], function (StoreViews, Models, Templates, Components, Themes) {
+define("storeView.spec", ["storeViews", "models", "components"], function (StoreViews, Models, Components) {
 
     // Assign to local variables for spec brevity
     var StoreView           = StoreViews.StoreView,
@@ -9,7 +9,7 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
 
         describe("StoreView", function() {
 
-            var storeView, attributes, nativeAPIStub, touchendEvent;
+            var storeView, attributes, nativeAPIStub, touchendEvent, theme;
 
             beforeEach(function() {
                 touchendEvent = $.Event("touchend", {originalEvent : {touches : [1]}});
@@ -18,20 +18,55 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
                     wantsToBuyCurrencyPacks : sinon.spy(),
                     wantsToLeaveStore       : sinon.spy()
                 };
+                theme = {
+                    name : "empty",
+                        template : sinon.stub(),
+                        virtualGoodsView: {
+                        type : "Components.CollectionListView",
+                        item : {
+                            type : "Components.ListItemView",
+                            template : sinon.stub()
+                        }
+                    },
+                    currencyPacksView: {
+                        type : "Components.CollectionListView",
+                        item : {
+                            type : "Components.ListItemView",
+                            template : sinon.stub()
+                        }
+                    },
+                    modalDialog : {
+                        template : sinon.stub()
+                    }
+                };
+
                 attributes = {
-                    model       : new Models.Store({virtualCurrencies : [{}]}),
+                    model       : new Models.Store({virtualCurrencies : [{}], theme : theme}),
                     el          : $("<div><div class='leave-store'></div><div class='buy-more'></div><div class='back'></div></div>"),
                     nativeAPI   : nativeAPIStub,
-                    theme       : Themes.empty
+                    theme       : theme
                 };
             });
 
-            it("should be defined on the SoomlaJS namespace", function() {
-                SoomlaJS.initialize({template : {name : "empty"}});
-                expect(SoomlaJS.storeView).toBeDefined();
-                expect(SoomlaJS.storeView).toBeInstanceOf(StoreView);
-                delete SoomlaJS.store;
-                delete SoomlaJS.storeView;
+            // TODO: Be able to require the correct path in store.js
+            xit("should be defined on the SoomlaJS namespace", function() {
+                var flag = false;
+                window.SoomlaNative = {
+                    storeInitialized : function() {
+                        flag = true;
+                    }
+                };
+                SoomlaJS.initialize({template : {name : "empty"}, theme : theme});
+                waitsFor(function() {
+                    return flag;
+                }, "window.SoomlaNative never became available", 50);
+                runs(function() {
+                    expect(SoomlaJS.storeView).toBeDefined();
+                    expect(SoomlaJS.storeView).toBeInstanceOf(StoreView);
+                    delete SoomlaJS.store;
+                    delete SoomlaJS.storeView;
+                    delete window.SoomlaNative;
+                });
             });
 
             it("should have a theme defined", function() {
@@ -46,9 +81,9 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
 
             it("should render two item collection views when instantiated and rendered", function() {
                 // The empty theme has the same view type for both the virtual goods and the currency packs
-                var stub = sinon.stub(Themes.empty.virtualGoodsView.type.prototype, "render", function(){ return this; });
-                new StoreView(attributes).render();
-                expect(stub.calledTwice).toBeTruthy();
+                var stub = sinon.stub(eval(attributes.theme.currencyPacksView.type).prototype, "render", function(){ return this; });
+                storeView = new StoreView(attributes).render();
+                expect(stub.called).toBeTruthy();
                 stub.restore();
             });
 
@@ -143,31 +178,45 @@ define("storeView.spec", ["storeViews", "models", "templates", "components", "th
 
             describe("Native API calls & Transaction management", function() {
 
-                var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub, themeStub;
+                var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub;
 
                 beforeEach(function() {
                     // Create view, model and api stubs
-                    modelStub       = new Models.Store({
-                        templateName        : "empty",
-                        templateProperties  : templatePropertiesStub,
-                        currency            : {balance : 0},
-                        virtualCurrencies   : [{}]
-                    });
                     ViewStub        = Backbone.View.extend({
                         render : sinon.spy(function() {return this;}),
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
                     });
-                    themeStub       = _.clone(Themes.empty);
-                    themeStub.virtualGoodsView.type = ViewStub;
-                    themeStub.currencyPacksView.type = ViewStub;
+                    modelStub       = new Models.Store({
+                        templateProperties  : templatePropertiesStub,
+                        currency            : {balance : 0},
+                        virtualCurrencies   : [{}],
+                        theme : {
+                            name : "empty",
+                            template : sinon.stub(),
+                            virtualGoodsView: {
+                                type : ViewStub,
+                                item : {
+                                    type : "Components.ListItemView",
+                                    template : sinon.stub()
+                                }
+                            },
+                            currencyPacksView: {
+                                type : ViewStub,
+                                item : {
+                                    type : "Components.ListItemView",
+                                    template : sinon.stub()
+                                }
+                            },
+                            modalDialog : {
+                                template : sinon.stub()
+                            }
+                        }
+                    });
                     nativeAPIStub   = {wantsToBuyVirtualGoods : sinon.spy(), wantsToBuyCurrencyPacks : sinon.spy()};
 
                     attributes = {
-                        VirtualGoodsView    : ViewStub,
-                        CurrencyPacksView   : ViewStub,
                         model               : modelStub,
-                        nativeAPI           : nativeAPIStub,
-                        theme               : themeStub
+                        nativeAPI           : nativeAPIStub
                     };
                 });
 

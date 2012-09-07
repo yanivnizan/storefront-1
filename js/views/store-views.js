@@ -33,8 +33,9 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
-            var VirtualGoodsView  = eval(this.theme.virtualGoodsView.type),
-                CurrencyPacksView = eval(this.theme.currencyPacksView.type);
+            // Allow this theme field to be either a string (runtime) or an actual view (testing)
+            var VirtualGoodsView  = typeof this.theme.virtualGoodsView.type  === "string" ? eval(this.theme.virtualGoodsView.type)  : this.theme.virtualGoodsView.type,
+                CurrencyPacksView = typeof this.theme.currencyPacksView.type === "string" ? eval(this.theme.currencyPacksView.type) : this.theme.currencyPacksView.type;
 
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
