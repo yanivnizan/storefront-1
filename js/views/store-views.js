@@ -18,18 +18,14 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
     var StoreView = Backbone.View.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
-                            "renderBackground", "renderTemplate", "render",
+                            "renderBackground", "render",
                             "showCurrencyStore", "showGoodsStore", "openDialog",
                             "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
-
-            // TODO: get rid of the templateName altogether
-            var name = this.model.get("templateName");
 
             this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
             this.theme      = this.model.get("theme");
 
             this.model.on("change:background", this.renderBackground);
-            this.model.on("change:templateName", this.renderTemplate);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
@@ -96,18 +92,6 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
             this.$(".background").remove();
             var background = $("<img>", {src : this.model.get("background"), class : "background"});
             this.$el.prepend(background);
-        },
-        renderTemplate : function() {
-            var name = this.model.get("templateName");
-            this.$el.html(this.theme.template(this.model.toJSON()));
-
-
-            // TODO: Release previous view bindings
-            this.itemsView = new CollectionListView({
-                el : $("#goods-store .items"),
-                collection : this.model.get("virtualGoods"),
-                templateName : this.model.get("templateName")
-            });
         },
         render : function() {
             var name = this.model.get("templateName");
