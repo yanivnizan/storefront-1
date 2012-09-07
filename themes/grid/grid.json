@@ -11,16 +11,18 @@
                 "name" : "Surf Store"
             }
         },
-        "properties" : {},
+        "properties" : {
+            "columns" : 3
+        },
         "name" : "basic"
     },
     "theme" : {
-        "name" :  "basic",
+        "name" :  "grid",
         "template" : "template",
         "virtualGoodsView" : {
-            "type" : "Components.CollectionListView",
+            "type" : "Components.CollectionGridView",
             "item" : {
-                "type" : "Components.ListItemView",
+                "type" : "Components.GridItemView",
                 "template" : "item"
             }
         },

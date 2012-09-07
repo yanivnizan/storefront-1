@@ -27,8 +27,8 @@ guard :shell, :all_on_start => true do
 end
 
 # Precompile LESS stylesheets
-guard 'less', :all_on_start => true, :all_after_change => true, :output => "themes/#{theme}" do
-  themes.each do |theme|
+themes.each do |theme|
+  guard 'less', :all_on_start => true, :all_after_change => true, :output => "themes/#{theme}" do
     watch(%r{^themes/#{theme}/less/.+\.less$})
   end
 end
