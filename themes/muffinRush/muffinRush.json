@@ -1,4 +1,5 @@
 {
+    "isCurrencyStoreDisabled" : false,
     "template" :  {
         "elements" :  {
             "title" :  {
@@ -11,28 +12,48 @@
         },
         "properties" : {}
     },
-    "theme" : {
-        "name" :  "muffinRush",
-        "template" : "template",
-        "virtualGoodsView" : {
-            "type" : "Components.CollectionListView",
-            "item" : {
-                "type" : "Components.ListItemView",
-                "template" : "item"
-            }
+    "currencyPacks" : [
+        {
+            "name"              : "10 Muffins",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins01.png",
+            "itemId"            : "muffins_10",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_10",
+            "price"             : 0.99,
+            "amount"            : 10,
+            "consumable"        : false
         },
-        "currencyPacksView" : {
-            "type" : "Components.CollectionListView",
-            "item" : {
-                "type" : "Components.ListItemView",
-                "template" : "currencyPack"
-            }
+        {
+            "name"              : "50 Muffins",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins02.png",
+            "itemId"            : "muffins_50",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "android.test.purchased",
+            "price"             : 1.99,
+            "amount"            : 50,
+            "consumable"        : false
         },
-        "modalDialog" : {
-            "template" : "modalDialog"
+        {
+            "name"              : "400 Muffins",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins03.png",
+            "itemId"            : "muffins_400",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_400",
+            "price"             : 4.99,
+            "amount"            : 400,
+            "consumable"        : false
+        },
+        {
+            "name"              : "1000 Muffins",
+            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins04.png",
+            "itemId"            : "muffins_1000",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_1000",
+            "price"             : 8.99,
+            "amount"            : 1000,
+            "consumable"        : false
         }
-    },
-    "background" : "themes/muffinRush/img/Bg_Wall.png",
+    ],
     "virtualCurrencies" : [
         {
             "name"          : "Muffins",
@@ -42,7 +63,6 @@
             "imgFilePath"   : "themes/muffinRush/img/muffin.png"
         }
     ],
-    "isCurrencyStoreDisabled" : false,
     "virtualGoods" : [
         {
             "name"          : "Fruit Cake",
@@ -93,47 +113,26 @@
             "itemId"        : "cream_cup"
         }
     ],
-    "currencyPacks" : [
-        {
-            "name"              : "10 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins01.png",
-            "itemId"            : "muffins_10",
-            "currency_itemId"   : "currency_muffin",
-            "productId"         : "muffins_10",
-            "price"             : 0.99,
-            "amount"            : 10,
-            "consumable"        : false
+    "background" : "themes/muffinRush/img/Bg_Wall.png",
+    "theme" : {
+        "name" :  "muffinRush",
+        "template" : "template",
+        "virtualGoodsView" : {
+            "type" : "Components.CollectionListView",
+            "item" : {
+                "type" : "Components.ListItemView",
+                "template" : "item"
+            }
         },
-        {
-            "name"              : "50 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins02.png",
-            "itemId"            : "muffins_50",
-            "currency_itemId"   : "currency_muffin",
-            "productId"         : "android.test.purchased",
-            "price"             : 1.99,
-            "amount"            : 50,
-            "consumable"        : false
+        "currencyPacksView" : {
+            "type" : "Components.CollectionListView",
+            "item" : {
+                "type" : "Components.ListItemView",
+                "template" : "currencyPack"
+            }
         },
-        {
-            "name"              : "400 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins03.png",
-            "itemId"            : "muffins_400",
-            "currency_itemId"   : "currency_muffin",
-            "productId"         : "muffins_400",
-            "price"             : 4.99,
-            "amount"            : 400,
-            "consumable"        : false
-        },
-        {
-            "name"              : "1000 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins04.png",
-            "itemId"            : "muffins_1000",
-            "currency_itemId"   : "currency_muffin",
-            "productId"         : "muffins_1000",
-            "price"             : 8.99,
-            "amount"            : 1000,
-            "consumable"        : false
+        "modalDialog" : {
+            "template" : "modalDialog"
         }
-    ]
-
+    }
 }
