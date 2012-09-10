@@ -123,8 +123,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.collection.each(function(item) {
                 var view = new $this.type({
                     model    : item,
-                    template : $this.template,
-                    type        : GridItemView
+                    template : $this.template
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
