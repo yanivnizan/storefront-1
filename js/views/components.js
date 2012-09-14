@@ -27,7 +27,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             return this;
         },
         render : function() {
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model));
             this.options.parent.append(this.$el);
             return this;
         }
@@ -48,6 +48,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.trigger("selected", this.model);
         },
         render : function() {
+            if (this.options.css) this.$el.css(this.options.css);
             this.$el.html(this.template(this.model.toJSON()));
             return this;
         }
@@ -82,7 +83,8 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.collection.each(function(item) {
                 var view = new $this.type({
                     model    : item,
-                    template : $this.template
+                    template : $this.template,
+                    css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });
@@ -123,7 +125,8 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.collection.each(function(item) {
                 var view = new $this.type({
                     model    : item,
-                    template : $this.template
+                    template : $this.template,
+                    css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });

@@ -108,6 +108,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 SoomlaJS.newStore();
             });
 
+            // TODO: Remove
             it("should have a default name", function() {
                 expect(SoomlaJS.store.get("themeName")).toEqual("basic");
             });
@@ -233,6 +234,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(SoomlaJS.store.get("background")).toEqual("fish.jpg");
             });
 
+            // TODO: Remove
             it("should accept nested template.name", function() {
                 SoomlaJS.newStore({ theme : { name : "grid"}});
                 expect(SoomlaJS.store.get("themeName")).toEqual("grid");

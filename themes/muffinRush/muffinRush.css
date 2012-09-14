@@ -24,7 +24,6 @@
   -webkit-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
   -moz-box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
   box-shadow: 0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1;
-  background-image: url("img/InnerBG.png");
   background-size: cover;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -43,7 +42,6 @@
 .virtualGoods .item,
 .currencyPacks .item {
   margin: 0 10px 10px;
-  background-image: url("img/Bar.png");
   background-position: center;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
@@ -193,7 +191,6 @@
 }
 .header {
   height: 183px;
-  background-image: url("img/Roof-Extended.png");
   background-position: center;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
