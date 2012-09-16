@@ -55,9 +55,6 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
                                 if (json.template.elements.buyMore.imgFilePath)
                                     attributes.moreCurrencyImage = json.template.elements.buyMore.imgFilePath;
                             }
-
-                            if (json.template.elements.title && json.template.elements.title.name)
-                                attributes.templateTitle = json.template.elements.title.name;
                         }
                     }
                     if (json.virtualGoods)

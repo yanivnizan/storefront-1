@@ -24,7 +24,7 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
             this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
             this.theme      = this.model.get("theme");
 
-            this.model.on("change:moreCurrencyText change:templateTitle", this.render);
+            this.model.on("change:moreCurrencyText", this.render);
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
             // Allow this theme field to be either a string (runtime) or an actual view (testing)

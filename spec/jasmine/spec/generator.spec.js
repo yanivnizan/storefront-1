@@ -113,10 +113,6 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(SoomlaJS.store.get("themeName")).toEqual("basic");
             });
 
-            it("should have a default title 'Store'", function() {
-                expect(SoomlaJS.store.get("templateTitle")).toEqual("Store");
-            });
-
             it("should have a default properties map", function() {
                 expect(SoomlaJS.store.get("templateProperties")).toEqual({orientation : "horizontal"});
             });
@@ -258,11 +254,6 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             it("should accept nested isCurrencyStoreDisabled", function() {
                 SoomlaJS.newStore({isCurrencyStoreDisabled : true});
                 expect(SoomlaJS.store.get("isCurrencyStoreDisabled")).toEqual(true);
-            });
-
-            it("should accept nested template.elements.title.name", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.title.name", "Surf Shop"));
-                expect(SoomlaJS.store.get("templateTitle")).toEqual("Surf Shop");
             });
 
             it("should accept nested template.elements.title.name", function() {
