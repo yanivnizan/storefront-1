@@ -39,6 +39,7 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
                         }
                     }
 
+                    // TODO: Remove
                     if (json.template) {
 
                         if (json.template.orientationLandscape)

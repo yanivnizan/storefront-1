@@ -1,17 +1,5 @@
 {
     "isCurrencyStoreDisabled" : false,
-    "template" :  {
-        "elements" :  {
-            "title" :  {
-                "name"  :  "Store"
-            },
-            "buyMore" :  {
-                "text"          :  "More coins",
-                "imgFilePath"   :  "themes/muffinRush/img/GetMore.png"
-            }
-        },
-        "properties" : {}
-    },
     "currencyPacks" : [
         {
             "name"              : "10 Muffins",
@@ -117,7 +105,6 @@
             "categoryId"   : 1
         }
     ],
-    "background" : "themes/muffinRush/img/Bg_Wall.png",
     "theme" : {
         "name" : "muffinRush",
         "template" : "muffinRush",

@@ -40,14 +40,14 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
                 className           : "items virtualGoods",
                 collection          : virtualGoods,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateProperties  : this.model.get("templateProperties"),
+                templateProperties  : {},
                 css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : currencyPacks,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateProperties  : this.model.get("templateProperties"),
+                templateProperties  : {},
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
