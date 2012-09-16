@@ -178,7 +178,7 @@ define("storeView.spec", ["storeViews", "models", "components"], function (Store
 
             describe("Native API calls & Transaction management", function() {
 
-                var modelStub, ViewStub, nativeAPIStub, templatePropertiesStub;
+                var modelStub, ViewStub, nativeAPIStub;
 
                 beforeEach(function() {
                     // Create view, model and api stubs
@@ -187,7 +187,6 @@ define("storeView.spec", ["storeViews", "models", "components"], function (Store
                         triggerSelectedEvent : function() { this.trigger("selected", modelStub) }
                     });
                     modelStub       = new Models.Store({
-                        templateProperties  : templatePropertiesStub,
                         currency            : {balance : 0},
                         virtualCurrencies   : [{}],
                         theme : {
@@ -220,11 +219,6 @@ define("storeView.spec", ["storeViews", "models", "components"], function (Store
                     };
                 });
 
-                it("should accept a template options object", function() {
-                    storeView = new StoreView(attributes).render();
-                    expect(storeView.virtualGoodsView.options.templateProperties).toEqual(templatePropertiesStub);
-                });
-
                 it("should invoke an item purchase when the 'selected' event is captured from the virtual goods sub-view", function() {
                     storeView = new StoreView(attributes).render();
                     storeView.virtualGoodsView.triggerSelectedEvent();
@@ -245,6 +239,7 @@ define("storeView.spec", ["storeViews", "models", "components"], function (Store
                     stub.restore();  // Restore original stubbed function to prototype
                 });
 
+                // TODO: Add a test for accepting a themes object
             });
 
         });

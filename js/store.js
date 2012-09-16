@@ -24,39 +24,14 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
         };
 
         window.SoomlaJS = _.extend({}, jsAPI, {
+            // TODO: Refactor function
             newStore : function(json) {
                 var attributes = {};
                 if (json) {
 
-                    if (json.background) attributes.background = json.background;
-
-                    if (json.theme) {
+                    if (json.theme)
                         attributes.theme = json.theme;
 
-                        // TODO: Remove
-                        if (json.theme.name) {
-                            attributes.themeName = json.theme.name;
-                        }
-                    }
-
-                    // TODO: Remove
-                    if (json.template) {
-
-                        if (json.template.orientationLandscape)
-                            attributes.orientationLandscape = json.template.orientationLandscape;
-
-                        if (json.template.properties)
-                            attributes.templateProperties = json.template.properties;
-                        if (json.template.elements) {
-
-                            if (json.template.elements.buyMore) {
-                                if (json.template.elements.buyMore.text)
-                                    attributes.moreCurrencyText = json.template.elements.buyMore.text;
-                                if (json.template.elements.buyMore.imgFilePath)
-                                    attributes.moreCurrencyImage = json.template.elements.buyMore.imgFilePath;
-                            }
-                        }
-                    }
                     if (json.virtualGoods)
                         attributes.virtualGoods = json.virtualGoods;
 

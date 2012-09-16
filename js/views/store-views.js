@@ -24,7 +24,6 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
             this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
             this.theme      = this.model.get("theme");
 
-            this.model.on("change:moreCurrencyText", this.render);
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
             // Allow this theme field to be either a string (runtime) or an actual view (testing)
@@ -39,13 +38,13 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
                 template            : this.theme.virtualGoodsView.item.template,
-                templateProperties  : this.model.get("templateProperties")
+                templateProperties  : {}
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new CurrencyPacksView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
                 template            : this.theme.currencyPacksView.item.template,
-                templateProperties  : this.model.get("templateProperties")
+                templateProperties  : {}
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
         },
