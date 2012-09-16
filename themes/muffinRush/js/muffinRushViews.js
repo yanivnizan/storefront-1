@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components", "handlebars"], function($, Backbone, Components, Handlebars) {
+define(["jquery", "backbone", "components", "handlebars", "templates"], function($, Backbone, Components, Handlebars) {
 
     // Determine which CSS transition event to bind according to the browser vendor
     var transEndEventNames = {
@@ -39,14 +39,14 @@ define(["jquery", "backbone", "components", "handlebars"], function($, Backbone,
             this.virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
                 collection          : virtualGoods,
-                template            : Handlebars.templates["item"],
+                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateProperties  : this.model.get("templateProperties"),
                 css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : currencyPacks,
-                template            : Handlebars.templates["currencyPack"],
+                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : this.model.get("templateProperties"),
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
@@ -83,7 +83,7 @@ define(["jquery", "backbone", "components", "handlebars"], function($, Backbone,
             new Components.ModalDialog({
                 parent : this.$el,
                 model : this.theme.pages.goods.noFundsModal,
-                template : Handlebars.templates["modalDialog"]
+                template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
             }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);

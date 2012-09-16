@@ -1,4 +1,4 @@
-define(["jquery", "js-api", "native-api", "models", "components", "handlebars"], function($, jsAPI, NativeAPI, Models, Components, Handlebars) {
+define(["jquery", "js-api", "native-api", "models", "components", "handlebars", "templates"], function($, jsAPI, NativeAPI, Models, Components, Handlebars) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
@@ -86,7 +86,7 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars"],
                 this.newStore(json);
                 var $this = this;
 
-                require(["themes/" + json.theme.name + "/js/" + json.theme.name + "Views.js", "themes/" + json.theme.name + "/templates.js"], function(ThemeViews) {
+                require(["themes/" + json.theme.name + "/js/" + json.theme.name + "Views.js"], function(ThemeViews) {
 
                     // Add pointing device events
                     addPointingDeviceEvents(ThemeViews.StoreView.prototype.events, {
@@ -100,7 +100,7 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars"],
                         model : $this.store,
                         el : $("#main"),
                         callbacks : json ? json.callbacks : {},
-                        template : Handlebars.templates["template"]
+                        template : Handlebars.getTemplate("themes/" + json.theme.name + "/templates", "template")
                     }).render();
 
                     if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();

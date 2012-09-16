@@ -29,6 +29,7 @@
             paths : {
                 storeViews          : "views/store-views",
                 components          : "views/components",
+                templates           : "views/templates",
                 "components.spec"   : "../spec/jasmine/spec/components.spec",
                 "generator.spec"    : "../spec/jasmine/spec/generator.spec",
                 "storeView.spec"    : "../spec/jasmine/spec/store-view.spec",
@@ -54,6 +55,9 @@
                 },
                 handlebars : {
                     exports : "Handlebars"
+                },
+                templates : {
+                    deps: ['handlebars']
                 }
             }
         });
