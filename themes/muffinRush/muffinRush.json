@@ -21,7 +21,7 @@
             "productId"         : "muffins_10",
             "price"             : 0.99,
             "amount"            : 10,
-            "consumable"        : false
+            "categoryId"       : 1
         },
         {
             "name"              : "50 Muffins",
@@ -31,7 +31,7 @@
             "productId"         : "android.test.purchased",
             "price"             : 1.99,
             "amount"            : 50,
-            "consumable"        : false
+            "categoryId"       : 1
         },
         {
             "name"              : "400 Muffins",
@@ -41,7 +41,7 @@
             "productId"         : "muffins_400",
             "price"             : 4.99,
             "amount"            : 400,
-            "consumable"        : false
+            "categoryId"       : 1
         },
         {
             "name"              : "1000 Muffins",
@@ -51,7 +51,7 @@
             "productId"         : "muffins_1000",
             "price"             : 8.99,
             "amount"            : 1000,
-            "consumable"        : false
+            "categoryId"       : 1
         }
     ],
     "virtualCurrencies" : [
@@ -74,7 +74,8 @@
                     "currency_muffin" : 225
                 }
             },
-            "itemId"        : "fruit_cake"
+            "itemId"        : "fruit_cake",
+            "categoryId"   : 1
         },
         {
             "name"          : "Pavlova",
@@ -86,7 +87,8 @@
                     "currency_muffin" : 175
                 }
             },
-            "itemId"        : "pavlova"
+            "itemId"        : "pavlova",
+            "categoryId"   : 1
         },
         {
             "name"          : "Choco-Cake",
@@ -98,7 +100,8 @@
                     "currency_muffin" : 250
                 }
             },
-            "itemId"        : "chocolate_cake"
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 1
         },
         {
             "name"          : "Cream Cup",
@@ -110,7 +113,8 @@
                     "currency_muffin" : 50
                 }
             },
-            "itemId"        : "cream_cup"
+            "itemId"        : "cream_cup",
+            "categoryId"   : 1
         }
     ],
     "background" : "themes/muffinRush/img/Bg_Wall.png",
@@ -133,6 +137,12 @@
         },
         "modalDialog" : {
             "template" : "modalDialog"
+        }
+    },
+    categories: {
+        {
+            id: 1,
+            name "General"
         }
     }
 }
