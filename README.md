@@ -1,2 +1,4 @@
-Soomla-Generator
-================
+Soomla Storefront
+=================
+
+[EXPERIMENTAL]

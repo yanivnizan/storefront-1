@@ -18,14 +18,12 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
     var StoreView = Backbone.View.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
-                            "renderBackground", "render",
-                            "showCurrencyStore", "showGoodsStore", "openDialog",
+                            "render", "showCurrencyStore", "showGoodsStore", "openDialog",
                             "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
             this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
             this.theme      = this.model.get("theme");
 
-            this.model.on("change:background", this.renderBackground);
             this.model.on("change:moreCurrencyText change:templateTitle", this.render);
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
@@ -87,11 +85,6 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
             return this;
-        },
-        renderBackground : function() {
-            this.$(".background").remove();
-            var background = $("<img>", {src : this.model.get("background"), class : "background"});
-            this.$el.prepend(background);
         },
         render : function() {
             var name = this.model.get("templateName");
