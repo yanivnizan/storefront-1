@@ -1,3 +1,7 @@
+Handlebars.registerHelper('formatCurrency', function(value) {
+    return parseFloat(value).toFixed(2);
+});
+
 Handlebars.getTemplate = function (path, name) {
     if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
         $.ajax({
