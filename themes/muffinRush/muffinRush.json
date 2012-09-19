@@ -1,17 +1,5 @@
 {
     "isCurrencyStoreDisabled" : false,
-    "template" :  {
-        "elements" :  {
-            "title" :  {
-                "name"  :  "Store"
-            },
-            "buyMore" :  {
-                "text"          :  "More coins",
-                "imgFilePath"   :  "themes/muffinRush/img/GetMore.png"
-            }
-        },
-        "properties" : {}
-    },
     "currencyPacks" : [
         {
             "name"              : "10 Muffins",
@@ -117,26 +105,47 @@
             "categoryId"   : 1
         }
     ],
-    "background" : "themes/muffinRush/img/Bg_Wall.png",
     "theme" : {
-        "name" :  "muffinRush",
-        "template" : "template",
-        "virtualGoodsView" : {
-            "type" : "Components.CollectionListView",
-            "item" : {
-                "type" : "Components.ListItemView",
-                "template" : "item"
+        "name" : "muffinRush",
+        "template" : "muffinRush",
+        "version" : 1,
+        "pages" : {
+            "goods" :{
+                "title" : "themes/muffinRush/img/Store_Store.png",
+                "background" : "themes/muffinRush/img/Bg_Wall.png",
+                "headerBackground" : "themes/muffinRush/img/Roof-Extended.png",
+                "backButton" : "themes/muffinRush/img/back.png",
+                "moreCurrencyButton" : "themes/muffinRush/img/GetMore.png",
+                "balance" : "themes/muffinRush/img/YourMuf.png",
+                "list" : {
+                    "background" : "themes/muffinRush/img/InnerBG.png"
+                },
+                "listItem" : {
+                    "background" : "themes/muffinRush/img/Bar.png",
+                    "itemBackground" :"themes/muffinRush/img/Mapit.png"
+                },
+                "noFundsModal" : {
+                    "background" : "img.png",
+                    "yesButton" : "themes/muffinRush/img/modalDialog/Yes.png",
+                    "description" : "themes/muffinRush/img/modalDialog/Description.png",
+                    "noButton" : "themes/muffinRush/img/modalDialog/No.png"
+                }
+            },
+            "currencyPacks" : {
+                "title" : "themes/muffinRush/img/Store_Store.png",
+                "background" : "themes/muffinRush/img/Bg_Wall.png",
+                "headerBackground" : "themes/muffinRush/img/Roof-Extended.png",
+                "backButton" : "themes/muffinRush/img/back.png",
+                "balance" : "themes/muffinRush/img/YourMuf.png",
+                "list" : {
+                    "background" : "themes/muffinRush/img/InnerBG.png"
+                },
+                "listItem" : {
+                    "background" : "themes/muffinRush/img/Bar.png",
+                    "itemBackground" :"themes/muffinRush/img/Mapit.png"
+                }
+
             }
-        },
-        "currencyPacksView" : {
-            "type" : "Components.CollectionListView",
-            "item" : {
-                "type" : "Components.ListItemView",
-                "template" : "currencyPack"
-            }
-        },
-        "modalDialog" : {
-            "template" : "modalDialog"
         }
     },
     "categories" : [

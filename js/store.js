@@ -1,20 +1,16 @@
-define(["jquery", "js-api", "native-api", "models", "storeViews", "components", "handlebars"], function($, jsAPI, NativeAPI, Models, StoreViews, Components, Handlebars) {
+define(["jquery", "js-api", "native-api", "models", "components", "handlebars", "templates"], function($, jsAPI, NativeAPI, Models, Components, Handlebars) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
-    if (top.enablePointingDeviceEvents) {
-        _.extend(Components.ListItemView.prototype.events, {click : "onSelect"});
-        _.extend(StoreViews.StoreView.prototype.events, {
-            "click .leave-store"    : "wantsToLeaveStore",
-            "click .buy-more"       : "showCurrencyStore",
-            "click .back"           : "showGoodsStore"
-        });
-        _.extend(Components.ModalDialog.prototype.events, {
-            "click .close"          : "close",
-            "click .modal"          : "close"
-        });
+    var addPointingDeviceEvents = function(target, events) {
+        if (top.enablePointingDeviceEvents) _.extend(target, events);
+    };
+    addPointingDeviceEvents(Components.ListItemView.prototype.events, {click : "onSelect"});
+    addPointingDeviceEvents(Components.ModalDialog.prototype.events, {
+        "click .close"          : "close",
+        "click .modal"          : "close"
+    });
 
-    }
     $(function() {
 
         var recursiveThemeUpdate = function(obj) {
@@ -28,37 +24,14 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
         };
 
         window.SoomlaJS = _.extend({}, jsAPI, {
+            // TODO: Refactor function
             newStore : function(json) {
                 var attributes = {};
                 if (json) {
 
-                    if (json.background) attributes.background = json.background;
+                    if (json.theme)
+                        attributes.theme = json.theme;
 
-                    if (json.theme) {
-                        if (json.theme.name)
-                            attributes.themeName = json.theme.name;
-                    }
-
-                    if (json.template) {
-
-                        if (json.template.orientationLandscape)
-                            attributes.orientationLandscape = json.template.orientationLandscape;
-
-                        if (json.template.properties)
-                            attributes.templateProperties = json.template.properties;
-                        if (json.template.elements) {
-
-                            if (json.template.elements.buyMore) {
-                                if (json.template.elements.buyMore.text)
-                                    attributes.moreCurrencyText = json.template.elements.buyMore.text;
-                                if (json.template.elements.buyMore.imgFilePath)
-                                    attributes.moreCurrencyImage = json.template.elements.buyMore.imgFilePath;
-                            }
-
-                            if (json.template.elements.title && json.template.elements.title.name)
-                                attributes.templateTitle = json.template.elements.title.name;
-                        }
-                    }
                     if (json.virtualGoods)
                         attributes.virtualGoods = json.virtualGoods;
 
@@ -86,17 +59,21 @@ define(["jquery", "js-api", "native-api", "models", "storeViews", "components", 
                 this.newStore(json);
                 var $this = this;
 
-                require(["themes/" + json.theme.name + "/templates.js"], function() {
+                require(["themes/" + json.theme.name + "/js/" + json.theme.name + "Views.js"], function(ThemeViews) {
 
-                    var theme = json.theme;
-                    recursiveThemeUpdate(theme);
-                    $this.store.set("theme", theme);
+                    // Add pointing device events
+                    addPointingDeviceEvents(ThemeViews.StoreView.prototype.events, {
+                        "click .leave-store"    : "wantsToLeaveStore",
+                        "click .buy-more"       : "showCurrencyStore",
+                        "click .back"           : "showGoodsStore"
+                    });
 
                     // Initialize view
-                    $this.storeView = new StoreViews.StoreView({
+                    $this.storeView = new ThemeViews.StoreView({
                         model : $this.store,
                         el : $("#main"),
-                        callbacks : json ? json.callbacks : {}
+                        callbacks : json ? json.callbacks : {},
+                        template : Handlebars.getTemplate("themes/" + json.theme.name + "/templates", "template")
                     }).render();
 
                     if (SoomlaNative && SoomlaNative.storeInitialized) SoomlaNative.storeInitialized();

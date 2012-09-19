@@ -29,11 +29,6 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
             expect(SoomlaJS.store).toBeInstanceOf(Models.Store);
         });
 
-        it("should create a store with a background", function () {
-            SoomlaJS.newStore({ background:"fish.png" });
-            expect(SoomlaJS.store.get("background")).toEqual("fish.png");
-        });
-
         it("should have a default empty list of virtual currencies", function () {
             expect(new Models.Store().get("virtualCurrencies")).toBeInstanceOf(Models.VirtualCurrencyCollection);
         });
@@ -100,41 +95,6 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(spy.errorStub).toHaveBeenCalled();
             });
 
-        });
-
-        describe('=== Template', function () {
-
-            beforeEach(function() {
-                SoomlaJS.newStore();
-            });
-
-            it("should have a default name", function() {
-                expect(SoomlaJS.store.get("themeName")).toEqual("basic");
-            });
-
-            it("should have a default title 'Store'", function() {
-                expect(SoomlaJS.store.get("templateTitle")).toEqual("Store");
-            });
-
-            it("should have a default properties map", function() {
-                expect(SoomlaJS.store.get("templateProperties")).toEqual({orientation : "horizontal"});
-            });
-
-            it("should have a default landscape orientation", function() {
-                expect(SoomlaJS.store.get("orientationLanscape")).toEqual(false);
-            });
-
-            it("shouldn't have a title background by default", function() {
-                expect(SoomlaJS.store.get("templateTitleBackgroundImage")).toBeUndefined();
-            });
-
-            it("should have a default 'more virtual currency' text", function() {
-                expect(SoomlaJS.store.get("moreCurrencyText")).toEqual("Get more coins");
-            });
-
-            it("shouldn't have a 'more virtual currency' background by default", function() {
-                expect(SoomlaJS.store.get("moreCurrencyBackgroundImage")).toBeUndefined();
-            });
         });
 
         describe('=== Virtual Goods', function () {
@@ -222,51 +182,17 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
 
         describe('Input JSON parsing', function () {
 
+            // TODO: Add a test for accepting a themes object in the JSON
+
             it("should initalize without a JSON argument", function() {
                 SoomlaJS.newStore();
                 expect(SoomlaJS.store).toBeDefined();
                 expect(SoomlaJS.store).toBeInstanceOf(Models.Store);
             });
 
-            it("should accept background", function() {
-                SoomlaJS.newStore({ background : "fish.jpg" });
-                expect(SoomlaJS.store.get("background")).toEqual("fish.jpg");
-            });
-
-            it("should accept nested template.name", function() {
-                SoomlaJS.newStore({ theme : { name : "grid"}});
-                expect(SoomlaJS.store.get("themeName")).toEqual("grid");
-            });
-
-            it("should accept nested template.orientationLandscape", function() {
-                SoomlaJS.newStore({ template : { orientationLandscape : true}});
-                expect(SoomlaJS.store.get("orientationLandscape")).toEqual(true);
-            });
-
-            it("should accept nested template.elements.buyMore.text", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.buyMore.text", "Buy more clams"));
-                expect(SoomlaJS.store.get("moreCurrencyText")).toEqual("Buy more clams");
-            });
-
-            it("should accept nested template.elements.buyMore.image", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.buyMore.imgFilePath", "img/assets/clam.png"));
-                expect(SoomlaJS.store.get("moreCurrencyImage")).toEqual("img/assets/clam.png");
-            });
-
             it("should accept nested isCurrencyStoreDisabled", function() {
                 SoomlaJS.newStore({isCurrencyStoreDisabled : true});
                 expect(SoomlaJS.store.get("isCurrencyStoreDisabled")).toEqual(true);
-            });
-
-            it("should accept nested template.elements.title.name", function() {
-                SoomlaJS.newStore(objectFromString("template.elements.title.name", "Surf Shop"));
-                expect(SoomlaJS.store.get("templateTitle")).toEqual("Surf Shop");
-            });
-
-            it("should accept nested template.elements.title.name", function() {
-                var properties = {rows : 2, columns : 3};
-                SoomlaJS.newStore(objectFromString("template.properties", properties));
-                expect(SoomlaJS.store.get("templateProperties")).toEqual(properties);
             });
 
             it("should accept an array of virtual goods", function() {

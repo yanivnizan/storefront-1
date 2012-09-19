@@ -60,15 +60,6 @@ define(["backboneRelational"], function() {
                 }
             }
         ],
-        defaults : {
-            themeName           : "basic",
-            templateTitle       : "Store",
-            moreCurrencyText    : "Get more coins",
-            orientationLanscape : false,
-            templateProperties  : {
-                orientation : "horizontal"
-            }
-        },
         initialize : function() {
             _.bindAll(this, "getBalance", "setBalance", "updateVirtualGoods");
         },

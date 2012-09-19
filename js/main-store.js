@@ -3,6 +3,7 @@ require.config({
     paths: {
         components          : "views/components",
         storeViews          : "views/store-views",
+        templates           : "views/templates",
 
         // 3rd party modules
         jquery              : "libs/jquery/jquery-1.8.0.min",
@@ -11,7 +12,7 @@ require.config({
         underscore          : "libs/underscore-min",
         backbone            : "libs/backbone-min",
         backboneRelational  : "libs/backbone-relational",
-        handlebars          : "libs/handlebars.runtime-1.0.0.beta.6"
+        handlebars          : "libs/handlebars-1.0.0.beta.6"
     },
     shim: {
         underscore: {
@@ -26,6 +27,9 @@ require.config({
         },
         handlebars : {
             exports : "Handlebars"
+        },
+        templates : {
+            deps: ['handlebars']
         }
 
         // No need to export globally in 'shim' section

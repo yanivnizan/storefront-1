@@ -18,13 +18,13 @@ end
 themes = ["basic", "grid", "muffinRush"]
 
 # Precompile handlebars.js templates
-guard :shell, :all_on_start => true do
-  themes.each do |theme|
-    watch(%r{^themes/#{theme}/templates/.+\.handlebars$}) do
-      `handlebars themes/#{theme}/templates/*.handlebars > themes/#{theme}/templates.js`
-    end
-  end
-end
+#guard :shell, :all_on_start => true do
+#  themes.each do |theme|
+#    watch(%r{^themes/#{theme}/templates/.+\.handlebars$}) do
+#      `handlebars themes/#{theme}/templates/*.handlebars > themes/#{theme}/templates.js`
+#    end
+#  end
+#end
 
 # Precompile LESS stylesheets
 themes.each do |theme|

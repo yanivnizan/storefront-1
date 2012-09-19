@@ -1,41 +1,5 @@
 {
     "isCurrencyStoreDisabled" : false,
-    "template" : {
-        "orientationLandscape" : false,
-        "elements" : {
-            "buyMore" : {
-                "imgFilePath" : "themes/basic/img/clam.png",
-                "text" : "Get more clams"
-            },
-            "title" : {
-                "name" : "Surf Store"
-            }
-        },
-        "properties" : {
-            "columns" : 3
-        }
-    },
-    "theme" : {
-        "name" :  "grid",
-        "template" : "template",
-        "virtualGoodsView" : {
-            "type" : "Components.CollectionGridView",
-            "item" : {
-                "type" : "Components.GridItemView",
-                "template" : "item"
-            }
-        },
-        "currencyPacksView" : {
-            "type" : "Components.CollectionListView",
-            "item" : {
-                "type" : "Components.ListItemView",
-                "template" : "currencyPack"
-            }
-        },
-        "modalDialog" : {
-            "template" : "modalDialog"
-        }
-    },
     "currencyPacks" : [
         {
             "amount" : 200,
@@ -86,7 +50,6 @@
             "name" : "clams"
         }
     ],
-    "background" : "themes/basic/img/theme-lime-bubbles.jpg",
     "virtualGoods" : [
         {
             "imgFilePath" : "themes/basic/img/items/blue-surfboard.png",
@@ -182,5 +145,33 @@
             "description" : "The all around conditions board of choice",
             "name" : "Traditional Fish"
         }
-    ]
+    ],
+    "theme" : {
+        "name" : "grid",
+        "template" : "grid",
+        "version" : 1,
+        "pages" : {
+            "goods" :{
+                "columns" : 3,
+                "moreCurrencyText" : "Get more clams",
+                "moreCurrencyImage" : "themes/basic/img/clam.png",
+                "background" : "themes/basic/img/theme-lime-bubbles.jpg",
+                "title" : "Surf Store",
+                "leaveIcon" : "img/default/icons/close.png",
+
+                "noFundsModal" : {
+                    "text" : "Not enough clams",
+                    "question" : "Buy more clams?",
+                    "noButtonText" : "No",
+                    "yesButtonText" : "Yes",
+                    "closeIcon" : "img/default/icons/close-dialog.png"
+                }
+            },
+            "currencyPacks" : {
+                "background" : "themes/basic/img/theme-lime-bubbles.jpg",
+                "title" : "Surf Store",
+                "backIcon" : "img/default/icons/close.png"
+            }
+        }
+    }
 }

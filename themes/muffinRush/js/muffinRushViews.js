@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components"], function($, Backbone, Components) {
+define(["jquery", "backbone", "components", "handlebars", "templates"], function($, Backbone, Components, Handlebars) {
 
     // Determine which CSS transition event to bind according to the browser vendor
     var transEndEventNames = {
@@ -9,10 +9,6 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
         'transition'       : 'transitionend'
     },
     transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
-
-
-    var CollectionListView  = Components.CollectionListView,
-        CollectionGridView  = Components.CollectionGridView;
 
 
     var StoreView = Backbone.View.extend({
@@ -26,25 +22,32 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
 
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
-            // Allow this theme field to be either a string (runtime) or an actual view (testing)
-            var VirtualGoodsView  = typeof this.theme.virtualGoodsView.type  === "string" ? eval(this.theme.virtualGoodsView.type)  : this.theme.virtualGoodsView.type,
-                CurrencyPacksView = typeof this.theme.currencyPacksView.type === "string" ? eval(this.theme.currencyPacksView.type) : this.theme.currencyPacksView.type;
+
+            var virtualGoods  = this.model.get("virtualGoods"),
+                currencyPacks = this.model.get("currencyPacks"),
+                $this = this;
+
+            // Add UI rendering properties to models.
+            virtualGoods.each(function(good) { good.set("itemBackground", $this.theme.pages.goods.listItem.itemBackground); });
+            currencyPacks.each(function(pack) { pack.set("itemBackground", $this.theme.pages.currencyPacks.listItem.itemBackground); });
 
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
             // as we like without losing the jQuery bindings each time.
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new VirtualGoodsView({
+            this.virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
-                collection          : this.model.get("virtualGoods"),
-                template            : this.theme.virtualGoodsView.item.template,
-                templateProperties  : {}
+                collection          : virtualGoods,
+                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
+                templateProperties  : {},
+                css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
-            this.currencyPacksView = new CurrencyPacksView({
+            this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
-                collection          : this.model.get("currencyPacks"),
-                template            : this.theme.currencyPacksView.item.template,
-                templateProperties  : {}
+                collection          : currencyPacks,
+                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
+                templateProperties  : {},
+                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
         },
@@ -78,16 +81,16 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
         openDialog : function(currency) {
             new Components.ModalDialog({
                 parent : this.$el,
-                model : this.model.get("virtualCurrencies").get(currency),
-                template : this.theme.modalDialog.template
+                model : this.theme.pages.goods.noFundsModal,
+                template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
             }).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
             return this;
         },
         render : function() {
-            var name = this.model.get("templateName");
-            this.$el.addClass(name).html(this.theme.template(this.model.toJSON()));
+            var context = _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
+            this.$el.html(this.options.template(context));
             this.$("#currency-store").css("visibility", "hidden");
 
             // Render subviews (items in goods store and currency store)
