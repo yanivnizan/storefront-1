@@ -4,6 +4,8 @@ require('shelljs/global');
 
 module.exports = function (grunt) {
 
+    var distFolder = "soomla_ui";
+
     // Project configuration.
     var config = {
         meta : {
@@ -17,7 +19,7 @@ module.exports = function (grunt) {
         less : {
             store : {
                 src  :'css/store.less',
-                dest :'dist/css/store.css',
+                dest :distFolder + '/css/store.css',
                 options : {
                     compress : true
                 }
@@ -27,16 +29,17 @@ module.exports = function (grunt) {
             baseUrl         : 'js',
             mainConfigFile  : 'js/main-store.js',
             name            : "main-store",
-            out             : "dist/js/main-store.js"
+            out             : distFolder + "/js/main-store.js"
         }
     };
 
+    // TODO: Don't pre-compile stylesheets for all themes, just the one that's needed
     // Extend the config object to include LESS pre-compilation tasks for all themes
     var themes = ls("themes");
     themes.forEach(function(name) {
         config.less[name] = {
-            src  :'dist/themes/' + name + '/less/' + name + '.less',
-            dest :'dist/themes/' + name + '/' + name + '.css',
+            src  :distFolder + '/themes/' + name + '/less/' + name + '.less',
+            dest :distFolder + '/themes/' + name + '/' + name + '.css',
             options:{
                 compress:true
             }
@@ -51,25 +54,41 @@ module.exports = function (grunt) {
 
     // Register helper tasks
 
-    grunt.registerTask('copy', 'Copies more necessary resources to the distribution folder', function() {
+    grunt.registerTask('copy', 'Copies more necessary resources to the distribution folder', function(theme) {
 
         // Copy Javascript
-        mkdir("-p", "dist/js/libs");
-        cp("js/libs/require.js", "dist/js/libs/");
+        mkdir("-p", distFolder + "/js/libs");
+        mkdir("-p", distFolder + "/themes");
+        cp("js/libs/require.js", distFolder + "/js/libs/");
 
         // Copy HTML & images
-        cp("store.html", "dist/");
-        cp("-R", "img", "dist/");
+        cp("store.html", distFolder + "/");
+        cp("-R", "img", distFolder + "/");
 
         // Copy themes
-        cp("-R", "themes/", "dist/");
+        cp("-R", "themes/" + theme + "/", distFolder + "/themes/");
     });
 
     grunt.registerTask('clean', 'Cleans the distribution folder', function() {
-        rm("-rf", "dist");
-        mkdir("dist");
+        rm("-rf", distFolder);
     });
 
+    grunt.registerTask('handlebars', "Pre-compile theme's Handlebars.js templates", function(theme) {
+        // Backup file before appending Handelbars templates to it.
+        cp("js/views/templates.js", "./");
+
+        var command = "handlebars --min themes/" + theme + "/templates/ >> ./js/views/templates.js";
+        exec(command, {async : true, silent : true});
+    });
+
+    grunt.registerTask('cleanup', 'Cleans leftover files from the build process', function() {
+        // Restore backed up file (before Handlebars templates were appended to it).
+        mv("-f", "./templates.js", "./js/views/templates.js");
+    });
+
+
     // Default task.
-    grunt.registerTask('default', 'clean copy less requirejs');
+    themes.forEach(function(name) {
+        grunt.registerTask("theme:" + name, 'clean copy:' + name + ' less handlebars:' + name + ' requirejs cleanup');
+    });
 };
