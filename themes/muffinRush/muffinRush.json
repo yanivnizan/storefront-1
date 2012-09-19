@@ -109,6 +109,7 @@
         "name" : "muffinRush",
         "template" : "muffinRush",
         "version" : 1,
+        "isOrientationLandscape" : false,
         "pages" : {
             "goods" :{
                 "title" : "themes/muffinRush/img/Store_Store.png",
