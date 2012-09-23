@@ -5,7 +5,7 @@
             "name"              : "10 Muffins",
             "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_10",
-            "currency_itemId"   : "currency_muffin",
+            "currency_itemId"   : "currency_coin",
             "productId"         : "muffins_10",
             "price"             : 0.99,
             "amount"            : 10,
@@ -15,7 +15,7 @@
             "name"              : "50 Muffins",
             "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_50",
-            "currency_itemId"   : "currency_muffin",
+            "currency_itemId"   : "currency_coin",
             "productId"         : "android.test.purchased",
             "price"             : 1.99,
             "amount"            : 50,
@@ -25,7 +25,7 @@
             "name"              : "400 Muffins",
             "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_400",
-            "currency_itemId"   : "currency_muffin",
+            "currency_itemId"   : "currency_coin",
             "productId"         : "muffins_400",
             "price"             : 4.99,
             "amount"            : 400,
@@ -35,7 +35,7 @@
             "name"              : "1000 Muffins",
             "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_1000",
-            "currency_itemId"   : "currency_muffin",
+            "currency_itemId"   : "currency_coin",
             "productId"         : "muffins_1000",
             "price"             : 8.99,
             "amount"            : 1000,
@@ -44,9 +44,9 @@
     ],
     "virtualCurrencies" : [
         {
-            "name"          : "Muffins",
+            "name"          : "Coins",
             "description"   : "",
-            "itemId"        : "currency_muffin",
+            "itemId"        : "currency_coin",
             "balance"       : 1000,
             "imgFilePath"   : "http://placehold.it/40x40"
         }
@@ -59,7 +59,7 @@
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 225
+                    "currency_coin" : 225
                 }
             },
             "itemId"        : "fruit_cake",
@@ -72,7 +72,7 @@
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 175
+                    "currency_coin" : 175
                 }
             },
             "itemId"        : "pavlova",
@@ -85,7 +85,7 @@
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 250
+                    "currency_coin" : 250
                 }
             },
             "itemId"        : "chocolate_cake",
@@ -98,7 +98,7 @@
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 50
+                    "currency_coin" : 50
                 }
             },
             "itemId"        : "cream_cup",
