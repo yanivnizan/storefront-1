@@ -44,13 +44,14 @@ ul {
 .item {
     margin: 10px;
     .box();
+    @innerMargin: 15px;
 
     .item-image {
         width: 100px;
         height: 100px;
     }
     .content {
-        padding: 0 15px;
+        padding: 0 @innerMargin;
         .box-flex(1);
         .box(vertical, center);
     }
@@ -63,6 +64,7 @@ ul {
     .price {
         .box(horizontal, end, center);
         width: 160px;
+        margin-right: @innerMargin;
 
         img {
             width: 40px;
