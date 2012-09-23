@@ -41,6 +41,9 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
                     if (json.currencyPacks)
                         attributes.currencyPacks = json.currencyPacks;
 
+                    if (json.categories)
+                        attributes.categories = json.categories;
+
                     if (json.isCurrencyStoreDisabled)
                         attributes.isCurrencyStoreDisabled = json.isCurrencyStoreDisabled;
                 }

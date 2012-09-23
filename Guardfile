@@ -15,7 +15,7 @@ guard 'steering', :output_folder => "js/views/components", :register_partials =>
 end
 
 
-themes = ["basic", "grid", "muffinRush"]
+themes = ["basic", "grid", "muffinRush", "jetpackJoyride"]
 
 # Precompile handlebars.js templates
 #guard :shell, :all_on_start => true do
