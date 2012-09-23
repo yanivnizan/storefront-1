@@ -3,6 +3,8 @@ require.config({
     paths: {
         components          : "views/components",
         storeViews          : "views/store-views",
+        viewMixins          : "views/view-mixins",
+        cssUtils            : "views/css-utils",
         templates           : "views/templates",
 
         // 3rd party modules

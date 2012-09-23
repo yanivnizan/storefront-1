@@ -1,15 +1,4 @@
-define(["jquery", "backbone", "components", "handlebars", "templates"], function($, Backbone, Components, Handlebars) {
-
-        // Determine which CSS transition event to bind according to the browser vendor
-    var transEndEventNames = {
-        'WebkitTransition' : 'webkitTransitionEnd',
-        'MozTransition'    : 'transitionend',
-        'OTransition'      : 'oTransitionEnd',
-        'msTransition'     : 'MSTransitionEnd',
-        'transition'       : 'transitionend'
-    },
-    transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
-
+define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, CssUtils, Handlebars) {
 
     var StoreView = Backbone.View.extend({
         initialize : function() {
@@ -45,13 +34,6 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
             "touchend .buy-more"    : "showCurrencyStore",
             "touchend .back"        : "showGoodsStore"
         },
-        wantsToLeaveStore : function(event) {
-            if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
-            event.preventDefault();
-
-            // TODO: Release view bindings and destroy view
-            this.nativeAPI.wantsToLeaveStore();
-        },
         updateBalance : function(model) {
             this.$(".header .balance label").html(model.get("balance"));
         },
@@ -65,7 +47,7 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
             }
         },
         showGoodsStore : function() {
-            this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
+            this.$("#currency-store").one(CssUtils.getTransitionendEvent(), function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
         openDialog : function(currency) {
             new Components.ModalDialog({
@@ -87,14 +69,9 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
             this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
 
             return this;
-        },
-        wantsToBuyVirtualGoods : function(model) {
-            this.nativeAPI.wantsToBuyVirtualGoods(model.toJSON().itemId);
-        },
-        wantsToBuyCurrencyPacks : function(model) {
-            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON().productId);
         }
     });
+    _.extend(StoreView.prototype, ViewMixins);
 
 
     return {
