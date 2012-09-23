@@ -30,6 +30,12 @@ ul {
     .box(vertical);
 }
 
+// In case a background image is applied...
+.item, .header {
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .items {
     list-style-type: none;
     padding: 0;
@@ -38,11 +44,6 @@ ul {
 .item {
     margin: 10px;
     .box();
-
-    // In case a background image is applied...
-    background-position: center;
-    background-repeat: no-repeat;
-
 
     .item-image {
         width: 100px;
@@ -73,9 +74,6 @@ ul {
 .header {
 	height: 60px;
     padding: 10px;
-	background-position: center;
-    background-color: @grayLighter;
-    // TODO: Add background image placeholder in HTML
 	.box;
 
 	.title-container {

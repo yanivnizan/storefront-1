@@ -43,6 +43,11 @@ ul {
   box-pack: start;
   box-align: stretch;
 }
+.item,
+.header {
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .items {
   list-style-type: none;
   padding: 0;
@@ -61,8 +66,6 @@ ul {
   box-orient: horizontal;
   box-pack: start;
   box-align: stretch;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 .item .item-image {
   width: 100px;
@@ -112,8 +115,6 @@ ul {
 .header {
   height: 60px;
   padding: 10px;
-  background-position: center;
-  background-color: #eeeeee;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
