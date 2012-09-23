@@ -111,6 +111,17 @@
         "version" : 1,
         "isOrientationLandscape" : false,
         "pages" : {
+            "menu" : {
+                "title" : "http://placehold.it/480x60&text=Title Image (480x60)",
+                "balance" : "http://placehold.it/140x60&text=Balance (140x60)",
+                "leave" : "http://placehold.it/100x60"
+            },
+            "clothing" : {
+                "title": "http://placehold.it/480x60&text=Clothing Image (480x60)"
+            },
+            "jetpacks" : {
+                "title": "http://placehold.it/480x60&text=Jetpacks Image (480x60)"
+            },
             "goods" :{
                 "title" : "themes/muffinRush/img/Store_Store.png",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
@@ -152,11 +163,11 @@
     "categories" : [
         {
             "id" : 1,
-            "name" : "Clothing"
+            "name" : "clothing"
         },
         {
             "id" : 2,
-            "name" : "Jetpacks"
+            "name" : "jetpacks"
         }
     ]
 }

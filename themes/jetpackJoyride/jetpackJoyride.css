@@ -190,9 +190,10 @@
   box-align: center;
 }
 .header {
-  height: 80px;
+  height: 60px;
+  padding: 10px;
   background-position: center;
-  background-color: beige;
+  background-color: #eeeeee;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -206,35 +207,23 @@
   box-pack: start;
   box-align: stretch;
 }
-.header > div {
+.header .title-container {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
-  margin-top: 20px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-pack: start;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-pack: start;
-  -moz-box-align: center;
-  display: box;
-  box-orient: vertical;
-  box-pack: start;
-  box-align: center;
 }
-.header .balance-container .balance {
-  position: relative;
+.header .back,
+.header .balance-container {
+  width: 150px;
 }
-.header .balance-container .container {
-  position: absolute;
-  top: 43px;
-  left: 85px;
-  width: 100px;
+.header .back {
+  text-align: left;
+}
+.header .balance-container {
+  text-align: right;
 }
 .pages {
-  background-color: #faebd7;
+  background-color: #f8f8f8;
   height: 100%;
 }
 .pages  > div {

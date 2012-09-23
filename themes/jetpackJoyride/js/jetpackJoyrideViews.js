@@ -70,10 +70,16 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
 
             var HeaderView = Backbone.View.extend({
+                initialize : function() {
+                    _.bindAll(this, "switchHeader");
+                },
                 events : {
-                    "click .goBack" : function() {
+                    "click .back" : function() {
                         this.trigger("back");
                     }
+                },
+                switchHeader : function(image) {
+                    this.$(".title-image").attr("src", image)
                 }
             });
             this.header = new HeaderView().on("back", this.showMenu);
@@ -88,13 +94,16 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             "touchend .back"        : "showGoodsStore"
         },
         switchCategory : function(model) {
+            var category = model.get("name");
             this.$(".menu").hide();
             this.$(".category").hide();
-            this.$(".category." + model.get("name")).show();
+            this.$(".category." + category).show();
+            this.header.switchHeader(this.theme.pages[category].title);
         },
         showMenu : function() {
             this.$(".menu").show();
             this.$(".category").hide();
+            this.header.switchHeader(this.theme.pages.menu.title);
         },
         updateBalance : function(model) {
             this.$(".header .balance label").html(model.get("balance"));

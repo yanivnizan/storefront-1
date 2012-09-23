@@ -4,6 +4,12 @@
 	font-family: Hobo;
 	src: url('fonts/HoboStd.otf');
 }
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #ccc;
+@grayLighter:           #eee;
+@grayLightest:          #F8F8F8;
 
 
 .header, .footer {
@@ -135,33 +141,33 @@
 }
 
 .header {
-	height: 80px;
+	height: 60px;
+    padding: 10px;
 	background-position: center;
-    background-color: beige;
+    background-color: @grayLighter;
+    // TODO: Add background image placeholder in HTML
 	.box;
 
-	&>div {
+	.title-container {
 		.box-flex(1);
-		margin-top: 20px;
-		.box(vertical, start, center);
 	}
 
-	.balance-container {
-		.balance {
-			position: relative;
-		}
-		.container {
-			position: absolute;
-			top: 43px;
-			left: 85px;
-			width: 100px;
-		}
-	}
+    .back, .balance-container {
+        width: 150px;
+    }
+
+    .back {
+        text-align: left;
+    }
+
+    .balance-container {
+        text-align: right;
+    }
 
 }
 
 .pages {
-    background-color: #faebd7;
+    background-color: @grayLightest;
     height: 100%;
 
     & > div {
