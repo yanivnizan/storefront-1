@@ -22,7 +22,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             currencyPacks.each(function(pack) { pack.set("itemBackground", $this.theme.pages.currencyPacks.listItem.itemBackground); });
 
             this.currencyPacksView = new Components.CollectionListView({
-                className           : "items currencyPacks",
+                className           : "items currencyPacks category",
                 collection          : currencyPacks,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateProperties  : {}
@@ -136,7 +136,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             var $this = this;
             _.each(this.pageViews, function(view) {
-                $this.$(".categories").append(view.render().el);
+                $this.$(".pages").append(view.render().el);
             });
 
             return this;

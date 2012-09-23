@@ -1,26 +1,24 @@
-<div class="header">
-    <div class="back">
-        <img src="{{pages.menu.leave}}">
-    </div>
-    <div class="title-container">
-        <img class="title-image" src="{{pages.menu.title}}" alt="Title Image">
-    </div>
-    <div class="balance-container">
-        <img class="balance-image" src="{{pages.menu.balance}}" alt="Balance Image">
-        <div class="label-container" style="{{balance.style}}">
-            {{#each currencies}}
-            <label>{{this.balance}}</label>
-            {{/each}}
+<div class="main-container">
+    <div class="header">
+        <div class="back">
+            <img src="{{pages.menu.leave}}">
+        </div>
+        <div class="title-container">
+            <img class="title-image" src="{{pages.menu.title}}" alt="Title Image">
+        </div>
+        <div class="balance-container">
+            <img class="balance-image" src="{{pages.menu.balance}}" alt="Balance Image">
+            <div class="label-container" style="{{balance.style}}">
+                {{#each currencies}}
+                <label>{{this.balance}}</label>
+                {{/each}}
+            </div>
         </div>
     </div>
-</div>
-<div id="goods-store" data-role="page">
-
     <div class="pages">
-       <div class="menu">
+        <div class="menu">
 
-       </div>
-        <div class="categories"></div>
+        </div>
 
     </div>
 </div>
