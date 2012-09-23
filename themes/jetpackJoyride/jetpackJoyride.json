@@ -113,6 +113,7 @@
         "balance" : {
             "style" : "top: -10000px; left: -10000px;"
         },
+        "background" : "http://placehold.it/640x960/F8F8F8/ddd&text=Background (640x960)",
         "pages" : {
             "menu" : {
                 "title" : "http://placehold.it/480x60&text=Title Image (480x60)",
