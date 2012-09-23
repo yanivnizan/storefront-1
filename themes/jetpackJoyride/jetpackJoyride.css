@@ -160,7 +160,13 @@
   text-align: left;
 }
 .header .balance-container {
+  position: relative;
   text-align: right;
+}
+.header .balance-container label {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .pages {
   background-color: #f8f8f8;
