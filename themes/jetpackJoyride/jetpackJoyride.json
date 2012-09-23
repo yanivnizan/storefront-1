@@ -110,6 +110,9 @@
         "template" : "jetpackJoyride",
         "version" : 1,
         "isOrientationLandscape" : false,
+        "balance" : {
+            "style" : "top: -10000px; left: -10000px;"
+        },
         "pages" : {
             "menu" : {
                 "title" : "http://placehold.it/480x60&text=Title Image (480x60)",

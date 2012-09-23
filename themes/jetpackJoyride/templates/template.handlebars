@@ -7,9 +7,11 @@
     </div>
     <div class="balance-container">
         <img class="balance-image" src="{{pages.menu.balance}}" alt="Balance Image">
-        {{#each currencies}}
-        <label>{{this.balance}}</label>
-        {{/each}}
+        <div class="label-container" style="{{balance.style}}">
+            {{#each currencies}}
+            <label>{{this.balance}}</label>
+            {{/each}}
+        </div>
     </div>
 </div>
 <div id="goods-store" data-role="page">

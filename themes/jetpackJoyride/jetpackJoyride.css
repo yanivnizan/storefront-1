@@ -134,10 +134,11 @@ ul {
   position: relative;
   text-align: right;
 }
-.header .balance-container label {
+.header .balance-container .label-container {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -10000px;
+  left: -10000px;
+  text-align: center;
 }
 .pages {
   background-color: #f8f8f8;
