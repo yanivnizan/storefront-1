@@ -144,7 +144,7 @@
                 }
             },
             "currencyPacks" : {
-                "title" : "themes/muffinRush/img/Store_Store.png",
+                "title" : "http://placehold.it/480x60&text=Currency Packs Image (480x60)",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
                 "headerBackground" : "themes/muffinRush/img/Roof-Extended.png",
                 "backButton" : "themes/muffinRush/img/back.png",

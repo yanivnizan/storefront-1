@@ -43,18 +43,21 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             var categories = new Backbone.Collection(this.model.get("categories"));
 
 
-            var Pageview = Backbone.View.extend({
-                render : function() {
-                    this.$el.html("This is the category: " + this.model.get("name"));
-                    return this;
-                }
-            });
             this.pageViews = [];
             categories.each(function(category) {
-                var view = new Pageview({
-                    className : "category " + category.get("name"),
-                    model : category
-                });
+
+                var categoryGoods = virtualGoods.filter(function(item) {return item.get("categoryId") == category.id});
+                categoryGoods = new Backbone.Collection(categoryGoods);
+
+                var view = new Components.CollectionListView({
+                    className           : "items virtualGoods category " + category.get("name"),
+                    category            : category,
+                    collection          : categoryGoods,
+                    template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
+                    templateProperties  : {}
+//                    css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
+                }).on("selected", this.wantsToBuyVirtualGoods);
+
                 $this.pageViews.push(view);
             });
             this.pageViews.push(this.currencyPacksView);
