@@ -3,7 +3,7 @@
     "currencyPacks" : [
         {
             "name"              : "10 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins01.png",
+            "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_10",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "muffins_10",
@@ -13,7 +13,7 @@
         },
         {
             "name"              : "50 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins02.png",
+            "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_50",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "android.test.purchased",
@@ -23,7 +23,7 @@
         },
         {
             "name"              : "400 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins03.png",
+            "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_400",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "muffins_400",
@@ -33,7 +33,7 @@
         },
         {
             "name"              : "1000 Muffins",
-            "imgFilePath"       : "themes/muffinRush/img/currencyPacks/muffins04.png",
+            "imgFilePath"       : "http://placehold.it/100x100",
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "muffins_1000",

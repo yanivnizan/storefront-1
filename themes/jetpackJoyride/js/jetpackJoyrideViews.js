@@ -24,9 +24,9 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : currencyPacks,
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateProperties  : {},
-                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
+                templateProperties  : {}
+//                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
             var categories = new Backbone.Collection(this.model.get("categories"));

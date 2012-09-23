@@ -22,29 +22,3 @@
 
     </div>
 </div>
-<div id="currency-store" data-role="page">
-    <img src="{{pages.currencyPacks.background}}" class="background">
-    <!--<div class="header" style="background-image: url('{{pages.currencyPacks.headerBackground}}');">-->
-        <div class="title">
-            <img src="{{pages.currencyPacks.title}}">
-        </div>
-        <div class="balance-container">
-            <div class="balance">
-                <img src="{{pages.currencyPacks.balance}}">
-                {{#each currencies}}
-                <div class="container">
-                    <label>{{this.balance}}</label>
-                </div>
-                {{/each}}
-            </div>
-        </div>
-    </div>
-    <div class="items-container" style="background-image: url('{{pages.currencyPacks.list.background}}');">
-    </div>
-    <div class="footer">
-        <div>
-            <img src="{{pages.currencyPacks.backButton}}" class="back">
-        </div>
-    </div>
-
-</div>
