@@ -31,101 +31,36 @@
 		list-style-type: none;
 		padding: 0;
 	}
+}
 
-	.item {
-		margin: 0 10px 10px;
-		background-position: center;
+.item {
+    margin: 10px;
+    .box();
 
-		.box();
+    .item-image {
+        width: 100px;
+        height: 100px;
+    }
+    .content {
+        padding: 0 15px;
+        .box-flex(1);
+        .box(vertical, center);
+    }
 
-		&.horizontal {
-			display: -webkit-inline-box;
-			display: -moz-inline-box;
-			display: inline-box;
-		}
+    h1 {
+        font-size: 27px;
+        line-height: 30px;
+    }
 
-		.visual {
-			position: relative;
-			width: 100px;
-			height: 100px;
+    .price {
+        .box(horizontal, end, center);
+        width: 160px;
 
-			.foreground {
-				@size: 100px;
-				@max: 80px;
-				position: absolute;
-				z-index: 1;
-				max-width: @max;
-				max-height: @max;
-				left: (@size - @max) / 2;
-			}
-
-			.img-container {
-				position: absolute;
-				z-index: 1;
-				width: 100px;
-				height: 100px;
-				.box(vertical, center, center);
-			}
-
-			.background {
-				position: absolute;
-				top: -7px;
-				left: -7px;
-			}
-
-			.balance {
-				font-size: 12px;
-				font-weight: bold;
-				text-align: center;
-				z-index: 1;
-				position: absolute;
-				bottom: 7px;
-				width: 100%;
-
-				label {
-					padding: 2px 6px;
-					background: rgba(0, 0, 0, 0.3);
-					.rounded(5px)
-				}
-			}
-		}
-		.content {
-			padding: 15px 15px 10px;
-			.box-flex(1);
-		}
-
-		img.currency {
-			display: block;
-			max-width: 55px;
-			max-height: 55px;
-
-		}
-
-		h1 {
-			font-size: 27px;
-			line-height: 30px;
-			font-family: Hobo;
-			margin: 0 0 2px;
-		}
-
-		.description {
-			font-size: 14px;
-			line-height: 16px;
-			font-family: Helvetica;
-		}
-
-		.price {
-			width: 55px;
-			padding: 5px;
-			text-align: center;
-			font-size: 20px;
-			font-weight: bold;
-			font-style: italic;
-			color: #ab744d;
-			text-shadow: 2px 2px 2px #FFFFFF;
-		}
-	}
-
+        img {
+            width: 40px;
+            height: 40px;
+        }
+    }
 }
 
 // Currency Pack specific overrides

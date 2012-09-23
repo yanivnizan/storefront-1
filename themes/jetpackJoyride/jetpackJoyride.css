@@ -39,10 +39,8 @@
   list-style-type: none;
   padding: 0;
 }
-.virtualGoods .item,
-.currencyPacks .item {
-  margin: 0 10px 10px;
-  background-position: center;
+.item {
+  margin: 10px;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -56,108 +54,50 @@
   box-pack: start;
   box-align: stretch;
 }
-.virtualGoods .item.horizontal,
-.currencyPacks .item.horizontal {
-  display: -webkit-inline-box;
-  display: -moz-inline-box;
-  display: inline-box;
-}
-.virtualGoods .item .visual,
-.currencyPacks .item .visual {
-  position: relative;
+.item .item-image {
   width: 100px;
   height: 100px;
 }
-.virtualGoods .item .visual .foreground,
-.currencyPacks .item .visual .foreground {
-  position: absolute;
-  z-index: 1;
-  max-width: 80px;
-  max-height: 80px;
-  left: 10px;
-}
-.virtualGoods .item .visual .img-container,
-.currencyPacks .item .visual .img-container {
-  position: absolute;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  display: box;
-  box-orient: vertical;
-  box-pack: center;
-  box-align: center;
-}
-.virtualGoods .item .visual .background,
-.currencyPacks .item .visual .background {
-  position: absolute;
-  top: -7px;
-  left: -7px;
-}
-.virtualGoods .item .visual .balance,
-.currencyPacks .item .visual .balance {
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  z-index: 1;
-  position: absolute;
-  bottom: 7px;
-  width: 100%;
-}
-.virtualGoods .item .visual .balance label,
-.currencyPacks .item .visual .balance label {
-  padding: 2px 6px;
-  background: rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.virtualGoods .item .content,
-.currencyPacks .item .content {
-  padding: 15px 15px 10px;
+.item .content {
+  padding: 0 15px;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   box-flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: center;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  box-align: stretch;
 }
-.virtualGoods .item img.currency,
-.currencyPacks .item img.currency {
-  display: block;
-  max-width: 55px;
-  max-height: 55px;
-}
-.virtualGoods .item h1,
-.currencyPacks .item h1 {
+.item h1 {
   font-size: 27px;
   line-height: 30px;
-  font-family: Hobo;
-  margin: 0 0 2px;
 }
-.virtualGoods .item .description,
-.currencyPacks .item .description {
-  font-size: 14px;
-  line-height: 16px;
-  font-family: Helvetica;
+.item .price {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: end;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: end;
+  -moz-box-align: center;
+  display: box;
+  box-orient: horizontal;
+  box-pack: end;
+  box-align: center;
+  width: 160px;
 }
-.virtualGoods .item .price,
-.currencyPacks .item .price {
-  width: 55px;
-  padding: 5px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  font-style: italic;
-  color: #ab744d;
-  text-shadow: 2px 2px 2px #FFFFFF;
+.item .price img {
+  width: 40px;
+  height: 40px;
 }
 .currencyPacks .item .price {
   display: -webkit-box;

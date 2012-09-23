@@ -48,14 +48,14 @@
             "description"   : "",
             "itemId"        : "currency_muffin",
             "balance"       : 1000,
-            "imgFilePath"   : "themes/muffinRush/img/muffin.png"
+            "imgFilePath"   : "http://placehold.it/40x40"
         }
     ],
     "virtualGoods" : [
         {
             "name"          : "Fruit Cake",
             "description"   : "Customers buy a double portion on each purchase of this cake",
-            "imgFilePath"   : "themes/muffinRush/img/items/fruit_cake.png",
+            "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -68,7 +68,7 @@
         {
             "name"          : "Pavlova",
             "description"   : "Gives customers a sugar rush and they call their friends",
-            "imgFilePath"   : "themes/muffinRush/img/items/pavlova.png",
+            "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -81,7 +81,7 @@
         {
             "name"          : "Choco-Cake",
             "description"   : "A classic cake to maximize customer satisfaction",
-            "imgFilePath"   : "themes/muffinRush/img/items/chocolate_cake.png",
+            "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -94,7 +94,7 @@
         {
             "name"          : "Cream Cup",
             "description"   : "Increase bakery reputation with this original pastry",
-            "imgFilePath"   : "themes/muffinRush/img/items/cream_cup.png",
+            "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
