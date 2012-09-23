@@ -55,6 +55,8 @@ ul {
   box-orient: horizontal;
   box-pack: start;
   box-align: stretch;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .item .item-image {
   width: 100px;

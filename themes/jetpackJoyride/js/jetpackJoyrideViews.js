@@ -25,8 +25,8 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateProperties  : {}
-//                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                templateProperties  : {},
+                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
             var categories = new Backbone.Collection(this.model.get("categories"));
@@ -37,14 +37,15 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
                 var categoryGoods = virtualGoods.filter(function(item) {return item.get("categoryId") == category.id});
                 categoryGoods = new Backbone.Collection(categoryGoods);
+                var categoryName = category.get("name");
 
                 var view = new Components.CollectionListView({
-                    className           : "items virtualGoods category " + category.get("name"),
+                    className           : "items virtualGoods category " + categoryName,
                     category            : category,
                     collection          : categoryGoods,
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
-                    templateProperties  : {}
-//                    css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
+                    templateProperties  : {},
+                    css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
                 }).on("selected", $this.wantsToBuyVirtualGoods);
 
                 $this.pageViews.push(view);

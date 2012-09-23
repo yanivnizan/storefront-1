@@ -120,10 +120,16 @@
                 "leave" : "http://placehold.it/100x60"
             },
             "clothing" : {
-                "title": "http://placehold.it/480x60&text=Clothing Image (480x60)"
+                "title": "http://placehold.it/480x60&text=Clothing Image (480x60)",
+                "listItem" : {
+                    "background" : "http://placehold.it/900x100/fff/eee&text=Background (900x100)"
+                }
             },
             "jetpacks" : {
-                "title": "http://placehold.it/480x60&text=Jetpacks Image (480x60)"
+                "title": "http://placehold.it/480x60&text=Jetpacks Image (480x60)",
+                "listItem" : {
+                    "background" : "http://placehold.it/900x100/fff/eee&text=Background (900x100)"
+                }
             },
             "goods" :{
                 "title" : "themes/muffinRush/img/Store_Store.png",
@@ -156,7 +162,7 @@
                     "background" : "themes/muffinRush/img/InnerBG.png"
                 },
                 "listItem" : {
-                    "background" : "themes/muffinRush/img/Bar.png",
+                    "background" : "http://placehold.it/900x100/fff/eee&text=Background (900x100)",
                     "itemBackground" :"themes/muffinRush/img/Mapit.png"
                 }
 
