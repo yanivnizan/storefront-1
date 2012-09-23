@@ -21,17 +21,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             virtualGoods.each(function(good) { good.set("itemBackground", $this.theme.pages.goods.listItem.itemBackground); });
             currencyPacks.each(function(pack) { pack.set("itemBackground", $this.theme.pages.currencyPacks.listItem.itemBackground); });
 
-            // Initialize sub-views, but defer providing an "el" until the rendering phase
-            // This will enable us to construct the view objects once and then render as many times
-            // as we like without losing the jQuery bindings each time.
-            // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new Components.CollectionListView({
-                className           : "items virtualGoods",
-                collection          : virtualGoods,
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateProperties  : {},
-                css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
-            }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : currencyPacks,
@@ -56,7 +45,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
                     templateProperties  : {}
 //                    css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
-                }).on("selected", this.wantsToBuyVirtualGoods);
+                }).on("selected", $this.wantsToBuyVirtualGoods);
 
                 $this.pageViews.push(view);
             });
@@ -141,7 +130,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.header.setElement(this.$(".header"));
 
             // Render subviews (items in goods store and currency store)
-            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
+//            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
 //            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
             this.$(".menu").html(this.categoryMenuView.render().el);
 
