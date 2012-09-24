@@ -116,6 +116,9 @@
         "background" : "http://placehold.it/960x640/F8F8F8/ddd&text=Background (960x640)",
         "headerBackground" : "http://placehold.it/960x80/eee/ddd&text=Background (960x80)",
         "buyImage" : "http://placehold.it/140x60",
+        "noFundsModal" : {
+            "background" : "http://placehold.it/520x200&text=Background (520x200)"
+        },
         "pages" : {
             "menu" : {
                 "title" : "http://placehold.it/480x60&text=Title Image (480x60)",
@@ -140,12 +143,6 @@
                 "balance" : "themes/muffinRush/img/YourMuf.png",
                 "listItem" : {
                     "background" : "themes/muffinRush/img/Bar.png"
-                },
-                "noFundsModal" : {
-                    "background" : "img.png",
-                    "yesButton" : "themes/muffinRush/img/modalDialog/Yes.png",
-                    "description" : "themes/muffinRush/img/modalDialog/Description.png",
-                    "noButton" : "themes/muffinRush/img/modalDialog/No.png"
                 }
             },
             "currencyPacks" : {

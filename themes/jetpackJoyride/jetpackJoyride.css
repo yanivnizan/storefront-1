@@ -205,24 +205,28 @@ ul {
 .cancel {
   cursor: pointer;
 }
-.dialog {
+.modal {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-pack: center;
   -webkit-box-align: center;
   display: -moz-box;
-  -moz-box-orient: vertical;
+  -moz-box-orient: horizontal;
   -moz-box-pack: center;
   -moz-box-align: center;
   display: box;
-  box-orient: vertical;
+  box-orient: horizontal;
   box-pack: center;
   box-align: center;
-  width: auto;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6);
 }
-.dialog  > img {
-  display: block;
-}
-.dialog .actions {
-  margin-top: 10px;
+.dialog {
+  width: 520px;
+  height: 200px;
 }

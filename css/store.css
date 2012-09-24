@@ -551,50 +551,6 @@ h1 {
 #currency-store.visible {
   opacity: 1;
 }
-.modal {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: center;
-  box-align: center;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.6);
-}
-.dialog {
-  width: 80%;
-  position: relative;
-  background: #FFFFFF;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  padding: 10px;
-  text-align: center;
-  -webkit-box-shadow: 0 0 20px #000000;
-  -moz-box-shadow: 0 0 20px #000000;
-  box-shadow: 0 0 20px #000000;
-}
-.dialog .close {
-  position: absolute;
-  z-index: 1;
-  right: -12px;
-  top: -12px;
-  cursor: pointer;
-}
 .btn {
   display: inline-block;
   *display: inline;

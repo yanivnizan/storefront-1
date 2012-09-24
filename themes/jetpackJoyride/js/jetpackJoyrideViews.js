@@ -124,11 +124,9 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
         openDialog : function(currency) {
             new Components.ModalDialog({
                 parent : this.$el,
-                model : this.theme.pages.goods.noFundsModal,
+                model : this.theme.noFundsModal,
                 template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
-            }).render().on("closed", function(command) {
-                if (command == "buyMore") this.showCurrencyStore();
-            }, this);
+            }).render();
             return this;
         },
         render : function() {

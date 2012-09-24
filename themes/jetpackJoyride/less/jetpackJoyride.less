@@ -138,15 +138,18 @@ ul {
 	cursor: pointer;
 }
 
+.modal {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .box(horizontal, center, center);
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+}
+
 .dialog {
-	.box(vertical, center, center);
-	width: auto;
-
-	& > img {
-		display: block;
-	}
-
-	.actions {
-		margin-top: 10px;
-	}
+	width: 520px;
+    height: 200px;
 }
