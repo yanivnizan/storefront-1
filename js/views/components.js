@@ -58,6 +58,53 @@ define(["jquery", "backbone"], function($, Backbone) {
         tagName : "div"
     });
 
+    // TODO: Write unit test for this component
+    var ExpandableListItemView = ListItemView.extend({
+        initialize : function(options) {
+            // Call super constructor
+            this.constructor.__super__.initialize.call(this, options);
+            _.bindAll(this, "onBuySelected", "onSelect");
+            this.model.on("change:equipped", this.render);
+
+            this.expanded = false;
+            this.lastEventTime = -(this.eventInterval * 10); // Initial value for allowing first expand
+        },
+        events : {
+            "touchend"      : "onSelect",
+            "touchend .buy" : "onBuySelected"
+        },
+        onSelect : function() {
+            // "touchend" on Android is triggered several times (probably a bug).
+            // Protect by setting a minimum interval between events
+            var currentTime = new Date().getTime();
+            if ((currentTime - this.lastEventTime) < this.eventInterval) return;
+
+            // If the product was already purchase it, now toggle between equipping or not equipping
+            if (this.model.get("balance") == 1) {
+                this.trigger(this.model.get("equipped") ? "unequipped" : "equipped", this.model);
+                return;
+            }
+
+            if (this.expanded) {
+                this.expanded = false;
+                this.$el.removeClass("expanded");
+                this.$(".expand-collapse").attr("src", this.model.get("images").expandImage);
+            } else {
+                this.expanded = true;
+                this.$el.addClass("expanded");
+                this.$(".expand-collapse").attr("src", this.model.get("images").collapseImage);
+            }
+
+            // If the event handler was executed, update the time the event was triggered.
+            this.lastEventTime = currentTime;
+        },
+        onBuySelected : function(event) {
+            event.stopPropagation();
+            this.trigger("selected", this.model);
+        },
+        eventInterval : 500
+    });
+
 
     ////////////////////  Collection Views  /////////////////////
 
@@ -87,6 +134,10 @@ define(["jquery", "backbone"], function($, Backbone) {
                     css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
+                }).on("equipped", function(model) {
+                    $this.trigger("equipped", model);
+                }).on("unequipped", function(model) {
+                    $this.trigger("unequipped", model);
                 });
                 $this.subViews.push(view);
             });
@@ -170,11 +221,12 @@ define(["jquery", "backbone"], function($, Backbone) {
     });
 
     return {
-        ListItemView        : ListItemView,
-        GridItemView        : GridItemView,
-        ModalDialog         : ModalDialog,
-        BaseCollectionView  : BaseCollectionView,
-        CollectionListView  : CollectionListView,
-        CollectionGridView  : CollectionGridView
+        ListItemView            : ListItemView,
+        ExpandableListItemView  : ExpandableListItemView,
+        GridItemView            : GridItemView,
+        ModalDialog             : ModalDialog,
+        BaseCollectionView      : BaseCollectionView,
+        CollectionListView      : CollectionListView,
+        CollectionGridView      : CollectionGridView
     };
 });

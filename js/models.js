@@ -98,6 +98,12 @@ define(["backboneRelational"], function() {
                 }
             });
             return this;
+        },
+        equipVirtualGoods : function(goods) {
+            var virtualGoods = this.get("virtualGoods");
+            _.each(goods, function(equipped, good) {
+                virtualGoods.get(good).set("equipped", equipped)
+            });
         }
     });
 

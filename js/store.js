@@ -6,9 +6,13 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
         if (top.enablePointingDeviceEvents) _.extend(target, events);
     };
     addPointingDeviceEvents(Components.ListItemView.prototype.events, {click : "onSelect"});
+    addPointingDeviceEvents(Components.ExpandableListItemView.prototype.events, {
+        click           : "onSelect",
+        "click .buy"    : "onBuySelected"
+    });
     addPointingDeviceEvents(Components.ModalDialog.prototype.events, {
-        "click .close"          : "close",
-        "click .modal"          : "close"
+        "click .close"  : "close",
+        "click .modal"  : "close"
     });
 
     $(function() {
@@ -40,6 +44,9 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
 
                     if (json.currencyPacks)
                         attributes.currencyPacks = json.currencyPacks;
+
+                    if (json.categories)
+                        attributes.categories = json.categories;
 
                     if (json.isCurrencyStoreDisabled)
                         attributes.isCurrencyStoreDisabled = json.isCurrencyStoreDisabled;
