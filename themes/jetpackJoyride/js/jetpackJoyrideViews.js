@@ -3,7 +3,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
     var StoreView = Backbone.View.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
-                            "render", "showCurrencyStore", "showGoodsStore", "openDialog",
+                            "render", "openDialog",
                             "switchCategory", "showMenu",
                             "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
@@ -90,10 +90,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);
 
         },
-        events : {
-            "touchend .buy-more"    : "showCurrencyStore",
-            "touchend .back"        : "showGoodsStore"
-        },
+        events : {},
         switchCategory : function(model) {
             this.header.state = "category";
             var category = model.get("name");
@@ -111,18 +108,8 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
         updateBalance : function(model) {
             this.$(".header .balance label").html(model.get("balance"));
         },
-        showCurrencyStore : function() {
-            // When this flag is raised, there is no connectivity,
-            // thus don't show the currency store
-            if (this.model.get("isCurrencyStoreDisabled")) {
-                alert("Buying more " + this.model.get("currency").get("name") + " is unavailable. Check your internet connectivity and try again.");
-            } else {
-                this.$("#currency-store").css("visibility", "").addClass("visible");
-            }
-        },
-        showGoodsStore : function() {
-            this.$("#currency-store").one(CssUtils.getTransitionendEvent(), function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
-        },
+        showCurrencyStore : function() {},
+        showGoodsStore : function() {},
         openDialog : function(currency) {
             new Components.ModalDialog({
                 parent : this.$el,
@@ -136,11 +123,8 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.$el.html(this.options.template(context));
             this.$("#currency-store").css("visibility", "hidden");
 
-            this.header.setElement(this.$(".header"));
-
             // Render subviews (items in goods store and currency store)
-//            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
-//            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
+            this.header.setElement(this.$(".header"));
             this.$(".menu").html(this.categoryMenuView.render().el);
 
             var $this = this;

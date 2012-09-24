@@ -11,9 +11,8 @@ define({
     wantsToUnequipGoods : function(model) {
         this.nativeAPI.wantsToUnequipGoods(model.toJSON().productId);
     },
-    wantsToLeaveStore : function(event) {
+    wantsToLeaveStore : function() {
         if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
-        event.preventDefault();
 
         // TODO: Release view bindings and destroy view
         this.nativeAPI.wantsToLeaveStore();
