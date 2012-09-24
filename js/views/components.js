@@ -17,6 +17,44 @@ define(["jquery", "backbone"], function($, Backbone) {
             }
 
             return template;
+        },
+        // Configure `triggers` to forward DOM events to view
+        // events. `triggers: {"click .foo": "do:foo"}`
+        configureTriggers: function(){
+            if (!this.triggers) { return; }
+
+            var triggers = this.triggers;
+            var that = this;
+            var triggerEvents = {};
+
+            // Allow `triggers` to be configured as a function
+            if (_.isFunction(triggers)){ triggers = triggers.call(this); }
+
+            // Configure the triggers, prevent default
+            // action and stop propagation of DOM events
+            _.each(triggers, function(value, key){
+
+                triggerEvents[key] = function(e){
+                    if (e && e.preventDefault){ e.preventDefault(); }
+                    if (e && e.stopPropagation){ e.stopPropagation(); }
+                    that.trigger(value, that.model);
+                };
+
+            });
+
+            return triggerEvents;
+        },
+        // Overriding Backbone.View's delegateEvents specifically
+        // to handle the `triggers` configuration
+        delegateEvents: function(events){
+            events = events || this.events;
+            if (_.isFunction(events)){ events = events.call(this); }
+
+            var combinedEvents = {};
+            var triggers = this.configureTriggers();
+            _.extend(combinedEvents, events, triggers);
+
+            Backbone.View.prototype.delegateEvents.call(this, combinedEvents);
         }
     });
 
@@ -57,14 +95,11 @@ define(["jquery", "backbone"], function($, Backbone) {
         className : "item",
         tagName : "li",
         initialize : function() {
-            _.bindAll(this, "onSelect", "render");
+            _.bindAll(this, "render");
             this.model.on("change:balance change:price change:currency", this.render);
         },
-        events : {
-            "touchend" : "onSelect"
-        },
-        onSelect : function() {
-            this.trigger("selected", this.model);
+        triggers : {
+            touchend : "selected"
         },
         render : function() {
             if (this.options.css) this.$el.css(this.options.css);
@@ -82,15 +117,17 @@ define(["jquery", "backbone"], function($, Backbone) {
         initialize : function(options) {
             // Call super constructor
             this.constructor.__super__.initialize.call(this, options);
-            _.bindAll(this, "onBuySelected", "onSelect");
+            _.bindAll(this, "onSelect");
             this.model.on("change:equipped", this.render);
 
             this.expanded = false;
             this.lastEventTime = -(this.eventInterval * 10); // Initial value for allowing first expand
         },
         events : {
-            "touchend"      : "onSelect",
-            "touchend .buy" : "onBuySelected"
+            "touchend"      : "onSelect"
+        },
+        triggers : {
+            "touchend .buy" : "bought"
         },
         onSelect : function() {
             // "touchend" on Android is triggered several times (probably a bug).
@@ -116,10 +153,6 @@ define(["jquery", "backbone"], function($, Backbone) {
 
             // If the event handler was executed, update the time the event was triggered.
             this.lastEventTime = currentTime;
-        },
-        onBuySelected : function(event) {
-            event.stopPropagation();
-            this.trigger("selected", this.model);
         },
         eventInterval : 500
     });
@@ -152,6 +185,8 @@ define(["jquery", "backbone"], function($, Backbone) {
                     css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
+                }).on("bought", function(model) {
+                    $this.trigger("bought", model);
                 }).on("equipped", function(model) {
                     $this.trigger("equipped", model);
                 }).on("unequipped", function(model) {
@@ -196,6 +231,8 @@ define(["jquery", "backbone"], function($, Backbone) {
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
+                }).on("bought", function(model) {
+                    $this.trigger("bought", model);
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
                 });

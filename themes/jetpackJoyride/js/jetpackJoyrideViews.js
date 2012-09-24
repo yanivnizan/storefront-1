@@ -46,7 +46,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : {},
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
-            }).on("selected", this.wantsToBuyCurrencyPacks);
+            }).on("bought", this.wantsToBuyCurrencyPacks);
 
 
 
@@ -65,7 +65,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
                     templateProperties  : {},
                     css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
-                }).on("selected", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
+                }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
 
                 $this.pageViews.push(view);
             });
@@ -81,7 +81,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);
         },
-        events : {},
         switchCategory : function(model) {
             this.header.state = "category";
             var category = model.get("name");

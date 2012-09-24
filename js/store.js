@@ -3,12 +3,17 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
     var addPointingDeviceEvents = function(target, events) {
-        if (top.enablePointingDeviceEvents) _.extend(target, events);
+        if (top.enablePointingDeviceEvents) {
+            (target) || (target = {});
+            _.extend(target, events);
+        }
     };
-    addPointingDeviceEvents(Components.ListItemView.prototype.events, {click : "onSelect"});
+    addPointingDeviceEvents(Components.ListItemView.prototype.triggers, {click : "selected"});
     addPointingDeviceEvents(Components.ExpandableListItemView.prototype.events, {
-        click           : "onSelect",
-        "click .buy"    : "onBuySelected"
+        click           : "onSelect"
+    });
+    addPointingDeviceEvents(Components.ExpandableListItemView.prototype.triggers, {
+        "click .buy"    : "bought"
     });
     addPointingDeviceEvents(Components.ModalDialog.prototype.events, {
         "click .close"  : "close",

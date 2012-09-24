@@ -130,7 +130,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should have a tap event on the entire item", function() {
-                expect(view.events["touchend"]).toBeDefined();
+                expect(view.triggers["touchend"]).toBeDefined();
             });
 
             it("should accept an itemType and use the relevant template", function() {
@@ -155,11 +155,11 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should trigger a 'selected' event on itself with its model when clicked", function () {
-                var spy     = sinon.spy();
-                _.extend(ListItemView.prototype.events, { click : "onSelect" });
+                var spy = sinon.spy();
+                _.extend(ListItemView.prototype.triggers, { click : "selected" });
                 new ListItemView(attributes).on("selected", spy).$el.click();
                 expect(spy.calledWith(model)).toBeTruthy();
-                delete ListItemView.prototype.events.click;
+                delete ListItemView.prototype.triggers.click;
             });
 
             it("should re-render on changes to the model attributes: currency, price, balance", function () {
