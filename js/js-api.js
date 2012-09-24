@@ -22,11 +22,8 @@ define({
     goodsUpdated : function(virtualGoods) {
         SoomlaJS.store.updateVirtualGoods(virtualGoods);
     },
-    goodsEquipped : function(itemId) {
-        SoomlaJS.store.equipVirtualGoods(itemId, true);
-    },
-    goodsUnequipped : function(itemId) {
-        SoomlaJS.store.equipVirtualGoods(itemId, false);
+    goodsEquippingChanged : function(virtualGoods) {
+        SoomlaJS.store.equipVirtualGoods(virtualGoods);
     },
     insufficientFunds : function(currency) {
         SoomlaJS.storeView.openDialog(currency);

@@ -39,7 +39,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         initialize : function() {
             _.bindAll(this, "onSelect", "render");
             this.template = this.options.template;
-            this.model.on("change:balance change:price change:currency change:equipped", this.render);
+            this.model.on("change:balance change:price change:currency", this.render);
         },
         events : {
             "touchend" : "onSelect"
@@ -64,6 +64,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             // Call super constructor
             this.constructor.__super__.initialize.call(this, options);
             _.bindAll(this, "onBuySelected", "onSelect");
+            this.model.on("change:equipped", this.render);
 
             this.expanded = false;
             this.lastEventTime = -(this.eventInterval * 10); // Initial value for allowing first expand
