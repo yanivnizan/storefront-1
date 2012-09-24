@@ -43,4 +43,6 @@ build/buildinfo.properties
 build/config/buildinfo.properties
 
 # More libraries
-tweenjs
+themes/**/*.css
+css/**/*.css
+css/*.css
