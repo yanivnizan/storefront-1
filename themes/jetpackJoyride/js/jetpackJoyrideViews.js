@@ -17,12 +17,17 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 currencyPacks = this.model.get("currencyPacks"),
                 $this = this;
 
+            // TODO: extend models with one property: a shared images object that contains all of them
             // Add UI rendering properties to models.
             virtualGoods.each(function(good) { good.set({
+                equippedIndicatorImage : $this.theme.equippedIndicatorImage,
+                notEquippedIndicatorImage : $this.theme.notEquippedIndicatorImage,
                 itemBackground : $this.theme.pages.goods.listItem.itemBackground,
                 buyImage : $this.theme.buyImage
             }); });
             currencyPacks.each(function(pack) { pack.set({
+                equippedIndicatorImage : $this.theme.equippedIndicatorImage,
+                notEquippedIndicatorImage : $this.theme.notEquippedIndicatorImage,
                 itemBackground : $this.theme.pages.currencyPacks.listItem.itemBackground,
                 buyImage : $this.theme.buyImage
             }); });
@@ -54,7 +59,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
                     templateProperties  : {},
                     css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
-                }).on("selected", $this.wantsToBuyVirtualGoods);
+                }).on("selected", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
 
                 $this.pageViews.push(view);
             });

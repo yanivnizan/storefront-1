@@ -98,6 +98,9 @@ define(["backboneRelational"], function() {
                 }
             });
             return this;
+        },
+        equipVirtualGoods : function(productId, equipped) {
+            this.get("virtualGoods").get(productId).set("equipped", equipped);
         }
     });
 

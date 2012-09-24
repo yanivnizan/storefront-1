@@ -5,6 +5,8 @@
 define({
     wantsToBuyVirtualGoods  : function(model) {},
     wantsToBuyCurrencyPacks : function(model) {},
-    wantsToLeaveStore       : function() {},
-    storeInitialized        : function() {}
+    wantsToEquipGoods       : function(model) {},
+    wantsToUnequipGoods     : function(model) {},
+    storeInitialized        : function() {},
+    wantsToLeaveStore       : function() {}
 });

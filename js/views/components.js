@@ -39,7 +39,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         initialize : function() {
             _.bindAll(this, "onSelect", "render");
             this.template = this.options.template;
-            this.model.on("change:balance change:price change:currency", this.render);
+            this.model.on("change:balance change:price change:currency change:equipped", this.render);
         },
         events : {
             "touchend" : "onSelect"
@@ -77,6 +77,12 @@ define(["jquery", "backbone"], function($, Backbone) {
             // Protect by setting a minimum interval between events
             var currentTime = new Date().getTime();
             if ((currentTime - this.lastEventTime) < this.eventInterval) return;
+
+            // If the product was already purchase it, now toggle between equipping or not equipping
+            if (this.model.get("balance") == 1) {
+                this.trigger(this.model.get("equipped") ? "unequipped" : "equipped", this.model);
+                return;
+            }
 
             if (this.expanded) {
                 this.expanded = false;
@@ -125,6 +131,10 @@ define(["jquery", "backbone"], function($, Backbone) {
                     css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
+                }).on("equipped", function(model) {
+                    $this.trigger("equipped", model);
+                }).on("unequipped", function(model) {
+                    $this.trigger("unequipped", model);
                 });
                 $this.subViews.push(view);
             });

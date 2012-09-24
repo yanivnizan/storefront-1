@@ -42,7 +42,7 @@ ul {
 }
 
 .item {
-    margin: 10px;
+    padding: 10px;
     @innerMargin: 15px;
     @collapsedHeight: 100px;
     height: @collapsedHeight;
@@ -57,6 +57,12 @@ ul {
         .box();
         height: @collapsedHeight;
         .gradient();
+    }
+
+    .equipped, .not-equipped {
+        width: 20px;
+        height: @collapsedHeight;
+        margin: 0 10px;
     }
 
     .item-image {

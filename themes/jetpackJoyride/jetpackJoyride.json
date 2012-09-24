@@ -119,6 +119,8 @@
         "noFundsModal" : {
             "background" : "http://placehold.it/520x200&text=Background (520x200)"
         },
+        "equippedIndicatorImage" : "http://placehold.it/100x20",
+        "notEquippedIndicatorImage" : "http://placehold.it/100x20",
         "pages" : {
             "menu" : {
                 "title" : "http://placehold.it/480x60&text=Title Image (480x60)",
@@ -128,13 +130,13 @@
             "clothing" : {
                 "title": "http://placehold.it/480x60&text=Clothing Image (480x60)",
                 "listItem" : {
-                    "background" : "http://placehold.it/900x100/fff/eee&text=Background (900x100)"
+                    "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
                 }
             },
             "jetpacks" : {
                 "title": "http://placehold.it/480x60&text=Jetpacks Image (480x60)",
                 "listItem" : {
-                    "background" : "http://placehold.it/900x100/fff/eee&text=Background (900x100)"
+                    "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
                 }
             },
             "goods" :{
@@ -149,7 +151,7 @@
                 "backButton" : "themes/muffinRush/img/back.png",
                 "balance" : "themes/muffinRush/img/YourMuf.png",
                 "listItem" : {
-                    "background" : "http://placehold.it/900x100/fff/eee&text=Background (900x100)"
+                    "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
                 }
 
             }

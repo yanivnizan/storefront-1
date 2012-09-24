@@ -53,7 +53,7 @@ ul {
   padding: 0;
 }
 .item {
-  margin: 10px;
+  padding: 10px;
   height: 100px;
   overflow: hidden;
   -webkit-transition: height 0.2s ease-out;
@@ -82,6 +82,12 @@ ul {
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
   background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
   background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
+}
+.item .equipped,
+.item .not-equipped {
+  width: 20px;
+  height: 100px;
+  margin: 0 10px;
 }
 .item .item-image {
   width: 100px;
