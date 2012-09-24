@@ -106,7 +106,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.header.switchHeader(this.theme.pages.menu.title, this.theme.images.quitImage);
         },
         updateBalance : function(model) {
-            this.$(".header .balance label").html(model.get("balance"));
+            this.$(".balance-container label").html(model.get("balance"));
         },
         showCurrencyStore : function() {},
         showGoodsStore : function() {},
