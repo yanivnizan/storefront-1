@@ -14,12 +14,17 @@
         <img src="{{currency.imgFilePath}}">
     </div>
     {{/unless}}
+    {{#if equipped}}
+    {{/if}}
+    <img src="{{expandImage}}" class="expand-collapse">
 </div>
 <div class="row">
     <div class="description">{{description}}</div>
+    {{#unless balance}}
     <div class="buy-container">
         <a class="buy">
             <img src="{{buyImage}}">
         </a>
     </div>
+    {{/unless}}
 </div>

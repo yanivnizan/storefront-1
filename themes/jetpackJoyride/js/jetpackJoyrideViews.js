@@ -22,12 +22,16 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             virtualGoods.each(function(good) { good.set({
                 equippedIndicatorImage : $this.theme.equippedIndicatorImage,
                 notEquippedIndicatorImage : $this.theme.notEquippedIndicatorImage,
+                expandImage : $this.theme.expandImage,
+                collapseImage : $this.theme.collapseImage,
                 itemBackground : $this.theme.pages.goods.listItem.itemBackground,
                 buyImage : $this.theme.buyImage
             }); });
             currencyPacks.each(function(pack) { pack.set({
                 equippedIndicatorImage : $this.theme.equippedIndicatorImage,
                 notEquippedIndicatorImage : $this.theme.notEquippedIndicatorImage,
+                expandImage : $this.theme.expandImage,
+                collapseImage : $this.theme.collapseImage,
                 itemBackground : $this.theme.pages.currencyPacks.listItem.itemBackground,
                 buyImage : $this.theme.buyImage
             }); });

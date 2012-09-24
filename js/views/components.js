@@ -87,9 +87,11 @@ define(["jquery", "backbone"], function($, Backbone) {
             if (this.expanded) {
                 this.expanded = false;
                 this.$el.removeClass("expanded");
+                this.$(".expand-collapse").attr("src", this.model.get("expandImage"));
             } else {
                 this.expanded = true;
                 this.$el.addClass("expanded");
+                this.$(".expand-collapse").attr("src", this.model.get("collapseImage"));
             }
 
             // If the event handler was executed, update the time the event was triggered.
