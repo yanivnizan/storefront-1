@@ -41,10 +41,6 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 expect(modal.el.className).toEqual("modal-container");
             });
 
-            it("should have a template defined", function() {
-                expect(new ModalDialog(_.extend(attributes, {template : "some template"})).template).toEqual("some template");
-            });
-
             it("should have a tap event on the close button and overlay", function() {
                 expect(modal.events["touchend .close"]).toBeDefined();
                 expect(modal.events["touchend .modal"]).toBeDefined();
@@ -64,12 +60,9 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 expect(modal.$el.parent().length).toEqual(0);
             });
 
-            it("should have a template defined", function() {
-                expect(modal.template).toBeDefined();
-            });
             it("should use the template when rendering", function() {
                 modal = new ModalDialog(_.extend(attributes, {template : sinon.spy()})).render();
-                expect(modal.template.called).toBeTruthy();
+                expect(modal.getTemplate().called).toBeTruthy();
             });
             it("should return the itself from render / close for chaining", function() {
                 modal = new ModalDialog(_.extend(attributes, {template : sinon.stub()})).render();
@@ -138,10 +131,6 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
             it("should have a tap event on the entire item", function() {
                 expect(view.events["touchend"]).toBeDefined();
-            });
-
-            it("should have a template defined", function() {
-                expect(new ListItemView(_.extend({template : "some template"}, attributes)).template).toEqual("some template");
             });
 
             it("should accept an itemType and use the relevant template", function() {
@@ -214,11 +203,6 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
             it("should be an instance of Backbone.View", function() {
                 expect(new BaseCollectionView()).toBeInstanceOf(Backbone.View);
-            });
-
-            it("should have a template defined", function() {
-                var template = sinon.stub();
-                expect(new BaseCollectionView({template : template}).template).toEqual(template);
             });
 
             it("should have a type defined", function() {

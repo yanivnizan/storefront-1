@@ -1,10 +1,30 @@
 define(["jquery", "backbone"], function($, Backbone) {
 
-    var ModalDialog = Backbone.View.extend({
+    var BaseView = Backbone.View.extend({
+        // Get the template for this view
+        // instance. You can set a `template` attribute in the view
+        // definition or pass a `template: "whatever"` parameter in
+        // to the constructor options.
+        getTemplate: function(){
+            var template;
+
+            // Get the template from `this.options.template` or
+            // `this.template`. The `options` takes precedence.
+            if (this.options && this.options.template){
+                template = this.options.template;
+            } else {
+                template = this.template;
+            }
+
+            return template;
+        }
+    });
+
+
+    var ModalDialog = BaseView.extend({
         className : "modal-container",
         initialize : function() {
             _.bindAll(this, "close");
-            this.template = this.options.template;
         },
         events : {
             "touchend .close"    : "close",
@@ -27,18 +47,17 @@ define(["jquery", "backbone"], function($, Backbone) {
             return this;
         },
         render : function() {
-            this.$el.html(this.template(this.model));
+            this.$el.html(this.getTemplate()(this.model));
             this.options.parent.append(this.$el);
             return this;
         }
     });
 
-    var ListItemView = Backbone.View.extend({
+    var ListItemView = BaseView.extend({
         className : "item",
         tagName : "li",
         initialize : function() {
             _.bindAll(this, "onSelect", "render");
-            this.template = this.options.template;
             this.model.on("change:balance change:price change:currency", this.render);
         },
         events : {
@@ -49,7 +68,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         },
         render : function() {
             if (this.options.css) this.$el.css(this.options.css);
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.getTemplate()(this.model.toJSON()));
             return this;
         }
     });
@@ -108,11 +127,10 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     ////////////////////  Collection Views  /////////////////////
 
-    var BaseCollectionView = Backbone.View.extend({
+    var BaseCollectionView = BaseView.extend({
         initialize : function(options) {
             (options) || (options = {});
             this.type = options.type;
-            this.template = options.template;
             this.subViews = []; // expose sub views for testing purposes
         }
     });
@@ -130,7 +148,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.collection.each(function(item) {
                 var view = new $this.type({
                     model    : item,
-                    template : $this.template,
+                    template : $this.getTemplate(),
                     css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
@@ -176,7 +194,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.collection.each(function(item) {
                 var view = new $this.type({
                     model    : item,
-                    template : $this.template,
+                    template : $this.getTemplate(),
                     css      : $this.options.css
                 }).on("selected", function(model) {
                     $this.trigger("selected", model);
