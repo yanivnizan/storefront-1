@@ -89,7 +89,8 @@ define(["jquery", "backbone"], function($, Backbone) {
             // If the event handler was executed, update the time the event was triggered.
             this.lastEventTime = currentTime;
         },
-        onBuySelected : function() {
+        onBuySelected : function(event) {
+            event.stopPropagation();
             this.trigger("selected", this.model);
         },
         eventInterval : 500
