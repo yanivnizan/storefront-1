@@ -115,6 +115,7 @@
         },
         "background" : "http://placehold.it/960x640/F8F8F8/ddd&text=Background (960x640)",
         "headerBackground" : "http://placehold.it/960x80/eee/ddd&text=Background (960x80)",
+        "buyImage" : "http://placehold.it/140x60",
         "pages" : {
             "menu" : {
                 "title" : "http://placehold.it/480x60&text=Title Image (480x60)",

@@ -18,8 +18,14 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 $this = this;
 
             // Add UI rendering properties to models.
-            virtualGoods.each(function(good) { good.set("itemBackground", $this.theme.pages.goods.listItem.itemBackground); });
-            currencyPacks.each(function(pack) { pack.set("itemBackground", $this.theme.pages.currencyPacks.listItem.itemBackground); });
+            virtualGoods.each(function(good) { good.set({
+                itemBackground : $this.theme.pages.goods.listItem.itemBackground,
+                buyImage : $this.theme.buyImage
+            }); });
+            currencyPacks.each(function(pack) { pack.set({
+                itemBackground : $this.theme.pages.currencyPacks.listItem.itemBackground,
+                buyImage : $this.theme.buyImage
+            }); });
 
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
