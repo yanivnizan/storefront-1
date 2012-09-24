@@ -1,8 +1,8 @@
 <div class="row">
     {{#if equipped}}
-    <img src="{{equippedIndicatorImage}}" class="equipped">
+    <img src="{{images.equippedIndicatorImage}}" class="equipped">
     {{else}}
-    <img src="{{notEquippedIndicatorImage}}" class="not-equipped">
+    <img src="{{images.notEquippedIndicatorImage}}" class="not-equipped">
     {{/if}}
     <img src="{{imgFilePath}}" class="item-image">
     <div class="content">
@@ -16,7 +16,7 @@
     {{/unless}}
     {{#if equipped}}
     {{/if}}
-    <img src="{{expandImage}}" class="expand-collapse">
+    <img src="{{images.expandImage}}" class="expand-collapse">
 </div>
 <div class="row">
     <div class="description">{{description}}</div>

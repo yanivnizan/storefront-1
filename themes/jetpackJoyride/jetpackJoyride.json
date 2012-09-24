@@ -119,10 +119,12 @@
         "noFundsModal" : {
             "background" : "http://placehold.it/520x200&text=Background (520x200)"
         },
-        "equippedIndicatorImage" : "http://placehold.it/20x100",
-        "notEquippedIndicatorImage" : "http://placehold.it/20x100",
-        "expandImage" : "http://placehold.it/20x100",
-        "collapseImage" : "http://placehold.it/20x100/fff/eee",
+        "images" : {
+            "equippedIndicatorImage" : "http://placehold.it/20x100",
+            "notEquippedIndicatorImage" : "http://placehold.it/20x100",
+            "expandImage" : "http://placehold.it/20x100",
+            "collapseImage" : "http://placehold.it/20x100/fff/eee"
+        },
         "pages" : {
             "menu" : {
                 "title" : "http://placehold.it/480x60&text=Title Image (480x60)",
