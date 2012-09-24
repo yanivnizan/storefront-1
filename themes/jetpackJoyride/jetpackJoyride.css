@@ -43,6 +43,20 @@ ul {
   box-pack: start;
   box-align: stretch;
 }
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px auto 0;
+  width: 560px;
+}
+.menu li {
+  float: left;
+  padding: 10px;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  background: #eeeeee;
+}
 .item,
 .header {
   background-position: center;

@@ -63,11 +63,11 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.pageViews.push(this.currencyPacksView);
 
             categories.add({name : "currencyPacks"});
-            this.categoryMenuView = new Components.CollectionGridView({
-                className           : "items virtualGoods",
+            this.categoryMenuView = new Components.CollectionListView({
+                className           : "menu items clearfix",
                 collection          : categories,
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateProperties  : {columns : 4}
+                templateProperties  : {},
+                template            : function(){}
             }).on("selected", this.switchCategory);
 
 
@@ -125,7 +125,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             // Render subviews (items in goods store and currency store)
             this.header.setElement(this.$(".header"));
-            this.$(".menu").html(this.categoryMenuView.render().el);
+            this.$(".pages").append(this.categoryMenuView.render().el);
 
             var $this = this;
             _.each(this.pageViews, function(view) {

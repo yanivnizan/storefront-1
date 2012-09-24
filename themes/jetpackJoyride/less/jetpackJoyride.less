@@ -30,6 +30,25 @@ ul {
     .box(vertical);
 }
 
+.menu {
+    @itemMargin: 10px;
+    @itemPadding: 10px;
+    @itemFace: 100px;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto 0;
+    width: (2 * (@itemPadding + @itemMargin) + @itemFace) * 4;
+
+    li {
+        float: left;
+        padding: @itemPadding;
+        margin: @itemMargin;
+        width: @itemFace;
+        height: @itemFace;
+        background: @grayLighter;
+    }
+}
+
 // In case a background image is applied...
 .item, .header {
     background-position: center;
