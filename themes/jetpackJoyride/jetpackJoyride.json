@@ -115,11 +115,11 @@
         },
         "background" : "http://placehold.it/960x640/F8F8F8/ddd&text=Background (960x640)",
         "headerBackground" : "http://placehold.it/960x80/eee/ddd&text=Background (960x80)",
-        "buyImage" : "http://placehold.it/140x60",
         "noFundsModal" : {
             "background" : "http://placehold.it/520x200&text=Background (520x200)"
         },
         "images" : {
+            "buyImage" : "http://placehold.it/140x60",
             "equippedIndicatorImage" : "http://placehold.it/20x100",
             "notEquippedIndicatorImage" : "http://placehold.it/20x100",
             "expandImage" : "http://placehold.it/20x100",
@@ -144,17 +144,8 @@
                     "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
                 }
             },
-            "goods" :{
-                "backButton" : "themes/muffinRush/img/back.png",
-                "moreCurrencyButton" : "themes/muffinRush/img/GetMore.png",
-                "balance" : "themes/muffinRush/img/YourMuf.png",
-                "listItem" : {
-                    "background" : "themes/muffinRush/img/Bar.png"
-                }
-            },
             "currencyPacks" : {
-                "backButton" : "themes/muffinRush/img/back.png",
-                "balance" : "themes/muffinRush/img/YourMuf.png",
+                "title": "http://placehold.it/480x60&text=Currency Packs (480x60)",
                 "listItem" : {
                     "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
                 }

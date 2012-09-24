@@ -1,5 +1,22 @@
 define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, CssUtils, Handlebars) {
 
+    var HeaderView = Backbone.View.extend({
+        initialize : function() {
+            _.bindAll(this, "switchHeader");
+            this.state = "menu";
+        },
+        events : {
+            "click .back" : function() {
+                this.trigger(this.state == "menu" ? "quit" : "back");
+            }
+        },
+        switchHeader : function(titleImage, backImage) {
+            this.$(".title-image").attr("src", titleImage);
+            this.$(".back img").attr("src", backImage);
+        }
+    });
+
+
     var StoreView = Backbone.View.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
@@ -10,24 +27,17 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
             this.theme      = this.model.get("theme");
 
-            this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
+            this.model.get("virtualCurrencies").on("change:balance", this.updateBalance);
 
 
-            var virtualGoods  = this.model.get("virtualGoods"),
-                currencyPacks = this.model.get("currencyPacks"),
-                $this = this;
+            var virtualGoods    = this.model.get("virtualGoods"),
+                currencyPacks   = this.model.get("currencyPacks"),
+                categories      = new Backbone.Collection(this.model.get("categories")),
+                $this           = this;
 
             // Add UI rendering properties to models.
-            virtualGoods.each(function(good) { good.set({
-                images : $this.theme.images,
-                itemBackground : $this.theme.pages.goods.listItem.itemBackground,
-                buyImage : $this.theme.buyImage
-            }); });
-            currencyPacks.each(function(pack) { pack.set({
-                images : $this.theme.images,
-                itemBackground : $this.theme.pages.currencyPacks.listItem.itemBackground,
-                buyImage : $this.theme.buyImage
-            }); });
+            virtualGoods.each(function(good)  { good.set("images", $this.theme.images); });
+            currencyPacks.each(function(pack) { pack.set("images", $this.theme.images); });
 
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
@@ -38,7 +48,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
-            var categories = new Backbone.Collection(this.model.get("categories"));
 
 
             this.pageViews = [];
@@ -70,25 +79,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 template            : function(){}
             }).on("selected", this.switchCategory);
 
-
-
-            var HeaderView = Backbone.View.extend({
-                initialize : function() {
-                    _.bindAll(this, "switchHeader");
-                    this.state = "menu";
-                },
-                events : {
-                    "click .back" : function() {
-                        this.trigger(this.state == "menu" ? "quit" : "back");
-                    }
-                },
-                switchHeader : function(titleImage, backImage) {
-                    this.$(".title-image").attr("src", titleImage);
-                    this.$(".back img").attr("src", backImage);
-                }
-            });
             this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);
-
         },
         events : {},
         switchCategory : function(model) {
