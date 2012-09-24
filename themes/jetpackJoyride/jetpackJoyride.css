@@ -54,6 +54,17 @@ ul {
 }
 .item {
   margin: 10px;
+  height: 100px;
+  overflow: hidden;
+  -webkit-transition: height 0.2s ease-out;
+  -moz-transition: height 0.2s ease-out;
+  -o-transition: height 0.2s ease-out;
+  transition: height 0.2s ease-out;
+}
+.item.expanded {
+  height: 200px;
+}
+.item .row {
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: start;
@@ -66,6 +77,11 @@ ul {
   box-orient: horizontal;
   box-pack: start;
   box-align: stretch;
+  height: 100px;
+  background: #f5f5f5;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
+  background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
+  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
 }
 .item .item-image {
   width: 100px;
@@ -93,7 +109,8 @@ ul {
   font-size: 27px;
   line-height: 30px;
 }
-.item .price {
+.item .price,
+.item .buy-container {
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: end;
@@ -112,6 +129,28 @@ ul {
 .item .price img {
   width: 40px;
   height: 40px;
+}
+.item .buy-container img {
+  width: 140px;
+  height: 60px;
+}
+.item .description {
+  padding: 15px;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: center;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  box-align: stretch;
 }
 .header {
   height: 60px;

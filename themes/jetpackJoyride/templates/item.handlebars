@@ -1,8 +1,16 @@
-<img src="{{imgFilePath}}" class="item-image">
-<div class="content">
-    <h1>{{name}}</h1>
+<div class="row">
+    <img src="{{imgFilePath}}" class="item-image">
+    <div class="content">
+        <h1>{{name}}</h1>
+    </div>
+    <div class="price">
+        <label>{{price}}</label>
+        <img src="{{currency.imgFilePath}}">
+    </div>
 </div>
-<div class="price">
-    <label>{{price}}</label>
-    <img src="{{currency.imgFilePath}}">
+<div class="row">
+    <div class="description">{{description}}</div>
+    <div class="buy-container">
+        <img src="http://placehold.it/140x60">
+    </div>
 </div>

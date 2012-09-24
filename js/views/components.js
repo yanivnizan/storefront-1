@@ -58,6 +58,43 @@ define(["jquery", "backbone"], function($, Backbone) {
         tagName : "div"
     });
 
+    // TODO: Write unit test for this component
+    var ExpandableListItemView = ListItemView.extend({
+        initialize : function(options) {
+            // Call super constructor
+            this.constructor.__super__.initialize.call(this, options);
+            _.bindAll(this, "onBuySelected", "onSelect");
+
+            this.expanded = false;
+            this.lastEventTime = -(this.eventInterval * 10); // Initial value for allowing first expand
+        },
+        events : {
+            "touchend"      : "onSelect",
+            "touchend .buy" : "onBuySelected"
+        },
+        onSelect : function() {
+            // "touchend" on Android is triggered several times (probably a bug).
+            // Protect by setting a minimum interval between events
+            var currentTime = new Date().getTime();
+            if ((currentTime - this.lastEventTime) < this.eventInterval) return;
+
+            if (this.expanded) {
+                this.expanded = false;
+                this.$el.removeClass("expanded");
+            } else {
+                this.expanded = true;
+                this.$el.addClass("expanded");
+            }
+
+            // If the event handler was executed, update the time the event was triggered.
+            this.lastEventTime = currentTime;
+        },
+        onBuySelected : function() {
+            this.trigger("selected", this.model);
+        },
+        eventInterval : 500
+    });
+
 
     ////////////////////  Collection Views  /////////////////////
 
@@ -170,11 +207,12 @@ define(["jquery", "backbone"], function($, Backbone) {
     });
 
     return {
-        ListItemView        : ListItemView,
-        GridItemView        : GridItemView,
-        ModalDialog         : ModalDialog,
-        BaseCollectionView  : BaseCollectionView,
-        CollectionListView  : CollectionListView,
-        CollectionGridView  : CollectionGridView
+        ListItemView            : ListItemView,
+        ExpandableListItemView  : ExpandableListItemView,
+        GridItemView            : GridItemView,
+        ModalDialog             : ModalDialog,
+        BaseCollectionView      : BaseCollectionView,
+        CollectionListView      : CollectionListView,
+        CollectionGridView      : CollectionGridView
     };
 });

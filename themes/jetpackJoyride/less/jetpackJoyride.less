@@ -43,12 +43,25 @@ ul {
 
 .item {
     margin: 10px;
-    .box();
     @innerMargin: 15px;
+    @collapsedHeight: 100px;
+    height: @collapsedHeight;
+    overflow: hidden;
+    .transition(height, 0.2s);
+
+    &.expanded {
+        height: 2 * @collapsedHeight;
+    }
+
+    .row {
+        .box();
+        height: @collapsedHeight;
+        .gradient();
+    }
 
     .item-image {
-        width: 100px;
-        height: 100px;
+        width: @collapsedHeight;
+        height: @collapsedHeight;
     }
     .content {
         padding: 0 @innerMargin;
@@ -61,15 +74,24 @@ ul {
         line-height: 30px;
     }
 
-    .price {
+    .price, .buy-container {
         .box(horizontal, end, center);
         width: 160px;
         margin-right: @innerMargin;
+    }
+    .price img {
+        width: 40px;
+        height: 40px;
+    }
+    .buy-container img {
+        width: 140px;
+        height: 60px;
+    }
 
-        img {
-            width: 40px;
-            height: 40px;
-        }
+    .description {
+        padding: @innerMargin;
+        .box-flex(1);
+        .box(vertical, center);
     }
 }
 

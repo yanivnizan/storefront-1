@@ -24,6 +24,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
+                type                : Components.ExpandableListItemView,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : {},
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
@@ -43,6 +44,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     className           : "items virtualGoods category " + categoryName,
                     category            : category,
                     collection          : categoryGoods,
+                    type                : Components.ExpandableListItemView,
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
                     templateProperties  : {},
                     css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
