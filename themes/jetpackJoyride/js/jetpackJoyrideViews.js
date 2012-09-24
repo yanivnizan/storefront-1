@@ -75,38 +75,38 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             var HeaderView = Backbone.View.extend({
                 initialize : function() {
                     _.bindAll(this, "switchHeader");
+                    this.state = "menu";
                 },
                 events : {
                     "click .back" : function() {
-                        this.trigger("back");
+                        this.trigger(this.state == "menu" ? "quit" : "back");
                     }
                 },
-                switchHeader : function(image) {
-                    this.$(".title-image").attr("src", image)
+                switchHeader : function(titleImage, backImage) {
+                    this.$(".title-image").attr("src", titleImage);
+                    this.$(".back img").attr("src", backImage);
                 }
             });
-            this.header = new HeaderView().on("back", this.showMenu);
-
-
-
+            this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);
 
         },
         events : {
-            "touchend .leave-store" : "wantsToLeaveStore",
             "touchend .buy-more"    : "showCurrencyStore",
             "touchend .back"        : "showGoodsStore"
         },
         switchCategory : function(model) {
+            this.header.state = "category";
             var category = model.get("name");
             this.$(".menu").hide();
             this.$(".category").hide();
             this.$(".category." + category).show();
-            this.header.switchHeader(this.theme.pages[category].title);
+            this.header.switchHeader(this.theme.pages[category].title, this.theme.images.backImage);
         },
         showMenu : function() {
+            this.header.state = "menu";
             this.$(".menu").show();
             this.$(".category").hide();
-            this.header.switchHeader(this.theme.pages.menu.title);
+            this.header.switchHeader(this.theme.pages.menu.title, this.theme.images.quitImage);
         },
         updateBalance : function(model) {
             this.$(".header .balance label").html(model.get("balance"));
