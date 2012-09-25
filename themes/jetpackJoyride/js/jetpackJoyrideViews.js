@@ -30,20 +30,18 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance);
 
 
-            var virtualGoods    = this.model.get("virtualGoods"),
-                currencyPacks   = this.model.get("currencyPacks"),
-                categories      = new Backbone.Collection(this.model.get("categories")),
-                $this           = this;
-
-            // Add UI rendering properties to models.
-            virtualGoods.each(function(good)  { good.set("images", $this.theme.images); });
-            currencyPacks.each(function(pack) { pack.set("images", $this.theme.images); });
+            var virtualGoods        = this.model.get("virtualGoods"),
+                currencyPacks       = this.model.get("currencyPacks"),
+                categories          = new Backbone.Collection(this.model.get("categories")),
+                itemTemplateHelpers = { images : this.theme.images },
+                $this               = this;
 
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
                 type                : Components.ExpandableListItemView,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
+                itemTemplateHelpers : itemTemplateHelpers,
                 templateProperties  : {},
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("bought", this.wantsToBuyCurrencyPacks);
@@ -63,6 +61,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     collection          : categoryGoods,
                     type                : Components.ExpandableListItemView,
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
+                    itemTemplateHelpers : itemTemplateHelpers,
                     templateProperties  : {},
                     css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
                 }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);

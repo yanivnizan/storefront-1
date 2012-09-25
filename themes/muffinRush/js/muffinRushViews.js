@@ -10,15 +10,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.theme      = this.model.get("theme");
 
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
-
-
-            var virtualGoods  = this.model.get("virtualGoods"),
-                currencyPacks = this.model.get("currencyPacks"),
-                $this = this;
-
-            // Add UI rendering properties to models.
-            virtualGoods.each(function(good) { good.set("itemBackground", $this.theme.pages.goods.listItem.itemBackground); });
-            currencyPacks.each(function(pack) { pack.set("itemBackground", $this.theme.pages.currencyPacks.listItem.itemBackground); });
+            var $this = this;
 
             // Initialize sub-views, but defer providing an "el" until the rendering phase
             // This will enable us to construct the view objects once and then render as many times
@@ -26,16 +18,18 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
             this.virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
-                collection          : virtualGoods,
+                collection          : this.model.get("virtualGoods"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateProperties  : {},
+                itemTemplateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground },
                 css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
-                collection          : currencyPacks,
+                collection          : this.model.get("currencyPacks"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : {},
+                itemTemplateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground },
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 

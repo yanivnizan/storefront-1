@@ -1,6 +1,40 @@
 define(["jquery", "backbone"], function($, Backbone) {
 
     var BaseView = Backbone.View.extend({
+        // Serialize the model or collection for the view. If a model is
+        // found, `.toJSON()` is called. If a collection is found, `.toJSON()`
+        // is also called, but is used to populate an `items` array in the
+        // resulting data. If both are found, defaults to the model.
+        // You can override the `serializeData` method in your own view
+        // definition, to provide custom serialization for your view's data.
+        serializeData: function(){
+            var data;
+
+            if (this.model) {
+                data = this.model.toJSON();
+            }
+            else if (this.collection) {
+                data = { items: this.collection.toJSON() };
+            }
+
+            data = this.mixinTemplateHelpers(data);
+
+            return data;
+        },
+
+        // Mix in template helper methods. Looks for a
+        // `templateHelpers` attribute, which can either be an
+        // object literal, or a function that returns an object
+        // literal. All methods and attributes from this object
+        // are copies to the object passed in.
+        mixinTemplateHelpers: function(target){
+            target = target || {};
+            var templateHelpers = this.templateHelpers;
+            if (_.isFunction(templateHelpers)){
+                templateHelpers = templateHelpers.call(this);
+            }
+            return _.extend(target, templateHelpers);
+        },
         // Get the template for this view
         // instance. You can set a `template` attribute in the view
         // definition or pass a `template: "whatever"` parameter in
@@ -109,7 +143,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         },
         render : function() {
             if (this.options.css) this.$el.css(this.options.css);
-            this.$el.html(this.getTemplate()(this.model.toJSON()));
+            this.$el.html(this.getTemplate()(this.serializeData()));
             return this;
         }
     });
@@ -194,11 +228,13 @@ define(["jquery", "backbone"], function($, Backbone) {
             var $this = this;
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
-                var view = new ItemView({
+                var attributes = {
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
-                }).bubbleEventsTo($this);
+                };
+                if ($this.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.itemTemplateHelpers});
+                var view = new ItemView(attributes).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
 
@@ -234,11 +270,13 @@ define(["jquery", "backbone"], function($, Backbone) {
             var $this = this;
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
-                var view = new ItemView({
+                var attributes = {
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
-                }).bubbleEventsTo($this);
+                };
+                if ($this.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.itemTemplateHelpers});
+                var view = new ItemView(attributes).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
         },
