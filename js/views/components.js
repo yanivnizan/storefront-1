@@ -278,6 +278,13 @@ define(["jquery", "backbone"], function($, Backbone) {
         }
     });
 
+    // TODO: Write unit test for this component
+    var BaseStoreView = Backbone.View.extend({
+        serializeData : function() {
+            return _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
+        }
+    });
+
     return {
         BaseView                : BaseView,
         ListItemView            : ListItemView,
@@ -286,6 +293,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         ModalDialog             : ModalDialog,
         BaseCollectionView      : BaseCollectionView,
         CollectionListView      : CollectionListView,
-        CollectionGridView      : CollectionGridView
+        CollectionGridView      : CollectionGridView,
+        BaseStoreView           : BaseStoreView
     };
 });

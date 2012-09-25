@@ -17,7 +17,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
     });
 
 
-    var StoreView = Backbone.View.extend({
+    var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
                             "render", "openDialog",
@@ -109,7 +109,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             return this;
         },
         render : function() {
-            var context = _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
+            var context = this.serializeData();
             this.$el.html(this.options.template(context));
             this.$("#currency-store").css("visibility", "hidden");
 
