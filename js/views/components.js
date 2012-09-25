@@ -168,9 +168,20 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     var BaseCollectionView = BaseView.extend({
         initialize : function(options) {
-            (options) || (options = {});
-            this.type = options.type;
             this.subViews = []; // expose sub views for testing purposes
+        },
+        // Retrieve the itemView type, either from `this.options.itemView`
+        // or from the `itemView` in the object definition. The "options"
+        // takes precedence.
+        getItemView : function(){
+            var itemView = this.options.itemView || this.itemView;
+
+            if (!itemView){
+                var err = new Error("An `itemView` must be specified");
+                err.name = "NoItemViewError";
+                throw err;
+            }
+            return itemView;
         }
     });
 
@@ -179,13 +190,13 @@ define(["jquery", "backbone"], function($, Backbone) {
         initialize : function(options) {
             // Call super constructor
             this.constructor.__super__.initialize.call(this, options);
-            (this.type) || (this.type = ListItemView); // For testing purposes
             _.bindAll(this, "adjustWidth");
 
             // Instantiate subviews
             var $this = this;
             this.collection.each(function(item) {
-                var view = new $this.type({
+                var ItemView = $this.getItemView();
+                var view = new ItemView({
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
@@ -195,6 +206,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
             this.orientation = this.options.templateProperties.orientation || "vertical";
         },
+        itemView : ListItemView,
         adjustWidth : function() {
             // Assuming that all elements are the same width, take the full width of the first element
             // and multiply it by the number of elements.  The product will be the scrollable container's width
@@ -219,13 +231,13 @@ define(["jquery", "backbone"], function($, Backbone) {
         initialize : function(options) {
             // Call super constructor
             this.constructor.__super__.initialize.call(this, options);
-            (this.type) || (this.type = GridItemView); // For testing purposes
             _.bindAll(this, "adjustWidth");
 
             // Instantiate subviews
             var $this = this;
             this.collection.each(function(item) {
-                var view = new $this.type({
+                var ItemView = $this.getItemView();
+                var view = new ItemView({
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
@@ -233,6 +245,7 @@ define(["jquery", "backbone"], function($, Backbone) {
                 $this.subViews.push(view);
             });
         },
+        itemView : GridItemView,
         adjustWidth : function() {
 
             // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
@@ -249,7 +262,6 @@ define(["jquery", "backbone"], function($, Backbone) {
             });
         },
         render : function() {
-            (this.type) || (this.type = GridItemView); // For testing purposes
             var columns  = this.options.templateProperties.columns,
                 $this    = this;
 

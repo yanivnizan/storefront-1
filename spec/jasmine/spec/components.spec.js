@@ -206,9 +206,19 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 expect(new BaseCollectionView()).toBeInstanceOf(Backbone.View);
             });
 
-            it("should have a type defined", function() {
-                var type = sinon.stub();
-                expect(new BaseCollectionView({type : type}).type).toEqual(type);
+            it("should use an item view as specified in the initialization options if none is given in the prototype", function() {
+                var ItemView = Backbone.View;
+                expect(new BaseCollectionView({itemView : ItemView}).getItemView()).toEqual(ItemView);
+            });
+            it("should use an item view as specified in prototype if none is give in the initialization options", function() {
+                var ItemView = Backbone.View;
+                var CollectionView = BaseCollectionView.extend({itemView : ItemView});
+                expect(new CollectionView().getItemView()).toEqual(ItemView);
+            });
+            it("should use an item view as specified in initialization options first when specified both in the options and the prototype", function() {
+                var CollectionView = BaseCollectionView.extend({itemView : Backbone.View});
+                var ItemView = Backbone.View.extend({a:1});
+                expect(new CollectionView({itemView : ItemView}).getItemView()).toEqual(ItemView);
             });
         });
 
@@ -221,7 +231,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 attributes  = {
                     collection : new Backbone.Collection([new Backbone.Model()]),
                     templateProperties : {},
-                    type : stubType
+                    itemView : stubType
                 };
                 view        = new CollectionListView(attributes);
             });
@@ -255,7 +265,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 var type        = BaseView.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
                 view = new CollectionListView({
                     collection          : new Backbone.Collection([model]),
-                    type                : type,
+                    itemView            : type,
                     templateProperties  : {}
                 }).on("selected", spy).render();
 
