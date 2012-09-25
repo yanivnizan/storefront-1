@@ -40,7 +40,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             "touchend .back"        : "showGoodsStore"
         },
         updateBalance : function(model) {
-            this.$(".header .balance label").html(model.get("balance"));
+            this.$(".balance-container label").html(model.get("balance"));
         },
         showCurrencyStore : function() {
             // When this flag is raised, there is no connectivity,
