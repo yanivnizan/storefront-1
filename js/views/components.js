@@ -1,10 +1,107 @@
 define(["jquery", "backbone"], function($, Backbone) {
 
-    var ModalDialog = Backbone.View.extend({
+    var BaseView = Backbone.View.extend({
+        // Serialize the model or collection for the view. If a model is
+        // found, `.toJSON()` is called. If a collection is found, `.toJSON()`
+        // is also called, but is used to populate an `items` array in the
+        // resulting data. If both are found, defaults to the model.
+        // You can override the `serializeData` method in your own view
+        // definition, to provide custom serialization for your view's data.
+        serializeData: function(){
+            var data;
+
+            if (this.model) {
+                data = this.model.toJSON();
+            }
+            else if (this.collection) {
+                data = { items: this.collection.toJSON() };
+            }
+
+            data = this.mixinTemplateHelpers(data);
+
+            return data;
+        },
+
+        // Mix in template helper methods. Looks for a
+        // `templateHelpers` attribute, which can either be an
+        // object literal, or a function that returns an object
+        // literal. All methods and attributes from this object
+        // are copies to the object passed in.
+        mixinTemplateHelpers: function(target){
+            target = target || {};
+            var templateHelpers = this.templateHelpers;
+            if (_.isFunction(templateHelpers)){
+                templateHelpers = templateHelpers.call(this);
+            }
+            return _.extend(target, templateHelpers);
+        },
+        // Get the template for this view
+        // instance. You can set a `template` attribute in the view
+        // definition or pass a `template: "whatever"` parameter in
+        // to the constructor options.
+        getTemplate: function(){
+            var template;
+
+            // Get the template from `this.options.template` or
+            // `this.template`. The `options` takes precedence.
+            if (this.options && this.options.template){
+                template = this.options.template;
+            } else {
+                template = this.template;
+            }
+
+            return template;
+        },
+        // Configure `triggers` to forward DOM events to view
+        // events. `triggers: {"click .foo": "do:foo"}`
+        configureTriggers: function(){
+            if (!this.triggers) { return; }
+
+            var triggers = this.triggers;
+            var that = this;
+            var triggerEvents = {};
+
+            // Allow `triggers` to be configured as a function
+            if (_.isFunction(triggers)){ triggers = triggers.call(this); }
+
+            // Configure the triggers, prevent default
+            // action and stop propagation of DOM events
+            _.each(triggers, function(value, key){
+
+                triggerEvents[key] = function(e){
+                    if (e && e.preventDefault){ e.preventDefault(); }
+                    if (e && e.stopPropagation){ e.stopPropagation(); }
+                    that.trigger(value, that.model);
+                };
+
+            });
+
+            return triggerEvents;
+        },
+        // Overriding Backbone.View's delegateEvents specifically
+        // to handle the `triggers` configuration
+        delegateEvents: function(events){
+            events = events || this.events;
+            if (_.isFunction(events)){ events = events.call(this); }
+
+            var combinedEvents = {};
+            var triggers = this.configureTriggers();
+            _.extend(combinedEvents, events, triggers);
+
+            Backbone.View.prototype.delegateEvents.call(this, combinedEvents);
+        },
+        bubbleEventsTo : function(targetView) {
+            this.on("all", function() {
+                Backbone.Events.trigger.apply(targetView, arguments);
+            });
+            return this;
+        }
+    });
+
+    var ModalDialog = BaseView.extend({
         className : "modal-container",
         initialize : function() {
             _.bindAll(this, "close");
-            this.template = this.options.template;
         },
         events : {
             "touchend .close"    : "close",
@@ -27,29 +124,26 @@ define(["jquery", "backbone"], function($, Backbone) {
             return this;
         },
         render : function() {
-            this.$el.html(this.template(this.model));
+            this.$el.html(this.getTemplate()(this.model));
             this.options.parent.append(this.$el);
             return this;
         }
     });
 
-    var ListItemView = Backbone.View.extend({
+    var ListItemView = BaseView.extend({
         className : "item",
         tagName : "li",
-        initialize : function() {
-            _.bindAll(this, "onSelect", "render");
-            this.template = this.options.template;
+        constructor : function() {
+            BaseView.prototype.constructor.apply(this, arguments);
+            _.bindAll(this, "render");
             this.model.on("change:balance change:price change:currency", this.render);
         },
-        events : {
-            "touchend" : "onSelect"
-        },
-        onSelect : function() {
-            this.trigger("selected", this.model);
+        triggers : {
+            touchend : "selected"
         },
         render : function() {
             if (this.options.css) this.$el.css(this.options.css);
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.getTemplate()(this.serializeData()));
             return this;
         }
     });
@@ -60,18 +154,19 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     // TODO: Write unit test for this component
     var ExpandableListItemView = ListItemView.extend({
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.call(this, options);
-            _.bindAll(this, "onBuySelected", "onSelect");
+        constructor : function(options) {
+            ListItemView.prototype.constructor.apply(this, arguments);
+            _.bindAll(this, "onSelect");
             this.model.on("change:equipped", this.render);
 
             this.expanded = false;
             this.lastEventTime = -(this.eventInterval * 10); // Initial value for allowing first expand
         },
         events : {
-            "touchend"      : "onSelect",
-            "touchend .buy" : "onBuySelected"
+            "touchend"      : "onSelect"
+        },
+        triggers : {
+            "touchend .buy" : "bought"
         },
         onSelect : function() {
             // "touchend" on Android is triggered several times (probably a bug).
@@ -98,52 +193,54 @@ define(["jquery", "backbone"], function($, Backbone) {
             // If the event handler was executed, update the time the event was triggered.
             this.lastEventTime = currentTime;
         },
-        onBuySelected : function(event) {
-            event.stopPropagation();
-            this.trigger("selected", this.model);
-        },
         eventInterval : 500
     });
 
 
     ////////////////////  Collection Views  /////////////////////
 
-    var BaseCollectionView = Backbone.View.extend({
+    var BaseCollectionView = BaseView.extend({
         initialize : function(options) {
-            (options) || (options = {});
-            this.type = options.type;
-            this.template = options.template;
             this.subViews = []; // expose sub views for testing purposes
+        },
+        // Retrieve the itemView type, either from `this.options.itemView`
+        // or from the `itemView` in the object definition. The "options"
+        // takes precedence.
+        getItemView : function(){
+            var itemView = this.options.itemView || this.itemView;
+
+            if (!itemView){
+                var err = new Error("An `itemView` must be specified");
+                err.name = "NoItemViewError";
+                throw err;
+            }
+            return itemView;
+        },
+        buildSubViews : function() {
+            var $this = this;
+            this.collection.each(function(item) {
+                var ItemView = $this.getItemView();
+                var attributes = {
+                    model    : item,
+                    template : $this.getTemplate(),
+                    css      : $this.options.css
+                };
+                if ($this.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.itemTemplateHelpers});
+                var view = new ItemView(attributes).bubbleEventsTo($this);
+                $this.subViews.push(view);
+            });
         }
     });
 
     var CollectionListView = BaseCollectionView.extend({
         tagName : "ul",
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.call(this, options);
-            (this.type) || (this.type = ListItemView); // For testing purposes
+        constructor : function(options) {
+            BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-
-            // Instantiate subviews
-            var $this = this;
-            this.collection.each(function(item) {
-                var view = new $this.type({
-                    model    : item,
-                    template : $this.template,
-                    css      : $this.options.css
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                }).on("equipped", function(model) {
-                    $this.trigger("equipped", model);
-                }).on("unequipped", function(model) {
-                    $this.trigger("unequipped", model);
-                });
-                $this.subViews.push(view);
-            });
-
+            this.buildSubViews();
             this.orientation = this.options.templateProperties.orientation || "vertical";
         },
+        itemView : ListItemView,
         adjustWidth : function() {
             // Assuming that all elements are the same width, take the full width of the first element
             // and multiply it by the number of elements.  The product will be the scrollable container's width
@@ -165,25 +262,12 @@ define(["jquery", "backbone"], function($, Backbone) {
     });
 
     var CollectionGridView = BaseCollectionView.extend({
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.call(this, options);
-            (this.type) || (this.type = GridItemView); // For testing purposes
+        constructor : function(options) {
+            BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-
-            // Instantiate subviews
-            var $this = this;
-            this.collection.each(function(item) {
-                var view = new $this.type({
-                    model    : item,
-                    template : $this.template,
-                    css      : $this.options.css
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                });
-                $this.subViews.push(view);
-            });
+            this.buildSubViews();
         },
+        itemView : GridItemView,
         adjustWidth : function() {
 
             // Amend element width to create a grid with a variable number of columns, but a uniform width for them.
@@ -200,7 +284,6 @@ define(["jquery", "backbone"], function($, Backbone) {
             });
         },
         render : function() {
-            (this.type) || (this.type = GridItemView); // For testing purposes
             var columns  = this.options.templateProperties.columns,
                 $this    = this;
 
@@ -220,13 +303,28 @@ define(["jquery", "backbone"], function($, Backbone) {
         }
     });
 
+    // TODO: Write unit test for this component
+    var BaseStoreView = Backbone.View.extend({
+        serializeData : function() {
+            return _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
+        },
+        render : function() {
+            var context = this.serializeData();
+            this.$el.html(this.options.template(context));
+            if (this.onRender) this.onRender();
+            return this;
+        }
+    });
+
     return {
+        BaseView                : BaseView,
         ListItemView            : ListItemView,
         ExpandableListItemView  : ExpandableListItemView,
         GridItemView            : GridItemView,
         ModalDialog             : ModalDialog,
         BaseCollectionView      : BaseCollectionView,
         CollectionListView      : CollectionListView,
-        CollectionGridView      : CollectionGridView
+        CollectionGridView      : CollectionGridView,
+        BaseStoreView           : BaseStoreView
     };
 });

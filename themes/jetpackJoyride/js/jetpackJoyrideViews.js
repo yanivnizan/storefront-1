@@ -17,7 +17,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
     });
 
 
-    var StoreView = Backbone.View.extend({
+    var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
                             "render", "openDialog",
@@ -30,23 +30,21 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance);
 
 
-            var virtualGoods    = this.model.get("virtualGoods"),
-                currencyPacks   = this.model.get("currencyPacks"),
-                categories      = new Backbone.Collection(this.model.get("categories")),
-                $this           = this;
-
-            // Add UI rendering properties to models.
-            virtualGoods.each(function(good)  { good.set("images", $this.theme.images); });
-            currencyPacks.each(function(pack) { pack.set("images", $this.theme.images); });
+            var virtualGoods        = this.model.get("virtualGoods"),
+                currencyPacks       = this.model.get("currencyPacks"),
+                categories          = new Backbone.Collection(this.model.get("categories")),
+                itemTemplateHelpers = { images : this.theme.images },
+                $this               = this;
 
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
                 type                : Components.ExpandableListItemView,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
+                itemTemplateHelpers : itemTemplateHelpers,
                 templateProperties  : {},
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
-            }).on("selected", this.wantsToBuyCurrencyPacks);
+            }).on("bought", this.wantsToBuyCurrencyPacks);
 
 
 
@@ -63,9 +61,10 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     collection          : categoryGoods,
                     type                : Components.ExpandableListItemView,
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
+                    itemTemplateHelpers : itemTemplateHelpers,
                     templateProperties  : {},
                     css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
-                }).on("selected", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
+                }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
 
                 $this.pageViews.push(view);
             });
@@ -81,7 +80,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);
         },
-        events : {},
         switchCategory : function(model) {
             this.header.state = "category";
             var category = model.get("name");
@@ -109,11 +107,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             }).render();
             return this;
         },
-        render : function() {
-            var context = _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
-            this.$el.html(this.options.template(context));
-            this.$("#currency-store").css("visibility", "hidden");
-
+        onRender : function() {
             // Render subviews (items in goods store and currency store)
             this.header.setElement(this.$(".header"));
             this.$(".pages").append(this.categoryMenuView.render().el);
@@ -122,8 +116,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             _.each(this.pageViews, function(view) {
                 $this.$(".pages").append(view.render().el);
             });
-
-            return this;
         }
     });
     _.extend(StoreView.prototype, ViewMixins);
