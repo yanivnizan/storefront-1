@@ -14,23 +14,19 @@
     <div class="items-container" style="background-image: url('{{pages.goods.list.background}}');">
     </div>
     <div class="footer">
-        <img src="{{pages.goods.backButton}}" class="leave-store">
-        <img src="{{pages.goods.moreCurrencyButton}}" class="currency buy-more">
+        <img src="{{common.moreCurrencyButton}}" class="currency buy-more">
+        <img src="{{common.backButton}}" class="leave-store">
     </div>
 </div>
 <div id="currency-store" data-role="page">
-    <img src="{{pages.currencyPacks.background}}" class="background">
-    <div class="header" style="background-image: url('{{pages.currencyPacks.headerBackground}}');">
-        <div class="title">
-            <img src="{{pages.currencyPacks.title}}">
-        </div>
+    <img src="{{background}}" class="background">
+    <div class="header">
+        <img class="title-image" src="{{common.titleImage}}">
         <div class="balance-container">
-            <div class="balance">
-                <img src="{{pages.currencyPacks.balance}}">
+            <img class="balance-image" src="{{common.balanceImage}}" alt="Balance Image">
+            <div class="label-container" style="{{balance.style}}">
                 {{#each currencies}}
-                <div class="container">
-                    <label>{{this.balance}}</label>
-                </div>
+                <label>{{this.balance}}</label>
                 {{/each}}
             </div>
         </div>
@@ -38,7 +34,6 @@
     <div class="items-container" style="background-image: url('{{pages.currencyPacks.list.background}}');">
     </div>
     <div class="footer">
-        <img src="{{pages.goods.backButton}}" class="leave-store">
-        <img src="{{pages.goods.moreCurrencyButton}}" class="currency buy-more">
+        <img src="{{common.backButton}}" class="back">
     </div>
 </div>

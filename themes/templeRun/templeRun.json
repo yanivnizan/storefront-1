@@ -113,7 +113,9 @@
         "isOrientationLandscape" : false,
         "common" : {
             "titleImage" : "http://placehold.it/460x100&text=Title (460x100)",
-            "balanceImage" : "http://placehold.it/460x80/ddd&text=Balance (460x80)"
+            "balanceImage" : "http://placehold.it/460x80/ddd&text=Balance (460x80)",
+            "backButton" : "http://placehold.it/500x100&text=Back (500x100)",
+            "moreCurrencyButton" : "http://placehold.it/500x100/ddd&text=More Coins (500x100)"
         },
         "balance" : {
             "style" : "top: -10000px; left: -10000px;"
@@ -122,8 +124,6 @@
             "goods" :{
                 "title" : "themes/muffinRush/img/Store_Store.png",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
-                "backButton" : "http://placehold.it/500x100&text=Back (500x100)",
-                "moreCurrencyButton" : "http://placehold.it/500x100/ddd&text=More Coins (500x100)",
                 "balance" : "themes/muffinRush/img/YourMuf.png",
                 "list" : {
                     "background" : "http://placehold.it/460x560/eee/ddd&text=Background (460x560)"
@@ -142,10 +142,9 @@
             "currencyPacks" : {
                 "title" : "themes/muffinRush/img/Store_Store.png",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
-                "backButton" : "themes/muffinRush/img/back.png",
                 "balance" : "themes/muffinRush/img/YourMuf.png",
                 "list" : {
-                    "background" : "themes/muffinRush/img/InnerBG.png"
+                    "background" : "http://placehold.it/460x660/eee/ddd&text=Background (460x560)"
                 },
                 "listItem" : {
                     "background" : "http://placehold.it/460x100/eee/ddd&text=Background (460x100)",
