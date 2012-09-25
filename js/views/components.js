@@ -64,7 +64,6 @@ define(["jquery", "backbone"], function($, Backbone) {
         }
     });
 
-
     var ModalDialog = BaseView.extend({
         className : "modal-container",
         initialize : function() {
@@ -100,7 +99,8 @@ define(["jquery", "backbone"], function($, Backbone) {
     var ListItemView = BaseView.extend({
         className : "item",
         tagName : "li",
-        initialize : function() {
+        constructor : function() {
+            BaseView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "render");
             this.model.on("change:balance change:price change:currency", this.render);
         },
@@ -120,9 +120,8 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     // TODO: Write unit test for this component
     var ExpandableListItemView = ListItemView.extend({
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.call(this, options);
+        constructor : function(options) {
+            ListItemView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "onSelect");
             this.model.on("change:equipped", this.render);
 
@@ -187,9 +186,8 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     var CollectionListView = BaseCollectionView.extend({
         tagName : "ul",
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.call(this, options);
+        constructor : function(options) {
+            BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
 
             // Instantiate subviews
@@ -228,9 +226,8 @@ define(["jquery", "backbone"], function($, Backbone) {
     });
 
     var CollectionGridView = BaseCollectionView.extend({
-        initialize : function(options) {
-            // Call super constructor
-            this.constructor.__super__.initialize.call(this, options);
+        constructor : function(options) {
+            BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
 
             // Instantiate subviews
