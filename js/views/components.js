@@ -282,6 +282,12 @@ define(["jquery", "backbone"], function($, Backbone) {
     var BaseStoreView = Backbone.View.extend({
         serializeData : function() {
             return _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
+        },
+        render : function() {
+            var context = this.serializeData();
+            this.$el.html(this.options.template(context));
+            if (this.onRender) this.onRender();
+            return this;
         }
     });
 

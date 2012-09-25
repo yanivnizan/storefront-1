@@ -108,10 +108,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             }).render();
             return this;
         },
-        render : function() {
-            var context = this.serializeData();
-            this.$el.html(this.options.template(context));
-
+        onRender : function() {
             // Render subviews (items in goods store and currency store)
             this.header.setElement(this.$(".header"));
             this.$(".pages").append(this.categoryMenuView.render().el);
@@ -120,8 +117,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             _.each(this.pageViews, function(view) {
                 $this.$(".pages").append(view.render().el);
             });
-
-            return this;
         }
     });
     _.extend(StoreView.prototype, ViewMixins);

@@ -70,16 +70,12 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             }, this);
             return this;
         },
-        render : function() {
-            var context = this.serializeData();
-            this.$el.html(this.options.template(context));
+        onRender : function() {
             this.$("#currency-store").css("visibility", "hidden");
 
             // Render subviews (items in goods store and currency store)
             this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
             this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
-
-            return this;
         }
     });
     _.extend(StoreView.prototype, ViewMixins);
