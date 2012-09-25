@@ -23,13 +23,13 @@ define(["jquery", "backbone"], function($, Backbone) {
         },
 
         // Mix in template helper methods. Looks for a
-        // `templateHelpers` attribute, which can either be an
+        // `templateHelpers` in view options or as attribute, which can either be an
         // object literal, or a function that returns an object
         // literal. All methods and attributes from this object
         // are copies to the object passed in.
         mixinTemplateHelpers: function(target){
             target = target || {};
-            var templateHelpers = this.templateHelpers;
+            var templateHelpers = this.options.templateHelpers ? this.options.templateHelpers : this.templateHelpers;
             if (_.isFunction(templateHelpers)){
                 templateHelpers = templateHelpers.call(this);
             }
@@ -225,7 +225,7 @@ define(["jquery", "backbone"], function($, Backbone) {
                     template : $this.getTemplate(),
                     css      : $this.options.css
                 };
-                if ($this.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.itemTemplateHelpers});
+                if ($this.options.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.options.itemTemplateHelpers});
                 var view = new ItemView(attributes).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
