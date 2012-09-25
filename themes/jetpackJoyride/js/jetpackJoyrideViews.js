@@ -111,7 +111,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
         render : function() {
             var context = this.serializeData();
             this.$el.html(this.options.template(context));
-            this.$("#currency-store").css("visibility", "hidden");
 
             // Render subviews (items in goods store and currency store)
             this.header.setElement(this.$(".header"));
