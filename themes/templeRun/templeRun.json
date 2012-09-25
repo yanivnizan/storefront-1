@@ -109,12 +109,19 @@
         "name" : "templeRun",
         "template" : "templeRun",
         "version" : 1,
+        "background" : "http://placehold.it/480x800/F8F8F8/ddd&text=Background (480x800)",
         "isOrientationLandscape" : false,
+        "common" : {
+            "titleImage" : "http://placehold.it/460x100&text=Title (460x100)",
+            "balanceImage" : "http://placehold.it/460x80/ddd&text=Balance (460x80)"
+        },
+        "balance" : {
+            "style" : "top: -10000px; left: -10000px;"
+        },
         "pages" : {
             "goods" :{
                 "title" : "themes/muffinRush/img/Store_Store.png",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
-                "headerBackground" : "themes/muffinRush/img/Roof-Extended.png",
                 "backButton" : "themes/muffinRush/img/back.png",
                 "moreCurrencyButton" : "themes/muffinRush/img/GetMore.png",
                 "balance" : "themes/muffinRush/img/YourMuf.png",
@@ -135,7 +142,6 @@
             "currencyPacks" : {
                 "title" : "themes/muffinRush/img/Store_Store.png",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
-                "headerBackground" : "themes/muffinRush/img/Roof-Extended.png",
                 "backButton" : "themes/muffinRush/img/back.png",
                 "balance" : "themes/muffinRush/img/YourMuf.png",
                 "list" : {

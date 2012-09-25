@@ -5,6 +5,7 @@
 	src: url('fonts/HoboStd.otf');
 }
 
+@standardWidth: 460px;
 
 .header, .footer {
 	text-align: center;
@@ -135,28 +136,26 @@
 }
 
 .header {
-	height: 183px;
-	background-position: center;
-	.box;
+    width: @standardWidth;
+    margin: 0 auto;
 
-	&>div {
-		.box-flex(1);
-		margin-top: 20px;
-		.box(vertical, start, center);
-	}
+    .title-image {
+        display: block;
+        width: @standardWidth;
+        height: 100px;
+    }
 
-	.balance-container {
-		.balance {
-			position: relative;
-		}
-		.container {
-			position: absolute;
-			top: 43px;
-			left: 85px;
-			width: 100px;
-		}
-	}
+    .balance-container {
+        position: relative;
+        text-align: right;
 
+        .label-container {
+            position: absolute;
+            top: -10000px;
+            left: -10000px;
+            text-align: center;
+        }
+    }
 }
 
 .footer {
