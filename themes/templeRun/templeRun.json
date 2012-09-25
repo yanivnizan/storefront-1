@@ -89,7 +89,7 @@
                 }
             },
             "itemId"        : "chocolate_cake",
-            "categoryId"   : 1
+            "categoryId"   : 2
         },
         {
             "name"          : "Cream Cup",
@@ -102,7 +102,7 @@
                 }
             },
             "itemId"        : "cream_cup",
-            "categoryId"   : 1
+            "categoryId"   : 2
         }
     ],
     "theme" : {
@@ -153,12 +153,19 @@
                 }
 
             }
+        },
+        "categories" : {
+            "style" : "background-image: url('http://placehold.it/460x40/bbb/ddd&text=Background (460x40)')"
         }
     },
     "categories" : [
         {
             "id" : 1,
-            "name" : "General"
+            "name" : "POWERUPS"
+        },
+        {
+            "id" : 2,
+            "name" : "UTILITIES"
         }
     ]
 }

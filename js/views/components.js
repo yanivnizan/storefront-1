@@ -258,6 +258,22 @@ define(["jquery", "backbone"], function($, Backbone) {
         }
     });
 
+    // TODO: Write unit test for this component
+    var SectionedListView = CollectionListView.extend({
+        tagName : "div",
+        render : function() {
+            var $this = this;
+
+            this.$el.html(this.options.categoryTemplate(this.serializeData()));
+            // Render each item and append it
+            _.each(this.subViews, function(view) {
+                view.render().$el.addClass($this.orientation);
+                $this.$(".container").append(view.el);
+            });
+            return this;
+        }
+    });
+
     var CollectionGridView = BaseCollectionView.extend({
         constructor : function(options) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
@@ -328,6 +344,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         BaseCollectionView      : BaseCollectionView,
         CollectionListView      : CollectionListView,
         CollectionGridView      : CollectionGridView,
+        SectionedListView       : SectionedListView,
         BaseStoreView           : BaseStoreView
     };
 });
