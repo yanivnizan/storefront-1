@@ -24,7 +24,7 @@
 	}
 }
 
-.item {
+.virtualGoods .item {
     @totalHeight: 100px;
     @visualWidth: 100px;
     background-position: center;
@@ -87,16 +87,39 @@
     }
 }
 
-// Currency Pack specific overrides
 .currencyPacks .item {
-	.price {
-		.box(vertical, center, center);
-		width: 100px;
-		font-size: 30px;
-	}
-	.content {
-		.box(vertical, center, center);
-	}
+    @totalHeight: 100px;
+    @visualWidth: 180px;
+    background-position: center;
+
+    height: @totalHeight;
+    width: 400px;
+    margin: 0 auto;
+
+    .visual {
+        float: left;
+        width: @visualWidth;
+        height: @totalHeight;
+    }
+    .price {
+        height: 100%;
+        margin-left: @visualWidth;
+        padding: 10px
+    }
+    @nameHeight: 50px;
+    @priceHeight: 30px;
+    h1 {
+        height: @nameHeight;
+        line-height: @nameHeight;
+    }
+    h2 {
+        height: @priceHeight;
+        line-height: @priceHeight;
+    }
+    h1, h2 {
+        margin: 0;
+        text-align: right;
+    }
 }
 
 .header {
