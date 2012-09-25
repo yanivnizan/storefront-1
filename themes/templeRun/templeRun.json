@@ -133,10 +133,11 @@
                     "balanceBackground" : "http://placehold.it/60x60"
                 },
                 "noFundsModal" : {
-                    "background" : "img.png",
-                    "yesButton" : "themes/muffinRush/img/modalDialog/Yes.png",
-                    "description" : "themes/muffinRush/img/modalDialog/Description.png",
-                    "noButton" : "themes/muffinRush/img/modalDialog/No.png"
+                    "background" : "http://placehold.it/540x300/eee/ddd&text=Background (540x300)",
+                    "title" : "Need More Coins!",
+                    "description" : "Would you like to get more coins?",
+                    "yesButton" : "http://placehold.it/260x80",
+                    "noButton" : "http://placehold.it/260x80"
                 }
             },
             "currencyPacks" : {

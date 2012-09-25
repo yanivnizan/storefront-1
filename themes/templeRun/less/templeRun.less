@@ -159,17 +159,41 @@
 }
 
 .dialog {
-	.box(vertical, center, center);
-	width: auto;
-
-	& > img {
-		display: block;
-	}
-
-	.actions {
-		margin-top: 10px;
-	}
+	.box(vertical, center);
 }
 
-// Include General components
-@import "css/templates/_modal-component.less";
+.modal {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .box(horizontal, center, center);
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.dialog {
+    text-align: center;
+    width: 540px;
+    height: 300px;
+
+    .title {
+        @height: 60px;
+        height: @height;
+        line-height: @height;
+    }
+
+    .description {
+        .box-flex(1);
+        .box(vertical, center, center);
+    }
+
+    .actions {
+        margin-top: 10px;
+        img {
+            width: 260px;
+            height: 80px;
+        }
+    }
+}
