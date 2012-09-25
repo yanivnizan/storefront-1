@@ -21,7 +21,10 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 collection          : this.model.get("virtualGoods"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateProperties  : {},
-                itemTemplateHelpers : { balanceBackground : this.theme.pages.goods.listItem.balanceBackground },
+                itemTemplateHelpers : {
+                    balanceBackground : this.theme.pages.goods.listItem.balanceBackground,
+                    balanceLabelStyle : this.theme.common.balanceLabelStyle
+                },
                 css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new Components.CollectionListView({

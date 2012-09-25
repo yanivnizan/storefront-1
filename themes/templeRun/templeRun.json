@@ -115,7 +115,8 @@
             "titleImage" : "http://placehold.it/460x100&text=Title (460x100)",
             "balanceImage" : "http://placehold.it/460x80/ddd&text=Balance (460x80)",
             "backButton" : "http://placehold.it/500x100&text=Back (500x100)",
-            "moreCurrencyButton" : "http://placehold.it/500x100/ddd&text=More Coins (500x100)"
+            "moreCurrencyButton" : "http://placehold.it/500x100/ddd&text=More Coins (500x100)",
+            "balanceLabelStyle" : "padding: 2px 6px; background: rgba(0, 0, 0, 0.3);"
         },
         "balance" : {
             "style" : "top: -10000px; left: -10000px;"
@@ -136,8 +137,8 @@
                     "background" : "http://placehold.it/540x300/eee/ddd&text=Background (540x300)",
                     "title" : "Need More Coins!",
                     "description" : "Would you like to get more coins?",
-                    "yesButton" : "http://placehold.it/260x80",
-                    "noButton" : "http://placehold.it/260x80"
+                    "yesButton" : "http://placehold.it/260x80&text=Yes (260x80)",
+                    "noButton" : "http://placehold.it/260x80&text=No (260x80)"
                 }
             },
             "currencyPacks" : {
