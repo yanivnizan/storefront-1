@@ -215,16 +215,8 @@ define(["jquery", "backbone"], function($, Backbone) {
                 throw err;
             }
             return itemView;
-        }
-    });
-
-    var CollectionListView = BaseCollectionView.extend({
-        tagName : "ul",
-        constructor : function(options) {
-            BaseCollectionView.prototype.constructor.apply(this, arguments);
-            _.bindAll(this, "adjustWidth");
-
-            // Instantiate subviews
+        },
+        buildSubViews : function() {
             var $this = this;
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
@@ -237,7 +229,15 @@ define(["jquery", "backbone"], function($, Backbone) {
                 var view = new ItemView(attributes).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
+        }
+    });
 
+    var CollectionListView = BaseCollectionView.extend({
+        tagName : "ul",
+        constructor : function(options) {
+            BaseCollectionView.prototype.constructor.apply(this, arguments);
+            _.bindAll(this, "adjustWidth");
+            this.buildSubViews();
             this.orientation = this.options.templateProperties.orientation || "vertical";
         },
         itemView : ListItemView,
@@ -265,20 +265,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         constructor : function(options) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-
-            // Instantiate subviews
-            var $this = this;
-            this.collection.each(function(item) {
-                var ItemView = $this.getItemView();
-                var attributes = {
-                    model    : item,
-                    template : $this.getTemplate(),
-                    css      : $this.options.css
-                };
-                if ($this.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.itemTemplateHelpers});
-                var view = new ItemView(attributes).bubbleEventsTo($this);
-                $this.subViews.push(view);
-            });
+            this.buildSubViews();
         },
         itemView : GridItemView,
         adjustWidth : function() {
