@@ -2,6 +2,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
     // Assign components to local variables for spec brevity
     var ModalDialog         = Components.ModalDialog,
+        BaseView            = Components.BaseView,
         ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
         BaseCollectionView  = Components.BaseCollectionView,
@@ -216,7 +217,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             var view,attributes, stubType;
 
             beforeEach(function() {
-                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+                stubType = BaseView.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
                 attributes  = {
                     collection : new Backbone.Collection([new Backbone.Model()]),
                     templateProperties : {},
@@ -251,7 +252,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                     model   = new Backbone.Model();
 
                 // Fake a view that can fire the event
-                var type        = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
+                var type        = BaseView.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
                 view = new CollectionListView({
                     collection          : new Backbone.Collection([model]),
                     type                : type,
@@ -286,7 +287,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
             beforeEach(function() {
                 model = new Backbone.Model();
-                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+                stubType = BaseView.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
                 attributes  = {
                     collection : new Backbone.Collection([model]),
                     templateProperties : {},

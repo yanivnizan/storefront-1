@@ -55,6 +55,12 @@ define(["jquery", "backbone"], function($, Backbone) {
             _.extend(combinedEvents, events, triggers);
 
             Backbone.View.prototype.delegateEvents.call(this, combinedEvents);
+        },
+        bubbleEventsTo : function(targetView) {
+            this.on("all", function() {
+                Backbone.Events.trigger.apply(targetView, arguments);
+            });
+            return this;
         }
     });
 
@@ -183,15 +189,7 @@ define(["jquery", "backbone"], function($, Backbone) {
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                }).on("bought", function(model) {
-                    $this.trigger("bought", model);
-                }).on("equipped", function(model) {
-                    $this.trigger("equipped", model);
-                }).on("unequipped", function(model) {
-                    $this.trigger("unequipped", model);
-                });
+                }).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
 
@@ -231,11 +229,7 @@ define(["jquery", "backbone"], function($, Backbone) {
                     model    : item,
                     template : $this.getTemplate(),
                     css      : $this.options.css
-                }).on("bought", function(model) {
-                    $this.trigger("bought", model);
-                }).on("selected", function(model) {
-                    $this.trigger("selected", model);
-                });
+                }).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
         },
@@ -276,6 +270,7 @@ define(["jquery", "backbone"], function($, Backbone) {
     });
 
     return {
+        BaseView                : BaseView,
         ListItemView            : ListItemView,
         ExpandableListItemView  : ExpandableListItemView,
         GridItemView            : GridItemView,
