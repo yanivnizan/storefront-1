@@ -122,11 +122,11 @@
             "goods" :{
                 "title" : "themes/muffinRush/img/Store_Store.png",
                 "background" : "themes/muffinRush/img/Bg_Wall.png",
-                "backButton" : "themes/muffinRush/img/back.png",
-                "moreCurrencyButton" : "themes/muffinRush/img/GetMore.png",
+                "backButton" : "http://placehold.it/500x100&text=Back (500x100)",
+                "moreCurrencyButton" : "http://placehold.it/500x100/ddd&text=More Coins (500x100)",
                 "balance" : "themes/muffinRush/img/YourMuf.png",
                 "list" : {
-                    "background" : "themes/muffinRush/img/InnerBG.png"
+                    "background" : "http://placehold.it/460x560/eee/ddd&text=Background (460x560)"
                 },
                 "listItem" : {
                     "background" : "themes/muffinRush/img/Bar.png",

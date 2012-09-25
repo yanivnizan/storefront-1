@@ -12,8 +12,8 @@
 }
 
 .items-container {
-	margin: 20px 30px;
-	.box-shadow(~"0 0 0 3px #8F6C56, 0 0 0 5px #49361F, 0 0 0 8px #664F34, 0 0 0 18px #E0CCA1");
+    width: @standardWidth;
+	margin: 0 auto;
 	background-size: cover;
 	.box-flex(1);
 	overflow-y: scroll;
@@ -159,14 +159,11 @@
 }
 
 .footer {
-	.box;
-
-	&>div {
-		.box-flex(1);
-	}
-
 	img {
-		max-height: 105px;
+        display: block;
+        width: 500px;
+        height: 100px;
+        margin: 0 auto;
 	}
 }
 
