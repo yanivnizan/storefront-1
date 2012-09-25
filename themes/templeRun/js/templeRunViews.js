@@ -21,7 +21,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 collection          : this.model.get("virtualGoods"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateProperties  : {},
-                itemTemplateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground },
+                itemTemplateHelpers : { balanceBackground : this.theme.pages.goods.listItem.balanceBackground },
                 css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
             this.currencyPacksView = new Components.CollectionListView({
@@ -29,7 +29,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 collection          : this.model.get("currencyPacks"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : {},
-                itemTemplateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground },
+                itemTemplateHelpers : { balanceBackground : this.theme.pages.currencyPacks.listItem.balanceBackground },
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
