@@ -311,6 +311,13 @@ define(["jquery", "backbone"], function($, Backbone) {
         render : function() {
             var context = this.serializeData();
             this.$el.html(this.options.template(context));
+
+            // Render child views (items in goods store and currency store)
+            if (this.children) {
+                _.each(this.children, function(view, selector) {
+                    this.$(selector).html(view.render().el);
+                });
+            }
             if (this.onRender) this.onRender();
             return this;
         }

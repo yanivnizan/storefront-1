@@ -15,19 +15,23 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             // This will enable us to construct the view objects once and then render as many times
             // as we like without losing the jQuery bindings each time.
             // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new Components.CollectionListView({
+            var virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateProperties  : {}
             }).on("selected", this.wantsToBuyVirtualGoods);
-            this.currencyPacksView = new Components.CollectionListView({
+            var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : {}
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
+            this.children = {
+                "#goods-store .items-container" : virtualGoodsView,
+                "#currency-store .items-container" : currencyPacksView
+            };
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
@@ -61,10 +65,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
         },
         onRender : function() {
             this.$("#currency-store").css("visibility", "hidden");
-
-            // Render subviews (items in goods store and currency store)
-            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
-            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
         }
     });
     _.extend(StoreView.prototype, ViewMixins);
