@@ -39,7 +39,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
-                type                : Components.ExpandableListItemView,
+                itemView            : Components.ExpandableListItemView,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 itemTemplateHelpers : itemTemplateHelpers,
                 templateProperties  : {},
@@ -59,7 +59,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     className           : "items virtualGoods category " + categoryName,
                     category            : category,
                     collection          : categoryGoods,
-                    type                : Components.ExpandableListItemView,
+                    itemView            : Components.ExpandableListItemView,
                     template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
                     itemTemplateHelpers : itemTemplateHelpers,
                     templateProperties  : {},
