@@ -26,8 +26,11 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             });
             var CurrencyPackView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateHelpers : { balanceBackground : this.theme.pages.currencyPacks.listItem.balanceBackground },
-                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                templateHelpers : {
+                    nameStyle : this.theme.pages.currencyPacks.listItem.nameStyle,
+                    priceStyle : this.theme.pages.currencyPacks.listItem.priceStyle
+                },
+                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.balanceBackground + "')" }
             });
 
             categories.each(function(category) {

@@ -143,7 +143,9 @@
                     "background" : "http://placehold.it/460x660/eee/ddd&text=Background (460x560)"
                 },
                 "listItem" : {
-                    "background" : "http://placehold.it/460x100/e0e0e0/ccc&text=Background (460x100)"
+                    "balanceBackground" : "http://placehold.it/460x100/e0e0e0/ccc&text=Background (460x100)",
+                    "nameStyle" : "",
+                    "priceStyle" : ""
                 }
 
             }
