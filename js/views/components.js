@@ -204,7 +204,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     var BaseCollectionView = BaseView.extend({
         initialize : function(options) {
-            this.subViews = []; // expose sub views for testing purposes
+            this.children = []; // expose sub views for testing purposes
         },
         // Retrieve the itemView type, either from `this.options.itemView`
         // or from the `itemView` in the object definition. The "options"
@@ -224,7 +224,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
                 var view = new ItemView({model : item}).bubbleEventsTo($this);
-                $this.subViews.push(view);
+                $this.children.push(view);
             });
         }
     });
@@ -248,7 +248,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             var $this = this;
 
             // Render each item and append it
-            _.each(this.subViews, function(view) {
+            _.each(this.children, function(view) {
                 view.render().$el.addClass($this.orientation);
                 $this.$el.append(view.el);
             });
@@ -272,10 +272,10 @@ define(["jquery", "backbone"], function($, Backbone) {
             // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
             // This assumes that the container has no margin, border or padding.
 
-            var subject             = this.subViews[0].$el,
+            var subject             = this.children[0].$el,
                 trueElementWidth    = (this.$el.width() / this.options.columns) - (subject.outerWidth(true) - subject.width());
 
-            _.each(this.subViews, function(subView) {
+            _.each(this.children, function(subView) {
                 subView.$el.css("width", trueElementWidth);
             });
         },
@@ -285,7 +285,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
             // Render each item and append it
             var currentRow;
-            _.each(this.subViews, function(view, i) {
+            _.each(this.children, function(view, i) {
                 if (i % columns == 0) {
                     currentRow = $("<div>", {class : "row"});
                     $this.$el.append(currentRow);

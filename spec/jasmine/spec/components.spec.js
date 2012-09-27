@@ -249,7 +249,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should create instances of subviews upon construction", function() {
-                expect(new CollectionListView(attributes).subViews.length).toEqual(1);
+                expect(new CollectionListView(attributes).children.length).toEqual(1);
             });
 
             it("should call subviews' render function when rendering", function () {
@@ -269,7 +269,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                     templateProperties  : {}
                 }).on("selected", spy).render();
 
-                view.subViews[0].triggerTapEvent();
+                view.children[0].triggerTapEvent();
                 expect(spy.calledWith(model)).toBeTruthy();
             });
 
@@ -319,7 +319,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should create instances of subviews upon construction", function() {
-                expect(view.subViews.length).toEqual(1);
+                expect(view.children.length).toEqual(1);
             });
 
             it("should adjust its items' width asynchronously when rendering", function() {
