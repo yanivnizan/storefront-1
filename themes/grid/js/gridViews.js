@@ -22,13 +22,12 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
                 itemView            : VirtualGoodView,
-                templateProperties  : {columns : this.theme.pages.goods.columns}
+                columns             : this.theme.pages.goods.columns
             }).on("selected", this.wantsToBuyVirtualGoods);
             var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                itemView            : CurrencyPackView,
-                templateProperties  : {}
+                itemView            : CurrencyPackView
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
             this.children = {

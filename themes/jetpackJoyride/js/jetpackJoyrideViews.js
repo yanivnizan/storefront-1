@@ -52,8 +52,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
-                itemView            : CurrencyPackView,
-                templateProperties  : {}
+                itemView            : CurrencyPackView
             }).on("bought", this.wantsToBuyCurrencyPacks);
 
 
@@ -69,8 +68,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     className           : "items virtualGoods category " + categoryName,
                     category            : category,
                     collection          : categoryGoods,
-                    itemView            : VirtualGoodView,
-                    templateProperties  : {}
+                    itemView            : VirtualGoodView
                 }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
 
                 $this.pageViews.push(view);
@@ -81,8 +79,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.categoryMenuView = new Components.CollectionListView({
                 className           : "menu items clearfix",
                 collection          : categories,
-                itemView            : CategoryView,
-                templateProperties  : {}
+                itemView            : CategoryView
             }).on("selected", this.switchCategory);
 
             this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);

@@ -283,7 +283,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
             it("should adjust its width if its orientation is horizontal", function() {
                 var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
-                view = new CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
+                view = new CollectionListView(_.extend(attributes, {orientation : "horizontal"})).render();
                 expect(spy.called).toBeTruthy();
                 expect(view.orientation).toEqual("horizontal");
                 spy.restore();

@@ -21,14 +21,12 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             var virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                itemView            : VirtualGoodView,
-                templateProperties  : {}
+                itemView            : VirtualGoodView
             }).on("selected", this.wantsToBuyVirtualGoods);
             var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                itemView            : CurrencyPackView,
-                templateProperties  : {}
+                itemView            : CurrencyPackView
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
             this.children = {

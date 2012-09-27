@@ -235,7 +235,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
             this.buildSubViews();
-            this.orientation = this.options.templateProperties.orientation || "vertical";
+            this.orientation = this.options.orientation || "vertical";
         },
         itemView : ListItemView,
         adjustWidth : function() {
@@ -272,16 +272,15 @@ define(["jquery", "backbone"], function($, Backbone) {
             // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
             // This assumes that the container has no margin, border or padding.
 
-            var columns             = this.options.templateProperties.columns,
-                subject             = this.subViews[0].$el,
-                trueElementWidth    = (this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
+            var subject             = this.subViews[0].$el,
+                trueElementWidth    = (this.$el.width() / this.options.columns) - (subject.outerWidth(true) - subject.width());
 
             _.each(this.subViews, function(subView) {
                 subView.$el.css("width", trueElementWidth);
             });
         },
         render : function() {
-            var columns  = this.options.templateProperties.columns,
+            var columns  = this.options.columns,
                 $this    = this;
 
             // Render each item and append it
