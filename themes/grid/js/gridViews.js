@@ -11,23 +11,29 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
-            // Initialize sub-views, but defer providing an "el" until the rendering phase
-            // This will enable us to construct the view objects once and then render as many times
-            // as we like without losing the jQuery bindings each time.
-            // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new Components.CollectionGridView({
+            var VirtualGoodView = Components.GridItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item")
+            });
+            var CurrencyPackView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack")
+            });
+
+            var virtualGoodsView = new Components.CollectionGridView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateProperties  : {columns : this.theme.pages.goods.columns}
+                itemView            : VirtualGoodView,
+                columns             : this.theme.pages.goods.columns
             }).on("selected", this.wantsToBuyVirtualGoods);
-            this.currencyPacksView = new Components.CollectionListView({
+            var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateProperties  : {}
+                itemView            : CurrencyPackView
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
+            this.children = {
+                "#goods-store .items-container" : virtualGoodsView,
+                "#currency-store .items-container" : currencyPacksView
+            };
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
@@ -61,10 +67,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
         },
         onRender : function() {
             this.$("#currency-store").css("visibility", "hidden");
-
-            // Render subviews (items in goods store and currency store)
-            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
-            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
         }
     });
     _.extend(StoreView.prototype, ViewMixins);

@@ -142,8 +142,11 @@ define(["jquery", "backbone"], function($, Backbone) {
             touchend : "selected"
         },
         render : function() {
-            if (this.options.css) this.$el.css(this.options.css);
-            this.$el.html(this.getTemplate()(this.serializeData()));
+            var css = this.options.css || this.css;
+            if (css) this.$el.css(css);
+            var template = this.getTemplate(),
+                context  = this.serializeData();
+            this.$el.html(template(context));
             return this;
         }
     });
@@ -201,7 +204,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     var BaseCollectionView = BaseView.extend({
         initialize : function(options) {
-            this.subViews = []; // expose sub views for testing purposes
+            this.children = []; // expose sub views for testing purposes
         },
         // Retrieve the itemView type, either from `this.options.itemView`
         // or from the `itemView` in the object definition. The "options"
@@ -216,18 +219,12 @@ define(["jquery", "backbone"], function($, Backbone) {
             }
             return itemView;
         },
-        buildSubViews : function() {
+        buildChildViews : function() {
             var $this = this;
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
-                var attributes = {
-                    model    : item,
-                    template : $this.getTemplate(),
-                    css      : $this.options.css
-                };
-                if ($this.options.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.options.itemTemplateHelpers});
-                var view = new ItemView(attributes).bubbleEventsTo($this);
-                $this.subViews.push(view);
+                var view = new ItemView({model : item}).bubbleEventsTo($this);
+                $this.children.push(view);
             });
         }
     });
@@ -237,8 +234,8 @@ define(["jquery", "backbone"], function($, Backbone) {
         constructor : function(options) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-            this.buildSubViews();
-            this.orientation = this.options.templateProperties.orientation || "vertical";
+            this.buildChildViews();
+            this.orientation = this.options.orientation || "vertical";
         },
         itemView : ListItemView,
         adjustWidth : function() {
@@ -251,7 +248,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             var $this = this;
 
             // Render each item and append it
-            _.each(this.subViews, function(view) {
+            _.each(this.children, function(view) {
                 view.render().$el.addClass($this.orientation);
                 $this.$el.append(view.el);
             });
@@ -265,7 +262,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         constructor : function(options) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-            this.buildSubViews();
+            this.buildChildViews();
         },
         itemView : GridItemView,
         adjustWidth : function() {
@@ -275,21 +272,20 @@ define(["jquery", "backbone"], function($, Backbone) {
             // Calculation: (container width) / (# of columns) - ( (item width + padding + border + margin) - (item width) )
             // This assumes that the container has no margin, border or padding.
 
-            var columns             = this.options.templateProperties.columns,
-                subject             = this.subViews[0].$el,
-                trueElementWidth    = (this.$el.width() / columns) - (subject.outerWidth(true) - subject.width());
+            var subject             = this.children[0].$el,
+                trueElementWidth    = (this.$el.width() / this.options.columns) - (subject.outerWidth(true) - subject.width());
 
-            _.each(this.subViews, function(subView) {
-                subView.$el.css("width", trueElementWidth);
+            _.each(this.children, function(view) {
+                view.$el.css("width", trueElementWidth);
             });
         },
         render : function() {
-            var columns  = this.options.templateProperties.columns,
+            var columns  = this.options.columns,
                 $this    = this;
 
             // Render each item and append it
             var currentRow;
-            _.each(this.subViews, function(view, i) {
+            _.each(this.children, function(view, i) {
                 if (i % columns == 0) {
                     currentRow = $("<div>", {class : "row"});
                     $this.$el.append(currentRow);
@@ -311,6 +307,13 @@ define(["jquery", "backbone"], function($, Backbone) {
         render : function() {
             var context = this.serializeData();
             this.$el.html(this.options.template(context));
+
+            // Render child views (items in goods store and currency store)
+            if (this.children) {
+                _.each(this.children, function(view, selector) {
+                    this.$(selector).html(view.render().el);
+                });
+            }
             if (this.onRender) this.onRender();
             return this;
         }
