@@ -15,27 +15,26 @@ define(["jquery", "backbone", "components", "viewMixins", "infrastructure", "han
 
             var VirtualGoodView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground }
+                templateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground },
+                css             : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             });
             var CurrencyPackView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground }
+                templateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground },
+                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             });
 
             var virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
                 itemView            : VirtualGoodView,
-                templateProperties  : {},
-                css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
+                templateProperties  : {}
             }).on("selected", this.wantsToBuyVirtualGoods);
             var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
                 itemView            : CurrencyPackView,
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateProperties  : {},
-                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                templateProperties  : {}
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
             this.children = {

@@ -142,7 +142,8 @@ define(["jquery", "backbone"], function($, Backbone) {
             touchend : "selected"
         },
         render : function() {
-            if (this.options.css) this.$el.css(this.options.css);
+            var css = this.options.css || this.css;
+            if (css) this.$el.css(css);
             var template = this.getTemplate(),
                 context  = this.serializeData();
             this.$el.html(template(context));
@@ -222,11 +223,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             var $this = this;
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
-                var attributes = {
-                    model    : item,
-                    css      : $this.options.css || $this.css
-                };
-                var view = new ItemView(attributes).bubbleEventsTo($this);
+                var view = new ItemView({model : item}).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });
         }

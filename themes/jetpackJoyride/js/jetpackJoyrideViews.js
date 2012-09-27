@@ -39,12 +39,13 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             var VirtualGoodView = Components.ExpandableListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateHelpers : templateHelpers
+                templateHelpers : templateHelpers,
+                css             : { "background-image" : "url('" + this.theme.images.itemBackgroundImage + "')" }
             });
             var CurrencyPackView = Components.ExpandableListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateHelpers : templateHelpers,
-                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                css             : { "background-image" : "url('" + this.theme.images.itemBackgroundImage + "')" }
             });
             var CategoryView = Components.ListItemView.extend({ template : function(){} }); // empty template
 
@@ -69,8 +70,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     category            : category,
                     collection          : categoryGoods,
                     itemView            : VirtualGoodView,
-                    templateProperties  : {},
-                    css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
+                    templateProperties  : {}
                 }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
 
                 $this.pageViews.push(view);

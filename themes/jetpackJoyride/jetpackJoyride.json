@@ -125,7 +125,8 @@
             "expandImage" : "http://placehold.it/20x100",
             "collapseImage" : "http://placehold.it/20x100/fff/eee",
             "backImage" : "http://placehold.it/100x60&text=Back (100x60)",
-            "quitImage" : "http://placehold.it/100x60&text=Quit (100x60)"
+            "quitImage" : "http://placehold.it/100x60&text=Quit (100x60)",
+            "itemBackgroundImage" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
         },
         "pages" : {
             "menu" : {
@@ -133,23 +134,13 @@
                 "balance" : "http://placehold.it/140x60&text=Balance (140x60)"
             },
             "clothing" : {
-                "title": "http://placehold.it/480x60&text=Clothing Image (480x60)",
-                "listItem" : {
-                    "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
-                }
+                "title": "http://placehold.it/480x60&text=Clothing Image (480x60)"
             },
             "jetpacks" : {
-                "title": "http://placehold.it/480x60&text=Jetpacks Image (480x60)",
-                "listItem" : {
-                    "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
-                }
+                "title": "http://placehold.it/480x60&text=Jetpacks Image (480x60)"
             },
             "currencyPacks" : {
-                "title": "http://placehold.it/480x60&text=Currency Packs (480x60)",
-                "listItem" : {
-                    "background" : "http://placehold.it/900x120/fff/eee&text=Background (900x120)"
-                }
-
+                "title": "http://placehold.it/480x60&text=Currency Packs (480x60)"
             }
         }
     },
