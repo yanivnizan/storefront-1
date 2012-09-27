@@ -112,7 +112,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             return this;
         },
         onRender : function() {
-            // Render subviews (items in goods store and currency store)
+            // Render child views (items in goods store and currency store)
             this.header.setElement(this.$(".header"));
             this.$(".pages").append(this.categoryMenuView.render().el);
 

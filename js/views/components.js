@@ -219,7 +219,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             }
             return itemView;
         },
-        buildSubViews : function() {
+        buildChildViews : function() {
             var $this = this;
             this.collection.each(function(item) {
                 var ItemView = $this.getItemView();
@@ -234,7 +234,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         constructor : function(options) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-            this.buildSubViews();
+            this.buildChildViews();
             this.orientation = this.options.orientation || "vertical";
         },
         itemView : ListItemView,
@@ -262,7 +262,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         constructor : function(options) {
             BaseCollectionView.prototype.constructor.apply(this, arguments);
             _.bindAll(this, "adjustWidth");
-            this.buildSubViews();
+            this.buildChildViews();
         },
         itemView : GridItemView,
         adjustWidth : function() {
@@ -275,8 +275,8 @@ define(["jquery", "backbone"], function($, Backbone) {
             var subject             = this.children[0].$el,
                 trueElementWidth    = (this.$el.width() / this.options.columns) - (subject.outerWidth(true) - subject.width());
 
-            _.each(this.children, function(subView) {
-                subView.$el.css("width", trueElementWidth);
+            _.each(this.children, function(view) {
+                view.$el.css("width", trueElementWidth);
             });
         },
         render : function() {
