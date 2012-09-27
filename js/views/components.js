@@ -245,17 +245,35 @@ define(["jquery", "backbone"], function($, Backbone) {
             this.$el.css("width", this.collection.length * elementWidth);
         },
         render : function() {
+            this.renderChildren();
+            if (this.orientation == "horizontal") this.adjustWidth();
+            return this;
+        },
+        renderChildren : function() {
             var $this = this;
 
             // Render each item and append it
             _.each(this.children, function(view) {
                 view.render().$el.addClass($this.orientation);
-                $this.$el.append(view.el);
+                $this.getChildrenContainer().append(view.el);
             });
-
-            if (this.orientation == "horizontal") this.adjustWidth();
-            return this;
+        },
+        getChildrenContainer : function() {
+            var container = this.options.childrenContainer || this.childrenContainer || this.$el;
+            if (_.isString(container)) container = this.$(container);
+            return container;
         }
+    });
+
+    // TODO: Write unit test for this component
+    var SectionedListView = CollectionListView.extend({
+        tagName : "div",
+        render : function() {
+            this.$el.html(this.getTemplate()(this.serializeData()));
+            this.renderChildren();
+            return this;
+        },
+        childrenContainer : ".container"
     });
 
     var CollectionGridView = BaseCollectionView.extend({
@@ -328,6 +346,7 @@ define(["jquery", "backbone"], function($, Backbone) {
         BaseCollectionView      : BaseCollectionView,
         CollectionListView      : CollectionListView,
         CollectionGridView      : CollectionGridView,
+        SectionedListView       : SectionedListView,
         BaseStoreView           : BaseStoreView
     };
 });
