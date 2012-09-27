@@ -322,6 +322,12 @@ define(["jquery", "backbone", "viewMixins"], function($, Backbone, ViewMixins) {
         serializeData : function() {
             return _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
         },
+        createDialog : function(options) {
+            return new ModalDialog(_.extend({
+                parent : this.$el,
+                template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
+            }, options));
+        },
         render : function() {
             var context = this.serializeData();
             this.$el.html(this.options.template(context));

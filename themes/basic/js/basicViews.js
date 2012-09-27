@@ -55,11 +55,7 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
             this.$("#currency-store").one(CssUtils.getTransitionendEvent(), function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
         openDialog : function(currency) {
-            new Components.ModalDialog({
-                parent : this.$el,
-                model : this.theme.pages.goods.noFundsModal,
-                template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
-            }).render().on("closed", function(command) {
+            this.createDialog({model : this.theme.pages.goods.noFundsModal}).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
             return this;

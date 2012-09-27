@@ -76,11 +76,7 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
             this.$("#goods-store").show();
         },
         openDialog : function(currency) {
-            new Components.ModalDialog({
-                parent : this.$el,
-                model : this.theme.pages.goods.noFundsModal,
-                template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
-            }).render().on("closed", function(command) {
+            this.createDialog({model : this.theme.pages.goods.noFundsModal}).render().on("closed", function(command) {
                 if (command == "buyMore") this.showCurrencyStore();
             }, this);
             return this;

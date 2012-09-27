@@ -104,11 +104,7 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
         showCurrencyStore : function() {},
         showGoodsStore : function() {},
         openDialog : function(currency) {
-            new Components.ModalDialog({
-                parent : this.$el,
-                model : this.theme.noFundsModal,
-                template : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "modalDialog")
-            }).render();
+            this.createDialog({model : this.theme.noFundsModal}).render();
             return this;
         },
         onRender : function() {
