@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, CssUtils, Handlebars) {
+define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates"], function($, Backbone, Components, CssUtils, Handlebars) {
 
     var HeaderView = Backbone.View.extend({
         initialize : function() {
@@ -122,7 +122,6 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             });
         }
     });
-    _.extend(StoreView.prototype, ViewMixins);
 
 
     return {

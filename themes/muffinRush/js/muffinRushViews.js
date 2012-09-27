@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, Handlebars) {
+define(["jquery", "backbone", "components", "handlebars", "templates"], function($, Backbone, Components, Handlebars) {
 
     var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
@@ -76,7 +76,6 @@ define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templat
             this.$("#currency-store").hide();
         }
     });
-    _.extend(StoreView.prototype, ViewMixins);
 
     return {
         StoreView : StoreView

@@ -1,4 +1,4 @@
-define(["jquery", "backbone"], function($, Backbone) {
+define(["jquery", "backbone", "viewMixins"], function($, Backbone, ViewMixins) {
 
     var BaseView = Backbone.View.extend({
         // Serialize the model or collection for the view. If a model is
@@ -336,6 +336,7 @@ define(["jquery", "backbone"], function($, Backbone) {
             return this;
         }
     });
+    _.extend(BaseStoreView.prototype, ViewMixins);
 
     return {
         BaseView                : BaseView,
