@@ -143,7 +143,9 @@ define(["jquery", "backbone"], function($, Backbone) {
         },
         render : function() {
             if (this.options.css) this.$el.css(this.options.css);
-            this.$el.html(this.getTemplate()(this.serializeData()));
+            var template = this.getTemplate(),
+                context  = this.serializeData();
+            this.$el.html(template(context));
             return this;
         }
     });
@@ -222,10 +224,8 @@ define(["jquery", "backbone"], function($, Backbone) {
                 var ItemView = $this.getItemView();
                 var attributes = {
                     model    : item,
-                    template : $this.getTemplate(),
-                    css      : $this.options.css
+                    css      : $this.options.css || $this.css
                 };
-                if ($this.options.itemTemplateHelpers) _.extend(attributes, {templateHelpers : $this.options.itemTemplateHelpers});
                 var view = new ItemView(attributes).bubbleEventsTo($this);
                 $this.subViews.push(view);
             });

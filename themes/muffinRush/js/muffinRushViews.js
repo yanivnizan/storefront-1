@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, Handlebars) {
+define(["jquery", "backbone", "components", "viewMixins", "infrastructure", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, Infrastructure, Handlebars) {
 
     var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
@@ -12,24 +12,29 @@ define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templat
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
             var $this = this;
 
-            // Initialize sub-views, but defer providing an "el" until the rendering phase
-            // This will enable us to construct the view objects once and then render as many times
-            // as we like without losing the jQuery bindings each time.
-            // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
+
+            var VirtualGoodView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
+                templateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground }
+            });
+            var CurrencyPackView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
+                templateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground }
+            });
+
             var virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
+                itemView            : VirtualGoodView,
                 templateProperties  : {},
-                itemTemplateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground },
                 css                 : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
             }).on("selected", this.wantsToBuyVirtualGoods);
             var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
+                itemView            : CurrencyPackView,
                 template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateProperties  : {},
-                itemTemplateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground },
                 css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
             }).on("selected", this.wantsToBuyCurrencyPacks);
 

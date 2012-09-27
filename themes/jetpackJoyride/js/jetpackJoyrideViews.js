@@ -30,20 +30,29 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance);
 
 
-            var virtualGoods        = this.model.get("virtualGoods"),
-                currencyPacks       = this.model.get("currencyPacks"),
-                categories          = new Backbone.Collection(this.model.get("categories")),
-                itemTemplateHelpers = { images : this.theme.images },
-                $this               = this;
+            var virtualGoods    = this.model.get("virtualGoods"),
+                currencyPacks   = this.model.get("currencyPacks"),
+                categories      = new Backbone.Collection(this.model.get("categories")),
+                templateHelpers = { images : this.theme.images },
+                $this           = this;
+
+
+            var VirtualGoodView = Components.ExpandableListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
+                templateHelpers : templateHelpers
+            });
+            var CurrencyPackView = Components.ExpandableListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
+                templateHelpers : templateHelpers,
+                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+            });
+            var CategoryView = Components.ListItemView.extend({ template : function(){} }); // empty template
 
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
                 collection          : currencyPacks,
-                itemView            : Components.ExpandableListItemView,
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                itemTemplateHelpers : itemTemplateHelpers,
-                templateProperties  : {},
-                css                 : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                itemView            : CurrencyPackView,
+                templateProperties  : {}
             }).on("bought", this.wantsToBuyCurrencyPacks);
 
 
@@ -59,9 +68,7 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
                     className           : "items virtualGoods category " + categoryName,
                     category            : category,
                     collection          : categoryGoods,
-                    itemView            : Components.ExpandableListItemView,
-                    template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "item"),
-                    itemTemplateHelpers : itemTemplateHelpers,
+                    itemView            : VirtualGoodView,
                     templateProperties  : {},
                     css                 : { "background-image" : "url('" + $this.theme.pages[categoryName].listItem.background + "')" }
                 }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
@@ -74,8 +81,8 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
             this.categoryMenuView = new Components.CollectionListView({
                 className           : "menu items clearfix",
                 collection          : categories,
-                templateProperties  : {},
-                template            : function(){}
+                itemView            : CategoryView,
+                templateProperties  : {}
             }).on("selected", this.switchCategory);
 
             this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);

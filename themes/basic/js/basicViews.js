@@ -11,20 +11,23 @@ define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebar
 
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
-            // Initialize sub-views, but defer providing an "el" until the rendering phase
-            // This will enable us to construct the view objects once and then render as many times
-            // as we like without losing the jQuery bindings each time.
-            // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
+            var VirtualGoodView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item")
+            });
+            var CurrencyPackView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack")
+            });
+
             var virtualGoodsView = new Components.CollectionListView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
+                itemView            : VirtualGoodView,
                 templateProperties  : {}
             }).on("selected", this.wantsToBuyVirtualGoods);
             var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
+                itemView            : CurrencyPackView,
                 templateProperties  : {}
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
