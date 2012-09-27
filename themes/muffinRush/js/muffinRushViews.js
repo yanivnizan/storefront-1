@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components", "viewMixins", "infrastructure", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, Infrastructure, Handlebars) {
+define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, Handlebars) {
 
     var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
