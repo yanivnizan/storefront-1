@@ -2,6 +2,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
     // Assign components to local variables for spec brevity
     var ModalDialog         = Components.ModalDialog,
+        BaseView            = Components.BaseView,
         ListItemView        = Components.ListItemView,
         GridItemView        = Components.GridItemView,
         BaseCollectionView  = Components.BaseCollectionView,
@@ -41,10 +42,6 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 expect(modal.el.className).toEqual("modal-container");
             });
 
-            it("should have a template defined", function() {
-                expect(new ModalDialog(_.extend(attributes, {template : "some template"})).template).toEqual("some template");
-            });
-
             it("should have a tap event on the close button and overlay", function() {
                 expect(modal.events["touchend .close"]).toBeDefined();
                 expect(modal.events["touchend .modal"]).toBeDefined();
@@ -64,12 +61,9 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 expect(modal.$el.parent().length).toEqual(0);
             });
 
-            it("should have a template defined", function() {
-                expect(modal.template).toBeDefined();
-            });
             it("should use the template when rendering", function() {
                 modal = new ModalDialog(_.extend(attributes, {template : sinon.spy()})).render();
-                expect(modal.template.called).toBeTruthy();
+                expect(modal.getTemplate().called).toBeTruthy();
             });
             it("should return the itself from render / close for chaining", function() {
                 modal = new ModalDialog(_.extend(attributes, {template : sinon.stub()})).render();
@@ -137,11 +131,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should have a tap event on the entire item", function() {
-                expect(view.events["touchend"]).toBeDefined();
-            });
-
-            it("should have a template defined", function() {
-                expect(new ListItemView(_.extend({template : "some template"}, attributes)).template).toEqual("some template");
+                expect(view.triggers["touchend"]).toBeDefined();
             });
 
             it("should accept an itemType and use the relevant template", function() {
@@ -166,11 +156,11 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should trigger a 'selected' event on itself with its model when clicked", function () {
-                var spy     = sinon.spy();
-                _.extend(ListItemView.prototype.events, { click : "onSelect" });
+                var spy = sinon.spy();
+                _.extend(ListItemView.prototype.triggers, { click : "selected" });
                 new ListItemView(attributes).on("selected", spy).$el.click();
                 expect(spy.calledWith(model)).toBeTruthy();
-                delete ListItemView.prototype.events.click;
+                delete ListItemView.prototype.triggers.click;
             });
 
             it("should re-render on changes to the model attributes: currency, price, balance", function () {
@@ -216,14 +206,19 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                 expect(new BaseCollectionView()).toBeInstanceOf(Backbone.View);
             });
 
-            it("should have a template defined", function() {
-                var template = sinon.stub();
-                expect(new BaseCollectionView({template : template}).template).toEqual(template);
+            it("should use an item view as specified in the initialization options if none is given in the prototype", function() {
+                var ItemView = Backbone.View;
+                expect(new BaseCollectionView({itemView : ItemView}).getItemView()).toEqual(ItemView);
             });
-
-            it("should have a type defined", function() {
-                var type = sinon.stub();
-                expect(new BaseCollectionView({type : type}).type).toEqual(type);
+            it("should use an item view as specified in prototype if none is give in the initialization options", function() {
+                var ItemView = Backbone.View;
+                var CollectionView = BaseCollectionView.extend({itemView : ItemView});
+                expect(new CollectionView().getItemView()).toEqual(ItemView);
+            });
+            it("should use an item view as specified in initialization options first when specified both in the options and the prototype", function() {
+                var CollectionView = BaseCollectionView.extend({itemView : Backbone.View});
+                var ItemView = Backbone.View.extend({a:1});
+                expect(new CollectionView({itemView : ItemView}).getItemView()).toEqual(ItemView);
             });
         });
 
@@ -232,11 +227,11 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             var view,attributes, stubType;
 
             beforeEach(function() {
-                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+                stubType = BaseView.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
                 attributes  = {
                     collection : new Backbone.Collection([new Backbone.Model()]),
                     templateProperties : {},
-                    type : stubType
+                    itemView : stubType
                 };
                 view        = new CollectionListView(attributes);
             });
@@ -254,7 +249,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should create instances of subviews upon construction", function() {
-                expect(new CollectionListView(attributes).subViews.length).toEqual(1);
+                expect(new CollectionListView(attributes).children.length).toEqual(1);
             });
 
             it("should call subviews' render function when rendering", function () {
@@ -267,14 +262,14 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
                     model   = new Backbone.Model();
 
                 // Fake a view that can fire the event
-                var type        = Backbone.View.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
+                var type        = BaseView.extend({model : model, triggerTapEvent : function(){ this.trigger("selected", this.model) }});
                 view = new CollectionListView({
                     collection          : new Backbone.Collection([model]),
-                    type                : type,
+                    itemView            : type,
                     templateProperties  : {}
                 }).on("selected", spy).render();
 
-                view.subViews[0].triggerTapEvent();
+                view.children[0].triggerTapEvent();
                 expect(spy.calledWith(model)).toBeTruthy();
             });
 
@@ -288,7 +283,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
             it("should adjust its width if its orientation is horizontal", function() {
                 var spy = sinon.spy(CollectionListView.prototype, "adjustWidth");
-                view = new CollectionListView(_.extend(attributes, {templateProperties : {orientation : "horizontal"}})).render();
+                view = new CollectionListView(_.extend(attributes, {orientation : "horizontal"})).render();
                 expect(spy.called).toBeTruthy();
                 expect(view.orientation).toEqual("horizontal");
                 spy.restore();
@@ -302,7 +297,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
 
             beforeEach(function() {
                 model = new Backbone.Model();
-                stubType = Backbone.View.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
+                stubType = BaseView.extend({render : sinon.spy(function() {return this;}), el : $("<div>")[0]});
                 attributes  = {
                     collection : new Backbone.Collection([model]),
                     templateProperties : {},
@@ -324,7 +319,7 @@ define("components.spec", ["components", "backbone", "handlebars"], function (Co
             });
 
             it("should create instances of subviews upon construction", function() {
-                expect(view.subViews.length).toEqual(1);
+                expect(view.children.length).toEqual(1);
             });
 
             it("should adjust its items' width asynchronously when rendering", function() {

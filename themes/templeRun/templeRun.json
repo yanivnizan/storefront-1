@@ -1,0 +1,167 @@
+{
+    "isCurrencyStoreDisabled" : false,
+    "currencyPacks" : [
+        {
+            "name"              : "10 Muffins",
+            "imgFilePath"       : "http://placehold.it/180x100",
+            "itemId"            : "muffins_10",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_10",
+            "price"             : 0.99,
+            "amount"            : 10,
+            "categoryId"       : 1
+        },
+        {
+            "name"              : "50 Muffins",
+            "imgFilePath"       : "http://placehold.it/180x100",
+            "itemId"            : "muffins_50",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "android.test.purchased",
+            "price"             : 1.99,
+            "amount"            : 50,
+            "categoryId"       : 1
+        },
+        {
+            "name"              : "400 Muffins",
+            "imgFilePath"       : "http://placehold.it/180x100",
+            "itemId"            : "muffins_400",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_400",
+            "price"             : 4.99,
+            "amount"            : 400,
+            "categoryId"       : 1
+        },
+        {
+            "name"              : "1000 Muffins",
+            "imgFilePath"       : "http://placehold.it/180x100",
+            "itemId"            : "muffins_1000",
+            "currency_itemId"   : "currency_muffin",
+            "productId"         : "muffins_1000",
+            "price"             : 8.99,
+            "amount"            : 1000,
+            "categoryId"       : 1
+        }
+    ],
+    "virtualCurrencies" : [
+        {
+            "name"          : "Muffins",
+            "description"   : "",
+            "itemId"        : "currency_muffin",
+            "balance"       : 1000,
+            "imgFilePath"   : "http://placehold.it/303x0"
+        }
+    ],
+    "virtualGoods" : [
+        {
+            "name"          : "Fruit Cake",
+            "description"   : "Customers buy a double portion on each purchase of this cake",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 225
+                }
+            },
+            "itemId"        : "fruit_cake",
+            "categoryId"   : 1
+        },
+        {
+            "name"          : "Pavlova",
+            "description"   : "Gives customers a sugar rush and they call their friends",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 175
+                }
+            },
+            "itemId"        : "pavlova",
+            "categoryId"   : 1
+        },
+        {
+            "name"          : "Choco-Cake",
+            "description"   : "A classic cake to maximize customer satisfaction",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 250
+                }
+            },
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 2
+        },
+        {
+            "name"          : "Cream Cup",
+            "description"   : "Increase bakery reputation with this original pastry",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 50
+                }
+            },
+            "itemId"        : "cream_cup",
+            "categoryId"   : 2
+        }
+    ],
+    "theme" : {
+        "name" : "templeRun",
+        "template" : "templeRun",
+        "version" : 1,
+        "background" : "http://placehold.it/480x800/F8F8F8/ddd&text=Background (480x800)",
+        "isOrientationLandscape" : false,
+        "common" : {
+            "titleImage" : "http://placehold.it/460x100&text=Title (460x100)",
+            "balanceImage" : "http://placehold.it/460x80/ddd&text=Balance (460x80)",
+            "backButton" : "http://placehold.it/500x100&text=Back (500x100)",
+            "moreCurrencyButton" : "http://placehold.it/500x100/ddd&text=More Coins (500x100)",
+            "balanceLabelStyle" : "padding: 2px 6px; background: rgba(0, 0, 0, 0.3);"
+        },
+        "balance" : {
+            "style" : "top: -10000px; left: -10000px;"
+        },
+        "pages" : {
+            "goods" :{
+                "list" : {
+                    "background" : "http://placehold.it/460x560/eee/ddd&text=Background (460x560)"
+                },
+                "listItem" : {
+                    "background" : "http://placehold.it/460x100/eee/ddd&text=Background (460x100)",
+                    "balanceBackground" : "http://placehold.it/60x60"
+                },
+                "noFundsModal" : {
+                    "background" : "http://placehold.it/540x300/eee/ddd&text=Background (540x300)",
+                    "title" : "Need More Coins!",
+                    "description" : "Would you like to get more coins?",
+                    "yesButton" : "http://placehold.it/260x80&text=Yes (260x80)",
+                    "noButton" : "http://placehold.it/260x80&text=No (260x80)"
+                }
+            },
+            "currencyPacks" : {
+                "list" : {
+                    "background" : "http://placehold.it/460x660/eee/ddd&text=Background (460x560)"
+                },
+                "listItem" : {
+                    "balanceBackground" : "http://placehold.it/460x100/e0e0e0/ccc&text=Background (460x100)",
+                    "nameStyle" : "",
+                    "priceStyle" : ""
+                }
+
+            }
+        },
+        "categories" : {
+            "style" : "background-image: url('http://placehold.it/460x40/bbb/ddd&text=Background (460x40)')"
+        }
+    },
+    "categories" : [
+        {
+            "id" : 1,
+            "name" : "POWERUPS"
+        },
+        {
+            "id" : 2,
+            "name" : "UTILITIES"
+        }
+    ]
+}

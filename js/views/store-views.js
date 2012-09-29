@@ -90,7 +90,7 @@ define(["jquery", "backbone", "components"], function($, Backbone, Components) {
             this.$el.addClass(name).html(this.theme.template(this.model.toJSON()));
             this.$("#currency-store").css("visibility", "hidden");
 
-            // Render subviews (items in goods store and currency store)
+            // Render child views (items in goods store and currency store)
             this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
             this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
 

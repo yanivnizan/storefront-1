@@ -1,17 +1,6 @@
-define(["jquery", "backbone", "components", "handlebars", "templates"], function($, Backbone, Components, Handlebars) {
+define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, CssUtils, Handlebars) {
 
-        // Determine which CSS transition event to bind according to the browser vendor
-    var transEndEventNames = {
-        'WebkitTransition' : 'webkitTransitionEnd',
-        'MozTransition'    : 'transitionend',
-        'OTransition'      : 'oTransitionEnd',
-        'msTransition'     : 'MSTransitionEnd',
-        'transition'       : 'transitionend'
-    },
-    transitionend = transEndEventNames[ Modernizr.prefixed('transition') ];
-
-
-    var StoreView = Backbone.View.extend({
+    var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
                             "render", "showCurrencyStore", "showGoodsStore", "openDialog",
@@ -22,35 +11,34 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
 
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
 
-            // Initialize sub-views, but defer providing an "el" until the rendering phase
-            // This will enable us to construct the view objects once and then render as many times
-            // as we like without losing the jQuery bindings each time.
-            // Based on: http://ianstormtaylor.com/rendering-views-in-backbonejs-isnt-always-simple/
-            this.virtualGoodsView = new Components.CollectionGridView({
+            var VirtualGoodView = Components.GridItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item")
+            });
+            var CurrencyPackView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack")
+            });
+
+            var virtualGoodsView = new Components.CollectionGridView({
                 className           : "items virtualGoods",
                 collection          : this.model.get("virtualGoods"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateProperties  : {columns : this.theme.pages.goods.columns}
+                itemView            : VirtualGoodView,
+                columns             : this.theme.pages.goods.columns
             }).on("selected", this.wantsToBuyVirtualGoods);
-            this.currencyPacksView = new Components.CollectionListView({
+            var currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
-                template            : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateProperties  : {}
+                itemView            : CurrencyPackView
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
+            this.children = {
+                "#goods-store .items-container" : virtualGoodsView,
+                "#currency-store .items-container" : currencyPacksView
+            };
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
             "touchend .buy-more"    : "showCurrencyStore",
             "touchend .back"        : "showGoodsStore"
-        },
-        wantsToLeaveStore : function(event) {
-            if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
-            event.preventDefault();
-
-            // TODO: Release view bindings and destroy view
-            this.nativeAPI.wantsToLeaveStore();
         },
         updateBalance : function(model) {
             this.$(".header .balance label").html(model.get("balance"));
@@ -65,7 +53,7 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
             }
         },
         showGoodsStore : function() {
-            this.$("#currency-store").one(transitionend, function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
+            this.$("#currency-store").one(CssUtils.getTransitionendEvent(), function(){ $(this).css("visibility", "hidden"); }).removeClass("visible");
         },
         openDialog : function(currency) {
             new Components.ModalDialog({
@@ -77,24 +65,11 @@ define(["jquery", "backbone", "components", "handlebars", "templates"], function
             }, this);
             return this;
         },
-        render : function() {
-            var context = _.extend({}, this.theme, {currencies : this.model.get("virtualCurrencies").toJSON()});
-            this.$el.html(this.options.template(context));
+        onRender : function() {
             this.$("#currency-store").css("visibility", "hidden");
-
-            // Render subviews (items in goods store and currency store)
-            this.$("#goods-store .items-container").html(this.virtualGoodsView.render().el);
-            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
-
-            return this;
-        },
-        wantsToBuyVirtualGoods : function(model) {
-            this.nativeAPI.wantsToBuyVirtualGoods(model.toJSON().itemId);
-        },
-        wantsToBuyCurrencyPacks : function(model) {
-            this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON().productId);
         }
     });
+    _.extend(StoreView.prototype, ViewMixins);
 
 
     return {

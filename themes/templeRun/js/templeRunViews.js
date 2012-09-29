@@ -1,4 +1,4 @@
-define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, Handlebars) {
+define(["jquery", "backbone", "components", "viewMixins", "cssUtils", "handlebars", "templates"], function($, Backbone, Components, ViewMixins, CssUtils, Handlebars) {
 
     var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
@@ -6,39 +6,52 @@ define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templat
                             "render", "showCurrencyStore", "showGoodsStore", "openDialog",
                             "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
-            this.nativeAPI  = this.options.nativeAPI || window.SoomlaNative;
-            this.theme      = this.model.get("theme");
+            this.nativeAPI      = this.options.nativeAPI || window.SoomlaNative;
+            this.theme          = this.model.get("theme");
+            this.categoryViews  = [];
 
             this.model.get("virtualCurrencies").on("change:balance", this.updateBalance); // TODO: Fix
-            var $this = this;
+            var $this        = this,
+                categories   = new Backbone.Collection(this.model.get("categories")),
+                virtualGoods = this.model.get("virtualGoods");
 
 
             var VirtualGoodView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
-                templateHelpers : { itemBackground : this.theme.pages.goods.listItem.itemBackground },
-                css             : { "background-image" : "url('" + this.theme.pages.goods.listItem.background + "')" }
+                templateHelpers : {
+                    balanceBackground : $this.theme.pages.goods.listItem.balanceBackground,
+                    balanceLabelStyle : $this.theme.common.balanceLabelStyle
+                },
+                css             : { "background-image" : "url('" + $this.theme.pages.goods.listItem.background + "')" }
             });
             var CurrencyPackView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
-                templateHelpers : { itemBackground : this.theme.pages.currencyPacks.listItem.itemBackground },
-                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.background + "')" }
+                templateHelpers : {
+                    nameStyle : this.theme.pages.currencyPacks.listItem.nameStyle,
+                    priceStyle : this.theme.pages.currencyPacks.listItem.priceStyle
+                },
+                css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.balanceBackground + "')" }
             });
 
-            var virtualGoodsView = new Components.CollectionListView({
-                className           : "items virtualGoods",
-                collection          : this.model.get("virtualGoods"),
-                itemView            : VirtualGoodView
-            }).on("selected", this.wantsToBuyVirtualGoods);
-            var currencyPacksView = new Components.CollectionListView({
+            categories.each(function(category) {
+                var categoryGoods = virtualGoods.filter(function(item) {return item.get("categoryId") == category.id});
+                categoryGoods = new Backbone.Collection(categoryGoods);
+
+                var view = new Components.SectionedListView({
+                    className           : "items virtualGoods",
+                    collection          : categoryGoods,
+                    itemView            : VirtualGoodView,
+                    template            : Handlebars.getTemplate("themes/" + $this.theme.name + "/templates", "listContainer"),
+                    templateHelpers     :_.extend({category : category.get("name")}, $this.theme.categories)
+                }).on("selected", $this.wantsToBuyVirtualGoods);
+                $this.categoryViews.push(view);
+            });
+            this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks",
                 collection          : this.model.get("currencyPacks"),
                 itemView            : CurrencyPackView
             }).on("selected", this.wantsToBuyCurrencyPacks);
 
-            this.children = {
-                "#goods-store .items-container" : virtualGoodsView,
-                "#currency-store .items-container" : currencyPacksView
-            };
         },
         events : {
             "touchend .leave-store" : "wantsToLeaveStore",
@@ -46,7 +59,7 @@ define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templat
             "touchend .back"        : "showGoodsStore"
         },
         updateBalance : function(model) {
-            this.$(".header .balance label").html(model.get("balance"));
+            this.$(".balance-container label").html(model.get("balance"));
         },
         showCurrencyStore : function() {
             // When this flag is raised, there is no connectivity,
@@ -73,7 +86,14 @@ define(["jquery", "backbone", "components", "viewMixins", "handlebars", "templat
             return this;
         },
         onRender : function() {
+            var $this = this;
             this.$("#currency-store").hide();
+
+            // Render subviews (items in goods store and currency store)
+            _.each(this.categoryViews, function(view) {
+                $this.$("#goods-store .items-container").append(view.render().el);
+            });
+            this.$("#currency-store .items-container").html(this.currencyPacksView.render().el);
         }
     });
     _.extend(StoreView.prototype, ViewMixins);
