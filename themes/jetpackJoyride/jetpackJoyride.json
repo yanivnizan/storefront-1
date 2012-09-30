@@ -65,8 +65,8 @@
         {
             "name"          : "EXPERIMENTAL FUEL",
             "description"   : "FLY TWICE AS FAST BUT BE CAREFUL, THERE IS INCREASED CHANCE OF ENGINE FIRE",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "chocolate_cake",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Utilities Objects/objects-06.png",
+            "itemId"        : "experimental_fuel",
             "categoryId"   : 1,
             "priceModel"    : {
                 "type" : "static",
@@ -78,8 +78,8 @@
         {
             "name"          : "BAND AID",
             "description"   : "RECOVER FROM ONE INJURY",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "cream_cup",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Utilities Objects/objects-08.png",
+            "itemId"        : "band_aid",
             "categoryId"   : 1, 
             "priceModel"    : {
                 "type" : "static",
@@ -91,8 +91,8 @@
         {
             "name"          : "FIRE EXTINGUISHER",
             "description"   : "RECOVER FROM ONE ENGINE FIRE",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "cream_cup",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Utilities Objects/objects-09.png",
+            "itemId"        : "fire_extinguisher",
             "categoryId"   : 1, 
             "priceModel"    : {
                 "type" : "static",
@@ -104,8 +104,8 @@
         {
             "name"          : "EXTRA LIFE",
             "description"   : "ESCAPE DEATH ONCE. DOUBLE TAP UP TO 5 SECONDS AFTER GAME IS OVER",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "cream_cup",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Utilities Objects/objects-07.png",
+            "itemId"        : "extra_life",
             "categoryId"   : 1, 
             "priceModel"    : {
                 "type" : "static",
@@ -117,8 +117,8 @@
         {
             "name"          : "LIGHTNING BOLT",
             "description"   : "SNAP ALL ENEMIES ON SIGHT WITH A SINGLE SHOT. USE DOUBLE TAP TO ACTIVATE",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "fruit_cake",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Gadgets Objects/objects-11.png",
+            "itemId"        : "lightning_bolt",
             "categoryId"   : 2,
             "priceModel"    : {
                 "type" : "static",
@@ -130,8 +130,8 @@
         {
             "name"          : "MORE TIME",
             "description"   : "GET AN EXTRA MINUTE TO COMPLETE YOUR TASK. TAP ON THE CLOCK TO USE IT",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "fruit_cake",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Gadgets Objects/objects-12.png",
+            "itemId"        : "more_time",
             "categoryId"   : 2,
             "priceModel"    : {
                 "type" : "static",
@@ -143,8 +143,8 @@
         {
             "name"          : "RED CROSS",
             "description"   : "DESCISE AS RED CROSS - INVISIBLE FOR 10 MILES",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "fruit_cake",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Gadgets Objects/objects-13.png",
+            "itemId"        : "red_cross",
             "categoryId"   : 2,
              "priceModel"    : {
                 "type" : "static",
@@ -156,8 +156,8 @@
         {
             "name"          : "BLUE STAR",
             "description"   : "BLUE STAR WILL ALLOW YOU TO START AT A HEIGHT OF 10000 FT",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Gadgets Objects/objects-14.png",
+            "itemId"        : "blue_star",
             "categoryId"   : 2,
              "priceModel"    : {
                 "type" : "static",
@@ -169,8 +169,8 @@
         {
             "name"          : "PURPLE HEART",
             "description"   : "TAP TO ACTIVATE AND GET 10 HEALTH POINTS",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Gadgets Objects/objects-15.png",
+            "itemId"        : "purple_heart",
             "categoryId"   : 2,
              "priceModel"    : {
                 "type" : "static",
@@ -182,8 +182,8 @@
         {
             "name"          : "UPGRADE 1",
             "description"   : "THIS IS A REALLY GREAT UPGRADE THAT WILL MAKE THE GAME MUCH MORE EXCITING",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Upgrades/Upgrade 1.png",
+            "itemId"        : "upgrade_1",
             "categoryId"   : 3,
              "priceModel"    : {
                 "type" : "static",
@@ -195,8 +195,8 @@
         {
             "name"          : "UPGRADE 2",
             "description"   : "THIS IS AN EVEN BETTER UPGRADE THAT WILL ALSO MAKE THE GAME FUN",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Upgrades/Upgrade 2.png",
+            "itemId"        : "upgrade_2",
             "categoryId"   : 3,
              "priceModel"    : {
                 "type" : "static",
@@ -208,8 +208,8 @@
         {
             "name"          : "AIRPLANE 1",
             "description"   : "THIS AIRPLANE FLIES REALLY HIGH",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Airplanes/Airplane 1.png",
+            "itemId"        : "airplane_1",
             "categoryId"   : 4,
              "priceModel"    : {
                 "type" : "static",
@@ -221,8 +221,8 @@
         {
             "name"          : "AIRPLANE 2",
             "description"   : "THIS ONE FLIES FOR LONG DISTANCES",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Airplanes/Airplane 2.png",
+            "itemId"        : "airplane_2",
             "categoryId"   : 4,
              "priceModel"    : {
                 "type" : "static",
@@ -234,8 +234,8 @@
         {
             "name"          : "CLOTHING 1",
             "description"   : "THIS SHIRT WILL PROTECT YOU FROM FIRES",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Clothing/Clothing 1.png",
+            "itemId"        : "clothing_1",
             "categoryId"   : 5,
              "priceModel"    : {
                 "type" : "static",
@@ -247,8 +247,8 @@
         {
             "name"          : "CLOTHING 2",
             "description"   : "THIS SHIRT WILL PROTECT YOU FROM BULLETS",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "itemId"        : "pavlova",
+            "imgFilePath"   : "themes/jetpackJoyride/img/Clothing/Clothing 2.png",
+            "itemId"        : "clothing_2",
             "categoryId"   : 5,
              "priceModel"    : {
                 "type" : "static",
@@ -292,6 +292,7 @@
      "categories" : [
         {
             "id" : 1,
+            "name" : "utilities",
             "title" : "UTILITIES",
             "categoryImage" : "themes/jetpackJoyride/img/-_Object 4.png"
         },
@@ -303,15 +304,21 @@
         },
         {
             "id" : 3,
-            "title" : "UPGRADES"
+            "name" : "upgrades",
+            "title" : "UPGRADES",
+            "categoryImage" : "themes/jetpackJoyride/img/-_Object 3.png"
         },
         {
             "id" : 4,
-            "title" : "AIRPLANES"
+            "name" : "airplanes",
+            "title" : "AIRPLANES",
+            "categoryImage" : "themes/jetpackJoyride/img/-_Object 2.png"
         },
         {
             "id" : 5,
-            "title" : "CLOTHING"
+            "name" : "clothing",
+            "title" : "CLOTHING",
+            "categoryImage" : "themes/jetpackJoyride/img/-_Object 1.png"
         },
         {
             "id" : 6,
