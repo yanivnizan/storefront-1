@@ -232,6 +232,32 @@
                 }
             }, 
         },
+        {
+            "name"          : "CLOTHING 1",
+            "description"   : "THIS SHIRT WILL PROTECT YOU FROM FIRES",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "itemId"        : "pavlova",
+            "categoryId"   : 5,
+             "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_coin" : 1000
+                }
+            }, 
+        },
+        {
+            "name"          : "CLOTHING 2",
+            "description"   : "THIS SHIRT WILL PROTECT YOU FROM BULLETS",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "itemId"        : "pavlova",
+            "categoryId"   : 5,
+             "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_coin" : 1500
+                }
+            }, 
+        },
     ],
     "theme" : {
         "name" : "jetpackJoyride",
