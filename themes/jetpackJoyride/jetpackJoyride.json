@@ -1,4 +1,4 @@
-{
+    {
     "isCurrencyStoreDisabled" : false,
         "currencyPacks" : [
         {
@@ -269,7 +269,7 @@
         "background" : "themes/jetpackJoyride/img/BG_BG.jpg",
         "headerBackground" : "themes/jetpackJoyride/img/Header.jpg",
         "noFundsModal" : {
-            "background" : "http://placehold.it/520x200&text=Background (520x200)"
+            "background" : "themes/jetpackJoyride/img/Alert-22.png"
         },
         "images" : {
             "buyImage" : "themes/jetpackJoyride/img/BUY.png",
