@@ -279,7 +279,8 @@
             "collapseImage" : "http://placehold.it/20x100/fff/eee",
             "backImage" : "themes/jetpackJoyride/img/BACK.png",
             "quitImage" : "themes/jetpackJoyride/img/QUIT.png",
-            "itemBackgroundImage" : "themes/jetpackJoyride/img/BG_Product.png"
+            "itemBackgroundImage" : "themes/jetpackJoyride/img/BG_Product.png",
+            "itemBackgroundImageExpanded" : "themes/jetpackJoyride/img/BG_Product Ext.png"
         },
         "titleStyle" : "",
         "pages" : {

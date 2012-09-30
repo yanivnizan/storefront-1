@@ -20,7 +20,7 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
     var StoreView = Components.BaseStoreView.extend({
         initialize : function() {
             _.bindAll(this, "wantsToLeaveStore", "updateBalance",
-                            "render", "openDialog",
+                            "render", "openDialog", "toggleItemBackground",
                             "switchCategory", "showMenu",
                             "wantsToBuyVirtualGoods", "wantsToBuyCurrencyPacks");
 
@@ -73,7 +73,11 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
                     category            : category,
                     collection          : categoryGoods,
                     itemView            : VirtualGoodView
-                }).on("bought", $this.wantsToBuyVirtualGoods).on("equipped", $this.wantsToEquipGoods).on("unequipped", $this.wantsToUnequipGoods);
+                })  .on("bought",       $this.wantsToBuyVirtualGoods)
+                    .on("equipped",     $this.wantsToEquipGoods)
+                    .on("unequipped",   $this.wantsToUnequipGoods)
+                    .on("expanded",     $this.toggleItemBackground)
+                    .on("collapsed",    $this.toggleItemBackground);
 
                 $this.pageViews.push(view);
             });
@@ -95,6 +99,10 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
             this.$(".category").hide();
             this.$(".category." + categoryName).show();
             this.header.switchHeader(categoryTitle, this.theme.images.backImage);
+        },
+        toggleItemBackground : function(view) {
+            var image = this.theme.images[view.expanded ? "itemBackgroundImageExpanded" : "itemBackgroundImage"];
+            view.$el.css("background-image", "url('" + image + "')");
         },
         showMenu : function() {
             this.header.state = "menu";
