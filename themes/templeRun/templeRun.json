@@ -131,8 +131,8 @@
             "categoryId"   : 2
         },
         {
-            "name"          : "Invisibility Hat",
-            "description"   : "Find the invisibility hat to suprise your enemies",
+            "name"          : "Science God",
+            "description"   : "Fight in the name of science god and get More powerful weapons",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
@@ -140,7 +140,7 @@
                     "currency_muffin" : 10000
                 }
             },
-            "itemId"        : "chocolate_cake",
+            "itemId"        : "science_god",
             "categoryId"   : 3
         },
         {
