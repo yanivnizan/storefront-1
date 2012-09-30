@@ -144,14 +144,26 @@
             }
         }
     },
-    "categories" : [
+     "categories" : [
         {
             "id" : 1,
-            "name" : "clothing"
+            "name" : "Utilities"
         },
         {
             "id" : 2,
-            "name" : "jetpacks"
+            "name" : "Gadgets"
+        {
+            "id" : 3,
+            "name" : "Upgrades"
+        {
+            "id" : 4,
+            "name" : "Airplanes"
+        {
+            "id" : 5,
+            "name" : "Clothing"
+        {
+            "id" : 6,
+            "name" : "Get Coins"
         }
     ]
 }
