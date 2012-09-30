@@ -2,49 +2,49 @@
     "isCurrencyStoreDisabled" : false,
     "currencyPacks" : [
         {
-            "name"              : "10 Muffins",
+            "name"              : "2,500 Coins",
             "imgFilePath"       : "http://placehold.it/180x100",
             "itemId"            : "muffins_10",
             "currency_itemId"   : "currency_muffin",
-            "productId"         : "muffins_10",
+            "productId"         : "2500_coins",
             "price"             : 0.99,
-            "amount"            : 10,
+            "amount"            : 2500,
             "categoryId"       : 1
         },
         {
-            "name"              : "50 Muffins",
+            "name"              : "25,000 Coins",
             "imgFilePath"       : "http://placehold.it/180x100",
             "itemId"            : "muffins_50",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "android.test.purchased",
-            "price"             : 1.99,
-            "amount"            : 50,
+            "price"             : 4.99,
+            "amount"            : 25000,
             "categoryId"       : 1
         },
         {
-            "name"              : "400 Muffins",
+            "name"              : "75,000 Coins",
             "imgFilePath"       : "http://placehold.it/180x100",
             "itemId"            : "muffins_400",
             "currency_itemId"   : "currency_muffin",
-            "productId"         : "muffins_400",
-            "price"             : 4.99,
-            "amount"            : 400,
+            "productId"         : "75000_coins",
+            "price"             : 9.99,
+            "amount"            : 75000,
             "categoryId"       : 1
         },
         {
-            "name"              : "1000 Muffins",
+            "name"              : "200,000 Coins",
             "imgFilePath"       : "http://placehold.it/180x100",
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_muffin",
-            "productId"         : "muffins_1000",
-            "price"             : 8.99,
-            "amount"            : 1000,
+            "productId"         : "200000_coins",
+            "price"             : 19.99,
+            "amount"            : 200000,
             "categoryId"       : 1
         }
     ],
     "virtualCurrencies" : [
         {
-            "name"          : "Muffins",
+            "name"          : "Coins",
             "description"   : "",
             "itemId"        : "currency_muffin",
             "balance"       : 1000,
@@ -162,6 +162,14 @@
         {
             "id" : 2,
             "name" : "UTILITIES"
-        }
+        },
+        {
+            "id" : 3,
+            "name" : "GODS"
+        },
+        {
+            "id" : 3,
+            "name" : "FRIENDS"
+        },
     ]
 }
