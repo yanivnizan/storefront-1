@@ -19,7 +19,7 @@
             "productId"         : "android.test.purchased",
             "price"             : 1.99,
             "amount"            : 50000,
-            "categoryId"       : 1
+            "categoryId"       : 6
         },
         {
             "name"              : "COIN ULTRA PACK",
@@ -29,7 +29,7 @@
             "productId"         : "muffins_400",
             "price"             : 2.99,
             "amount"            : 100000,
-            "categoryId"       : 1
+            "categoryId"       : 6
         },
         {
             "name"              : "COIN JUMBO PACK",
@@ -39,7 +39,7 @@
             "productId"         : "muffins_1000",
             "price"             : 4.99,
             "amount"            : 250000,
-            "categoryId"       : 1
+            "categoryId"       : 6
         },
         {
             "name"              : "COIN ULTIMATE PACK",
@@ -47,14 +47,14 @@
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_coin",
             "productId"         : "muffins_1000",
-            "price"             : 4.99,
-            "amount"            : 250000,
-            "categoryId"       : 1
+            "price"             : 9.99,
+            "amount"            : 600000,
+            "categoryId"       : 6
         }
     ],
     "virtualCurrencies" : [
         {
-            "name"          : "Coins",
+            "name"          : "COINS",
             "description"   : "",
             "itemId"        : "currency_coin",
             "balance"       : 1000,
