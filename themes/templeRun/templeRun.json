@@ -131,8 +131,8 @@
             "categoryId"   : 2
         },
         {
-            "name"          : "Science God",
-            "description"   : "Fight in the name of science god and get More powerful weapons",
+            "name"          : "Wisdom God",
+            "description"   : "Fight in the name of Wisdom God and get more powerful weapons",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
@@ -144,8 +144,47 @@
             "categoryId"   : 3
         },
         {
-            "name"          : "Invisibility Hat",
-            "description"   : "Find the invisibility hat to suprise your enemies",
+            "name"          : "Wind God",
+            "description"   : "Fight in the name of the Wind God and the wind will always be at your side",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "wind_god",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Winter God",
+            "description"   : "Fight in the name of the Winter God and avoid glaciers and frost",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "winter_god",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Stars God",
+            "description"   : "Fight in the name of the Stars God and never be lost",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "stars_god",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Argriculture God",
+            "description"   : "Fight in the name of Agriculture God and never run out of food",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
@@ -157,43 +196,43 @@
             "categoryId"   : 3
         },
         {
-            "name"          : "Invisibility Hat",
-            "description"   : "Find the invisibility hat to suprise your enemies",
+            "name"          : "Eagle",
+            "description"   : "The eagle can tell you about enemies ahead of time up to 100 miles away",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 10000
+                    "currency_muffin" : 5000
                 }
             },
-            "itemId"        : "chocolate_cake",
-            "categoryId"   : 3
+            "itemId"        : "eagle",
+            "categoryId"   : 4
         },
         {
-            "name"          : "Invisibility Hat",
-            "description"   : "Find the invisibility hat to suprise your enemies",
+            "name"          : "Butterfly",
+            "description"   : "The butterfly can help you control your crew and protect against mutiny",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 10000
+                    "currency_muffin" : 5000
                 }
             },
-            "itemId"        : "chocolate_cake",
-            "categoryId"   : 3
+            "itemId"        : "butterfly",
+            "categoryId"   : 4
         },
         {
-            "name"          : "Invisibility Hat",
-            "description"   : "Find the invisibility hat to suprise your enemies",
+            "name"          : "Fish",
+            "description"   : "Fish can help you trick your enemy into a trap",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 10000
+                    "currency_muffin" : 5000
                 }
             },
-            "itemId"        : "chocolate_cake",
-            "categoryId"   : 3
+            "itemId"        : "fish",
+            "categoryId"   : 4
         },
     ],
     "theme" : {
