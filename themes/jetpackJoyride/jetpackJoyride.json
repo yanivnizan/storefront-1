@@ -3,17 +3,17 @@
         "currencyPacks" : [
         {
             "name"              : "COIN BOOSTER PACK",
-            "imgFilePath"       : "http://placehold.it/100x100",
+            "imgFilePath"       : "themes/jetpackJoyride/img/coins/objects-05.png",
             "itemId"            : "muffins_10",
             "currency_itemId"   : "currency_coin",
-            "productId"         : "muffins_10",
+            "productId"         : "coin_booster_pack",
             "price"             : 0.99,
             "amount"            : 20000,
             "categoryId"       : 6
         },
         {
             "name"              : "COIN MEGA PACK",
-            "imgFilePath"       : "http://placehold.it/100x100",
+            "imgFilePath"       : "themes/jetpackJoyride/img/coins/objects-04.png",
             "itemId"            : "muffins_50",
             "currency_itemId"   : "currency_coin",
             "productId"         : "android.test.purchased",
@@ -23,30 +23,30 @@
         },
         {
             "name"              : "COIN ULTRA PACK",
-            "imgFilePath"       : "http://placehold.it/100x100",
+            "imgFilePath"       : "themes/jetpackJoyride/img/coins/objects-01.png",
             "itemId"            : "muffins_400",
             "currency_itemId"   : "currency_coin",
-            "productId"         : "muffins_400",
+            "productId"         : "coin_ultra_pack",
             "price"             : 2.99,
             "amount"            : 100000,
             "categoryId"       : 6
         },
         {
             "name"              : "COIN JUMBO PACK",
-            "imgFilePath"       : "http://placehold.it/100x100",
+            "imgFilePath"       : "themes/jetpackJoyride/img/coins/objects-03.png",
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_coin",
-            "productId"         : "muffins_1000",
+            "productId"         : "coin_jumbo_pack",
             "price"             : 4.99,
             "amount"            : 250000,
             "categoryId"       : 6
         },
         {
             "name"              : "COIN ULTIMATE PACK",
-            "imgFilePath"       : "http://placehold.it/100x100",
+            "imgFilePath"       : "themes/jetpackJoyride/img/coins/objects-02.png",
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_coin",
-            "productId"         : "muffins_1000",
+            "productId"         : "coin_ultimate_pack",
             "price"             : 9.99,
             "amount"            : 600000,
             "categoryId"       : 6
