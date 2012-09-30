@@ -1,8 +1,8 @@
 @import "css/mixins/elements.less";
 
 @font-face {
-	font-family: Hobo;
-	src: url('fonts/HoboStd.otf');
+	font-family: Calibri;
+	src: url('fonts/calibrib.ttf');
 }
 @grayDarker:            #222;
 @grayDark:              #333;
@@ -32,8 +32,8 @@ ul {
 
 .menu {
     @itemMargin: 10px;
-    @itemPadding: 10px;
-    @itemFace: 100px;
+    @itemPadding: 0;
+    @itemFace: 200px;
     list-style-type: none;
     padding: 0;
     margin: 20px auto 0;
@@ -127,6 +127,12 @@ ul {
 
 	.title-container {
 		.box-flex(1);
+
+        h1 {
+            text-align: center;
+            font-family: Calibri;
+            font-size: 60px;
+        }
 	}
 
     .back, .balance-container {
@@ -146,6 +152,8 @@ ul {
             top: -10000px;
             left: -10000px;
             text-align: center;
+            font-size: 24px;
+            font-weight: bold;
         }
     }
 

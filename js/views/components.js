@@ -186,11 +186,11 @@ define(["jquery", "backbone", "viewMixins"], function($, Backbone, ViewMixins) {
             if (this.expanded) {
                 this.expanded = false;
                 this.$el.removeClass("expanded");
-                this.$(".expand-collapse").attr("src", this.model.get("images").expandImage);
+                this.$(".expand-collapse").attr("src", this.templateHelpers.expandImage);
             } else {
                 this.expanded = true;
                 this.$el.addClass("expanded");
-                this.$(".expand-collapse").attr("src", this.model.get("images").collapseImage);
+                this.$(".expand-collapse").attr("src", this.templateHelpers.collapseImage);
             }
 
             // If the event handler was executed, update the time the event was triggered.

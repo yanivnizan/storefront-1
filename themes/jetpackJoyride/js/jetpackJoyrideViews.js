@@ -10,8 +10,8 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
                 this.trigger(this.state == "menu" ? "quit" : "back");
             }
         },
-        switchHeader : function(titleImage, backImage) {
-            this.$(".title-image").attr("src", titleImage);
+        switchHeader : function(title, backImage) {
+            this.$(".title-container h1").html(title);
             this.$(".back img").attr("src", backImage);
         }
     });
@@ -47,7 +47,9 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
                 templateHelpers : templateHelpers,
                 css             : { "background-image" : "url('" + this.theme.images.itemBackgroundImage + "')" }
             });
-            var CategoryView = Components.ListItemView.extend({ template : function(){} }); // empty template
+            var CategoryView = Components.ListItemView.extend({
+                template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "categoryMenuItem")
+            });
 
             this.currencyPacksView = new Components.CollectionListView({
                 className           : "items currencyPacks category",
@@ -59,6 +61,8 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
 
             this.pageViews = [];
             categories.each(function(category) {
+                // Currency packs have a view of their own so don't add one for their category
+                if (category.get("name") == "currencyPacks") return;
 
                 var categoryGoods = virtualGoods.filter(function(item) {return item.get("categoryId") == category.id});
                 categoryGoods = new Backbone.Collection(categoryGoods);
@@ -75,7 +79,6 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
             });
             this.pageViews.push(this.currencyPacksView);
 
-            categories.add({name : "currencyPacks"});
             this.categoryMenuView = new Components.CollectionListView({
                 className           : "menu items clearfix",
                 collection          : categories,
@@ -86,11 +89,12 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
         },
         switchCategory : function(model) {
             this.header.state = "category";
-            var category = model.get("name");
+            var categoryName = model.get("name"),
+                categoryTitle = model.get("title");
             this.$(".menu").hide();
             this.$(".category").hide();
-            this.$(".category." + category).show();
-            this.header.switchHeader(this.theme.pages[category].title, this.theme.images.backImage);
+            this.$(".category." + categoryName).show();
+            this.header.switchHeader(categoryTitle, this.theme.images.backImage);
         },
         showMenu : function() {
             this.header.state = "menu";
