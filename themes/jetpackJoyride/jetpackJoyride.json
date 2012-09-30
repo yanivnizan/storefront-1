@@ -73,8 +73,7 @@
                 "values" :{
                     "currency_coin" : 250
                     }
-            },
-            
+            }
         },
         {
             "name"          : "BAND AID",
@@ -126,7 +125,7 @@
                 "values" :{
                     "currency_coin" : 225
                 }
-            },
+            }
         },
         {
             "name"          : "MORE TIME",
@@ -139,7 +138,7 @@
                 "values" :{
                     "currency_coin" : 175
                 }
-            },
+            }
         },
         {
             "name"          : "RED CROSS",
@@ -152,7 +151,7 @@
                 "values" :{
                     "currency_coin" : 375
                 }
-            }, 
+             }
         },
         {
             "name"          : "BLUE STAR",
@@ -165,7 +164,7 @@
                 "values" :{
                     "currency_coin" : 525
                 }
-            }, 
+            }
         },
         {
             "name"          : "PURPLE HEART",
@@ -178,7 +177,7 @@
                 "values" :{
                     "currency_coin" : 525
                 }
-            }, 
+            }
         },
         {
             "name"          : "UPGRADE 1",
@@ -191,7 +190,7 @@
                 "values" :{
                     "currency_coin" : 500
                 }
-            }, 
+            }
         },
         {
             "name"          : "UPGRADE 2",
@@ -204,7 +203,7 @@
                 "values" :{
                     "currency_coin" : 1000
                 }
-            }, 
+            }
         },
         {
             "name"          : "AIRPLANE 1",
@@ -217,7 +216,7 @@
                 "values" :{
                     "currency_coin" : 2500
                 }
-            }, 
+            }
         },
         {
             "name"          : "AIRPLANE 2",
@@ -230,7 +229,7 @@
                 "values" :{
                     "currency_coin" : 5000
                 }
-            }, 
+            }
         },
         {
             "name"          : "CLOTHING 1",
@@ -243,7 +242,7 @@
                 "values" :{
                     "currency_coin" : 1000
                 }
-            }, 
+            }
         },
         {
             "name"          : "CLOTHING 2",
@@ -256,8 +255,8 @@
                 "values" :{
                     "currency_coin" : 1500
                 }
-            }, 
-        },
+            }
+        }
     ],
     "theme" : {
         "name" : "jetpackJoyride",
@@ -306,15 +305,19 @@
         {
             "id" : 2,
             "name" : "GADGETS"
+        },
         {
             "id" : 3,
             "name" : "UPGRADES"
+        },
         {
             "id" : 4,
             "name" : "AIRPLANES"
+        },
         {
             "id" : 5,
             "name" : "CLOTHING"
+        },
         {
             "id" : 6,
             "name" : "GET COINS"
