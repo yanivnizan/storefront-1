@@ -53,34 +53,8 @@
     ],
     "virtualGoods" : [
         {
-            "name"          : "Fruit Cake",
-            "description"   : "Customers buy a double portion on each purchase of this cake",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "priceModel"    : {
-                "type" : "static",
-                "values" :{
-                    "currency_muffin" : 225
-                }
-            },
-            "itemId"        : "fruit_cake",
-            "categoryId"   : 1
-        },
-        {
-            "name"          : "Pavlova",
-            "description"   : "Gives customers a sugar rush and they call their friends",
-            "imgFilePath"   : "http://placehold.it/100x100",
-            "priceModel"    : {
-                "type" : "static",
-                "values" :{
-                    "currency_muffin" : 175
-                }
-            },
-            "itemId"        : "pavlova",
-            "categoryId"   : 1
-        },
-        {
-            "name"          : "Choco-Cake",
-            "description"   : "A classic cake to maximize customer satisfaction",
+            "name"          : "Boost Ahead",
+            "description"   : "Get a head start of 100 miles",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
@@ -88,22 +62,139 @@
                     "currency_muffin" : 250
                 }
             },
-            "itemId"        : "chocolate_cake",
-            "categoryId"   : 2
+            "itemId"        : "boost_ahead",
+            "categoryId"   : 1
         },
         {
-            "name"          : "Cream Cup",
-            "description"   : "Increase bakery reputation with this original pastry",
+            "name"          : "Extra Health",
+            "description"   : "Find hearts in the game to recover your health points",
             "imgFilePath"   : "http://placehold.it/100x100",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
-                    "currency_muffin" : 50
+                    "currency_muffin" : 500
                 }
             },
-            "itemId"        : "cream_cup",
+            "itemId"        : "extra_health",
+            "categoryId"   : 1
+        },
+        {
+            "name"          : "Invisibility Hat",
+            "description"   : "Find the invisibility hat to suprise your enemies",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 750
+                }
+            },
+            "itemId"        : "invisibility_hat",
+            "categoryId"   : 1
+        },
+         {
+            "name"          : "Horn of War",
+            "description"   : "Pass the word to your fleet quicker",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 500
+                }
+            },
+            "itemId"        : "horn_of_war",
             "categoryId"   : 2
-        }
+        },
+        {
+            "name"          : "Flagship",
+            "description"   : "Use the power of the wind to move faster",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 1000
+                }
+            },
+            "itemId"        : "flagship",
+            "categoryId"   : 2
+        },
+        {
+            "name"          : "Mystery Box",
+            "description"   : "Special utility that will be revealed once you open the box",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 2000
+                }
+            },
+            "itemId"        : "mystery_box",
+            "categoryId"   : 2
+        },
+        {
+            "name"          : "Invisibility Hat",
+            "description"   : "Find the invisibility hat to suprise your enemies",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Invisibility Hat",
+            "description"   : "Find the invisibility hat to suprise your enemies",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Invisibility Hat",
+            "description"   : "Find the invisibility hat to suprise your enemies",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Invisibility Hat",
+            "description"   : "Find the invisibility hat to suprise your enemies",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 3
+        },
+        {
+            "name"          : "Invisibility Hat",
+            "description"   : "Find the invisibility hat to suprise your enemies",
+            "imgFilePath"   : "http://placehold.it/100x100",
+            "priceModel"    : {
+                "type" : "static",
+                "values" :{
+                    "currency_muffin" : 10000
+                }
+            },
+            "itemId"        : "chocolate_cake",
+            "categoryId"   : 3
+        },
     ],
     "theme" : {
         "name" : "templeRun",
