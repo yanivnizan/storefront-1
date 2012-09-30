@@ -1,4 +1,4 @@
-define(["jquery", "js-api", "native-api", "models", "components", "handlebars", "templates"], function($, jsAPI, NativeAPI, Models, Components, Handlebars) {
+define(["jquery", "js-api", "native-api", "models", "components", "handlebars", "soomla-ios", "templates"], function($, jsAPI, NativeAPI, Models, Components, Handlebars, SoomlaIos) {
 
     // If pointing devices are enable (i.e. in the desktop generator \ mobile preview),
     // extend the views to capture their events.
@@ -98,8 +98,14 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
 
         // Notify native code that we're initialized only if an interface exists
         // i.e. only when running in a device and not in the store builder.
+        if (isMobile.iOS()){
+            window.SoomlaNative = SoomlaIos;
+        }
+
         var SoomlaNative = window.SoomlaNative;
-        if (SoomlaNative && SoomlaNative.uiReady) SoomlaNative.uiReady();
+        if (SoomlaNative && SoomlaNative.uiReady) {
+            SoomlaNative.uiReady();
+        }
 
     });
 });
