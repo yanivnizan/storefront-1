@@ -58,7 +58,7 @@
             "description"   : "",
             "itemId"        : "currency_coin",
             "balance"       : 1000,
-            "imgFilePath"   : "http://placehold.it/40x40"
+            "imgFilePath"   : "themes/jetpackJoyride/img/coin.png"
         }
     ],
     "virtualGoods" : [
