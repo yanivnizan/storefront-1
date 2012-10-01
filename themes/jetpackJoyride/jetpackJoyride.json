@@ -262,7 +262,7 @@
         "name" : "jetpackJoyride",
         "template" : "jetpackJoyride",
         "version" : 1,
-        "isOrientationLandscape" : false,
+        "isOrientationLandscape" : true,
         "balance" : {
             "style" : "top: 30px; left: 15px; width: 100px; text-align: right"
         },
