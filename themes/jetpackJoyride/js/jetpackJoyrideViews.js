@@ -73,11 +73,13 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
                     category            : category,
                     collection          : categoryGoods,
                     itemView            : VirtualGoodView
-                })  .on("bought",       $this.wantsToBuyVirtualGoods)
-                    .on("equipped",     $this.wantsToEquipGoods)
-                    .on("unequipped",   $this.wantsToUnequipGoods)
-                    .on("expanded",     $this.toggleItemBackground)
-                    .on("collapsed",    $this.toggleItemBackground);
+                }).on({
+                    bought      : $this.wantsToBuyVirtualGoods,
+                    equipped    : $this.wantsToEquipGoods,
+                    unequipped  : $this.wantsToUnequipGoods,
+                    expanded    : $this.toggleItemBackground,
+                    collapsed   : $this.toggleItemBackground
+                });
 
                 $this.pageViews.push(view);
             });
@@ -89,7 +91,10 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
                 itemView            : CategoryView
             }).on("selected", this.switchCategory);
 
-            this.header = new HeaderView().on("back", this.showMenu).on("quit", this.wantsToLeaveStore);
+            this.header = new HeaderView().on({
+                "back" : this.showMenu,
+                "quit" : this.wantsToLeaveStore
+            }, this);
         },
         switchCategory : function(model) {
             this.header.state = "category";

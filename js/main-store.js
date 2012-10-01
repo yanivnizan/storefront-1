@@ -6,6 +6,7 @@ require.config({
         viewMixins          : "views/view-mixins",
         cssUtils            : "views/css-utils",
         templates           : "views/templates",
+        backboneAddons      : "views/backbone-addons",
 
         // 3rd party modules
         jquery              : "libs/jquery/jquery-1.8.0.min",
@@ -25,6 +26,9 @@ require.config({
             exports: 'Backbone'
         },
         backboneRelational : {
+            deps: ['backbone']
+        },
+        backboneAddons : {
             deps: ['backbone']
         },
         handlebars : {
