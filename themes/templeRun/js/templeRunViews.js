@@ -19,16 +19,18 @@ define(["jquery", "backbone", "components", "cssUtils", "handlebars", "templates
             var VirtualGoodView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "item"),
                 templateHelpers : {
-                    balanceBackground : $this.theme.pages.goods.listItem.balanceBackground,
-                    balanceLabelStyle : $this.theme.common.balanceLabelStyle
+                    balanceBackground : this.theme.pages.goods.listItem.balanceBackground,
+                    balanceLabelStyle : this.theme.common.balanceLabelStyle,
+                    itemSeparator     :$this.theme.itemSeparator
                 },
                 css             : { "background-image" : "url('" + $this.theme.pages.goods.listItem.background + "')" }
             });
             var CurrencyPackView = Components.ListItemView.extend({
                 template        : Handlebars.getTemplate("themes/" + this.theme.name + "/templates", "currencyPack"),
                 templateHelpers : {
-                    nameStyle : this.theme.pages.currencyPacks.listItem.nameStyle,
-                    priceStyle : this.theme.pages.currencyPacks.listItem.priceStyle
+                    nameStyle       : this.theme.pages.currencyPacks.listItem.nameStyle,
+                    priceStyle      : this.theme.pages.currencyPacks.listItem.priceStyle,
+                    itemSeparator   :$this.theme.itemSeparator
                 },
                 css             : { "background-image" : "url('" + this.theme.pages.currencyPacks.listItem.balanceBackground + "')" }
             });

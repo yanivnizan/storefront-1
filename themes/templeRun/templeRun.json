@@ -249,6 +249,7 @@
             "moreCurrencyButton" : "themes/templeRun/img/GetMore BTN.png",
             "balanceLabelStyle" : ""
         },
+        "itemSeparator" : "themes/templeRun/img/Item Seperator.png",
         "balance" : {
             "style" : "top: 20px; left: 200px; font-size: 36px; color: #FFF;"
         },
@@ -274,7 +275,7 @@
                     "background" : "themes/templeRun/img/Item Area.png"
                 },
                 "listItem" : {
-                    "balanceBackground" : "http://placehold.it/460x100/e0e0e0/ccc&text=Background (460x100)",
+                    "balanceBackground" : "",
                     "nameStyle" : "",
                     "priceStyle" : ""
                 }
