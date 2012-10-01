@@ -239,7 +239,8 @@
         "name" : "templeRun",
         "template" : "templeRun",
         "version" : 1,
-        "background" : "themes/templeRun/img/BG.png",
+        "background" : "themes/templeRun/img/BG-Level0.png",
+        "contentBackground" : "themes/templeRun/img/BG-Level1.png",
         "isOrientationLandscape" : false,
         "common" : {
             "titleImage" : "themes/templeRun/img/Header Title.png",
