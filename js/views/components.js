@@ -186,12 +186,12 @@ define(["jquery", "backbone", "viewMixins"], function($, Backbone, ViewMixins) {
             if (this.expanded) {
                 this.expanded = false;
                 this.$el.removeClass("expanded");
-                this.$(".expand-collapse").attr("src", this.templateHelpers.expandImage);
+                this.$(".expand-collapse").attr("src", this.templateHelpers.images.expandImage);
                 this.trigger("collapsed", this);
             } else {
                 this.expanded = true;
                 this.$el.addClass("expanded");
-                this.$(".expand-collapse").attr("src", this.templateHelpers.collapseImage);
+                this.$(".expand-collapse").attr("src", this.templateHelpers.images.collapseImage);
                 this.trigger("expanded", this);
             }
 
