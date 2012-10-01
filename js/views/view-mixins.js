@@ -6,10 +6,10 @@ define({
         this.nativeAPI.wantsToBuyCurrencyPacks(model.toJSON().productId);
     },
     wantsToEquipGoods : function(model) {
-        this.nativeAPI.wantsToEquipGoods(model.toJSON().productId);
+        this.nativeAPI.wantsToEquipGoods(model.toJSON().itemId);
     },
     wantsToUnequipGoods : function(model) {
-        this.nativeAPI.wantsToUnequipGoods(model.toJSON().productId);
+        this.nativeAPI.wantsToUnequipGoods(model.toJSON().itemId);
     },
     wantsToLeaveStore : function() {
         if (this.options.callbacks && this.options.callbacks.beforeLeave) this.options.callbacks.beforeLeave();
