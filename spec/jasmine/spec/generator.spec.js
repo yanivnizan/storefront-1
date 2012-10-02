@@ -250,6 +250,7 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(SoomlaJS.goodsUpdated).toBeDefined();
                 expect(SoomlaJS.insufficientFunds).toBeDefined();
                 expect(SoomlaJS.unexpectedError).toBeDefined();
+                expect(SoomlaJS.notEnoughGoods).toBeDefined();
                 expect(SoomlaJS.destroy).toBeDefined();
             });
 

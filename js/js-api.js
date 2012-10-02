@@ -31,6 +31,10 @@ define({
     unexpectedError : function() {
         alert("An unexpected error has occurred.  Please try again.");
     },
+    notEnoughGoods : function(itemId) {
+        var good = SoomlaJS.store.get("virtualGoods").get(itemId);
+        alert("Cannot use " + good);
+    },
     // The native UI is going to be destroyed
     destroy : function() {
         alert("Sorry bub, not implemented yet.");
