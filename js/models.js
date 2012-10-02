@@ -13,6 +13,7 @@ define(["backboneRelational"], function() {
         idAttribute : "itemId",
         defaults : {
             balance     : 0,
+            equipped    : false,
             consumable  : true
         },
         initialize : function() {
@@ -82,6 +83,19 @@ define(["backboneRelational"], function() {
                 if (attributes.balance)
                     good.set("balance", attributes.balance);
 
+                if (attributes.hasOwnProperty("equipped")) {
+                    if (attributes.equipped)
+                        if (good.get("balance") >  0) {
+                            good.set("equipped", attributes.equipped);
+                        } else {
+                            // Don't allow equipping goods that aren't owned
+                            good.set("equipped", false);
+                            SoomlaJS.notEnoughGoods(good.id);
+                        }
+                    else
+                        good.set("equipped", attributes.equipped);
+                }
+
                 if (attributes.price) {
                     // TODO: Support passing multiple prices in different currencies
                     // Currently this code always takes the currency of the first price it encounters
@@ -98,9 +112,6 @@ define(["backboneRelational"], function() {
                 }
             });
             return this;
-        },
-        equipVirtualGood : function(itemId, equipped) {
-            this.get("virtualGoods").get(itemId).set("equipped", equipped)
         }
     });
 

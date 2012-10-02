@@ -22,9 +22,6 @@ define({
     goodsUpdated : function(virtualGoods) {
         SoomlaJS.store.updateVirtualGoods(virtualGoods);
     },
-    goodsEquippingChanged : function(itemId, equipped) {
-        SoomlaJS.store.equipVirtualGood(itemId, equipped);
-    },
     insufficientFunds : function(currency) {
         SoomlaJS.storeView.openDialog(currency);
     },
@@ -33,7 +30,7 @@ define({
     },
     notEnoughGoods : function(itemId) {
         var good = SoomlaJS.store.get("virtualGoods").get(itemId);
-        alert("Cannot use " + good);
+        alert("Cannot use " + good.get("name"));
     },
     // The native UI is going to be destroyed
     destroy : function() {

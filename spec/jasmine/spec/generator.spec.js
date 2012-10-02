@@ -107,6 +107,10 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 expect(new Models.VirtualGood().isConsumable()).toEqual(true);
             });
 
+            it("should not be equipped by default", function() {
+                expect(new Models.VirtualGood().get("equipped")).toEqual(false);
+            });
+
             it("should return itself after setting balances for chaining", function() {
                 var store = new Models.Store();
                 expect(store.updateVirtualGoods({})).toEqual(store);
@@ -149,6 +153,21 @@ define("generator.spec", ["models", "native-api", "components"], function (Model
                 var good = store.get("virtualGoods").get("surfboard");
                 expect(good.get("price")).toEqual(100);
                 expect(good.get("currency")).toEqual(store.get("virtualCurrencies").get("currency_dollar").toJSON());
+            });
+
+            it("should equip a virtual good when it was equipped", function() {
+                var store = new Models.Store({ virtualGoods: [{ itemId : "surfboard", balance : 1 }] });
+                store.updateVirtualGoods({surfboard : {equipped : true}});
+                expect(store.get("virtualGoods").get("surfboard").get("equipped")).toBeTruthy();
+            });
+
+            it("should invoke 'notEnoughGoods' if a virtual good that isn't owned is trying to get equipped", function() {
+                var store = new Models.Store({ virtualGoods: [{ itemId : "surfboard", balance : 0 }] });
+                var stub = sinon.stub(SoomlaJS, "notEnoughGoods");
+                store.updateVirtualGoods({surfboard : {equipped : true}});
+                expect(store.get("virtualGoods").get("surfboard").get("equipped")).toBeFalsy();
+                expect(stub.called).toBeTruthy();
+                stub.restore();
             });
 
             // TODO: More tests on default field values and validation
