@@ -102,7 +102,7 @@ define(["jquery", "js-api", "native-api", "models", "components", "handlebars", 
             window.SoomlaNative = SoomlaIos;
         }
 
-        var SoomlaNative = window.SoomlaNative;
+        var SoomlaNative = window.SoomlaNative || top.SoomlaNative;
         if (SoomlaNative && SoomlaNative.uiReady) {
             SoomlaNative.uiReady();
         }
