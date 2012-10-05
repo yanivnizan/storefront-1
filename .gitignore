@@ -43,6 +43,7 @@ build/buildinfo.properties
 build/config/buildinfo.properties
 
 # More libraries
-themes/**/*.css
+# themes/**/*.css
 css/**/*.css
-css/*.css
+css/bootstrap.min.css
+# css/*.css
