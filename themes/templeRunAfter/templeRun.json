@@ -3,7 +3,7 @@
     "currencyPacks" : [
         {
             "name"              : "2,500 Coins",
-            "imgFilePath"       : "themes/templeRun/img/CurrencyPacks/GetCoins_1.png",
+            "imgFilePath"       : "themes/templeRunAfter/img/CurrencyPacks/GetCoins_1.png",
             "itemId"            : "muffins_10",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "2500_coins",
@@ -13,7 +13,7 @@
         },
         {
             "name"              : "25,000 Coins",
-            "imgFilePath"       : "themes/templeRun/img/CurrencyPacks/GetCoins_2.png",
+            "imgFilePath"       : "themes/templeRunAfter/img/CurrencyPacks/GetCoins_2.png",
             "itemId"            : "muffins_50",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "android.test.purchased",
@@ -23,7 +23,7 @@
         },
         {
             "name"              : "75,000 Coins",
-            "imgFilePath"       : "themes/templeRun/img/CurrencyPacks/GetCoins_3.png",
+            "imgFilePath"       : "themes/templeRunAfter/img/CurrencyPacks/GetCoins_3.png",
             "itemId"            : "muffins_400",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "75000_coins",
@@ -33,7 +33,7 @@
         },
         {
             "name"              : "200,000 Coins",
-            "imgFilePath"       : "themes/templeRun/img/CurrencyPacks/GetCoins_4.png",
+            "imgFilePath"       : "themes/templeRunAfter/img/CurrencyPacks/GetCoins_4.png",
             "itemId"            : "muffins_1000",
             "currency_itemId"   : "currency_muffin",
             "productId"         : "200000_coins",
@@ -48,14 +48,14 @@
             "description"   : "",
             "itemId"        : "currency_muffin",
             "balance"       : 1000,
-            "imgFilePath"   : "themes/templeRun/img/Item_Price.png"
+            "imgFilePath"   : "themes/templeRunAfter/img/Item_Price.png"
         }
     ],
     "virtualGoods" : [
         {
             "name"          : "Boost Ahead",
             "description"   : "Get a head start of 100 miles",
-            "imgFilePath"   : "themes/templeRun/img/Powerups/Object_11.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Powerups/Object_11.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -68,7 +68,7 @@
         {
             "name"          : "Extra Health",
             "description"   : "Find hearts in the game to recover your health points",
-            "imgFilePath"   : "themes/templeRun/img/Powerups/Object_12.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Powerups/Object_12.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -81,7 +81,7 @@
         {
             "name"          : "Invisibility Hat",
             "description"   : "Find the invisibility hat to suprise your enemies",
-            "imgFilePath"   : "themes/templeRun/img/Powerups/Object_14.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Powerups/Object_14.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -94,7 +94,7 @@
          {
             "name"          : "Horn of War",
             "description"   : "Pass the word to your fleet quicker",
-            "imgFilePath"   : "themes/templeRun/img/Utilities/Object_1.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Utilities/Object_1.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -107,7 +107,7 @@
         {
             "name"          : "Flagship",
             "description"   : "Use the power of the wind to move faster",
-            "imgFilePath"   : "themes/templeRun/img/Utilities/Object_2.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Utilities/Object_2.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -120,7 +120,7 @@
         {
             "name"          : "Mystery Box",
             "description"   : "Special utility that will be revealed once you open the box",
-            "imgFilePath"   : "themes/templeRun/img/Utilities/Object_10.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Utilities/Object_10.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -133,7 +133,7 @@
         {
             "name"          : "Wisdom God",
             "description"   : "Fight in the name of Wisdom God and get more powerful weapons",
-            "imgFilePath"   : "themes/templeRun/img/Gods/Object_4.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Gods/Object_4.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -146,7 +146,7 @@
         {
             "name"          : "Wind God",
             "description"   : "Fight in the name of the Wind God and the wind will always be at your side",
-            "imgFilePath"   : "themes/templeRun/img/Gods/Object_5.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Gods/Object_5.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -159,7 +159,7 @@
         {
             "name"          : "Winter God",
             "description"   : "Fight in the name of the Winter God and avoid glaciers and frost",
-            "imgFilePath"   : "themes/templeRun/img/Gods/Object_7.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Gods/Object_7.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -172,7 +172,7 @@
         {
             "name"          : "Stars God",
             "description"   : "Fight in the name of the Stars God and never be lost",
-            "imgFilePath"   : "themes/templeRun/img/Gods/Object_8.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Gods/Object_8.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -185,7 +185,7 @@
         {
             "name"          : "Argriculture God",
             "description"   : "Fight in the name of Agriculture God and never run out of food",
-            "imgFilePath"   : "themes/templeRun/img/Gods/Object_15.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Gods/Object_15.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -198,7 +198,7 @@
         {
             "name"          : "Eagle",
             "description"   : "The eagle can tell you about enemies ahead of time up to 100 miles away",
-            "imgFilePath"   : "themes/templeRun/img/Friends/Object_3.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Friends/Object_3.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -211,7 +211,7 @@
         {
             "name"          : "Butterfly",
             "description"   : "The butterfly can help you control your crew and protect against mutiny",
-            "imgFilePath"   : "themes/templeRun/img/Friends/Object_9.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Friends/Object_9.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -224,7 +224,7 @@
         {
             "name"          : "Fish",
             "description"   : "Fish can help you trick your enemy into a trap",
-            "imgFilePath"   : "themes/templeRun/img/Friends/Object_13.png",
+            "imgFilePath"   : "themes/templeRunAfter/img/Friends/Object_13.png",
             "priceModel"    : {
                 "type" : "static",
                 "values" :{
@@ -236,43 +236,43 @@
         }
     ],
     "theme" : {
-        "name" : "templeRun",
-        "template" : "templeRun",
+        "name" : "templeRunAfter",
+        "template" : "templeRunAfter",
         "version" : 1,
-        "background" : "themes/templeRun/img/BG-Level0.png",
-        "contentBackground" : "themes/templeRun/img/BG-Level1.png",
+        "background" : "themes/templeRunAfterAfter/img/BG-Level0.png",
+        "contentBackground" : "themes/templeRunAfter/img/BG-Level1.png",
         "isOrientationLandscape" : false,
         "common" : {
-            "titleImage" : "themes/templeRun/img/Header_Title.png",
-            "balanceImage" : "themes/templeRun/img/Header_Balance.png",
-            "backButton" : "themes/templeRun/img/Back_BTN.png",
-            "moreCurrencyButton" : "themes/templeRun/img/GetMore_BTN.png",
+            "titleImage" : "themes/templeRunAfter/img/Header_Title.png",
+            "balanceImage" : "themes/templeRunAfter/img/Header_Balance.png",
+            "backButton" : "themes/templeRunAfter/img/Back_BTN.png",
+            "moreCurrencyButton" : "themes/templeRunAfter/img/GetMore_BTN.png",
             "balanceLabelStyle" : ""
         },
-        "itemSeparator" : "themes/templeRun/img/Item_Seperator.png",
+        "itemSeparator" : "themes/templeRunAfter/img/Item_Seperator.png",
         "balance" : {
             "style" : "top: 20px; left: 200px; font-size: 36px; color: #FFF;"
         },
         "pages" : {
             "goods" :{
                 "list" : {
-                    "background" : "themes/templeRun/img/Item_Area.png"
+                    "background" : "themes/templeRunAfter/img/Item_Area.png"
                 },
                 "listItem" : {
                     "background" : "",
-                    "balanceBackground" : "themes/templeRun/img/Item_Balance.png"
+                    "balanceBackground" : "themes/templeRunAfter/img/Item_Balance.png"
                 },
                 "noFundsModal" : {
-                    "background" : "themes/templeRun/img/Alert_BG.png",
+                    "background" : "themes/templeRunAfter/img/Alert_BG.png",
                     "title" : "Need More Coins!",
                     "description" : "Would you like to get more coins?",
-                    "yesButton" : "themes/templeRun/img/Yes_BTN.png",
-                    "noButton" : "themes/templeRun/img/No_BTN.png"
+                    "yesButton" : "themes/templeRunAfter/img/Yes_BTN.png",
+                    "noButton" : "themes/templeRunAfter/img/No_BTN.png"
                 }
             },
             "currencyPacks" : {
                 "list" : {
-                    "background" : "themes/templeRun/img/Item_Area.png"
+                    "background" : "themes/templeRunAfter/img/Item_Area.png"
                 },
                 "listItem" : {
                     "balanceBackground" : "",
@@ -283,7 +283,7 @@
             }
         },
         "categories" : {
-            "style" : "background-image: url('themes/templeRun/img/Catagory_Seperator.png'); color: #FFF;"
+            "style" : "background-image: url('themes/templeRunAfter/img/Catagory_Seperator.png'); color: #FFF;"
         }
     },
     "categories" : [
